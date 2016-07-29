@@ -75,4 +75,15 @@ function Decrypt($Word,$Key = 5)
 function Encrypt_And_Hash($imput){
 	return hash("sha256", Encrypt($imput));
 }
+//########################################### File ###########################################
+//########################################### File ###########################################
+//########################################### File ###########################################
+function UpdateRecord($Newrecord,$OldRecord){
+	global $OrderSize , $Order , $Seperator , $FileLoc;
+//	$file = fopen($FileLoc, "a+") or die("Unable to open file!");
+	$contents = file_get_contents($FileLoc);
+	$contents = str_replace($OldRecord,$Newrecord, $contents);
+	file_put_contents($FileLoc, $contents);
+}
+
 ?>

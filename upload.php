@@ -1,4 +1,4 @@
-<!doctype>
+!doctype>
 <html>
 <head>
 
@@ -7,7 +7,7 @@
 <?php
 $ds= DIRECTORY_SEPARATOR;  //1
  
-$storeFolder = '/Uploads';   //2
+$storeFolder = '\Data\Articles';   //2
  
 if (!empty($_FILES)) {
      

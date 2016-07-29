@@ -4,8 +4,9 @@
 Check_Login();
 if(isset($_GET["ID"])){
 	$user = LoadUser($_GET["ID"]);
-	if($user==null){
+	if($user==NULL){
 		header("Location: 404.php");
+		exit();
 	}
 }else{
 $user = $_SESSION['user'];

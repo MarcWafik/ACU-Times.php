@@ -1,5 +1,26 @@
+<?php require_once ("ControlArticle.php");?>
+<?php require_once ("ControlUsers.php");?>
+<?php
+$article = array();
+if(isset($_GET["ID"])){
+	$article = LoadArticle($_GET["ID"]);
+	if($article==null){
+		header("Location: 404.php");
+		exit();
+	}
+}else{
+	header("Location: 404.php");
+	exit();
+}
+$WriterName =  "Unknown";
+if(isset($article["WriterID"])){
+	$Writer = LoadUser($article["WriterID"]);
+	if($Writer!=NULL){
+		$WriterName =$Writer["name"];
+	}
+}
+?>
 <!DOCTYPE html>
-
 <html>
 <!DOCTYPE html>
 <html lang="en">
@@ -21,35 +42,27 @@
 				<!-- Blog Post --> 
 				
 				<!-- Title -->
-				<h1>Blog Post Title</h1>
+				<h1><?php echo $article["Name"]?></h1>
 				
 				<!-- Author -->
-				<p class="lead"> by <a href="#">Loren impsun</a> ,ACU times
+				<p class="lead"> by <a href="Profile.php?ID=<?php echo $article["WriterID"]?>"><?php echo $WriterName;?></a> ,ACU times
 				</p>
 				
 				<!-- Date/Time -->
-				<p><span class="glyphicon glyphicon-time"></span> Posted on August 24, 2013 at 9:00 PM</p>
+				<p><span class="glyphicon glyphicon-time"></span><?php echo $article["ArticleDay"]."/".$article["ArticleMonth"]."/".$article["ArticleYear"] ?></p>
 				<hr>
 				
 				<!-- Preview Image --> 
-				<img style="height:300px; width:900px;" class="img-responsive" src="http://placehold.it/900x300" alt="">
+				<img style="height:300px; width:900px;" class="img-responsive" src="<?php echo $article["ID"]?>" alt="">
 				<hr>
 				
 				<!-- Post Content -->
-				<p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus, vero, obcaecati, aut, error quam sapiente nemo saepe quibusdam sit excepturi nam quia corporis eligendi eos magni recusandae laborum minus inventore?</p>
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus.</p>
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos, doloribus, dolorem iusto blanditiis unde eius illum consequuntur neque dicta incidunt ullam ea hic porro optio ratione repellat perspiciatis. Enim, iure!</p>
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error, nostrum, aliquid, animi, ut quas placeat totam sunt tempora commodi nihil ullam alias modi dicta saepe minima ab quo voluptatem obcaecati?</p>
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum, dolor quis. Sunt, ut, explicabo, aliquam tenetur ratione tempore quidem voluptates cupiditate voluptas illo saepe quaerat numquam recusandae? Qui, necessitatibus, est!</p>
-				<hr>
 				
-				
-				
-				
-				
-				
-				
-				
+				<?php 
+				$ds = DIRECTORY_SEPARATOR;
+				$loc = 'Data\Articles'.$ds.$article["ID"].'.html';
+				include( $loc );
+				?>
 				
 				
 <!-- ############################################ Script ############################################ --> 
@@ -73,81 +86,36 @@
   })();
 </script> 
 <!-- ############################################ /Socail Media ############################################ -->
-<div class="Social-container">
+<?php 
+$url =  "//{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}";
+$url = htmlspecialchars( $url, ENT_QUOTES, 'UTF-8' );
+?>
+<div class="clearfix"><br><br></div>
+<div class="row Social-container">
 	<ul>
 		<!---------------------------------------------------------- Facebook ---------------------------------------------------------->
-		<li><div class="fb-like" data-href="http://acujournal.netai.net" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div></li>
+		<li><div class="fb-like" data-href="<?php echo $url ?>" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div></li>
 		<!---------------------------------------------------------- Twitter ----------------------------------------------------------> 
-		<li><a href="https://twitter.com/share" class="twitter-share-button" data-url="http://acujournal.netai.net" data-text="ACU Times" data-via="ACUTimes">Tweet</a> </li>
+		<li><a href="https://twitter.com/share" class="twitter-share-button" data-url="<?php echo $url ?>" data-text="ACU Times" data-via="ACUTimes">Tweet</a> </li>
 		 <!---------------------------------------------------------- Google + ---------------------------------------------------------->
-		<li><div class="g-plusone" data-annotation="inline" data-width="120" data-href="http://acujournal.netai.net"></div></li>
+		<li><div class="g-plusone" data-annotation="inline" data-width="120" data-href="<?php echo $url ?>"></div></li>
 	</ul>
 </div>
 <!-- ############################################ /Socail Media ############################################ -->
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				<!-- Blog Comments --> 
-				<!-- Comments Form -->
-				<div class="well">
-					<h4>Leave a Comment:</h4>
-					<form role="form">
-						<div class="form-group">
-							<textarea class="form-control" rows="3"></textarea>
-						</div>
-						<button type="submit" class="btn btn-primary">Submit</button>
-					</form>
-				</div>
-				<hr>
-				
-				<!-- Posted Comments --> 
-				
-				<!-- Comment -->
-				<div class="media"> <a class="pull-left" href="#"> <img style="width:64px; height:64px" class="media-object" src="images/User.png" alt=""> </a>
-					<div class="media-body">
-						<h4 class="media-heading">Start Bootstrap <small>August 25, 2014 at 9:30 PM</small> </h4>
-						Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus. </div>
-				</div>
-				
-				<!-- Comment -->
-				<div class="media"> <a class="pull-left" href="#"> <img style="width:64px; height:64px" class="media-object" src="images/User.png" alt=""> </a>
-					<div class="media-body">
-						<h4 class="media-heading">Start Bootstrap <small>August 25, 2014 at 9:30 PM</small> </h4>
-						Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus. 
-						<!-- Nested Comment -->
-						<div class="media"> <a class="pull-left" href="#"> <img style="width:64px; height:64px" class="media-object" src="images/User.png" alt=""> </a>
-							<div class="media-body">
-								<h4 class="media-heading">Nested Start Bootstrap <small>August 25, 2014 at 9:30 PM</small> </h4>
-								Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus. </div>
-						</div>
-						<!-- End Nested Comment --> 
-					</div>
-				</div>
+<!---------------------------------------------- Posted Comments ----------------------------------------------------------> 
+
 			</div>
 			
 			<!-- Blog Sidebar Widgets Column -->
 			<div class="col-md-4"> 
-				
-				<!-- Blog Search Well -->
+			<!--
 				<div class="well">
 					<h4>RELATED STORIES</h4>
-					<!-- /.input-group --> 
 				</div>
-				
-				<!-- Blog Categories Well -->
 				<div class="well">
 					<h4>TOP STORIES</h4>
-					<!-- /.row --> 
 				</div>
-				
+				-->
 				<!-- Side Widget Well -->
 				<div class="well">
 					<h4> </h4>

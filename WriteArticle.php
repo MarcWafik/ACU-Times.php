@@ -1,53 +1,35 @@
 <?php 
 require_once("ControlArticle.php");
+require_once("ControlUsers.php");
+require_once("ControlSession.php");
+require_once("ControlFunctions.php");
+Check_Login();
+$user =$_SESSION['user'];
+
 if (isset($_POST['submit-article'])) {
-	id_count();
+	$ID = LastID()+1;
 	$AricleTime = getdate();
-	$arr = array(
-		$ID + 1,
-		$_POST["Title"],
-		$_POST["Category"],
-		$_POST["lang"],
-		$_POST["Youtube-link"],
-		$_POST["Brief"],
-		$_POST["Rate"],
-		$AricleTime["mday"],
-		$AricleTime["mon"],
-		$AricleTime["year"],
-		" ",
-		" "
-	);
-
-
-	$Article = ArrToArticle($arr);
+	$Article = array(	"ID"=>$ID,
+					"Name"=>$_POST["Title"],
+					"Category"=>$_POST["Category"],
+					"Language"=>$_POST["lang"],
+					"Youtubelink"=>$_POST["Youtubelink"],
+					"Brief"=>$_POST["Brief"],
+					"Rate"=>$_POST["Rate"],
+					"ArticleDay"=>$AricleTime["mday"],
+					"ArticleMonth"=>$AricleTime["mon"],
+					"ArticleYear"=>$AricleTime["year"],
+					"WriterID"=>$user["ID"],
+					"EditorID"=>" ");
+					
+	SaveBodyHtml($ID ,$_POST["article"]);
 	save_article_info($Article);
-	
-	$ArticleBody = $_POST["article"];
-	$mark = SearchID(2);
-	DeleteID(2);
-	
-	//=========================================validate=========================================
-	function valAllnull() {
-		return isset($_POST["Title"]) && isset($_POST["Brief"]) && isset($_POST["Youtube-link"]);
-	}
-	function Save_Article() {
-		$ds = DIRECTORY_SEPARATOR;
-		global $ID, $FileLoc, $ArticleBody;
-		$destination = 'Data\Articles'.$ds.$ID.
-		'.html';
-		$file = fopen($destination, "x+") or die("Unable to open file!");
-		fwrite($file, $ArticleBody);
-		fclose($file);
-	}
-
-	function UpdateTitle($user) {
-		global $OrderSize, $Order, $Seperator, $FileLoc;
-		$temp = SearchTitle($Article["ID"]);
-
-		$Article2STR = ArticleToString($Article);
-		UpdateRecord($Article2STR, $temp);
-	}
-
+	header("Location: Article.php?ID=".$ID);
+	exit();
+}
+//=========================================validate=========================================
+function valAllnull() {
+	return isset($_POST["Title"]) && isset($_POST["Brief"]) && isset($_POST["Youtube-link"]);
 }
 ?>
 <!DOCTYPE html>
@@ -124,7 +106,7 @@ tinymce.init({
 	<?php include ("Navbar.php");?>
 	<div class="container">
 	<h3>
-		<ul class="nav nav-pills">
+			<ul class="nav nav-pills">
 			<li role="presentation" class="active"><a>WriteArticle</a></li>
 			<li role="presentation"><a href="#">Creat Vote</a></li>
 			<li role="presentation"><a href="#">Multimedia</a></li>
@@ -180,7 +162,7 @@ tinymce.init({
 			<div class="form-group">
 			<label class="control-label col-sm-2" for="Rate">Rate:</label>
 			<div class="col-sm-10">
-					<input type="range" min="1" max="10" value="5" step="1" name="Rate" id="Rate">           
+					<input type="range" min="1" max="10" value="5" step="1" name="Rate" id="Rate">
 				</div>
 		</div>
 			<div class="form-group">
@@ -195,7 +177,7 @@ tinymce.init({
 				</div>
 		</div>
 			<div class="form-group">
-			<div  class="dropzone" id="upload-widget"> </div>
+			<div class="dropzone" id="upload-widget"></div>
 		</div>
 			<div class="form-group">
 			<textarea id="article" name="article"></textarea>
@@ -205,12 +187,12 @@ tinymce.init({
 		</div>
 		</form>
 </div>
-<?php include ("Footer.php");?>
+	<?php include ("Footer.php");?>
 <script>
 var cleanFilename = function (name) {
    return name.toLowerCase().replace(/^[\w.]+$/i, 'a.jpg');
 };
-var myDropzone = new Dropzone("div#upload-widget", { url: "http://localhost/Project-v6.04/upload.php", maxFilesize: 8,maxFiles: 1,parallelUploads:1,acceptedFiles: "image/*",renameFilename: cleanFilename, addRemoveLinks: true});
+var myDropzone = new Dropzone("div#upload-widget", { url: "upload.php", maxFilesize: 8,maxFiles: 1,parallelUploads:1,acceptedFiles: "image/*", renameFilename: cleanFilename, addRemoveLinks: true});
 </script>
 </body>
 </html>
