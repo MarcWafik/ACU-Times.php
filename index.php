@@ -2,7 +2,7 @@
 
 <html>
 <head>
-<title>RS-Fusion V.1</title>
+<title>ACU journal</title>
 <meta charset="iso-8859-1">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="layout/styles/layout.css" type="text/css" media="all">
@@ -15,48 +15,7 @@
 <!-- / slider -->
 </head>
 <body>
-<div class="wrapper row1">
-	<header id="header" class="clear">
-		<div id="hgroup" class="pad">
-			<h1><a href="index.html">ACU Student's Journal</a></h1>
-			<h2>Ahram Canadien University</h2>
-		</div>
-		<form action="#" method="post">
-			<fieldset>
-				<legend>Search:</legend>
-				<input type="text" value="Search Our Website&hellip;" onFocus="this.value=(this.value=='Search Our Website&hellip;')? '' : this.value ;">
-				<input type="submit" id="sf_submit" value="submit">
-			</fieldset>
-		</form>
-	</header>
-</div>
-<div class="wrapper row2">
-	<nav id="topnav"> 
-		<!-- ################################################################################################ -->
-		<div class="pad"> 
-			<!-- ################################################################################################ -->
-			<ul class="topnav clear">
-				<li class="active"><a href="index.html">Homepage</a></li>
-				<li><a href="pages/Category.html">Politics</a></li>
-				<li><a href="pages/Category.html">Sport</a></li>
-				<li><a href="pages/Category.html">Business</a></li>
-				<li><a href="pages/Category.html">Tech</a></li>
-				<li><a href="pages/Category.html">Science</a></li>
-				<li><a href="pages/Category.html">Arts</a></li>
-				<li><a href="pages/Category.html">Health</a></li>
-				<li><a href="pages/Category.html">World News</a></li>
-				<li>Editors Area
-					<ul>
-						<li><a href="pages/LogIn.html">Log in</a></li>
-						<li><a href="pages/Register.html">Sign up</a></li>
-					</ul>
-				</li>
-			</ul>
-			<!-- ################################################################################################ --> 
-		</div>
-		<!-- ################################################################################################ --> 
-	</nav>
-</div>
+<?php include ("Header.html");?>
 <!-- content -->
 <div class="wrapper row3">
 	<div id="container"> 
@@ -190,78 +149,6 @@
 	</div>
 </div>
 <!-- Footer -->
-<div class="wrapper row4">
-	<div id="footer"> 
-		<!-- ################################################################################################ -->
-		<div class="pad"> 
-			<!-- ################################################################################################ -->
-			<section class="one_quarter first">
-				<h2 class="title">From The Blog</h2>
-				<article>
-					<header>
-						<h2>Post Title</h2>
-						<address>
-						<a href="#">Admin</a>, domainname.com
-						</address>
-						<time datetime="2000-04-06">Friday, 6<sup>th</sup> April 2000</time>
-					</header>
-					<p>Vestibulumaccumsan egestibulum eu justo convallis augue estas aenean elit intesque sed. Facilispede estibulum nulla orna nisl velit elit ac aliquat non tincidunt. Namjusto cras urna urnaretra lor urna neque sed quis orci nulla.</p>
-					<footer class="more"><a href="#">Read More &raquo;</a></footer>
-				</article>
-			</section>
-			<section class="one_quarter">
-				<h2 class="title">Quick Links</h2>
-				<nav>
-					<ul>
-						<li><a href="#">Lorem ipsum dolor sit</a></li>
-						<li><a href="#">Amet consectetur</a></li>
-						<li><a href="#">Praesent vel sem id</a></li>
-						<li><a href="#">Curabitur hendrerit est</a></li>
-						<li><a href="#">Aliquam eget erat nec sapien</a></li>
-						<li><a href="#">Cras id augue nunc</a></li>
-						<li class="last"><a href="#">Sed a nulla urna</a></li>
-					</ul>
-				</nav>
-			</section>
-			<section class="one_quarter">
-				<h2 class="title">From The Gallery</h2>
-				<div class="ft_gallery clear">
-					<ul>
-						<li class="one_third first"><a href="#"><img src="images/demo/60x60.gif" alt="" /></a></li>
-						<li class="one_third"><a href="#"><img src="images/demo/60x60.gif" alt="" /></a></li>
-						<li class="one_third"><a href="#"><img src="images/demo/60x60.gif" alt="" /></a></li>
-						<li class="one_third first"><a href="#"><img src="images/demo/60x60.gif" alt="" /></a></li>
-						<li class="one_third"><a href="#"><img src="images/demo/60x60.gif" alt="" /></a></li>
-						<li class="one_third"><a href="#"><img src="images/demo/60x60.gif" alt="" /></a></li>
-						<li class="one_third first"><a href="#"><img src="images/demo/60x60.gif" alt="" /></a></li>
-						<li class="one_third"><a href="#"><img src="images/demo/60x60.gif" alt="" /></a></li>
-						<li class="one_third"><a href="#"><img src="images/demo/60x60.gif" alt="" /></a></li>
-					</ul>
-				</div>
-			</section>
-			<section class="one_quarter last">
-				<h2 class="title">Latest Tweets</h2>
-				<div class="ft_tweets">
-					<ul>
-						<li><a href="#">@namehere</a> Justoid nonummy laoreet phasellent penatoque in antesque pellus elis eget tincidunt. Nequatdui laorem justo a non tellus laoremut vitae doloreet 1 day ago</li>
-						<li><a href="#">@namehere</a> Justoid nonummy laoreet phasellent penatoque in antesque pellus elis eget tincidunt. Nequatdui laorem justo a non tellus laoremut vitae doloreet 1 day ago</li>
-					</ul>
-				</div>
-			</section>
-			<!-- ################################################################################################ -->
-			<div class="clear"></div>
-		</div>
-		<!-- ################################################################################################ --> 
-	</div>
-</div>
-<!-- Copyright -->
-<div class="wrapper row5">
-	<footer id="copyright" class="clear">
-		<div class="pad">
-			<p class="fl_left">Copyright &copy; 2016 - All Rights Reserved - <a href="#">acujournal.netai.net</a></p>
-			<p class="fl_right">Thanks to <a href="http://www.os-templates.com/" title="Free Website Templates">OS Templates</a></p>
-		</div>
-	</footer>
-</div>
+<?php include ("Footer.html");?>
 </body>
 </html>
