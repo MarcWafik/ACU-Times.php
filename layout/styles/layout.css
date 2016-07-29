@@ -8,7 +8,7 @@
 @import url("gallery.css");
 @import url("portfolio.css");
 @import url("my.css");
-@import url("http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css");
+@import url("https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css");
 
 
 html{overflow-y:scroll;}

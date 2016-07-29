@@ -70,7 +70,7 @@ tinymce.init({
   </script>
   </head>
   <body>
-	<?php include ("Header.html");?>
+	<?php include ("Header.php");?>
 	<!-- content -->
 
 	<div class="wrapper row3">

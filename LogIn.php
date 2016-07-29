@@ -1,10 +1,21 @@
+<?php 
+require_once ("ControlUsers.php");
+require_once ("Session.php");
+?>
 <?php
+session_start_once();
+if(isset($_SESSION['user'])){
+	header("Location: MangeUsers.php");
+	exit;
+}
+
 $FirstOpen = false;
-require_once('Control_Users.php');
 if(isset($_POST["ID"])&&isset($_POST["Password"])){
-	$User = Login($_POST["ID"] ,$_POST["Password"] );
-	if(isset($User)){
-		header("Location: WriteArticle.php");
+	$user = Login($_POST["ID"] ,$_POST["Password"] );
+	if(isset($user)){
+		session_start_once();
+		$_SESSION["user"] = $user;
+		header("Location: MangeUsers.php");
 		exit;
 	}
 	else
@@ -58,7 +69,9 @@ if(isset($_POST["ID"])&&isset($_POST["Password"])){
 				<br>
 				<input type="password" name="Password" id="Password" value="" class="MyInput" onBlur="valPassword()" required>
 				<small>
-				<div id="Validate_Password" name = "Validate_Password" class="MyAlret"><?php if($FirstOpen) echo" ID or Password is incorrect "; ?></div>
+				<div id="Validate_Password" name = "Validate_Password" class="MyAlret">
+					<?php if($FirstOpen) echo" ID or Password is incorrect "; ?>
+				</div>
 				</small> </div>
 			<div class="MyContainer" style="text-align:right">
 				<input class="Mysubmit" style="border-radius:5px;" name="submit" type="submit" id="submit" value="Login">

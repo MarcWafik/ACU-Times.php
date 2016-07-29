@@ -27,7 +27,7 @@
 //=========================================PhoneNo=========================================
  function valPhoneNo($Check) {
 	$pattern = '/^\d+$/';
-	return preg_match($pattern, $Check)||$Check="";
+	return preg_match($pattern, $Check)||$Check=="";
 }
 //=========================================Gender=========================================
 //=========================================BrithDay=========================================
@@ -38,8 +38,8 @@ function valBirthday ( $Month , $Year , $Day) {
 	return ((int)$Day<=$DaysInEatchMonth[(int)$Month]);
 }
 //########################################################################################## MangeUsers ##########################################################################################
-$Order = array("ID", "Password", "name", "email", "PhoneNo", "Gender", "BirthdayDay", "BirthdayMonth", "BirthdayYear", "RegisterDay", "RegisterMonth", "RegisterYear", "Photo", "About");
-$OrderSize = 14;
+$Order = array("ID", "Password", "name", "email", "PhoneNo", "Gender", "BirthdayDay", "BirthdayMonth", "BirthdayYear", "RegisterDay", "RegisterMonth", "RegisterYear", "Photo","Status", "About");
+$OrderSize = 15;
 $Seperator = "~#*$%#";
 $FileLoc = "Data\Users\UsersList.txt";
 //=========================================appendUser=========================================
@@ -69,7 +69,7 @@ function UserToString($User) {
 				$txt .= "".$Seperator;
 			}
 		}
-		return $txt ."\r\n";
+		return "\r\n".$txt;
 	}
 //=========================================LoadUser=========================================
 function LoadUser($ID) {
@@ -85,9 +85,34 @@ function LoadUser($ID) {
 	fclose($file);
 	return false;
 }
+function LoadAllUser() {
+	global $OrderSize , $Order , $Seperator , $FileLoc;
+	$file = fopen($FileLoc, "a+") or die("Unable to open file!");
+	$user=array();
+	$i =0;
+	while ((!feof($file))) {
+		$user[$i++] = ArrToUser(explode("~#*$%#", fgets($file)));
+	}
+	fclose($file);
+	return $user;
+}
+function SearchAllUser($find) {
+	global $OrderSize , $Order , $Seperator , $FileLoc;
+	$file = fopen($FileLoc, "a+") or die("Unable to open file!");
+	$user=array();
+	$i =0;
+	while ((!feof($file))) {
+		$temp = fgets($file);
+		if(strpos($temp,$find)!==false){
+			$user[$i++] = ArrToUser(explode("~#*$%#", $temp ));
+		}
+	}
+	fclose($file);
+	return $user;
+}
 //=========================================UpdateRecord=========================================
-	function UpdateRecord($Newrecord,$OldRecord){
-		global $OrderSize , $Order , $Seperator , $FileLoc;
+function UpdateRecord($Newrecord,$OldRecord){
+	global $OrderSize , $Order , $Seperator , $FileLoc;
 	$file = fopen($FileLoc, "a+") or die("Unable to open file!");
 	$contents = file_get_contents($file);
 	$contents = str_replace($OldRecord,$Newrecord, $contents);

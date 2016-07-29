@@ -13,6 +13,7 @@
 <link rel="stylesheet" href="layout/scripts/flexslider/flexslider.css" type="text/css" media="all">
 <script src="layout/scripts/flexslider/jquery-flexslider.min.js"></script>
 <!-- / slider -->
+
 </head>
 <body>
 <?php include ("Header.php");?>

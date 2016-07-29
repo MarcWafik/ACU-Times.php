@@ -1,3 +1,35 @@
+<?php
+require_once('ControlUsers.php');
+if(valAllnull() && valAll()){
+	    echo "succses " ;
+    $right_now = getdate();
+	$arr = array( 
+		$_POST["ID"],
+		$_POST["Password"],
+		$_POST["name"],
+		$_POST["email"],
+		$_POST["PhoneNo"],
+		$_POST["Gender"],
+		$_POST["BirthdayDay"],
+		$_POST["BirthdayMonth"],
+		$_POST["BirthdayYear"],
+		$right_now["mday"],
+		$right_now["mon"],
+		$right_now["year"]);
+		
+	$User = ArrToUser($arr);
+	appendUser($User);
+	header("Location: SignupSuccessful.php");
+	exit;
+}
+//=========================================validate=========================================
+function valAll() {
+	return 	valName($_POST["name"]) && valID($_POST["ID"]) && valEmail($_POST["email"]) && valPassword($_POST["Password"]) && valRePassword($_POST["RePassword"] , $_POST["Password"]) && valBirthday ($_POST["BirthdayMonth"] , $_POST["BirthdayYear"] , $_POST["BirthdayDay"]) && valPhoneNo($_POST["PhoneNo"]);
+}
+function valAllnull() {
+	return 	isset($_POST["name"]) && isset($_POST["ID"]) && isset($_POST["email"]) && isset($_POST["Password"]) && isset($_POST["RePassword"]) && isset($_POST["BirthdayMonth"]) && isset($_POST["BirthdayYear"])&& isset($_POST["BirthdayDay"]) && isset($_POST["PhoneNo"]);
+}
+?>
 <!DOCTYPE html>
 
 <html>
@@ -22,12 +54,12 @@
 		<br>
 	</div>
 	<div style="margin: 0 auto; width: 340px;text-align:left;"> <br>
-		<form action="Control_Signup.php" method="post">
+		<form action="SignUp.php" method="post">
 			<!-- #################################################################### name #################################################################### -->
 			<div class="MyContainer">
 				<label for="name">Full name :</label>
 				<br>
-				<input type="text" name="name" id="name" value="" class="MyInput" onBlur="valName(this,Validate_name)" required autocomplete="on">
+				<input type="text" name="name" id="name" value="<?php echo @$_POST["name"]; ?>" class="MyInput" onBlur="valName(this,Validate_name)" required autocomplete="on">
 				<small>
 				<div id="Validate_name" name = "Validate_name" class="MyAlret"></div>
 				</small> </div>
@@ -35,7 +67,7 @@
 			<div class="MyContainer">
 				<label for="ID">University ID :</label>
 				<br>
-				<input type="text" name="ID" id="ID" value="" class="MyInput" onBlur="valID(this,Validate_ID)" required autocomplete="on">
+				<input type="text" name="ID" id="ID" value="<?php echo @$_POST["ID"]; ?>" class="MyInput" onBlur="valID(this,Validate_ID)" required autocomplete="on">
 				<small>
 				<div id="Validate_ID" name = "Validate_ID" class="MyAlret"></div>
 				</small> </div>
@@ -43,7 +75,7 @@
 			<div class="MyContainer">
 				<label for="email">E-Mail :</label>
 				<br>
-				<input type="email" name="email" id="email" value="" class="MyInput" onBlur="valEmail(this,Validate_email)" required autocomplete="on">
+				<input type="email" name="email" id="email" value="<?php echo @$_POST["email"]; ?>" class="MyInput" onBlur="valEmail(this,Validate_email)" required autocomplete="on">
 				<small>
 				<div id="Validate_email" name = "Validate_email" class="MyAlret"></div>
 				</small> </div>
@@ -67,7 +99,7 @@
 			<div class="MyContainer">
 				<label for="PhoneNo">Phone Number (optional) :</label>
 				<br>
-				<input type= "tel" name="PhoneNo" id="PhoneNo" value="" class="MyInput" onBlur="valPhoneNo(this,Validate_PhoneNo)" autocomplete="on">
+				<input type= "tel" name="PhoneNo" id="PhoneNo" value="<?php echo @$_POST["PhoneNo"]; ?>" class="MyInput" onBlur="valPhoneNo(this,Validate_PhoneNo)" autocomplete="on">
 				<small>
 				<div id="Validate_PhoneNo" name = "Validate_PhoneNo" class="MyAlret"></div>
 				</small> </div>
@@ -119,7 +151,7 @@
 					<input class="Mysubmit" style="border-radius:5px" name="submit" type="submit" id="submit" value="Creat Account">
 				</div>
 			</div>
-				<div id="Error" name = "Error" class="MyAlret" style="text-align:center"></div>
+				<div id="Error" name = "Error" class="MyAlret" style="text-align:center"> <?php //if((!valAllnull())) echo "Please check the values marked in red"; ?></div>
 			<!-- ####################################################################  #################################################################### -->
 		</form>
 		<div class="clear"><br>

@@ -1,3 +1,16 @@
+<?php require ("ControlUsers.php");?>
+<?php require ("Session.php");?>
+<?php
+Check_Login();
+if(isset($_GET["ID"])){
+	$user = LoadUser($_GET["ID"]);
+	if($user==null){
+		header("Location: 404.php");
+	}
+}else{
+$user = $_SESSION['user'];
+}
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,33 +24,16 @@
 <script src="layout/scripts/jquery-mobilemenu.min.js"></script>
 </head>
 <style>
-.MyLargeContainer {
-	float: left;
-	padding: 10px;
-}
-.MyContainer {
-	padding: 10px;
-	clear: both;
-}
-.MyLable {
-	float: left;
-	text-align: right;
-	width: 110px;
-}
-.MyOut {
-	float: left;
-	text-align: left;
-}
-.MyIMG {
-	padding: 10px;
-	float: left;
-}
+.MyLargeContainer { float: left; padding: 10px; }
+.MyContainer { padding: 10px; clear: both; }
+.MyLable { float: left; text-align: right; width: 120px; }
+.MyOut { float: left; text-align: left; }
+.MyIMG { padding: 10px; float: left; }
+.MyPhoto { background-image: url(images/demo/User.png); height: 140px; width: 140px; background-size: contain; }
+.MyChangePhoto { padding-right: 10px; padding-left: 10px; padding-top: 5px; padding-bottom: 5px; width: 140px; background-color: #FF9900; border: thin; }
 
 @media screen and (min-width : 250px) and (max-width : 650px) {
-.MyIMG {
-	float: none;
-	text-align: center;
-}
+.MyIMG { float: none; text-align: center; }
 }
 </style>
 <body>
@@ -45,70 +41,70 @@
 <!-- content -->
 <div class="wrapper row3">
 	<div id="container"> 
-		<!-- ################################################################################################ --?
+		<!-- ################################################################################################ --> 
 		<!-- main content -->
-		<div class="MyIMG"> <a href="#"><img src="images/demo/166x130.gif" alt="" class="img"></a> <br>
-			<input style=" padding-right:10px ; padding-left:10px ; padding-top:5px ; padding-bottom:5px;width: 166px;
-							 background-color:#FF9900; border:thin" type="submit" value=" Change image " >
+		<div class="MyIMG"><img class="MyPhoto" src="<?php echo $user["Photo"]; ?>"> <br>
+			<input class="MyChangePhoto" type="submit" value=" Change image " >
 		</div>
-		<div class="MyLargeContainer">
+		<div class="MyLargeContainer" style="margin:0 auto">
 			<div class="MyContainer">
 				<div class="MyLable">ID :&nbsp;&nbsp;&nbsp;</div>
-				<div class="MyOut">41400000</div>
-			</div>
-			<br>
-			<div class="MyContainer">
-				<div class="MyLable">Name :&nbsp;&nbsp;&nbsp;</div>
-				<div class="MyOut">Ipsun Arion</div>
+				<div class="MyOut"><?php echo $user["ID"]; ?></div>
 			</div>
 			<br>
 			<div class="MyContainer">
 				<div class="MyLable">E-mail :&nbsp;&nbsp;&nbsp;</div>
-				<div class="MyOut">Example@example.com</div>
+				<div class="MyOut"><?php echo $user["email"]; ?></div>
 			</div>
 			<br>
 			<div class="MyContainer">
-				<div class="MyLable">Password :&nbsp;&nbsp;&nbsp;</div>
-				<div class="MyOut">Change PW</div>
+				<div class="MyLable">Member Since :&nbsp;&nbsp;&nbsp;</div>
+				<div class="MyOut"><?php echo $user["RegisterDay"]."/".$user["RegisterMonth"]."/".$user["RegisterYear"]; ?></div>
 			</div>
 			<br>
 			<hr>
+			<!-- ################################################################################################ -->
 			<div style="float:right;"> <a><i class="fa fa-pencil append-icon"></i> Edit</a></div>
 			<div class="MyContainer">
-				<div class="MyLable">Phone Nu :&nbsp;&nbsp;&nbsp;</div>
-				<div class="MyOut">0120 585 5896</div>
+				<div class="MyLable">Name :&nbsp;&nbsp;&nbsp;</div>
+				<div class="MyOut"><?php echo $user["name"]; ?></div>
+			</div>
+			<br>
+			<div class="MyContainer">
+				<div class="MyLable">Phone Number :&nbsp;&nbsp;&nbsp;</div>
+				<div class="MyOut"><?php echo $user["PhoneNo"]; ?></div>
 			</div>
 			<br>
 			<div class="MyContainer">
 				<div class="MyLable">BirthDay :&nbsp;&nbsp;&nbsp;</div>
-				<div class="MyOut">01/01/2016</div>
+				<div class="MyOut"><?php echo $user["BirthdayDay"]."/".$user["BirthdayMonth"]."/".$user["BirthdayYear"]; ?></div>
 			</div>
 			<br>
 			<div class="MyContainer">
 				<div class="MyLable">Country :&nbsp;&nbsp;&nbsp;</div>
-				<div class="MyOut">Egypt</div>
+				<div class="MyOut">
+					<?php  ?>
+				</div>
 			</div>
 			<br>
 			<div class="MyContainer">
 				<div class="MyLable">Address :&nbsp;&nbsp;&nbsp;</div>
-				<div class="MyOut">854 sgrwww st</div>
+				<div class="MyOut">
+					<?php  ?>
+				</div>
 			</div>
 			<br>
 			<hr>
-			<div class="MyContainer">
-				<div class="MyLable">Article writen :&nbsp;&nbsp;&nbsp;</div>
-				<div class="MyOut"> 25 </div>
-			</div>
-			<br>
+			<!-- ################################################################################################ -->
 			<div class="MyContainer">
 				<div class="MyLable" style="text-align:left">About :<br>
 				</div>
 				<br>
-				<div class="MyOut">Lorem ipsum dolor sit amet, consectetur adipiscing elit. </div>
+				<div class="MyOut"><?php echo $user["About"]; ?></div>
 			</div>
 		</div>
+		<div style="clear:both ; padding:20px;"></div>
 	</div>
-	<div style="clear:both ; padding:20px;"></div>
 </div>
 </div>
 </div>

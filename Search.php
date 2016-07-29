@@ -11,7 +11,7 @@
 <script src="layout/scripts/jquery-mobilemenu.min.js"></script>
 <script src="bootstrap/js/bootstrap.min.js"></script>
 <style>
-#SNAV { display:none; }
+#SNAV { display: none; }
 </style>
 </head>
 <body>
@@ -22,13 +22,13 @@
 	<div id="container"> 
 		
 		<!-- ################################################################################################ -->
-	
+		
 		<div id="advSearchBarDiv" class="pad">
 			<form action="Search.php" method="get">
 				<fieldset>
 					<div style="width:100%">
 						<div style="height:35px; width:100% ;border:1px solid #686868;border-radius:3px; margin:0; position:relative;">
-							<input id="advSearch" name="advSearch" type="text" value="Search Our Website&hellip;" class="MySearchBar" onFocus="this.value=(this.value=='Search Our Website&hellip;')? '' : this.value ;">
+							<input id="advSearch" name="advSearch" type="text" value="Search Our Website&hellip;" class="MySearchBar" onFocus="this.value=(this.value=='Search Our Website&hellip;')? '' : this.value ;" autocomplete="off">
 							<input type="submit" value="&#xf002;" class="  MySearchButton" >
 							<input type="button" value="&#9660;" class="MyadvSearchButton" onClick="AdvSR()" >
 						</div>

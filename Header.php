@@ -1,3 +1,19 @@
+<?php
+require_once ("Session.php");
+session_start_once();
+$Links;
+$Display;
+if(isset($_SESSION['user'])){
+	$Links   = array("MangeUsers.php","WriteArticle.php","Profile.php", "Logout.php");
+	$Display = array("Mange Users"   ,"Creat Article"   ,"Profile"    , "Logout");
+}
+else{
+	$Links   = array("Login.php", "SignUp.php");
+	$Display = array("Login"    , "SignUp");
+}
+$LinksSize = count($Links);
+?>
+
 <div class="wrapper row1" style="background-image:url(images/demo/Header%20Back.png); background-repeat:no-repeat; background-size:cover">
 	<header id="header" class="clear">
 		<div id="hgroup" class="pad">
@@ -57,8 +73,11 @@ $sCategory = "0" ;
 				<li <?php if($sCategory=="Gallery") echo $Active ?>><a href="Category.php?Category=Gallery">Gallery</a></li>
 				<li><a href="">Editors</a>
 					<ul>
-						<li><a href="LogIn.php">Log in</a></li>
-						<li><a href="SignUp.php">Sign up</a></li>
+					<?php
+					for($i=0;$i<$LinksSize;$i++){
+						echo '<li><a href="'.$Links[$i].'">'.$Display[$i].'</a></li>';
+						}
+					?>
 					</ul>
 				</li>
 			</ul>
