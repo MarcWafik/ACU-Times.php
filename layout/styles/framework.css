@@ -1,4 +1,5 @@
 @charset "utf-8";
+/********************************************** File: 960px Framework CSS **********************************************/
 
 .one_half, .one_third, .two_third, .one_quarter, .two_quarter, .three_quarter, .one_fifth, .two_fifth, .three_fifth, .four_fifth{
 	display:inline-block; float:left; margin:0 0 0 2.08333%; list-style:none;
@@ -29,7 +30,7 @@
 
 /* Fifth Grid */
 
-.one_fifth{width:18.33333%; padding-bottom:25px}
+.one_fifth{width:18.33333%;}
 .two_fifth{width:38.75%;}
 .three_fifth{width:59.16666%;}
 .four_fifth{width:79.58333%;}

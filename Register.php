@@ -14,71 +14,73 @@
 <body>
 <?php include ("Header.html");?>
 <!-------------------------------------------------------------------------- content -------------------------------------------------------------------------->
-<div class="wrapper row3" style=" text-align:left">
-	<div align="center"> <br>
+<div class="wrapper row3">
+	<div style="margin: 0 auto; width: 350px;text-align:left;"> <br>
 		<form action="#" method="post">
 			<p>
-			<div class="row3" style="width:350px; text-align:left">
+			<div>
 				<label for="name"><small>Full name :</small></label>
 				<br>
-				<input type="text" name="name" id="name" value="" style="width:inherit">
+				<input type="text" name="name" id="name" value="" style="width:320px">
 			</div>
 			</p>
 			<p>
-			<div class="row3" style="width:350px; text-align:left">
+			<div>
 				<label for="ID"><small>University ID :</small></label>
 				<br>
-				<input type="text" name="ID" id="ID" value="" style="width:inherit">
+				<input type="text" name="ID" id="ID" value="" style="width:320px">
 			</div>
 			</p>
 			<p>
-			<div class="row3" style="width:350px; text-align:left">
+			<div>
 				<label for="email"><small>E-Mail :</small></label>
 				<br>
-				<input type="email" name="email" id="email" value="" style="width:inherit">
+				<input type="email" name="email" id="email" value="" style="width:320px">
 			</div>
 			</p>
 			<p>
-			<div class="row3" style="width:350px; text-align:left">
+			<div>
 				<label for="Password"><small>Password :</small></label>
 				<br>
-				<input type="password" name="Password" id="Password" value="" style="width:inherit">
+				<input type="password" name="Password" id="Password" value="" style="width:320px">
 			</div>
 			</p>
 			<p>
-			<div class="row3" style="width:350px; text-align:left">
+			<div>
 				<label for="RePassword"><small>Reenter password :</small></label>
 				<br>
-				<input type="password" name="RePassword" id="RePassword" value="" style="width:inherit">
+				<input type="password" name="RePassword" id="RePassword" value="" style="width:320px">
 			</div>
 			</p>
-
 			<p>
-			<div class="row3" style="width:350px; text-align:left">
+			<div>
 				<label for="PhoneNumber"><small>Phone Number (optional) :</small></label>
 				<br>
-				<input type= "text" name="PhoneNumber" id="PhoneNumber" value="" style="width:inherit">
+				<input type= "text" name="PhoneNumber" id="PhoneNumber" value="" style="width:320px">
 			</div>
 			</p>
 			<p>
-			<div class="row3" style="width:350px; text-align:left">
+			<div>
 				<label for="Gender" ><small>Gender :</small></label>
 				<br>
-				<select   style="width:inherit" name="Gender">
+				<select   style="width:320px" name="Gender">
 					<option>Male</option>
 					<option>Female</option>
 					<option selected="selected">Do not specify</option>
 				</select>
 			</div>
 			</p>
-			<div class="row3" style="width:350px; text-align:left">
+			<div>
 				<label for="Birthday" ><small>Birthday :</small></label>
 				<br>
-				<input type="date"  name="Birthday" id="Birthday" value=""    style="width:inherit">
-				<br><br>
+				<input type="date"  name="Birthday" id="Birthday" value=""    style="width:320px">
+				<br>
+				<br>
 			</div>
-			<p><div class="g-recaptcha" data-sitekey="6Ldh-RkTAAAAAPtk9mzLYazqa7A9twsF8-2dMPuC"></div></p>
-			<div class="row3">
+			<p>
+			<div class="g-recaptcha" data-sitekey="6Ldh-RkTAAAAAPtk9mzLYazqa7A9twsF8-2dMPuC"></div>
+			</p>
+			<div style="text-align:center">
 				<p> <small>Clicking Create account means that you agree to <br>
 					our <a href="Register.html" title="Services Agreement">Services Agreement</a> and <a href="Register.html">Privacy Policy</a></small></p>
 				<p>
@@ -92,7 +94,7 @@
 		</form>
 	</div>
 </div>
-<!-------------------------------------------------------------------------- content --------------------------------------------------------------------------> 
+<!-------------------------------------------------------------------------- content -------------------------------------------------------------------------->
 <?php include ("Footer.html");?>
 </body>
 </html>

@@ -14,7 +14,7 @@
 <?php include ("Header.html");?>
 <!-------------------------------------------------------------------------- content -------------------------------------------------------------------------->
 <div class="wrapper row3">
-	<div class=" center"> <br>
+	<div style=" text-align:center"> <br>
 		<br><p><h6>Log in</h6></p><br>
 		<form action="#" method="post">
 			<p>
@@ -34,7 +34,8 @@
 			<p><a href="##################"><small>Forgotten your username or password?</small></a></p>
 			<p>
 			<div class="row3">
-				<input name="Login" type="submit" id="Login" value="Login">
+				<input style=" padding-right:15px ; padding-left:15px ; padding-top:5px ; padding-bottom:5px ;
+							 background-color:#BABABA; border:thin" name="Login" type="submit" id="Login" value="Login">
 			</div>
 			</p>
 		</form>
