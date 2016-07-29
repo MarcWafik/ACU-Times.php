@@ -1,7 +1,7 @@
 <?php
 require_once("ControlFunctions.php");
 
-$Order = array("ID", "Name", "Category", "Language", "Youtubelink", "Brief", "Rate", "ArticleDay", "ArticleMonth", "ArticleYear", "WriterID", "EditorID");
+$Order = array("ID", "Name", "Category", "Language", "Youtubelink", "Brief", "Rate", "ArticleDay", "ArticleMonth", "ArticleYear", "WriterID", "EditorID" , "ArticleName" );
 $OrderSize = 12;
 $Seperator = "~#*$%#";
 $FileLoc = "Data\Articles\Article-info.txt";
@@ -62,8 +62,8 @@ function UpdateHTML($ID , $Body){
 	fwrite($file, $Body);
 	fclose($file);
 }
-//=========================================Search=========================================
-function SearchArticleCategory($Find) {
+//=========================================Load=========================================
+function LoadArticleCategory($Find) {
 	global $FileLoc, $Seperator;
 	$file = fopen($FileLoc, "a+") or die("Unable to open file!");
 	$AllArticle = array();

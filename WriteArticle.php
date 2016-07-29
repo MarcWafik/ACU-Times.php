@@ -5,7 +5,7 @@ require_once("ControlSession.php");
 require_once("ControlFunctions.php");
 Check_Login();
 $user =$_SESSION['user'];
-
+//$ID = LastID()+1;
 if (isset($_POST['submit-article'])) {
 	$ID = LastID()+1;
 	$AricleTime = getdate();
@@ -20,7 +20,11 @@ if (isset($_POST['submit-article'])) {
 					"ArticleMonth"=>$AricleTime["mon"],
 					"ArticleYear"=>$AricleTime["year"],
 					"WriterID"=>$user["ID"],
-					"EditorID"=>" ");
+					"EditorID"=>" ",
+					"Rate"=>$_POST["TheLastIDinTheFile"])
+					
+					
+					;
 					
 	SaveBodyHtml($ID ,$_POST["article"]);
 	save_article_info($Article);
@@ -131,24 +135,8 @@ tinymce.init({
 			<div class="form-group">
 			<label class="control-label col-sm-2" for="Category">Category:</label>
 			<div class="col-sm-10">
-					<select class="form-control" id="Category" name="Category">
-					<optgroup label="News">
-						<option value="WorldNews">World News</option>
-						<option value=">ACUCollegeNews">ACU College News</option>
-						</optgroup>
-					<optgroup label="Art">
-						<option value="Cinema">Cinema</option>
-						<option value="Drama">Drama</option>
-						<option value="Theater">Theater</option>
-						</optgroup>
-					<optgroup label="Sport">
-						<option value="Local Footaball">Local Footaball</option>
-						<option value="International Football">International Football</option>
-						<option value="Other">Other</option>
-						</optgroup>
-					<option value="Interviews">Interviews</option>
-					<option value="TechandScience">Tech &amp; Science</option>
-					<option value="Economy">Economy</option>
+				<select class="form-control" id="Category" name="Category">
+                      <?php foreach($CategoryList as $Category){ PrintOptionCategory($Category); }?>  
 				</select>
 				</div>
 		</div>
@@ -176,8 +164,50 @@ tinymce.init({
 					Arabic</label>
 				</div>
 		</div>
-			<div class="form-group">
-			<div class="dropzone" id="upload-widget"></div>
+			
+        <div  class="dropzone" id="upload-widget">
+			</div>
+			<script>
+			
+					
+						function ImageExist(url) 
+						{
+						   var img = new Image();
+						   img.src = url;
+						   return img.height != 0;
+						}
+					var cleanFilename = function (name) {
+						$.ajax({
+						url:'Data\\Articles\\'+name,
+						type:'HEAD',
+						error: function()
+						{
+							var MyID = document.getElementById('TheLastIDinTheFile').value;
+						document.getElementById("TheLastIDinTheFile").value = name;
+							
+						},
+						success: function()
+						{
+							
+							var rand = Math.floor((Math.random() * 10000000) + 1);
+												name = name.slice(0,name.length - 4);
+							name = name+rand+".jpg";
+							var MyID = document.getElementById('TheLastIDinTheFile').value;
+						document.getElementById("TheLastIDinTheFile").value = name;
+							
+						}
+					});
+							
+								
+								
+								
+						
+   						
+						};
+						
+				var myDropzone = new Dropzone("div#upload-widget", { url: "http://localhost/Project-v6.08/upload.php", maxFilesize				: 8,maxFiles: 1,parallelUploads:1,acceptedFiles: "image/*", renameFilename: cleanFilename});
+
+					</script> 
 		</div>
 			<div class="form-group">
 			<textarea id="article" name="article"></textarea>
@@ -185,14 +215,9 @@ tinymce.init({
 			<div class="form-group">
 			<button type="submit" class="btn btn-primary pull-right" name="submit-article"> Creat Article </button>
 		</div>
+        <input name="TheLastIDinTheFile" id ="TheLastIDinTheFile" >
 		</form>
 </div>
 	<?php include ("Footer.php");?>
-<script>
-var cleanFilename = function (name) {
-   return name.toLowerCase().replace(/^[\w.]+$/i, 'a.jpg');
-};
-var myDropzone = new Dropzone("div#upload-widget", { url: "upload.php", maxFilesize: 8,maxFiles: 1,parallelUploads:1,acceptedFiles: "image/*", renameFilename: cleanFilename, addRemoveLinks: true});
-</script>
 </body>
 </html>

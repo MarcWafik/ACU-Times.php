@@ -2,32 +2,11 @@
 require_once ("ControlCategory.php");
 require_once ("ControlSession.php");
 session_start_once();
-?>
-<?php 
+
 if(isset($_GET["Category"]))
 	$sCategory = $_GET["Category"];
 else
-	$sCategory = "0" ;
-
-function PrintLargeCategory(Category $Category)
-{
-	echo			'<li class="dropdown"> <a class="dropdown-toggle" data-toggle="dropdown" href="Category.php?Category='.$Category->Link.'">'.$Category->Name.' <span class="caret"></span></a>
-						<ul class="dropdown-menu">';
-	foreach($Category->ArrSubCategorys as $SubCat ){
-		echo '<li><a href="Category.php?Category='.$SubCat->Link.'">'.$SubCat->Name.'</a></li>' ;
-							}					
-	echo				'</ul></li>';	
-}
-function PrintSmallCategory (Category $Category){
-	echo '<li><a href="Category.php?Category='.$Category->Link.'">'.$Category->Name.'</a></li>' ;
-}
-function PrintCategory(Category $Category){
-	if(isset($Category->ArrSubCategorys[0])){
-	PrintLargeCategory( $Category);
-	}else{
-	PrintSmallCategory ( $Category);
-	}
-}
+	$sCategory = "0";
 ?>
 <nav class="navbar navbar-inverse"> <!--navbar-fixed-top-->
 	<div class="container-fluid">
