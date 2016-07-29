@@ -15,7 +15,9 @@
 .AdvSearchBox {
 	width: 100%;
 	border: 1px solid #686868;
-	border-radius: 6px;
+	border-top: none;
+	border-bottom-left-radius:4px;
+	border-bottom-right-radius:4px;
 	box-shadow: 3px 3px 10px #999999;
 }
 .AdvSearchLine {
@@ -33,24 +35,26 @@
 	background-position: center;
 	color: #FFFFFF;
 	border: none;
-	float: right;
-	border-bottom-right-radius: 6px;
-	border-top-right-radius: 6px;
+	position: absolute;
+	border-bottom-right-radius: 4px;
+	border-top-right-radius: 4px;
+	top: 0px;
+	right: 0px;
 }
 .MyadvSearchButton {
 	background-image: url(images/demo/setting.png);
-	background-color: #ABABAB;
+	background-color: inherit;
 	width: 35px;
 	height: 100%;
 	background-repeat: no-repeat;
 	cursor: pointer;
 	background-position: center;
-	color: #FFFFFF;
 	border: none;
-	float: right;
+	position: absolute;
 	font-size: 14px;
 	color: black;
-	border: 1px solid #686868;
+	top: 0px;
+	right: 45px;
 }
 .MyLable {
 	padding: 4px;
@@ -63,9 +67,9 @@
 	border-radius: 3px;
 }
 .MySearchBar {
-	width: 80%;
+	width: 90%;
 	height: 100%;
-	float: left;
+	position:absolute;
 	margin: 0;
 	padding: 0 10px;
 	border: none;
@@ -84,25 +88,37 @@
 			<form action="#" method="post">
 				<fieldset>
 					<div style="width:100%">
-						<div style="height:35px; width:100% ;border:1px solid #686868;border-radius:6px; margin:0;">
+						<div style="height:35px; width:100% ;border:1px solid #686868;border-radius:6px; margin:0; position:relative;">
 							<div style="float:left">&nbsp; </div>
-							<input type="text" value="Search Our Website&hellip;" class="MySearchBar">
+							<input type="text" value="Search Our Website&hellip;" class="MySearchBar" onFocus="this.value=(this.value=='Search Our Website&hellip;')? '' : this.value ;">
 							<input type="submit" id="Search" value="" class="MySearchButton" >
 							<input type="button" id="AdvSearch" value="&#9660;" class="MyadvSearchButton" onClick="AdvSR()" >
 						</div>
 						<div class="clear"></div>
 						<div id="AdvSearchBox" class="AdvSearchBox" >
 							<div class="AdvSearchLine"><br>
-								<label class="MyLable">Category:</label>
+								<label class="MyLable" style="border-color:#686868;">Category:</label>
 								<br>
 							</div>
 							<div class="AdvSearchLine">
 								<select class="MyImput">
-									<option>News</option>
-									<option>Art</option>
-									<option>Sport</option>
+									<option>All</option>
+									<optgroup label="News">
+									<option>World News</option>
+									<option>ACU College News</option>
+									</optgroup>
+									<optgroup label="Art">
+									<option>Cinema</option>
+									<option>Drama</option>
+									<option>Theater</option>
+									</optgroup>
+									<optgroup label="Sport">
+									<option>Local Footaball</option>
+									<option>International Football</option>
+									<option>Other</option>
+									</optgroup>
 									<option>Interviews</option>
-									<option>tech &amp; science</option>
+									<option>Tech &amp; Science</option>
 									<option>Economy</option>
 									<option>Multimedia</option>
 									<option>Gallery</option>
@@ -116,14 +132,14 @@
 							<div class="AdvSearchLine">
 								<input type="text" value="" class="MyImput">
 							</div>
-							<div class="clear"><BR>
+							<div class="clear"><br>
 							</div>
 						</div>
 					</div>
 				</fieldset>
 			</form>
-			<div class="clear"><BR>
-				<BR>
+			<div class="clear"><br>
+				<br>
 			</div>
 		</div>
 		
