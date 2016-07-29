@@ -63,7 +63,7 @@ function UpdateHTML($ID , $Body){
 	fclose($file);
 }
 //=========================================Search=========================================
-function SearchCategory($Find) {
+function SearchArticleCategory($Find) {
 	global $FileLoc, $Seperator;
 	$file = fopen($FileLoc, "a+") or die("Unable to open file!");
 	$AllArticle = array();
@@ -99,7 +99,7 @@ function SearchStringID($Find) {
 	}
 	return NULL;
 }
-function SearchTitle($Find) {
+function SearchArticleTitle($Find) {
 	global $FileLoc, $Seperator;
 	$file = fopen($FileLoc, "a+") or die("Unable to open file!");
 	$AllArticle = array();
@@ -112,8 +112,19 @@ function SearchTitle($Find) {
 	}
 	return $AllArticle;
 }
+function LoadAllArticle() {
+	global $FileLoc, $Seperator;
+	$file = fopen($FileLoc, "a+") or die("Unable to open file!");
+	$AllArticle = array();
+	$i = 0;
+	while ((!feof($file))) {
+		$Article = ArrToArticle(explode($Seperator, fgets($file)));
+		$AllArticle[$i++] = $Article;
+	}
+	return $AllArticle;
+}
 //=========================================Update=========================================
-function DeleteID($ID) {
+function DeleteArticle($ID) {
 	$ds = DIRECTORY_SEPARATOR;
 	global $OrderSize, $Order, $Seperator, $FileLoc;
 	$temp = SearchStringID($ID);

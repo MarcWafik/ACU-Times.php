@@ -1,11 +1,12 @@
 <?php require_once("PrintPortofolio.php");?>
+<?php require_once("ControlArticle.php");?>
 <?php
 $ArticleArr = Array();
 if(Null===@$_GET["Search"]||""===@$_GET["Search"]){
 	$ArticleArr = LoadAllArticle();
 }
 else{
-	$ArticleArr = SearchAllArticle($_GET["Search"]);
+	$ArticleArr = SearchArticleTitle($_GET["Search"]);
 }
 ?>
 <!DOCTYPE html>
@@ -41,7 +42,7 @@ else{
 				 $Article["ID"]."-1.jpeg" , 
 				 $Article["Name"], 
 				 "Article.php?ID=".$Article["ID"], 
-				 $Article["Breif"], 
+				 $Article["Brief"], 
 				 $Article["ArticleDay"], 
 				 $Article["ArticleMonth"],
 				 $Article["ArticleYear"]);

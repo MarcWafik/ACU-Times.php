@@ -50,10 +50,18 @@ if(isset($article["WriterID"])){
 				
 				<!-- Date/Time -->
 				<p><span class="glyphicon glyphicon-time"></span><?php echo $article["ArticleDay"]."/".$article["ArticleMonth"]."/".$article["ArticleYear"] ?></p>
+			<?php 
+			if(isset($_SESSION['user']) && $_SESSION['user']['Status']=="A"){
+			echo	
+			"<div class='btn-group  pull-right'>
+				<a class='btn btn-danger' href='Redir_DeleteArticle.php?ID={$article['ID']}'><i class='fa fa-trash-o'></i></i></a>
+				<a class='btn btn-warning' href='WriteArticle.php?ID={$article['ID']}'><i class='fa fa-pencil'></i></a> 
+			</div>
+			<div class='clearfix'></div>"; }?>
 				<hr>
 				
 				<!-- Preview Image --> 
-				<img style="height:300px; width:900px;" class="img-responsive" src="<?php echo $article["ID"]?>" alt="">
+				<img style="height:300px; width:900px;" class="img-responsive" src="<?php echo $article["ID"]."-1.jpg"?>" alt="">
 				<hr>
 				
 				<!-- Post Content -->
@@ -61,8 +69,9 @@ if(isset($article["WriterID"])){
 				<?php 
 				$ds = DIRECTORY_SEPARATOR;
 				$loc = 'Data\Articles'.$ds.$article["ID"].'.html';
-				include( $loc );
-				?>
+				if(file_exists ($loc )){
+					include( $loc );
+				}?>
 				
 				
 <!-- ############################################ Script ############################################ --> 
