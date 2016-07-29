@@ -18,7 +18,8 @@
 			<div class="col-xs-8">
 				<ul class="list-unstyled list-inline pull-left">
 					<li><a href="#">Terms of Service</a></li>
-					<li><a href="#">Contact Us</a></li>
+					<li><a href="#">Privacy</a></li>
+					<li><a href="ContactUs.php">Contact Us</a></li>
 					<li><a href="#">About Us</a></li>
 				</ul>
 			</div>
@@ -28,4 +29,4 @@
 		</div>
 	</div>
 </footer>
-<pre><?php print_r(get_defined_vars ()); ?></pre>
+<pre><?php print_r(get_defined_vars()); ?></pre>

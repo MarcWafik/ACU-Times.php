@@ -1,4 +1,16 @@
-<?php require_once 'autoload.php';
+<?php
+require_once 'autoload.php';
+$youtube = new Youtube();
+if (isset($_GET["id"]) && $youtube->read($_GET["id"])) {
+	
+} else {
+	header("Location: 404.php");
+	exit;
+}
+$writer = new User();
+if (!$writer->read($youtube->getWriterID())) {
+	$writer = new User();
+}
 ?><!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -11,21 +23,28 @@
 		<div class="container">
 			<div class="col-md-8 ">
 				<div class="embed-responsive embed-responsive-16by9">
-					<iframe class="embed-responsive-item" src="https://www.youtube.com/embed/YQHsXMglC9A" frameborder="0" allowfullscreen></iframe>
+					<iframe class="embed-responsive-item" src="https://www.youtube.com/embed/<?php echo $youtube->getyoutubeID() ?>" frameborder="0" allowfullscreen></iframe>
 				</div>
 				<div class="row">
-					<h2 class="text-primary"> Sed ultrices turpis sed rhoncus semper</h2>
+					<h2 class="text-primary"> <?php echo $youtube->getTitleEnglish(); ?></h2>
+				</div>
+				<div class="dropdown pull-right">
+					<button class="btn-setting btn btn-default " data-toggle="dropdown" aria-haspopup="true" > <i class="fa fa-bars" aria-hidden="true"></i> </button>
+					<ul class="dropdown-menu" aria-labelledby="dLabel">
+						<li><a href="#"><i class="fa fa-pencil"></i> Edit</a></li>
+						<li><a  href="#"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</a></li>
+					</ul>
 				</div>
 				<div class="container">
-					<a href="#"> <img style="height:60px"class="img-responsive img-circle pull-left" src="http://placehold.it/500x500"> </a>
+					<a href="Profile.php?id=<?php echo $youtube->getWriterID; ?>"> <img style="height:60px"class="img-responsive img-circle pull-left" src="images/User.png"> </a>
 					<div class="pull-left" style="padding-left:10px">
-						<h5><strong>By <a href="#">Name of writer</a>, ACU Times</strong></h5>
-						<h5> <span class="glyphicon glyphicon-time"></span> 3:00PM 10/10/2015 </h5>
+						<h5><strong>By <a href="Profile.php?id=<?php echo $youtube->getWriterID; ?>"><?php echo $writer->getfullName(); ?></a>, ACU Times</strong></h5>
+						<h5> <span class="glyphicon glyphicon-time"></span> <?php echo $youtube->getCreatDate_StringLong(); ?> </h5>
 					</div>
 				</div>
 				<hr>
 				<div class="row">
-					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi pellentesque scelerisque mi, eu varius eros interdum sit amet. Maecenas at vulputate nisl. Aenean in varius purus. Praesent commodo fringilla euismod. In eu eros id arcu imperdiet rutrum.</p>
+					<p><?php echo $youtube->getDescriptionEnglish(); ?></p>
 				</div>
 				<hr>
 			</div>

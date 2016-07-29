@@ -1,72 +1,31 @@
-<?php 
-require_once("PrintPortofolio.php");
-require_once("ControlArticle.php");
-require_once("ControlCategory.php");
-
-function isValidCat($find ){
-	global $CategoryList;
-		foreach($CategoryList as $Category){
-			if(isset($Category->ArrSubCategorys[0])){
-				foreach($Category->ArrSubCategorys as $SubCat ){
-					if($SubCat->Link === $Find){
-						return TRUE;
-					}
-				}
-			}else{
-				if($Category->Link === $Find){
-					return TRUE;
-				}
-			}
-		}
-	return FALSE;
-}
-
-$ArticleArr = Array();
-if(!isset($_GET["Category"])){//||isValidCat($_GET["Category"]
-	header("Location: 404.php");
-	exit();
-}
-else{
-	$ArticleArr = LoadArticleCategory($_GET["Category"]);
-}
-?>
-<!DOCTYPE html>
+<?php require_once 'autoload.php';
+?><!DOCTYPE html>
 <html lang="en">
-<head>
-<title>ACU Times | Title</title>
-<?php require_once("Header.php");?>
-</head>
-<body>
-<?php include ("Navbar.php");?>
-
-	<!-------------------------------- Articles -------------------------------->
-	<div class="container">
-	<h1><a><?php echo $_GET["Category"]?></a></h1>
-	<hr>
-		<?php 
-		foreach ($ArticleArr as &$Article){
-			if(isset($Article["ID"])&&$Article["ID"]!=""&&$Article["ID"]!=" "){
-				echo
-				 printPortofolio_1Line ( 
-				 $Article["IMG"], 
-				 $Article["Name"], 
-				 "Article.php?ID=".$Article["ID"], 
-				 $Article["Brief"], 
-				 $Article["ArticleDay"], 
-				 $Article["ArticleMonth"],
-				 $Article["ArticleYear"]);
-			}
-		}
-		?>
-	</div>
-	<!-------------------------------- pagination -------------------------------->
-	<div class="text-center center-block">
-		<ul class = "pagination">
-			<li><a href = "#">&laquo;</a></li>
-			<li><a href = "?Page=1">1</a></li>
-			<li><a href = "#">&raquo;</a></li>
-		</ul>
-	</div>
-<?php include ("Footer.php");?>
-</body>
+	<head>
+		<title>ACU Times | Title</title>
+		<?php require_once("Header.php"); ?>
+	</head>
+	<body>
+		<?php include ("Navbar.php"); ?>
+		<div class="container">
+			<br><h2 class="text-primary">Category name</h2>
+			<hr>
+			<!-------------------------------- Articles -------------------------------->
+			<?php
+			$title = "Sed ultrices turpis sed rhoncus semper";
+			$link = "#";
+			$description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi pellentesque scelerisque mi, eu varius eros interdum sit amet. Maecenas at vulputate nisl. Aenean in varius purus. Praesent commodo fringilla euismod. In eu eros id arcu imperdiet rutrum.";
+			$time = new DateTime;
+			$time = $time->format('g:i a - D, d F Y');
+			$img = "http://placehold.it/1920x1080";
+			PrintHTML::portofolio_12row_next_large($title, $link, $description, $time, $img);
+			PrintHTML::portofolio_12row_next_normal($title, $link, $description, $time, $img);
+			PrintHTML::portofolio_12row_next_normal($title, $link, $description, $time, $img);
+			PrintHTML::portofolio_12row_next_normal($title, $link, $description, $time, $img);
+			PrintHTML::portofolio_12row_next_normal($title, $link, $description, $time, $img);
+			?></div>
+		<!-------------------------------- pagination -------------------------------->
+		<button type="button" class="btn btn-primary center-block" onClick="">Load more <i class="fa fa-arrow-down" aria-hidden="true"></i></button>
+			<?php include ("Footer.php"); ?>
+	</body>
 </html>
