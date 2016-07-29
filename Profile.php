@@ -13,8 +13,6 @@
 </head>
 <style>
 .MyLargeContainer {
-	margin-left: inherit;
-	margin-top: inherit;
 	float: left;
 	padding: 10px;
 }
@@ -31,20 +29,28 @@
 	float: left;
 	text-align: left;
 }
+.MyIMG {
+	padding: 10px;
+	float: left;
+}
 
 @media screen and (min-width : 250px) and (max-width : 650px) {
+.MyIMG {
+	float: none;
+	text-align: center;
+}
 }
 </style>
 <body>
 <?php include ("Header.html");?>
 <!-- content -->
 <div class="wrapper row3">
-	<div id="container">
+	<div id="container"> 
 		<!-- ################################################################################################ --?
 		<!-- main content -->
-		<div style="padding:10px;float:left;"> <a href="#"><img src="images/demo/166x130.gif" alt="" class="img"></a> <br>
+		<div class="MyIMG"> <a href="#"><img src="images/demo/166x130.gif" alt="" class="img"></a> <br>
 			<input style=" padding-right:10px ; padding-left:10px ; padding-top:5px ; padding-bottom:5px;width: 166px;
-							 background-color:#FF9900; border:thin" type="submit" value=" change image " >
+							 background-color:#FF9900; border:thin" type="submit" value=" Change image " >
 		</div>
 		<div class="MyLargeContainer">
 			<div class="MyContainer">
@@ -96,7 +102,9 @@
 			</div>
 			<br>
 			<div class="MyContainer">
-				<div class="MyLable" style="text-align:left">About:&nbsp;&nbsp;&nbsp;</div><br>
+				<div class="MyLable" style="text-align:left">About :<br>
+				</div>
+				<br>
 				<div class="MyOut">Lorem ipsum dolor sit amet, consectetur adipiscing elit. </div>
 			</div>
 		</div>
