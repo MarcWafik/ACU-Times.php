@@ -9,35 +9,59 @@
 <link rel="stylesheet" href="layout/styles/mediaqueries.css" type="text/css" media="all">
 <script src="layout/scripts/jquery.min.js"></script>
 <script src="layout/scripts/jquery-mobilemenu.min.js"></script>
+<style>
+.MyAlret {
+	color: red;
+	padding-top: 5px;
+}
+.MyLable {
+}
+.MyInput {
+	width: 320px;
+}
+.MyContainer {
+	padding:10px;
+}
+</style>
 </head>
 <body>
 <?php include ("Header.html");?>
 <!-------------------------------------------------------------------------- content -------------------------------------------------------------------------->
 <div class="wrapper row3">
-	<div style=" text-align:center"> <br>
-		<br><p><h6>Log in</h6></p><br>
+	<div class="clear"><br>
+		<br>
+		<br>
+	</div>
+	<h6 class="center">Login</h6>
+	<div class="clear"><br>
+		<br>
+		<br>
+	</div>
+	<div style="margin: 0 auto; width: 340px;text-align:left;">
 		<form action="#" method="post">
-			<p>
-			<div class="row3">
-				<label for="name"><small>ID :</small></label>
+<div class="MyContainer">
+				<label for="ID">University ID :</label>
 				<br>
-				<input style=" width:250px" type= "text" name="ID" id="ID" value="">
-			</div>
-			</p>
-			<p>
-			<div class="row3">
-				<label for="Password"><small>Password :</small></label>
+				<input type="text" name="ID" id="ID" value="" class="MyInput" onBlur="valID()" required>
+				<small>
+				<div id="Validate_ID" name = "Validate_ID" class="MyAlret"></div>
+				</small> </div>
+<div class="MyContainer">
+				<label for="Password">Password :</label>
 				<br>
-				<input style=" width:250px" type="password" name="Password" id="Password" value="">
-			</div>
-			</p>
-			<p><a href="##################"><small>Forgotten your username or password?</small></a></p>
-			<p>
-			<div class="row3">
-				<input class="Mysubmit" style=" width:100px" name="Login" type="submit" id="Login" value="Login">
-			</div>
-			</p>
+				<input type="password" name="Password" id="Password" value="" class="MyInput" onBlur="valPassword()" required>
+				<small>
+				<div id="Validate_Password" name = "Validate_Password" class="MyAlret"></div>
+				</small> </div>
+				
+				<div class="MyContainer" style="text-align:right">
+				<input class="Mysubmit" style="border-radius:5px;" name="submit" type="submit" id="submit" value="Login">
+				</div>
+				
+				
 		</form>
+	</div>
+	<div class="clear"><br>
 		<br>
 		<br>
 	</div>

@@ -63,7 +63,7 @@
 					<div>
 						<article class="one_fifth first"><a href="#"><img src="images/demo/166x130.gif" alt=""></a>
 							<h2>Indonectetus facilis</h2>
-							<p>Nullamlacus dui ipsum conseque loborttis non euisque morbi penas dapibulum orna.</p>
+							<p>Nullamlacus dui ipsum consequ?e loborttis non euisque morbi penas dapibulum orna.</p>
 							<footer class="more"><a href="#">Read More &raquo;</a></footer>
 						</article>
 						<article class="one_fifth"><a href="#"><img src="images/demo/166x130.gif" alt=""></a>
@@ -202,8 +202,5 @@
 </div>
 <!-- Footer -->
 <?php include ("Footer.html");?>
-<script>
-alert("1- the form validation using Java script  & Regex is in /Register.php \n2- the grey images are only a placeholder and will be replaced once we use DB \n ");
-</script>
 </body>
 </html>

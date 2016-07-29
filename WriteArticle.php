@@ -51,9 +51,29 @@ tinymce.init({
   plugins: "textcolor",
   toolbar: "forecolor backcolor"
 });
-
-
   </script>
+  <style>
+.MyLable {
+	float: left;
+	width: 80px;
+	height:30px;
+	text-align: right;
+}
+.MyInput {
+	float: left;
+	margin-left: 10px;
+	width: 300px;
+	
+}
+.MyContainer {
+	clear: both;
+	padding: 10px;
+}
+#article {
+	width: 100%;
+	height: 600px;
+}
+</style>
   </head>
   <body>
 	<?php include ("Header.html");?>
@@ -65,51 +85,60 @@ tinymce.init({
 			<div class="pad"> 
 			<!-- ################################################################################################ --> 
 			<!-- content body -->
-			
 			<form method="post">
-					<div style="margin:0 auto;">
-				<div style="clear:both">
-					<div style="float:left">Language :</div>
-					<div style="float:left"><input type="radio" value="Arabic" name="lang">Arabic</div>
-					<div style="float:left"><input type="radio" name="lang">English</div>
+					<div class="MyContainer">
+					<div class="MyLable">Title : </div>
+					<input type="text" name="Title" id="Title" value="" class="MyInput" required>
 				</div>
-<div style="clear:both">
-<label>Write In :</label>
-					<select style="float:left">
-							<option>Category</option>
-							<option>News</option>
-							<option>Art</option>
-							<option>Sport</option>
+					<div class="MyContainer">
+					<div class="MyLable">Language :</div>
+					<div class="MyInput" style="width:100px">
+							<input type="radio" value="Arabic" name="lang" required>
+							Arabic </div>
+					<div class="MyInput" style="width:100px">
+							<input type="radio" name="lang" required>
+							English </div>
+				</div>
+					<div class="MyContainer">
+					<div class="MyLable">Category :</div>
+					<select class="MyInput" required>
+							<optgroup label="News">
+						<option>World News</option>
+						<option>ACU College News</option>
+						</optgroup>
+							<optgroup label="Art">
+						<option>Cinema</option>
+						<option>Drama</option>
+						<option>Theater</option>
+						</optgroup>
+							<optgroup label="Sport">
+						<option>Local Footaball</option>
+						<option>International Football</option>
+						<option>Other</option>
+						</optgroup>
 							<option>Interviews</option>
-							<option>tech &amp; science</option>
+							<option>Tech &amp; Science</option>
 							<option>Economy</option>
 							<option>Multimedia</option>
 							<option>Gallery</option>
 						</select>
-					<select style="float:left">
-							<option>SubCategory</option>
-							<option>Sub #1</option>
-							<option>Sub #2</option>
-							<option>Sub #3</option>
-							<option>Sub #4</option>
-							<option>Sub #5</option>
-							<option>Sub #6</option>
-							<option>Sub #7</option>
-							<option>Sub #8</option>
-						</select>
 				</div>
-					<textarea id="article">
-  
-</textarea>
+					<div style="clear:both">
+					<br>
+					<div >
+					<textarea id="article" ></textarea>
+				</div>
 				</form>
-			</div>
 			<!-- / content body --> 
-			<!-- ################################################################################################ -->
-			<div class="clear"></div>
+			<!-- ################################################################################################ --> 
+			
 		</div>
+			<div class="clear"></div>
 			<!-- ################################################################################################ --> 
 		</div>
 </div>
+	</div>
+	</div>
 	<?php include ("Footer.html");?>
 </body>
 </html>

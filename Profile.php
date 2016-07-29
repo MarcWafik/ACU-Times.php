@@ -25,7 +25,7 @@
 .MyLable {
 	float: left;
 	text-align: right;
-	width: 100px;
+	width: 110px;
 }
 .MyOut {
 	float: left;
@@ -91,12 +91,12 @@
 			<br>
 			<hr>
 			<div class="MyContainer">
-				<div class="MyLable">Article :&nbsp;&nbsp;&nbsp;</div>
+				<div class="MyLable">Article writen :&nbsp;&nbsp;&nbsp;</div>
 				<div class="MyOut"> 25 </div>
 			</div>
 			<br>
 			<div class="MyContainer">
-				<div class="MyLable">About:&nbsp;&nbsp;&nbsp;</div>
+				<div class="MyLable" style="text-align:left">About:&nbsp;&nbsp;&nbsp;</div><br>
 				<div class="MyOut">Lorem ipsum dolor sit amet, consectetur adipiscing elit. </div>
 			</div>
 		</div>
