@@ -10,9 +10,21 @@
 <script src="layout/scripts/jquery.min.js"></script>
 <script src="layout/scripts/jquery-mobilemenu.min.js"></script>
 <script src="https://www.google.com/recaptcha/api.js"></script>
+<style>
+.MyAlret {
+	color: red;
+	padding-top: 5px;
+}
+.MyLable {
+}
+.MyInput {
+	width: 320px;
+}
+</style>
 </head>
 <body>
 <?php include ("Header.html");?>
+
 <!-------------------------------------------------------------------------- content -------------------------------------------------------------------------->
 <div class="wrapper row3">
 	<div style="margin: 0 auto; width: 325px;text-align:left;"> <br>
@@ -21,72 +33,83 @@
 			<div>
 				<label for="name"><small>Full name :</small></label>
 				<br>
-				<input type="text" name="name" id="name" value="" style="width:320px">
-			</div>
-			</p>
+				<input type="text" name="name" id="name" value="" class="MyInput" onBlur="valName()" required>
+				<small>
+				<div id="Validate_name" name = "Validate_name" class="MyAlret"></div>
+				</small> </div>
 			<p>
 			<div>
 				<label for="ID"><small>University ID :</small></label>
 				<br>
-				<input type="text" name="ID" id="ID" value="" style="width:320px">
-			</div>
+				<input type="text" name="ID" id="ID" value="" class="MyInput" onBlur="valID()" required>
+				<small>
+				<div id="Validate_ID" name = "Validate_ID" class="MyAlret"></div>
+				</small> </div>
 			</p>
 			<p>
 			<div>
 				<label for="email"><small>E-Mail :</small></label>
 				<br>
-				<input type="email" name="email" id="email" value="" style="width:320px">
-			</div>
+				<input type="email" name="email" id="email" value="" class="MyInput" onBlur="valEmail()" required>
+				<small>
+				<div id="Validate_email" name = "Validate_email" class="MyAlret"></div>
+				</small> </div>
 			</p>
 			<p>
 			<div>
 				<label for="Password"><small>Password :</small></label>
 				<br>
-				<input type="password" name="Password" id="Password" value="" style="width:320px">
-			</div>
+				<input type="password" name="Password" id="Password" value="" class="MyInput" onBlur="valPassword()" required>
+				<small>
+				<div id="Validate_Password" name = "Validate_Password" class="MyAlret"></div>
+				</small> </div>
 			</p>
 			<p>
 			<div>
 				<label for="RePassword"><small>Reenter password :</small></label>
 				<br>
-				<input type="password" name="RePassword" id="RePassword" value="" style="width:320px">
-			</div>
+				<input type="password" name="RePassword" id="RePassword" value="" class="MyInput" onBlur="valRePassword()" required>
+				<small>
+				<div id="Validate_RePassword" name = "Validate_RePassword" class="MyAlret"></div>
+				</small> </div>
 			</p>
 			<p>
 			<div>
-				<label for="PhoneNumber"><small>Phone Number (optional) :</small></label>
+				<label for="PhoneNo"><small>Phone Number (optional) :</small></label>
 				<br>
-				<input type= "text" name="PhoneNumber" id="PhoneNumber" value="" style="width:320px">
-			</div>
+				<input type= "text" name="PhoneNo" id="PhoneNo" value="" class="MyInput" onBlur="valPhoneNo()">
+				<small>
+				<div id="Validate_PhoneNo" name = "Validate_PhoneNo" class="MyAlret"></div>
+				</small> </div>
 			</p>
 			<p>
 			<div>
 				<label for="Gender" ><small>Gender :</small></label>
 				<br>
-				<select   style="width:320px" name="Gender">
+				<select   class="MyInput" name="Gender" required >
 					<option>Male</option>
 					<option>Female</option>
 					<option selected="selected">Do not specify</option>
 				</select>
-			</div>
+				<small>
+				<div id="Validate_Gender" name = "Validate_Gender" class="MyAlret"></div>
+				</small> </div>
 			</p>
 			<div>
 				<label for="Birthday" ><small>Birthday :</small></label>
 				<br>
-				<input type="date"  name="Birthday" id="Birthday" value=""    style="width:320px">
-				<br>
-				<br>
-			</div>
+				<input type="date"  name="Birthday" id="Birthday" value=""    class="MyInput" onBlur="valBirthday()" required>
+				<small>
+				<div id="Validate_Birthday" name = "Validate_Birthday" class="MyAlret"></div>
+				</small> </div>
 			<p>
-			<div class="g-recaptcha" data-sitekey="6Ldh-RkTAAAAAPtk9mzLYazqa7A9twsF8-2dMPuC"></div>
+			<div style="padding:5px" class="g-recaptcha" data-sitekey="6Ldh-RkTAAAAAPtk9mzLYazqa7A9twsF8-2dMPuC"></div>
 			</p>
 			<div style="text-align:center">
 				<p> <small>Clicking Create account means that you agree to <br>
 					our <a href="Register.html" title="Services Agreement">Services Agreement</a> and <a href="Register.html">Privacy Policy</a></small></p>
 				<p>
-					<input name="submit" type="submit" id="submit" value="&nbsp; Creat Account &nbsp;">
-					&nbsp;
-					<input name="reset" type="reset" id="reset" value="&nbsp; Reset &nbsp;">
+					<input class="Mysubmit" name="submit" type="submit" id="submit" value="Creat Account">
 					<br>
 					<br>
 				</p>
@@ -94,6 +117,102 @@
 		</form>
 	</div>
 </div>
+<script type="text/javascript">
+//=========================================Name=========================================
+var fullName = document.getElementById("name");
+var fullNameAlert = document.getElementById("Validate_name");
+ function valName() {
+	fullNameAlert.innerHTML = fullName.value;
+		var patt =  /^[A-Za-z\s]+$/;
+	if(!patt.test(fullName.value))
+	{
+		fullNameAlert.innerHTML = "Enter a Valid Name (Letters and space only)";
+	}
+	else
+	{
+		fullNameAlert.innerHTML = "";
+	}
+	
+}
+//=========================================ID=========================================
+var ID = document.getElementById("ID");
+var IDAlert = document.getElementById("Validate_ID");
+ function valID() {
+	if((isNaN(ID.value))&&((int(ID.value)>1000000)&&(int(ID.value)<9999999)))
+	{
+		IDAlert.innerHTML ="";
+	}
+	else
+	{
+		IDAlert.innerHTML ="Enter your university ID";
+	}
+}
+//=========================================Email=========================================
+var Email = document.getElementById("email")
+var EmailAlert = document.getElementById("Validate_email");
+ function valEmail() {
+	var patt =  /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+	if(!patt.test(Email.value))
+	{
+		EmailAlert.innerHTML = "Enter a Valid E-mail";
+	}
+	else
+	{
+		EmailAlert.innerHTML = "";
+	}
+}
+//=========================================Password=========================================
+var Password = document.getElementById("Password");
+var PasswordAlert = document.getElementById("Validate_Password");
+ function valPassword() {
+	PasswordAlert.innerHTML = Password.value;
+	var patt =/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/
+	if(!patt.test(Password.value))
+	{
+		PasswordAlert.innerHTML = "Must contain a number ,upercase letter (A-Z) & lowercase letter (a-z)";
+	}
+	else
+	{
+		PasswordAlert.innerHTML = "";
+	}
+}
+//=========================================RePassword=========================================
+var RePassword = document.getElementById("RePassword");
+var RePasswordAlert = document.getElementById("Validate_RePassword");
+ function valRePassword() {
+	if(Password.value!==RePassword.value)
+	{
+		RePasswordAlert.innerHTML = "Password does not match";
+	}
+	else
+	{
+		RePasswordAlert.innerHTML = "";
+	}
+}
+//=========================================PhoneNo=========================================
+var PhoneNo = document.getElementById("PhoneNo");
+var PhoneNoAlert = document.getElementById("Validate_PhoneNo");
+ function valPhoneNo() {
+	PhoneNoAlert.innerHTML = PhoneNo.value;
+	
+	if((isNaN(PhoneNo.value)&&((int(PhoneNo.value)>1000)&&(int(PhoneNo.value)<9999999999)))||PhoneNo.value=="")
+	{
+		PhoneNoAlert.innerHTML ="";
+	}
+	else
+	{
+		PhoneNoAlert.innerHTML ="Enter a correct Phone Number";
+	}
+}
+//=========================================Gender=========================================
+
+//=========================================BrithDay=========================================
+var BrithDay = document.getElementById("Birthday");
+var BrithDayAlert = document.getElementById("Validate_Birthday");
+ function valBirthday() {
+	//BrithDayAlert.innerHTML = BrithDay.value;
+}
+</script> 
 <!-------------------------------------------------------------------------- content -------------------------------------------------------------------------->
 <?php include ("Footer.html");?>
 </body>

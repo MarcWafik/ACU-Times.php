@@ -202,5 +202,8 @@
 </div>
 <!-- Footer -->
 <?php include ("Footer.html");?>
+<script>
+alert("1- the form validation using Java script  & Regex is in /Register.php \n2- the grey images are only a placeholder and will be replaced once we use DB \n ");
+</script>
 </body>
 </html>

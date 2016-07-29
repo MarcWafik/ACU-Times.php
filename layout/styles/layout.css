@@ -142,3 +142,8 @@ aside h2{padding-bottom:8px; font-size:1.2em; text-transform:uppercase; border-b
 
 #copyright{padding:10px 0;}
 #copyright p{margin:0; padding:0;}
+
+
+/**/
+.Mysubmit { padding-right:10px ; padding-left:10px ; padding-top:5px ; padding-bottom:5px;margin-top:0.5%;width: 166px;
+							 background-color:#FF9900; border:thin;}
