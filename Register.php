@@ -31,7 +31,7 @@
 		<form action="#" method="post">
 			<p>
 			<div>
-				<label for="name"><small>Full name :</small></label>
+				<label for="name">Full name :</label>
 				<br>
 				<input type="text" name="name" id="name" value="" class="MyInput" onBlur="valName()" required>
 				<small>
@@ -39,7 +39,7 @@
 				</small> </div>
 			<p>
 			<div>
-				<label for="ID"><small>University ID :</small></label>
+				<label for="ID">University ID :</label>
 				<br>
 				<input type="text" name="ID" id="ID" value="" class="MyInput" onBlur="valID()" required>
 				<small>
@@ -48,7 +48,7 @@
 			</p>
 			<p>
 			<div>
-				<label for="email"><small>E-Mail :</small></label>
+				<label for="email">E-Mail :</label>
 				<br>
 				<input type="email" name="email" id="email" value="" class="MyInput" onBlur="valEmail()" required>
 				<small>
@@ -57,7 +57,7 @@
 			</p>
 			<p>
 			<div>
-				<label for="Password"><small>Password :</small></label>
+				<label for="Password">Password :</label>
 				<br>
 				<input type="password" name="Password" id="Password" value="" class="MyInput" onBlur="valPassword()" required>
 				<small>
@@ -66,7 +66,7 @@
 			</p>
 			<p>
 			<div>
-				<label for="RePassword"><small>Reenter password :</small></label>
+				<label for="RePassword">Reenter password :</label>
 				<br>
 				<input type="password" name="RePassword" id="RePassword" value="" class="MyInput" onBlur="valRePassword()" required>
 				<small>
@@ -75,7 +75,7 @@
 			</p>
 			<p>
 			<div>
-				<label for="PhoneNo"><small>Phone Number (optional) :</small></label>
+				<label for="PhoneNo">Phone Number (optional) :</label>
 				<br>
 				<input type= "text" name="PhoneNo" id="PhoneNo" value="" class="MyInput" onBlur="valPhoneNo()">
 				<small>
@@ -84,7 +84,7 @@
 			</p>
 			<p>
 			<div>
-				<label for="Gender" ><small>Gender :</small></label>
+				<label for="Gender" >Gender :</label>
 				<br>
 				<select   class="MyInput" name="Gender" required >
 					<option>Male</option>
@@ -96,7 +96,7 @@
 				</small> </div>
 			</p>
 			<div>
-				<label for="Birthday" ><small>Birthday :</small></label>
+				<label for="Birthday" >Birthday :</label>
 				<br>
 				<input type="date"  name="Birthday" id="Birthday" value=""    class="MyInput" onBlur="valBirthday()" required>
 				<small>
@@ -109,7 +109,7 @@
 				<p> <small>Clicking Create account means that you agree to <br>
 					our <a href="Register.html" title="Services Agreement">Services Agreement</a> and <a href="Register.html">Privacy Policy</a></small></p>
 				<p>
-					<input class="Mysubmit" name="submit" type="submit" id="submit" value="Creat Account">
+					<input class="Mysubmit" style="border-radius:5px" name="submit" type="submit" id="submit" value="Creat Account">
 					<br>
 					<br>
 				</p>
