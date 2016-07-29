@@ -19,11 +19,6 @@
 			</div>
 			<br>
 		</div>
-		<?php
-		include ("Footer.php");
-		$x = new User();
-		$x->setLastUpdateDate();
-		echo $x->getLastUpdateDate_StringLong();
-		?>
+		<?php include ("Footer.php");?>
 	</body>
 </html>

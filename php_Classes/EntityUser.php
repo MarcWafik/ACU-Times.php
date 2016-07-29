@@ -16,8 +16,8 @@ class EntityUser extends Entity {
 	protected $fullName; //32
 	protected $email; // 254
 
-	public function _init() {
-		parent::_init();
+	public function __init() {
+		parent::__init();
 		$this->fullName = "";
 		$this->email = "";
 	}

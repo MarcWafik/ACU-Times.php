@@ -15,8 +15,12 @@ class Poll extends EntityArticle implements iCRUD {
 
 	protected $choices = array(); // an array of poll choices
 
-	public function _init() {
-		parent::_init();
+	function __construct() {
+		$this->__init();
+	}
+
+	public function __init() {
+		parent::__init();
 		$this->choices = array();
 	}
 

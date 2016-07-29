@@ -18,9 +18,15 @@ class Article extends Youtube implements iCRUD {
 	protected $importance; // 0~9
 	protected $imageNumber; // how many images  max is 99 (just for db)
 	protected $views = 0; // max 11
+	protected $bodyEnglish = 0; // max 64k
+	protected $bodyArabic = 0; // max 64k
 
-	public function _init() {
-		parent::_init();
+	function __construct() {
+		$this->__init();
+	}
+
+	public function __init() {
+		parent::__init();
 		$this->categoryID = 0;
 		$this->language = 0;
 		$this->importance = 0; // 0~9
@@ -99,6 +105,22 @@ class Article extends Youtube implements iCRUD {
 		}
 	}
 
+	function setBodyEnglish($bodyEnglish) {
+		if (Validation::isStringMinMaxLenth($bodyEnglish, 0, 64000)) {
+			$this->bodyEnglish = Validation::Sanetize($bodyEnglish);
+			return TRUE;
+		}
+		return FALSE;
+	}
+
+	function setBodyArabic($bodyArabic) {
+		if (Validation::isStringMinMaxLenth($bodyArabic, 0, 64000)) {
+			$this->bodyArabic = Validation::Sanetize($bodyArabic);
+			return TRUE;
+		}
+		return FALSE;
+	}
+
 //===================================================GET===================================================
 
 	public function getViews() {
@@ -119,6 +141,14 @@ class Article extends Youtube implements iCRUD {
 
 	public function getImageNumber() {
 		return $this->imageNumber;
+	}
+
+	function getBodyEnglish() {
+		return $this->bodyEnglish;
+	}
+
+	function getBodyArabic() {
+		return $this->bodyArabic;
 	}
 
 }

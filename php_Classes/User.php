@@ -16,37 +16,65 @@ class User extends EntityUser implements iCRUD {
 // photo is stored as 4141235.jpeg
 	protected $phoneNumber;   //13
 	protected $nameArabic;  //32
-	protected $password; //32
+	protected $password; //32             for varchar 64
 	protected $gender; //1 - 0 dont say 1 male 2 female 
 	protected $accses;   //1 - 0 regular 1 editor 2 admin
 	protected $about;  //2048
 	protected $birthDate;  // using datetime class
-	protected $listNotification; // an array of notification
+	protected $arrNotification; // an array of notification
 
-	public function _init() {
-		parent::_init();
+	function __construct() {
+		$this->__init();
+	}
+
+	public function __init() {
+		parent::__init();
 		$this->phoneNumber = 0;
+		$this->nameArabic = "";
 		$this->password = "";
 		$this->gender = 0;
 		$this->accses = 0;
 		$this->about = "";
 		$this->birthDate = new DateTime();
-		$this->listNotification = array();
+		$this->arrNotification = array();
 	}
 
 //=================================================Const===================================================
-
 	const ACCSES_REGULAR = 0;
 	const ACCSES_EDITOR = 1;
 	const ACCSES_ADMIN = 2;
 	const GENDER_NOTSET = 0;
 	const GENDER_MALE = 1;
 	const GENDER_FEMALE = 2;
+	const DB_TABLE_NAME = "user";
 
 //==================================================CRUD===================================================
 
 	public function create() {
-		
+		$conn = DataBase::getConnection();
+		if ($conn === null) {
+			return FALSE;
+		}
+		try {
+			$stmt = $conn->prepare("INSERT INTO " . self::DB_TABLE_NAME . " (id, fullName, email, phoneNumber, nameArabic, password, gender, accses, about, birthDate)
+										VALUES (:id, :fullName, :email, :phoneNumber, :nameArabic, :password, :gender, :accses, :about, :birthDate)");
+
+			$stmt->bindParam(':id', $this->id);
+			$stmt->bindParam(':fullName', $this->fullName);
+			$stmt->bindParam(':email', $this->email);
+			$stmt->bindParam(':phoneNumber', $this->phoneNumber);
+			$stmt->bindParam(':nameArabic', $this->nameArabic);
+			$stmt->bindParam(':password', $this->password);
+			$stmt->bindParam(':gender', $this->gender);
+			$stmt->bindParam(':accses', $this->accses);
+			$stmt->bindParam(':about', $this->about);
+			$stmt->bindParam(':birthDate', $this->birthDate->format('Y-m-d'));
+
+			return $stmt->execute();
+		} catch (PDOException $e) {
+			//echo "Error: " . $e->getMessage();
+			return FALSE;
+		}
 	}
 
 	public function read($id) {
@@ -54,11 +82,29 @@ class User extends EntityUser implements iCRUD {
 	}
 
 	public function update() {
-		
-	}
+		$conn = DataBase::getConnection();
+		if ($conn === null) {
+			return FALSE;
+		}
+		try {
+			$stmt = $conn->prepare("UPDATE " . self::DB_TABLE_NAME . " SET fullName = :fullName, email =  :email, phoneNumber = :phoneNumber, nameArabic = :nameArabic, password = :password, gender = :gender, accses = :accses, about = :about, birthDate = :birthDate WHERE id=:id");
 
-	public function delete() {
-		
+			$stmt->bindParam(':id', $this->id);
+			$stmt->bindParam(':fullName', $this->fullName);
+			$stmt->bindParam(':email', $this->email);
+			$stmt->bindParam(':phoneNumber', $this->phoneNumber);
+			$stmt->bindParam(':nameArabic', $this->nameArabic);
+			$stmt->bindParam(':password', $this->password);
+			$stmt->bindParam(':gender', $this->gender);
+			$stmt->bindParam(':accses', $this->accses);
+			$stmt->bindParam(':about', $this->about);
+			$stmt->bindParam(':birthDate', $this->birthDate->format('Y-m-d'));
+
+			return $stmt->execute();
+		} catch (PDOException $e) {
+			echo "Error: " . $e->getMessage();
+			return FALSE;
+		}
 	}
 
 	public function search($imput) {

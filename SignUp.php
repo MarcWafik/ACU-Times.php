@@ -19,7 +19,7 @@ if (valAllNotnull()) {
 		"IDtaken" => (bool) $User->isIDAvailable($_POST["ID"]),
 		"emailtaken" => (bool) $User->isEmailAvailable($_POST["email"]),
 	);
-	if (valAll($iscorrect)) {
+	if (Validation::valAll($iscorrect)) {
 		$User->create();
 		header("Location: SignupSuccessful.php");
 		exit;
@@ -27,14 +27,6 @@ if (valAllNotnull()) {
 }
 
 //=========================================validate=========================================
-function valAll($iscorrect) {
-	foreach ($iscorrect as $key => $value) {
-		if (FALSE == $value) {
-			return FALSE;
-		}
-	}
-	return TRUE;
-}
 
 function valAllNotnull() {
 	return
@@ -89,10 +81,12 @@ function valAllNotnull() {
 				<div class="form-group">
 					<label class="control-label" for="ID">University ID :</label>
 					<div class="controls">
-						<input type="number" 
-							   name="text" id="ID" 
+						<input type="text" 
+							   name="ID" 
+							   id="ID" 
 							   value="<?php echo @$_POST["ID"]; ?>" 
-							   class="form-control" onBlur="valID(this)" 
+							   class="form-control" 
+							   onBlur="valID(this)" 
 							   maxlength="7" 
 							   required 
 							   autocomplete="on">
@@ -112,7 +106,8 @@ function valAllNotnull() {
 							   value="<?php echo @$_POST["email"]; ?>" 
 							   class="form-control" 
 							   onBlur="valEmail(this)" 
-							   required autocomplete="on" 
+							   required 
+							   autocomplete="on" 
 							   maxlength="256">
 						<span class="help-block"><ul>
 								<?php PrintHTML::validation("email", @$iscorrect["email"], "Enter a Valid E-mail") ?>
@@ -182,9 +177,9 @@ function valAllNotnull() {
 								name="Gender" 
 								id="Gender" 
 								required>
-							<option value="M">Male</option>
-							<option value="F">Female</option>
-							<option value="" selected="selected">Leave Empty</option>
+							<option value="1">Male</option>
+							<option value="2">Female</option>
+							<option value="3" selected="selected">Leave Empty</option>
 						</select>
 						<span class="help-block"></span></div>
 				</div>

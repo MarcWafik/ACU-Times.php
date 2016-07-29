@@ -19,15 +19,12 @@ class Category extends Entity {
 	private $nameArabic;
 	private $arrSubCategorys;
 
-	function __construct($possition, $nameEnglish, $nameArabic, $arrSubCategorys) {
-		$this->possition = $possition;
-		$this->nameEnglish = $nameEnglish;
-		$this->nameArabic = $nameArabic;
-		$this->arrSubCategorys = $arrSubCategorys;
+	function __construct() {
+		$this->__init();
 	}
 
-	function _init() {
-		parent::_init();
+	function __init() {
+		parent::__init();
 		$this->possition = 0;
 		$this->nameEnglish = "";
 		$this->nameArabic = "";

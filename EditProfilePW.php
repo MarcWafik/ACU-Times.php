@@ -1,7 +1,7 @@
 <?php
 require_once 'autoload.php';
 $User = new User();
-$User->_init();
+$User->__init();
 $User->read(User::getSessionUserID());
 if (valAllNotnull()) {
 	$User->setLastUpdateDate();
@@ -10,21 +10,12 @@ if (valAllNotnull()) {
 		"RePassword" => (bool) $_POST["Password"] === $_POST["RePassword"],
 		"Password" => (bool) $User->setPassword($_POST["Password"]),
 	);
-	if (valAll($iscorrect) && $User->update()) {
+	if (Validation::valAll($iscorrect) && $User->update()) {
 		$Passed = true;
 	}
 }
 
 //=========================================validate=========================================
-function valAll($iscorrect) {
-	foreach ($iscorrect as $key => $value) {
-		if (FALSE == $value) {
-			return FALSE;
-		}
-	}
-	return TRUE;
-}
-
 function valAllNotnull() {
 	return
 			isset($_POST["submit"]) &&

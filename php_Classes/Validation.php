@@ -33,4 +33,18 @@ class Validation {
 		return isset($Imput) && strlen($Imput) <= $max && strlen($Imput) >= $mim;
 	}
 
+	public static function Sanetize($Imput) {
+		$Source = array("<script>", "</script>", "<?php", "<?", "?>");
+		return str_ireplace($Source, "", $Imput);
+	}
+
+	public static function valAll($iscorrect) {
+		foreach ($iscorrect as $key => $value) {
+			if (FALSE === $value) {
+				return FALSE;
+			}
+		}
+		return TRUE;
+	}
+
 }

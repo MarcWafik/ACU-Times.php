@@ -16,14 +16,18 @@ class Youtube extends EntityArticle implements iCRUD {
 	protected $youtubeID;
 	protected $descriptionEnglish;
 	protected $descriptionArabic;
-	protected $Comments; // and array of class comment
+	protected $ArrComments; // and array of class comment
 
-	public function _init() {
-		parent::_init();
+	function __construct() {
+		$this->__init();
+	}
+
+	public function __init() {
+		parent::__init();
 		$this->youtubeID = "";
 		$this->descriptionEnglish = "";
 		$this->descriptionArabic = "";
-		$this->Comments = array();
+		$this->ArrComments = array();
 	}
 
 	public function getComments() {

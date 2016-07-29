@@ -19,8 +19,8 @@ abstract class EntityArticle extends Entity {
 	protected $writerID;
 	protected $editorID;
 
-	public function _init() {
-		parent::_init();
+	public function __init() {
+		parent::__init();
 		$this->titleEnglish = "";
 		$this->titleArabic = "";
 		$this->display = 0;

@@ -1,7 +1,7 @@
 <?php
 require_once 'autoload.php';
 $User = new User();
-$User->_init();
+$User->__init();
 $User->read(User::getSessionUserID());
 if (valAllNotnull()) {
 	$User->setLastUpdateDate();
@@ -15,21 +15,12 @@ if (valAllNotnull()) {
 		"emailtaken" => (bool) $User->isEmailAvailable($_POST["email"]),
 		"about" => (bool) $User->setAbout($_POST["about"]),
 	);
-	if (valAll($iscorrect) && $User->update()) {
+	if (Validation::valAll($iscorrect) && $User->update()) {
 		$Passed = true;
 	}
 }
 
 //=========================================validate=========================================
-function valAll($iscorrect) {
-	foreach ($iscorrect as $key => $value) {
-		if (FALSE == $value) {
-			return FALSE;
-		}
-	}
-	return TRUE;
-}
-
 function valAllNotnull() {
 	return
 			isset($_POST["submit"]) &&

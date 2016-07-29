@@ -1,7 +1,7 @@
 <?php
 require_once 'autoload.php';
 $User = new User();
-$User->_init();
+$User->__init();
 
 if (isset($_GET["ID"])) {
 	if (!$User->read($_GET["ID"])) {

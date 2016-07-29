@@ -17,8 +17,12 @@ class Comment extends EntityUser implements iCRUD {
 	protected $for;
 	protected $targetID;
 
-	public function _init() {
-		parent::_init();
+	function __construct() {
+		$this->__init();
+	}
+
+	public function __init() {
+		parent::__init();
 		$this->message = "";
 		$this->for = 0;
 		$this->targetID = 0;

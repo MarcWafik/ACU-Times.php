@@ -14,9 +14,9 @@
 class DataBase {
 
 	private static $servername = "localhost";
-	private static $username = "username";
-	private static $password = "password";
-	private static $dbname = "dbname";
+	private static $username = "root";
+	private static $password = "";
+	private static $dbname = "journalcms";
 	private static $dbConnection = null;
 
 	public static function getConnection() {
@@ -28,7 +28,7 @@ class DataBase {
 				return static::$dbConnection;
 			} catch (PDOException $e) {
 				static::$dbConnection = null;
-				//echo "Connection failed: " . $e->getMessage();
+				echo "Connection failed: " . $e->getMessage();
 			}
 		}
 		return static::$dbConnection;

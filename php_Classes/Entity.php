@@ -17,7 +17,7 @@ abstract class Entity {
 	protected $creatDate;
 	protected $lastUpdateDate;
 
-	public function _init() {
+	public function __init() {
 		$this->id = 0;
 		$this->setCreatDate();
 		$this->setLastUpdateDate();
@@ -27,6 +27,36 @@ abstract class Entity {
 	const LANGUAGE_ENGLISH = 0;
 	const LANGUAGE_ARABIC = 1;
 	const LANGUAGE_Both = 2;
+	const DB_TABLE_NAME = "";
+
+//================================================Delete===================================================
+	public function delete() {
+		$conn = DataBase::getConnection();
+		if ($conn === null) {
+			return FALSE;
+		}
+		try {
+			$sql = "DELETE FROM " . self::DB_TABLE_NAME . " WHERE id=" . $this->id;
+			return $conn->exec($sql);
+		} catch (PDOException $e) {
+			//echo $sql . "<br>" . $e->getMessage();
+			return FALSE;
+		}
+	}
+
+	public static function delete_Static($id) {
+		$conn = DataBase::getConnection();
+		if ($conn === null) {
+			return FALSE;
+		}
+		try {
+			$sql = "DELETE FROM " . self::DB_TABLE_NAME . " WHERE id=" . $id;
+			return $conn->exec($sql);
+		} catch (PDOException $e) {
+			//echo $sql . "<br>" . $e->getMessage();
+			return FALSE;
+		}
+	}
 
 //===================================================SET===================================================
 	public function setLastUpdateDate() {
@@ -35,6 +65,10 @@ abstract class Entity {
 
 	public function setCreatDate() {
 		$this->creatDate = new DateTime();
+	}
+
+	public static function test() {
+		echo static::DB_TABLE_NAME;
 	}
 
 //===================================================GET===================================================
