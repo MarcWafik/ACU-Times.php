@@ -1,25 +1,26 @@
 <?php
 require_once 'autoload.php';
-if (isset($_POST["submit"])) {
-	$iscorrect = valArrIscorrect();
-	$iscorrect["IDtaken"] = (bool) (NULL == SearchIDUserSTR($_POST["ID"]));
+
+if (valAllNotnull()) {
+	$User = new User();
+	$User->setAccses(User::ACCSES_REGULAR);
+	$User->setCreatDate();
+	$User->setLastUpdateDate();
+	$iscorrect = array();
+	$iscorrect = array(
+		"ID" => (bool) $User->setID($_POST["ID"]),
+		"RePassword" => (bool) $User->setPassword($_POST["Password"]),
+		"Password" => (bool) ($_POST["Password"] === $_POST["RePassword"]),
+		"name" => (bool) $User->setfullName($_POST["name"]),
+		"email" => (bool) $User->setEmail($_POST["email"]),
+		"PhoneNo" => (bool) $User->setPhoneNumber($_POST["PhoneNo"]),
+		"Gender" => (bool) $User->setGender($_POST["Gender"]),
+		"Birthday" => (bool) $User->setBirthDate($_POST["BirthdayDay"], $_POST["BirthdayMonth"], $_POST["BirthdayYear"]),
+		"IDtaken" => (bool) $User->isIDAvailable($_POST["ID"]),
+		"emailtaken" => (bool) $User->isEmailAvailable($_POST["email"]),
+	);
 	if (valAll($iscorrect)) {
-		$right_now = getdate();
-		$User = array(
-			"ID" => $_POST["ID"],
-			"Password" => Encrypt_And_Hash($_POST["Password"]),
-			"name" => $_POST["name"],
-			"email" => $_POST["email"],
-			"PhoneNo" => $_POST["PhoneNo"],
-			"Gender" => $_POST["Gender"],
-			"BirthdayDay" => $_POST["BirthdayDay"],
-			"BirthdayMonth" => $_POST["BirthdayMonth"],
-			"BirthdayYear" => $_POST["BirthdayYear"],
-			"RegisterDay" => $right_now["mday"],
-			"RegisterMonth" => $right_now["mon"],
-			"RegisterYear" => $right_now["year"]
-		);
-		appendUser($User);
+		$User->create();
 		header("Location: SignupSuccessful.php");
 		exit;
 	}
@@ -34,8 +35,21 @@ function valAll($iscorrect) {
 	}
 	return TRUE;
 }
-?>
-<!DOCTYPE html>
+
+function valAllNotnull() {
+	return
+			isset($_POST["submit"]) &&
+			isset($_POST["name"]) &&
+			isset($_POST["ID"]) &&
+			isset($_POST["email"]) &&
+			isset($_POST["Password"]) &&
+			isset($_POST["RePassword"]) &&
+			isset($_POST["BirthdayMonth"]) &&
+			isset($_POST["BirthdayYear"]) &&
+			isset($_POST["BirthdayDay"]) &&
+			isset($_POST["PhoneNo"]);
+}
+?><!DOCTYPE html>
 <html lang="en">
 	<head>
 		<title>ACU Times | Title</title>
@@ -53,7 +67,7 @@ function valAll($iscorrect) {
 				</ul>
 			</h3>
 			<br>
-			<form class="form-horizontal" role="form" action="SignUp.php" method="post">
+			<form  role="form" action="SignUp.php" method="post" onSubmit="return isAllValid()">
 				<div class="form-group">
 					<label  class="control-label" class="control-label" for="name">Full name :</label>
 					<div class="controls">
@@ -64,32 +78,28 @@ function valAll($iscorrect) {
 							   class="form-control" 
 							   onBlur="valName(this)" 
 							   required 
-							   autocomplete="on" 
+							   autocomplete="on"
 							   maxlength="32">
-						<span class="help-block">
-							<?php if (isset($iscorrect["name"]) && !$iscorrect["name"]) echo "Enter a Valid Name (Letters and space only)" ?>
-						</span> </div>
+						<span class="help-block"><ul>
+								<?php PrintHTML::validation("name", @$iscorrect["name"], "Enter a Valid Name (Letters and space only)") ?>
+							</ul></span>
+					</div>
 				</div>
 				<!-- #################################################################### ID #################################################################### -->
 				<div class="form-group">
 					<label class="control-label" for="ID">University ID :</label>
 					<div class="controls">
 						<input type="number" 
-							   name="ID" id="ID" 
+							   name="text" id="ID" 
 							   value="<?php echo @$_POST["ID"]; ?>" 
 							   class="form-control" onBlur="valID(this)" 
 							   maxlength="7" 
 							   required 
 							   autocomplete="on">
-						<span class="help-block">
-							<?php
-							if (isset($iscorrect["ID"]) && !$iscorrect["ID"]) {
-								echo "Enter your university ID";
-							} else if (isset($iscorrect["IDtaken"]) && !$iscorrect["IDtaken"]) {
-								echo "ID is Alreaty taken";
-							}
-							?>
-						</span> </div>
+						<span class="help-block"><ul>
+								<?php PrintHTML::validation("ID", @$iscorrect["ID"], "") ?>
+								<?php PrintHTML::validation("IDtaken", @$iscorrect["IDtaken"], "ID is Already Taken") ?>
+							</ul></span> </div>
 				</div>
 
 				<!-- #################################################################### email #################################################################### -->
@@ -104,9 +114,10 @@ function valAll($iscorrect) {
 							   onBlur="valEmail(this)" 
 							   required autocomplete="on" 
 							   maxlength="256">
-						<span class="help-block">
-							<?php if (isset($iscorrect["email"]) && !$iscorrect["email"]) echo "Enter a Valid E-mail" ?>
-						</span></div>
+						<span class="help-block"><ul>
+								<?php PrintHTML::validation("email", @$iscorrect["email"], "Enter a Valid E-mail") ?>
+							</ul></span>
+					</div>
 				</div>
 
 				<!-- #################################################################### Password #################################################################### -->
@@ -121,9 +132,10 @@ function valAll($iscorrect) {
 							   onBlur="valPassword(this)" 
 							   maxlength="32" 
 							   required>
-						<span class="help-block">
-							<?php if (isset($iscorrect["Password"]) && !$iscorrect["Password"]) echo "Must contain a number (0-9) ,upercase letter (A-Z) & lowercase letter (a-z)" ?>
-						</span></div>
+						<span class="help-block"><ul>
+								<?php PrintHTML::validation("Password", @$iscorrect["Password"], "Must contain a number (0-9) ,upercase letter (A-Z) & lowercase letter (a-z)") ?>
+							</ul></span>
+					</div>
 				</div>
 
 				<!-- #################################################################### RePassword #################################################################### -->
@@ -138,16 +150,17 @@ function valAll($iscorrect) {
 							   onBlur="valRePassword(this, Password)" 
 							   maxlength="32" 
 							   required>
-						<span class="help-block">
-							<?php if (isset($iscorrect["RePassword"]) && !$iscorrect["RePassword"]) echo "Passwords don't match" ?>
-						</span></div>
+						<span class="help-block"><ul>
+								<?php PrintHTML::validation("RePassword", @$iscorrect["RePassword"], "Password does not match") ?>
+							</ul></span>
+					</div>
 				</div>
 
 				<!-- #################################################################### PhoneNo #################################################################### -->
 				<div class="form-group">
 					<label class="control-label" for="PhoneNo">Phone Number (optional) :</label>
 					<div class="controls">
-						<input type="number" 
+						<input type="text" 
 							   name="PhoneNo" 
 							   id="PhoneNo" 
 							   value="<?php echo @$_POST["PhoneNo"]; ?>" 
@@ -155,9 +168,10 @@ function valAll($iscorrect) {
 							   maxlength="13" 
 							   onBlur="valPhoneNo(this)" 
 							   autocomplete="on">
-						<span class="help-block">
-							<?php if (isset($iscorrect["PhoneNo"]) && !$iscorrect["PhoneNo"]) echo "Enter a correct Phone Number" ?>
-						</span></div>
+						<span class="help-block"><ul>
+								<?php PrintHTML::validation("PhoneNo", @$iscorrect["PhoneNo"], "Enter a correct Phone Number") ?>
+							</ul></span>
+					</div>
 				</div>
 
 				<!-- #################################################################### Gender #################################################################### -->
@@ -188,7 +202,7 @@ function valAll($iscorrect) {
 									onBlur="valBirthday(BirthdayMonth, BirthdayYear, BirthdayDay)">
 										<?php
 										$right_now = getdate();
-										PrintHTML::numericOption($right_now['year'] - 16, 1900)
+										PrintHTML::numericOption($right_now['year'] - 16, 1900, @$_POST["BirthdayYear"]);
 										?>
 							</select>
 						</div>
@@ -206,7 +220,9 @@ function valAll($iscorrect) {
 										<?php PrintHTML::numericOption(1, 31, @$_POST["BirthdayDay"]) ?>
 							</select>
 						</div>
-						<span class="help-block"><?php if (isset($iscorrect["BirthDay"]) && !$iscorrect["BirthDay"]) echo "Enter a valid date" ?></span>
+						<span class="help-block"><ul>
+								<?php PrintHTML::validation("Birthday", @$iscorrect["Birthday"], "Enter a valid date") ?>
+							</ul></span>
 					</div>
 				</div>
 		</div>
@@ -215,7 +231,7 @@ function valAll($iscorrect) {
 		<div  class="MyContainer text-center">Clicking Create account means that you agree to <br>
 			our <a href="Register.html" title="Services Agreement">Services Agreement</a> and <a href="Register.html">Privacy Policy</a><br>
 			<br>
-			<button type="submit" name="submit" id="submit" class="btn btn-primary center-block">Creat Account</button>
+			<button type="submit" name="submit" id="submit" class="btn btn-primary center-block" >Creat Account</button>
 		</div>
 	</form>
 </div>

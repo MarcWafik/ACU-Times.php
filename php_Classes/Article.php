@@ -19,19 +19,14 @@ class Article extends Youtube implements iCRUD {
 	protected $imageNumber; // how many images  max is 99 (just for db)
 	protected $views = 0; // max 11
 
-	public function init() {
-		parent::init();
+	public function _init() {
+		parent::_init();
 		$this->categoryID = 0;
 		$this->language = 0;
 		$this->importance = 0; // 0~9
 		$this->imageNumber = 0;
 		$this->views = 0;
 	}
-
-//=================================================Const===================================================
-	const LANGUAGE_ENGLISH = 0;
-	const LANGUAGE_ARABIC = 1;
-	const LANGUAGE_Both = 2;
 
 //==================================================CRUD===================================================
 
@@ -74,7 +69,7 @@ class Article extends Youtube implements iCRUD {
 	}
 
 	public function setLanguage($language) {
-		if (isset($language) && Validation::isNumInRange($language, 0, 2)) {
+		if (Language::isValidLang($language)) {
 			$this->language = (int) $language;
 		}
 		return TRUE;

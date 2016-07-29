@@ -1,5 +1,5 @@
-<?php require_once 'autoload.php'; ?>
-<!doctype html>
+<?php require_once 'autoload.php';
+?><!doctype html>
 <html>
 	<html lang="en">
 		<head>

@@ -13,8 +13,12 @@
  */
 class Validation {
 
-	public static function isNumInRange($Imput, $from, $to) { //'/^[0-9]{8,13}$/',
-		return isset($Imput) && is_numeric($Imput) && (int) $Imput >= $from && (int) $Imput >= $to;
+	private function __construct() {
+		
+	}
+
+	public static function isNumInRange($Imput, $min, $max) { //'/^[0-9]{8,13}$/',
+		return isset($Imput) && is_numeric($Imput) && (int) $Imput >= $min && (int) $Imput <= $max;
 	}
 
 	public static function isNumMinMaxLenth($Imput, $mim, $max) {

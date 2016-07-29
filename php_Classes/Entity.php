@@ -17,21 +17,24 @@ abstract class Entity {
 	protected $creatDate;
 	protected $lastUpdateDate;
 
-	public function init() {
+	public function _init() {
 		$this->id = 0;
 		$this->setCreatDate();
 		$this->setLastUpdateDate();
 	}
 
+//=================================================Const===================================================
+	const LANGUAGE_ENGLISH = 0;
+	const LANGUAGE_ARABIC = 1;
+	const LANGUAGE_Both = 2;
+
 //===================================================SET===================================================
 	public function setLastUpdateDate() {
-		date_default_timezone_set('Africa/Cairo');
-		$this->lastUpdateDate = date('m/d/Y h:i:s a', time());
+		$this->lastUpdateDate = new DateTime();
 	}
 
 	public function setCreatDate() {
-		date_default_timezone_set('Africa/Cairo');
-		$this->creatDate = date('m/d/Y h:i:s a', time());
+		$this->creatDate = new DateTime();
 	}
 
 //===================================================GET===================================================
@@ -43,8 +46,24 @@ abstract class Entity {
 		return $this->creatDate;
 	}
 
+	public function getCreatDate_StringShort() {
+		return $this->creatDate->format('g:i a - d/m/Y');
+	}
+
+	public function getCreatDate_StringLong() {
+		return $this->creatDate->format('g:i a - D, d F Y');
+	}
+
 	public function getLastUpdateDate() {
 		return $this->lastUpdateDate;
+	}
+
+	public function getLastUpdateDate_StringShort() {
+		return $this->lastUpdateDate->format('g:i a - d/m/Y');
+	}
+
+	public function getLastUpdateDate_StringLong() {
+		return $this->lastUpdateDate->format('g:i a - D, d F Y');
 	}
 
 }

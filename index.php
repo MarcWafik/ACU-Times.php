@@ -1,11 +1,11 @@
-<?php require_once 'autoload.php'; ?>
-<!DOCTYPE html>
+<?php require_once 'autoload.php';
+?><!DOCTYPE html>
 <html lang="en">
 	<head>
 		<title>ACU Times | Home</title>
 		<?php require_once("Header.php"); ?>
 	</head>
-	<body>
+	<body  style="<?php if (Language::isArabic()) echo 'direction: rtl'; ?>">
 		<?php include ("Navbar.php"); ?>
 
 		<!-------------------------------- Slider -------------------------------->
@@ -20,19 +20,19 @@
 			<!-- Wrapper for slides -->
 			<div class="carousel-inner">
 				<div class="item active">
-					<div class="fill" style="background-image:url('Data/Articles/1.jpg');"></div>
+					<a href="#"><div class="fill" style="background-image:url('Data/Articles/1.jpg');"></div></a>
 					<div class="carousel-caption">
 						<h2>Caption 1</h2>
 					</div>
 				</div>
 				<div class="item">
-					<div class="fill" style="background-image:url('Data/Articles/2.jpg');"></div>
+					<a href="#"><div class="fill" style="background-image:url('Data/Articles/2.jpg');"></div></a>
 					<div class="carousel-caption">
 						<h2>Caption 2</h2>
 					</div>
 				</div>
 				<div class="item">
-					<div class="fill" style="background-image:url('Data/Articles/3.jpg');"></div>
+					<a href="#"><div class="fill" style="background-image:url('Data/Articles/3.jpg');"></div></a>
 					<div class="carousel-caption">
 						<h2>Caption 3</h2>
 					</div>

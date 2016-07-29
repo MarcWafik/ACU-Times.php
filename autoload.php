@@ -6,3 +6,6 @@ function __autoload($className) {
 		require_once( $filename );
 	}
 }
+
+date_default_timezone_set('Africa/Cairo');
+Language::setFromURL();

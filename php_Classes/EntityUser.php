@@ -15,13 +15,11 @@ class EntityUser extends Entity {
 
 	protected $fullName; //32
 	protected $email; // 254
-	protected $phoneNumber; //13
 
-	public function init() {
-		parent::init();
+	public function _init() {
+		parent::_init();
 		$this->fullName = "";
 		$this->email = "";
-		$this->phoneNumber = 0;
 	}
 
 //===================================================SET===================================================
@@ -42,14 +40,6 @@ class EntityUser extends Entity {
 		return FALSE;
 	}
 
-	public function setPhoneNumber($phoneNumber) {
-		if (Validation::isNumMinMaxLenth($phoneNumber, 8, 13) || $phoneNumber == "") {
-			$this->phoneNumber = (int) $phoneNumber;
-			return TRUE;
-		}
-		return FALSE;
-	}
-
 //===================================================GET===================================================
 	public function getfullName() {
 		return $this->fullName;
@@ -57,10 +47,6 @@ class EntityUser extends Entity {
 
 	public function getEmail() {
 		return $this->email;
-	}
-
-	public function getPhoneNumber() {
-		return $this->phoneNumber;
 	}
 
 }

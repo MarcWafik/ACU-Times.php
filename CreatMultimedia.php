@@ -1,5 +1,5 @@
-<?php require_once 'autoload.php'; ?>
-<!DOCTYPE html>
+<?php require_once 'autoload.php';
+?><!DOCTYPE html>
 <html lang="en">
 	<head>
 		<title>ACU Times | Creat Multimedia</title>

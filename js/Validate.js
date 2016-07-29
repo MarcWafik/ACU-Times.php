@@ -1,3 +1,13 @@
+var isAllOkay = [];
+
+function isAllValid() {
+	for (var i in isAllOkay) {
+		if (!isAllOkay[i]) {
+			return false;
+		}
+	}
+	return true;
+}
 function findhelpblockInNodes(Check) {
 	for (var i = 0; i < Check.parentNode.childNodes.length; i++) {
 		if (Check.parentNode.childNodes[i].className === "help-block") {
@@ -5,97 +15,67 @@ function findhelpblockInNodes(Check) {
 		}
 	}
 }
+function ChangeHelpBlock(Check, isTrue, message) {
+	var helpBlock = findhelpblockInNodes(Check);
+	var id_val = document.getElementById(Check.id + '_val');
+	if (isTrue) {
+		Check.parentNode.parentNode.className = "form-group";
+		if (id_val !== null) {
+			helpBlock.lastChild.removeChild(id_val);
+		}
+	} else {
+		if (!helpBlock.hasChildNodes()) {
+			helpBlock.appendChild(document.createElement("ul"))
+		}
+		Check.parentNode.parentNode.className = "form-group has-error";
+		helpBlock.lastChild.innerHTML = '<li id="' + Check.id + '_val">' + message + "</li>";
+	}
+	return isTrue;
+}
+function valSubmit(Check) {
+	//Check.disabled = true;
+	return "hi";
+}
 //=========================================YouTube=========================================
 function valYouTube(Check) {
 	var patt = /(?:https?:\/\/)?(?:youtu\.be\/|(?:www\.)?youtube\.com\/watch(?:\.php)?\?.*v=)([a-zA-Z0-9\-_]+)/;
-	if (patt.test(Check.value) || Check.value === "") {
-		Check.parentNode.parentNode.className = "form-group";
-		findhelpblockInNodes(Check).innerHTML = "";
-		return true;
-	} else {
-		Check.parentNode.parentNode.className = "form-group has-error";
-		findhelpblockInNodes(Check).innerHTML = "invalid youtube video link ";
-		return false;
-	}
+	isAllOkay.YouTube = (patt.test(Check.value) || Check.value === "");
+	return ChangeHelpBlock(Check, isAllOkay.YouTube, "invalid youtube video link");
 }
 //=========================================Name=========================================
 function valName(Check) {
 	var patt = /^[A-Za-z\s]+$/;
-	if (!patt.test(Check.value)) {
-		Check.parentNode.parentNode.className = "form-group has-error";
-		findhelpblockInNodes(Check).innerHTML = "Enter a Valid Name (Letters and space only)";
-		return false;
-	} else {
-		Check.parentNode.parentNode.className = "form-group";
-		findhelpblockInNodes(Check).innerHTML = "";
-		return true;
-	}
+	isAllOkay.Name = patt.test(Check.value);
+	return ChangeHelpBlock(Check, isAllOkay.Name, "Enter a Valid Name (Letters and space only)");
 }
 //=========================================ID=========================================
 function valID(Check) {
 	var patt = /^\d+$/;
-	if (!patt.test(Check.value)) {
-		Check.parentNode.parentNode.className = "form-group has-error";
-		findhelpblockInNodes(Check).innerHTML = "Enter your university ID";
-		return false;
-	} else {
-		Check.parentNode.parentNode.className = "form-group";
-		findhelpblockInNodes(Check).innerHTML = "";
-		return true;
-	}
+	isAllOkay.ID = (patt.test(Check.value));
+	return ChangeHelpBlock(Check, isAllOkay.ID, "Enter your university ID");
 }
 //=========================================Email=========================================
 function valEmail(Check) {
 	var patt = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-	if (!patt.test(Check.value)) {
-		Check.parentNode.parentNode.className = "form-group has-error";
-		findhelpblockInNodes(Check).innerHTML = "Enter a Valid E-mail";
-		return false;
-	} else {
-		Check.parentNode.parentNode.className = "form-group";
-		findhelpblockInNodes(Check).innerHTML = "";
-		return true;
-	}
+	isAllOkay.Email = (patt.test(Check.value));
+	return ChangeHelpBlock(Check, isAllOkay.Email, "Enter a Valid E-mail");
 }
 //=========================================Password=========================================
 function valPassword(Check) {
 	var patt = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/;
-	if (!patt.test(Check.value)) {
-		Check.parentNode.parentNode.className = "form-group has-error";
-		findhelpblockInNodes(Check).innerHTML = "Must contain a number (0-9) ,upercase letter (A-Z) & lowercase letter (a-z)";
-		return false;
-	} else {
-		Check.parentNode.parentNode.className = "form-group";
-		findhelpblockInNodes(Check).innerHTML = "";
-		return true;
-	}
+	isAllOkay.Password = (patt.test(Check.value));
+	return ChangeHelpBlock(Check, isAllOkay.Password, "Must contain a number (0-9) ,upercase letter (A-Z) & lowercase letter (a-z)");
 }
 //=========================================RePassword=========================================
-
 function valRePassword(Check, Original) {
-	var RePasswordAlert = document.getElementById("Validate_RePassword");
-	if (Original.value !== Check.value) {
-		Check.parentNode.parentNode.className = "form-group has-error";
-		findhelpblockInNodes(Check).innerHTML = "Password does not match";
-		return false;
-	} else {
-		Check.parentNode.parentNode.className = "form-group";
-		findhelpblockInNodes(Check).innerHTML = "";
-		return true;
-	}
+	isAllOkay.RePassword = (Original.value === Check.value);
+	return ChangeHelpBlock(Check, isAllOkay.RePassword, "Password does not match");
 }
 //=========================================PhoneNo=========================================
 function valPhoneNo(Check) {
 	var patt = /^[0-9]*$/;
-	if (patt.test(Check.value)) {
-		Check.parentNode.parentNode.className = "form-group";
-		findhelpblockInNodes(Check).innerHTML = "";
-		return true;
-	} else {
-		Check.parentNode.parentNode.className = "form-group has-error";
-		findhelpblockInNodes(Check).innerHTML = "Enter a correct Phone Number";
-		return false;
-	}
+	isAllOkay.PhoneNo = (patt.test(Check.value));
+	return ChangeHelpBlock(Check, isAllOkay.PhoneNo, "Enter a correct Phone Number");
 }
 //=========================================BrithDay=========================================
 function valBirthday(Month, Year, Day) {
@@ -111,7 +91,6 @@ function valBirthday(Month, Year, Day) {
 	for (var i = Lin - 1; i >= DaysInEatchMonth[Month.value]; i--) {
 		x.remove(i);
 	}
-
 	for (var j = Lin + 1; j <= DaysInEatchMonth[Month.value]; j++) {
 		var option = document.createElement("option");
 		option.text = j;
@@ -120,28 +99,10 @@ function valBirthday(Month, Year, Day) {
 	}
 }
 //=========================================Title=========================================
-function valPhoneNo(Check) {
-	var patt = /^[0-9]*$/;
-	if (patt.test(Check.value)) {
-		Check.parentNode.parentNode.className = "form-group";
-		findhelpblockInNodes(Check).innerHTML = "";
-		return true;
-	} else {
-		Check.parentNode.parentNode.className = "form-group has-error";
-		findhelpblockInNodes(Check).innerHTML = "Enter a correct Phone Number";
-		return false;
-	}
-}
+//=========================================Description=========================================
 //=========================================Arabic=========================================
 function valArabic(Check) {
 	var patt = /^[\u0600-\u06FF]*$]/;
-	if (patt.test(Check.value)) {
-		Check.parentNode.parentNode.className = "form-group";
-		findhelpblockInNodes(Check).innerHTML = "";
-		return true;
-	} else {
-		Check.parentNode.parentNode.className = "form-group has-error";
-		findhelpblockInNodes(Check).innerHTML = "Enter a correct Phone Number";
-		return false;
-	}
+	isAllOkay.Arabic = (patt.test(Check.value));
+	return ChangeHelpBlock(Check, isAllOkay.Arabic, "only arrabic is allowed");
 }

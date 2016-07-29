@@ -15,18 +15,19 @@ body { padding-top: 50px; /* Required padding for .navbar-fixed-top. Remove if u
 .social-gp:hover { color: #d34836; }
 .social-em:hover { color: #f39c12; }
 .social-is:hover { color: black; }
-.social-yt:hover { color: red; }
+.social-yt:hover { color: #cd201f; }
 /*==================================================== Forms ====================================================*/
 .MyAlret { color: red; }
 /*==================================================== Code 404 & Succses====================================================*/
-.error-code { bottom: 60%; color: black; font-size: 96px; line-height: 100px; margin-top: 50px!important; margin-bottom: 50px!important; }
+.error-code { bottom: 60%; font-size: 96px; line-height: 100px; margin-top: 50px!important; margin-bottom: 50px!important; }
 .Succses-code { bottom: 60%; color: green; font-size: 200px; line-height: 100px; margin-top: 50px!important; margin-bottom: 50px!important; }
 /*==================================================== HomePage Slider ====================================================*/
-header.carousel { height: 50%; }
+header.carousel { height: 60%; }
 header.carousel .item, header.carousel .item.active, header.carousel .carousel-inner { height: 100%; }
 header.carousel .fill { width: 100%; height: 100%; background-position: center; background-size: cover; }
 
 @media(max-width:767px) {
+header.carousel { height: 40%; }
 header.carousel .carousel { height: 70%; }
 }
 /*==================================================== Social Media Share Article ====================================================*/
@@ -45,3 +46,12 @@ header.carousel .carousel { height: 70%; }
 @media screen and (max-width: 767px) {
 .Search-navbar { width: auto; }
 }
+/*==================================================== btn  ====================================================*/
+.btn-setting { border: 0px solid transparent; font-size: 24px; color: red; }
+/*==================================================== img  ====================================================*/
+.img-64x64 { width: 64px; height: 64px; }
+.img-80x80 { width: 80px; height: 80px; }
+.img-200x200 { width: 200px; height: 200px; }
+.img-1920x1080 { width: 1920px; height: 1080px; }
+/*==================================================== coment  ====================================================*/
+.comment-text { margin: 0 10px; }

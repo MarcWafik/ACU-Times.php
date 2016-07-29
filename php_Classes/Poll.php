@@ -15,8 +15,8 @@ class Poll extends EntityArticle implements iCRUD {
 
 	protected $choices = array(); // an array of poll choices
 
-	public function init() {
-		parent::init();
+	public function _init() {
+		parent::_init();
 		$this->choices = array();
 	}
 
@@ -63,6 +63,7 @@ class PollChoice {
 		$this->textArabic = "";
 		$this->votes = 0;
 	}
+
 //===================================================SET===================================================
 	public function increment() {
 		if (!isset($this->votes)) {
@@ -79,6 +80,7 @@ class PollChoice {
 	public function setTextArabic($textArabic) {
 		$this->textArabic = $textArabic;
 	}
+
 //===================================================GET===================================================
 	public function getId() {
 		return $this->id;

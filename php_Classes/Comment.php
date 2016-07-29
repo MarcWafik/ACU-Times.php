@@ -13,12 +13,12 @@
  */
 class Comment extends EntityUser implements iCRUD {
 
-	protected $message; //2048
+	protected $message; //1024
 	protected $for;
 	protected $targetID;
 
-	public function init() {
-		parent::init();
+	public function _init() {
+		parent::_init();
 		$this->message = "";
 		$this->for = 0;
 		$this->targetID = 0;
@@ -52,9 +52,13 @@ class Comment extends EntityUser implements iCRUD {
 		
 	}
 
+	public static function loadAllCommentFor($for, $targetID) {
+		
+	}
+
 //===================================================SET===================================================
 	public function setMessage($message) {
-		if (isset($message) && strlen($message) < 2048) {
+		if (isset($message) && strlen($message) < 1024) {
 			$this->message = htmlspecialchars($message);
 			return TRUE;
 		}

@@ -18,8 +18,8 @@ class Youtube extends EntityArticle implements iCRUD {
 	protected $descriptionArabic;
 	protected $Comments; // and array of class comment
 
-	public function init() {
-		parent::init();
+	public function _init() {
+		parent::_init();
 		$this->youtubeID = "";
 		$this->descriptionEnglish = "";
 		$this->descriptionArabic = "";
@@ -30,7 +30,7 @@ class Youtube extends EntityArticle implements iCRUD {
 		
 	}
 
-	public function setComments(Comment $imput) {
+	public function addComment(Comment $imput) {
 		
 	}
 

@@ -18,8 +18,8 @@ class Notification extends Entity implements iCRUD {
 	private $source;
 	private $targetID;
 
-	public function init() {
-		parent::init();
+	public function _init() {
+		parent::_init();
 		$this->message = "";
 		$this->importance = 0;
 		$this->source = 0;

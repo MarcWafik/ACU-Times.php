@@ -1,5 +1,5 @@
-<?php require_once 'autoload.php'; ?>
-<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+<?php require_once 'autoload.php';
+?><nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 	<div class="container-fluid">
 		<div class="navbar-header">
 			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -7,7 +7,6 @@
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>             
 			</button>
-			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
 			<a class="navbar-brand" href="index.php">ACU Times</a> </div>
 		<div class="collapse navbar-collapse" id="myNavbar">
 
@@ -26,17 +25,12 @@
 				<li><a href="Gallery.php">Gallery</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
-				<li class="dropdown"> <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></a>
+				<li class="dropdown"> <a class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></a>
 					<ul class="dropdown-menu">
-						<li class="Search-navbar">
-							<form action="Search.php" method="get">
-								<div class="input-group">
-									<input type="text" class="form-control" placeholder="Search for..." id="Search" name="Search">
-									<span class="input-group-btn">
-										<button class="btn btn-primary" type="submit"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
-									</span> </div>
-							</form>
-						</li>
+						<form action="Search.php" method="get" class="Search-navbar input-group">
+							<input type="text" class="form-control" placeholder="Search for..." id="Search" name="Search">
+							<span class="input-group-btn"><button class="btn btn-primary" type="submit"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button></span> 
+						</form>
 					</ul>
 				</li>
 				<!--<li><a href="SignUp.php"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li> -->
@@ -46,8 +40,8 @@
 					if ($_SESSION['user']["Status"] == "A") {
 						$temp = '<li><a href="MangeUsers.php">Mange Users</a></li>';
 					}
-					echo '
-<li class="dropdown"> <a class="dropdown-toggle" data-toggle="dropdown" href=""><span class="glyphicon glyphicon-user"></span> ' . $_SESSION["user"]["name"] . '<span class="caret"></span></a>
+					echo
+					'<li class="dropdown"> <a class="dropdown-toggle" data-toggle="dropdown" href=""><span class="glyphicon glyphicon-user"></span> ' . $_SESSION["user"]["name"] . '<span class="caret"></span></a>
 	<ul class="dropdown-menu">
 		<li><a href="Profile.php">Profile</a></li>
 		<li><a href="WriteArticle.php">Write Article</a></li>'

@@ -1,13 +1,12 @@
-<?php require_once 'autoload.php'; ?>
 <?php
+require_once 'autoload.php';
 $ArticleArr = Array();
 if (Null === @$_GET["Search"] || "" === @$_GET["Search"]) {
 	$ArticleArr = LoadAllArticle();
 } else {
 	$ArticleArr = SearchArticleTitle($_GET["Search"]);
 }
-?>
-<!DOCTYPE html>
+?><!DOCTYPE html>
 <html lang="en">
 	<head>
 		<title>ACU Times | Title</title>

@@ -1,9 +1,10 @@
-<?php require_once 'autoload.php'; ?>
-<!DOCTYPE html>
+<?php require_once 'autoload.php';
+?><!DOCTYPE html>
 <html lang="en">
 	<head>
 		<title>ACU Times | Contact Us</title>
 		<?php require_once("Header.php"); ?>
+		<script src="js/Validate.js"></script>
 	</head>
 	<body>
 		<?php include ("Navbar.php"); ?>
@@ -57,31 +58,62 @@
 				<div class="col-md-8">
 					<h3>Send us a Message</h3>
 					<form name="sentMessage" id="contactForm" method="post" action="ContactUs.php">
-						<div class="control-group form-group">
+						<!-- #################################################################### full name #################################################################### -->
+						<div class="form-group">
+							<label  class="control-label" class="control-label" for="name">Full name :</label>
 							<div class="controls">
-								<label>Full Name:</label>
-								<input type="text" class="form-control" id="name" name="name" required>
-								<p class="help-block"></p>
+								<input type="text" 
+									   name="name" 
+									   id="name" 
+									   value="<?php echo @$_POST["name"]; ?>" 
+									   class="form-control" 
+									   onBlur="valName(this)" 
+									   required 
+									   autocomplete="on"
+									   maxlength="32">
+								<span class="help-block"><ul>
+										<?php PrintHTML::validation("name", @$iscorrect["name"], "Enter a Valid Name (Letters and space only)") ?>
+									</ul></span>
 							</div>
 						</div>
-						<div class="control-group form-group">
+						<!-- #################################################################### email #################################################################### -->
+						<div class="form-group">
+							<label class="control-label" for="email">E-Mail :</label>
 							<div class="controls">
-								<label>Phone Number:</label>
-								<input type="tel" class="form-control" id="phone" name="phone" required>
+								<input type="email" 
+									   name="email" 
+									   id="email" 
+									   value="<?php echo @$_POST["email"]; ?>" 
+									   class="form-control" 
+									   onBlur="valEmail(this)" 
+									   required autocomplete="on" 
+									   maxlength="256">
+								<span class="help-block"><ul>
+										<?php PrintHTML::validation("email", @$iscorrect["email"], "Enter a Valid E-mail") ?>
+									</ul></span>
 							</div>
 						</div>
-						<div class="control-group form-group">
+						<!-- #################################################################### email #################################################################### -->
+						<div class="form-group">
+							<label class="control-label" for="message">Message:</label>
 							<div class="controls">
-								<label>Email Address:</label>
-								<input type="email" class="form-control" id="email" name="email" required>
+								<textarea 
+									rows="10" 
+									cols="100"
+									id="message" 
+									name="message"
+									value="<?php echo @$_POST["email"]; ?>" 
+									class="form-control" 
+									onBlur="valMessage(this)" 
+									required autocomplete="on" 
+									maxlength="1024"></textarea>
+
+								<span class="help-block"><ul>
+										<?php PrintHTML::validation("message", @$iscorrect["message"], "you can't leave this feild empty") ?>
+									</ul></span>
 							</div>
 						</div>
-						<div class="control-group form-group">
-							<div class="controls">
-								<label>Message:</label>
-								<textarea rows="10" cols="100" class="form-control" id="message" name="message" required maxlength="999" style="resize:none"></textarea>
-							</div>
-						</div>
+
 						<button type="submit" class="btn btn-primary">Send Message</button>
 					</form>
 				</div>

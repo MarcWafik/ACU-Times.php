@@ -1,5 +1,5 @@
-<?php require_once 'autoload.php'; ?>
-<!DOCTYPE html>
+<?php require_once 'autoload.php';
+?><!DOCTYPE html>
 <html lang="en">
 	<head>
 		<title>ACU Times | 404</title>
@@ -19,6 +19,11 @@
 			</div>
 			<br>
 		</div>
-		<?php include ("Footer.php"); ?>
+		<?php
+		include ("Footer.php");
+		$x = new User();
+		$x->setLastUpdateDate();
+		echo $x->getLastUpdateDate_StringLong();
+		?>
 	</body>
 </html>

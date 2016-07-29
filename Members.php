@@ -1,43 +1,5 @@
-<?php
-require_once ("ControlUsers.php");
-require_once ("ControlSession.php");
-Check_Login();
-Check_Admin();
-$user = $_SESSION['user'];
-
-if (Null === @$_GET["Search"] || "" === @$_GET["Search"]) {
-	$userArr = LoadAllUser();
-} else {
-	$userArr = SearchAllUser($_GET["Search"]);
-}
-
-function printUser($ID, $name, $ImgPath, $Status) {
-	if (!isset($ImgPath) || $ImgPath == "" || $ImgPath == " ") {
-		$ImgPath = "images/User.png";
-	}
-	$MakeAdmin = "";
-	if ($Status != "A") {
-		$MakeAdmin = "<a class='btn btn-primary' href='Redir_MakeAdminUser.php?ID={$ID}'>Make Admin</i></a>";
-	}
-	return
-			"<hr>
-	<div class='row'>
-		<div class='col-md-2 text-center'><a href='Profile.php?ID={$ID}'><img src='{$ImgPath}' style='height:90px; width:90px;' class='avatar img-circle' alt='avatar'></a></div>
-		<div class='col-md-10'>
-			<h4 class='col-xs-2 text-right'>Name:</h4>
-			<h4 class='col-xs-10'>{$name}</h4>
-			<h4 class='col-xs-2 text-right'>ID:</h4>
-			<h4 class='col-xs-10'>{$ID}</h4>
-			<div class='btn-group  pull-right'>
-				{$MakeAdmin}
-				<a class='btn btn-primary' href='Redir_DeleteUser.php?ID={$ID}'><i class='fa fa-trash-o'></i></i></a>
-				<a class='btn btn-primary' href='MangeUsers_ChangePW.php?ID={$ID}'><i class='fa fa-key'></i></a> 
-			</div>
-		</div>
-	</div>";
-}
-?>
-<!DOCTYPE html>
+<?php require_once 'autoload.php';
+?><!DOCTYPE html>
 <html lang="en">
 	<head>
 		<title>ACU Times | Title</title>
@@ -45,7 +7,7 @@ function printUser($ID, $name, $ImgPath, $Status) {
 	</head>
 	<body>
 		<?php include ("Navbar.php"); ?>
-		<div class="container"> 
+		<div class="container" style="padding-top:20px;"> 
 			<!-------------------------------- Search -------------------------------->
 			<div class="col-md-6 col-md-offset-3">
 				<form action="Members.php" method="get">
@@ -58,22 +20,37 @@ function printUser($ID, $name, $ImgPath, $Status) {
 			</div>
 			<!-------------------------------- content -------------------------------->
 			<div class="clearfix"></div>
-			<?php
-			foreach ($userArr as &$user) {
-				if (isset($user["ID"]) && $user["ID"] != "" && $user["ID"] != " " && $user["ID"] != $_SESSION['user']['ID']) {
-					echo printUser($user["ID"], $user["name"], $user["Photo"], $user["Status"]);
-				}
-			}
-			?>
+
+
 			<hr>
-			<!-------------------------------- pagination -------------------------------->
-			<div class="text-center center-block">
-				<ul class = "pagination">
-					<li><a href = "#">&laquo;</a></li>
-					<li><a href = "?Page=1">1</a></li>
-					<li><a href = "#">&raquo;</a></li>
-				</ul>
+			<div class="container">
+				<div class=" col-xs-11">
+					<div class="col-sm-2 text-center"><a href="Profile.php?ID={$ID}"><img src="images/User.png" class="img-80x80 img-circle"></a></div>
+					<div class="col-sm-10">
+						<h4><a href="Profile.php?ID={$ID}">Marc Wafik</a><br>
+							<small>4141127<br>
+								something@something.com</small></h4>
+					</div>
+				</div>
+				<div class="dropdown col-xs-1">
+					<button class="btn-setting btn btn-default " data-toggle="dropdown" aria-haspopup="true" > <i class="fa fa-bars" aria-hidden="true"></i> </button>
+					<ul class="dropdown-menu" aria-labelledby="dLabel">
+						<li><a href="#"><i class="fa fa-user"></i> Make Admin</a></li>
+						<li><a  href="#"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</a></li>
+						<li><a  href="#"><i class="fa fa-key" aria-hidden="true"></i> Reset PW</a></li>
+					</ul>
+				</div>
 			</div>
+			<hr>
+			<?php 
+	
+			
+			echo substr (md5(uniqid(rand(), true)) , 0 ,8 ); 
+
+			
+			?>
+			<!-------------------------------- pagination -------------------------------->
+			<button type="button" class="btn btn-primary center-block" onClick="">Load more <i class="fa fa-arrow-down" aria-hidden="true"></i></button>
 		</div>
 		<?php include ("Footer.php"); ?>
 	</body>

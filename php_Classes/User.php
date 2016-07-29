@@ -14,16 +14,18 @@
 class User extends EntityUser implements iCRUD {
 
 // photo is stored as 4141235.jpeg
-	protected $nameArabic; //32
+	protected $phoneNumber;   //13
+	protected $nameArabic;  //32
 	protected $password; //32
 	protected $gender; //1 - 0 dont say 1 male 2 female 
-	protected $accses; //1 - 0 regular 1 editor 2 admin
-	protected $about; //2048
+	protected $accses;   //1 - 0 regular 1 editor 2 admin
+	protected $about;  //2048
 	protected $birthDate;  // using datetime class
 	protected $listNotification; // an array of notification
 
-	public function init() {
-		parent::init();
+	public function _init() {
+		parent::_init();
+		$this->phoneNumber = 0;
 		$this->password = "";
 		$this->gender = 0;
 		$this->accses = 0;
@@ -63,16 +65,23 @@ class User extends EntityUser implements iCRUD {
 		
 	}
 
+	public static function isIDAvailable($id) {
+		
+	}
+
+	public static function isEmailAvailable($email) {
+		
+	}
+
 //==========================================NOTIFICATION===================================================
 //===============================================Session===================================================
 	function Login($id, $password) {
-		if (read($id)) {
-			if ($this->getIsCorrectPassword($password)) {
-				Session::startOnce();
-				$_SESSION["id"] = $this->id;
-				$_SESSION["accses"] = $this->accses;
-				$_SESSION["fullName"] = $this->fullName;
-			}
+		if ($this->read($id) && $this->getIsCorrectPassword($password)) {
+			Session::startOnce();
+			$_SESSION["id"] = $this->id;
+			$_SESSION["accses"] = $this->accses;
+			$_SESSION["fullName"] = $this->fullName;
+			return TRUE;
 		}
 		return FALSE;
 	}
@@ -106,6 +115,22 @@ class User extends EntityUser implements iCRUD {
 		}
 	}
 
+//=========================================Session IS===================================================
+	static function isLogin() {
+		Session::startOnce();
+		return isset($_SESSION['id']);
+	}
+
+	static function isEditor() {
+		Session::startOnce();
+		return ($_SESSION['accses'] == self::ACCSES_EDITOR);
+	}
+
+	static function isAdmin() {
+		Session::startOnce();
+		return ($_SESSION['accses'] == self::ACCSES_ADMIN);
+	}
+
 //===========================================Session Get===================================================
 	static function getSessionUserID() {
 		Session::startOnce();
@@ -124,6 +149,14 @@ class User extends EntityUser implements iCRUD {
 	}
 
 //===================================================SET===================================================
+	public function setPhoneNumber($phoneNumber) {
+		if (Validation::isNumMinMaxLenth($phoneNumber, 8, 13) || $phoneNumber == "") {
+			$this->phoneNumber = (int) $phoneNumber;
+			return TRUE;
+		}
+		return FALSE;
+	}
+
 	public function setNameArabic($nameArabic) {
 		if (Validation::isStringMinMaxLenth($nameArabic, 0, 32)) {
 			$this->nameArabic = htmlspecialchars($nameArabic);
@@ -146,6 +179,12 @@ class User extends EntityUser implements iCRUD {
 			return TRUE;
 		}
 		return FALSE;
+	}
+
+	public function setPasswordRandom() {
+		$result = substr(md5(uniqid(rand(), true)), 0, 8);
+		$this->password = hash("sha256", $result);
+		return $result;
 	}
 
 	public function setGender($gender) {
@@ -181,11 +220,15 @@ class User extends EntityUser implements iCRUD {
 	}
 
 //===================================================GET===================================================
+	public function getPhoneNumber() {
+		return $this->phoneNumber;
+	}
+
 	public function getNameArabic() {
 		return $this->nameArabic;
 	}
 
-	public function getIsCorrectPassword($password) {
+	public function isCorrectPassword($password) {
 		return (isset($password) && hash("sha256", $password) == $password);
 	}
 
@@ -197,6 +240,16 @@ class User extends EntityUser implements iCRUD {
 		return $this->gender;
 	}
 
+	public function getGenderString() {
+		if ($this->gender == self::GENDER_FEMALE) {
+			return "Female";
+		} else if ($this->gender == self::GENDER_MALE) {
+			return "Male";
+		} else {
+			return "";
+		}
+	}
+
 	public function getAccses() {
 		return $this->accses;
 	}
@@ -205,19 +258,28 @@ class User extends EntityUser implements iCRUD {
 		return $this->birthDate;
 	}
 
+	public function getBirthdateStringLong() {
+		return $this->birthDate->format("D, d F Y");
+	}
+
+	public function getBirthdateStringShort() {
+		return $this->birthDate->format("d/m/Y");
+	}
+
+	public function getBirthDay() {
+		return $this->birthDate->format("d");
+	}
+
+	public function getBirthYear() {
+		return $this->birthDate->format("Y");
+	}
+
+	public function getBirthMonth() {
+		return $this->birthDate->format("m");
+	}
+
 	public function getAbout() {
 		return $this->about;
 	}
 
 }
-
-function UnitTest_User() {
-	$temp = new User();
-	$temp->setAccses(User::ACCSES_ADMIN);
-	$temp->init();
-	echo"<pre>";
-	print_r(get_defined_vars());
-	echo "</pre>";
-}
-
-UnitTest_User();

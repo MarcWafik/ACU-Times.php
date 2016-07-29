@@ -1,4 +1,5 @@
-<!DOCTYPE html>
+<?php require_once 'autoload.php';
+?><!DOCTYPE html>
 <html lang="en">
 	<head>
 
@@ -27,7 +28,7 @@
 				<div class="row">
 					<h2 class="text-primary"> Sed ultrices turpis sed rhoncus semper</h2>
 				</div>
-				<div class="row">
+				<div class="container">
 					<a href="#"> <img style="height:60px"class="img-responsive img-circle pull-left" src="http://placehold.it/500x500"> </a>
 					<div class="pull-left" style="padding-left:10px">
 						<h5><strong>By <a href="#">Name of writer</a>, ACU Times</strong></h5>
