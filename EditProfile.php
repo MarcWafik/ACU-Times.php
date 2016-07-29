@@ -14,8 +14,9 @@
 <?php include ("Header.html");?>
 <!-------------------------------------------------------------------------- content -------------------------------------------------------------------------->
 <div class="wrapper row3">
-	<div class=" center"> <br>
-		<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+	<div class=" center"> 
+	
+	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 	</div>
 </div>
 <?php include ("Footer.html");?>

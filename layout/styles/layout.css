@@ -46,8 +46,8 @@ address, article, aside, figcaption, figure, footer, header, nav, section{displa
 
 div.wrapper{display:block; width:100%; margin:0; padding:0; text-align:left;}
 .row1, .row1 a{color:#C0BAB6; background-color:#333333;}
-.row2{color:#919191; background-color:#232323;}
-.row3{color:#979797; background-color:#FFFFFF;}
+.row2{color:#555555; background-color:#232323;}
+.row3{color:#555555; background-color:#FFFFFF;}
 .row3 a{color:#FF9900; background-color:#FFFFFF;}
 .row4{color:#989898; background-color:#333333;}
 .row4 a{color:#FF9900; background-color:#333333;}
