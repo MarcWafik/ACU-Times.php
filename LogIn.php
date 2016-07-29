@@ -39,7 +39,7 @@ if(isset($_POST["ID"])&&isset($_POST["Password"])){
 		</ul>
 	</h3>
 	<br>
-	<form role="form" action="LogIn.php" method="post">
+	<form role="form" action="Login.php" method="post">
 		<div class="form-group">
 			<label for="ID">ID:</label>
 			<input type="text" name="ID" id="ID" class="form-control" placeholder="Enter university ID" required>

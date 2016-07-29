@@ -37,7 +37,7 @@ function valBirthday ( $Month , $Year , $Day) {
 		$DaysInEatchMonth[2]=29;
 	return ((int)$Day<=$DaysInEatchMonth[(int)$Month]);
 }
-//########################################################################################## MangeUsers ##########################################################################################
+//############################################################################# MangeUsers #############################################################################
 $Order = array("ID", "Password", "name", "email", "PhoneNo", "Gender", "BirthdayDay", "BirthdayMonth", "BirthdayYear", "RegisterDay", "RegisterMonth", "RegisterYear", "Photo","Status", "About");
 $OrderSize = 15;
 $Seperator = "~#*$%#";
@@ -85,6 +85,7 @@ function LoadUser($ID) {
 	fclose($file);
 	return false;
 }
+// returns an array of Users
 function LoadAllUser() {
 	global $OrderSize , $Order , $Seperator , $FileLoc;
 	$file = fopen($FileLoc, "a+") or die("Unable to open file!");
@@ -96,6 +97,7 @@ function LoadAllUser() {
 	fclose($file);
 	return $user;
 }
+// returns a user
 function SearchAllUser($find) {
 	global $OrderSize , $Order , $Seperator , $FileLoc;
 	$file = fopen($FileLoc, "a+") or die("Unable to open file!");
@@ -110,14 +112,42 @@ function SearchAllUser($find) {
 	fclose($file);
 	return $user;
 }
+// returns a sting with the exact match
+function SearchIDUserSTR($find) {
+	global $OrderSize , $Order , $Seperator , $FileLoc;
+	$file = fopen($FileLoc, "a+") or die("Unable to open file!");
+	$user=array();
+	$i =0;
+	while ((!feof($file))) {
+		$temp = fgets($file);
+		$usertemp = explode("~#*$%#", $temp );
+		$IDtemp = $usertemp[0];
+		if($IDtemp==$find){
+			fclose($file);
+			return $temp;
+		}
+	}
+	fclose($file);
+	return NULL;
+}
+
 //=========================================UpdateRecord=========================================
 function UpdateRecord($Newrecord,$OldRecord){
 	global $OrderSize , $Order , $Seperator , $FileLoc;
 	$file = fopen($FileLoc, "a+") or die("Unable to open file!");
 	$contents = file_get_contents($file);
 	$contents = str_replace($OldRecord,$Newrecord, $contents);
-	file_put_contents($file, $contents);
+	file_put_contents($FileLoc, $contents);
 }
+
+function DeleteUser($ID){
+	global $OrderSize , $Order , $Seperator , $FileLoc;
+	$temp = SearchIDUserSTR($ID);
+	//$User2STR = UserToString($User);
+	UpdateRecord("",$temp);
+}
+
+
 function Login($ID , $PW ){
 	global $OrderSize , $Order , $Seperator , $FileLoc;
 	$User=LoadUser($ID);

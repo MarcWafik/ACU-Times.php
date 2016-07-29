@@ -2,25 +2,13 @@
 require_once ("ControlCategory.php");
 require_once ("ControlSession.php");
 session_start_once();
-$Links;
-$Display;
-if(isset($_SESSION['user'])){
-	$Links   = array("MangeUsers.php","WriteArticle.php","Profile.php", "Logout.php");
-	$Display = array("Mange Users"   ,"Creat Article"   ,"Profile"    , "Logout");
-}
-else{
-	$Links   = array("Login.php", "SignUp.php");
-	$Display = array("Login"    , "SignUp");
-}
-$LinksSize = count($Links);
 ?>
 <?php 
 if(isset($_GET["Category"]))
 	$sCategory = $_GET["Category"];
 else
 	$sCategory = "0" ;
-?>
-<?php 
+
 function PrintLargeCategory(Category $Category)
 {
 	echo			'<li class="dropdown"> <a class="dropdown-toggle" data-toggle="dropdown" href="Category.php?Category='.$Category->Link.'">'.$Category->Name.' <span class="caret"></span></a>
@@ -63,10 +51,28 @@ function PrintCategory(Category $Category){
 				PrintCategory($Category);
 				}
 				?>
+				<li><a href="Multimedia.php">Multimedia</a></li>
+				<li><a href="Gallery.php">Gallery</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<!--<li><a href="SignUp.php"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li> -->
-				<li><a href="LogIn.php"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+<?php
+if(isset($_SESSION['user'])){
+echo "
+<li class='dropdown'> <a class='dropdown-toggle' data-toggle='dropdown' href=''><span class='glyphicon glyphicon-user'></span> {$_SESSION['user']['name']}<span class='caret'></span></a>
+	<ul class='dropdown-menu'>
+		<li><a href='Profile.php'>Profile</a></li>
+		<li><a href='WriteArticle.php'>Write Article</a></li>
+		<li><a href='MangeUsers.php'>Mange Users</a></li>
+		<li><a href='Logout.php'>Logout</a></li>
+	</ul>
+</li>";
+} else {
+echo"<li><a href='LogIn.php'><span class='glyphicon glyphicon-log-in'></span> Login</a></li>";
+}
+
+?>
+				
 			</ul>
 			<form class="navbar-form navbar-right" role="search" action="Search.php" method="get">
 				<div class="input-group">

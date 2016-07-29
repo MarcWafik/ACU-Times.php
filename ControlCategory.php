@@ -45,6 +45,6 @@ array_push($CategoryList, new Category("Sport","Sport",new SubCategory("Local Fo
 array_push($CategoryList, new Category("Interviews","Interviews"));
 array_push($CategoryList, new Category("TechScience","TechScience"));
 array_push($CategoryList, new Category("Economy","Economy"));
-array_push($CategoryList, new Category("Multimedia","Multimedia"));
-array_push($CategoryList, new Category("Gallery","Gallery"));
+//array_push($CategoryList, new Category("Multimedia","Multimedia"));
+//array_push($CategoryList, new Category("Gallery","Gallery"));
 ?>

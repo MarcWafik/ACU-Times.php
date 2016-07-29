@@ -1,7 +1,6 @@
 <?php
 require_once('ControlUsers.php');
 if(valAllnull() && valAll()){
-	    echo "succses " ;
     $right_now = getdate();
 	$arr = array(	$_POST["ID"],
 					$_POST["Password"],
@@ -42,7 +41,7 @@ function valAllnull() {
 <div class="container">
 	<h3>
 		<ul class="nav nav-pills">
-			<li role="presentation"><a href="LogIn.php">Login</a></li>
+			<li role="presentation"><a href="Login.php">Login</a></li>
 			<li role="presentation" class="active"><a>Sign up</a></li>
 		</ul>
 	</h3>

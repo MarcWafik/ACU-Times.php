@@ -1,14 +1,8 @@
 <!DOCTYPE html>
-
-<html>
-  <head>
-  <title>ACU Times | Write Article</title>
-  <meta charset="iso-8859-1">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="layout/styles/layout.css" type="text/css" media="all">
-  <link rel="stylesheet" href="layout/styles/mediaqueries.css" type="text/css" media="all">
-  <script src="layout/scripts/jquery.min.js"></script>
-  <script src="layout/scripts/jquery-mobilemenu.min.js"></script>
+<html lang="en">
+<head>
+<title>ACU Times | WriteArticle</title>
+<?php require_once("Header.php");?>
   <script src='//cdn.tinymce.com/4/tinymce.min.js'></script>
   <script>
   tinymce.init({
@@ -71,15 +65,8 @@ tinymce.init({
   </head>
   <body>
 	<?php include ("Navbar.php");?>
-	<!-- content -->
-
-	<div class="wrapper row3">
 	<div id="container"> 
-			<!-- ################################################################################################ -->
 			<div class="pad"> 
-			<!-- ################################################################################################ --> 
-			<!-- content body -->
-			
 			<form method="post" >
 					<div style="position:relative;bottom:30px;margin:0 auto;">
 					<p style="position:relative;top:32px">Language :</p>
@@ -136,7 +123,6 @@ tinymce.init({
 		</div>
 			<!-- ################################################################################################ --> 
 		</div>
-</div>
 	<?php include ("Footer.php");?>
 </body>
 </html>

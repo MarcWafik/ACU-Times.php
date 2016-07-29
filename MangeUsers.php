@@ -26,7 +26,7 @@ function printUser( $ID ,$name , $ImgPath ){
 			<h4 class='col-xs-2 text-right'>ID:</h4>
 			<h4 class='col-xs-10'>{$ID}</h4>
 			<div class='btn-group  pull-right'>
-				<a class='btn btn-danger' href='deleteUser.php?ID={$ID}'><i class='fa fa-trash-o'></i></i></a>
+				<a class='btn btn-danger' href='Redir_DeleteUser.php?ID={$ID}'><i class='fa fa-trash-o'></i></i></a>
 				<a class='btn btn-warning' href='ChangePW.php?ID={$ID}'>Change PW</a> 
 			</div>
 		</div>
