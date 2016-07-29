@@ -1,80 +1,43 @@
 <?php
-//########################################################################################## Validate ##########################################################################################
-//=========================================Name=========================================
- function valName($Check) {
-	$pattern = '/^[A-Za-z\s]+$/';
-	return preg_match($pattern, $Check);
-}
-//=========================================ID=========================================
- function valID($Check) {
-	$pattern = '/^\d+$/';
-	return preg_match($pattern, $Check);
-}
-//=========================================Email=========================================
- function valEmail($Check) {
-	$pattern = '/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/';
-	return preg_match($pattern, $Check);
-}
-//=========================================Password=========================================
- function valPassword($Check) {
-	$pattern = '/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/';
-	return preg_match($pattern, $Check);
-}
-//=========================================RePassword=========================================
- function valRePassword($Check , $PW) {
-	return $Check===$PW;
-}
-//=========================================PhoneNo=========================================
- function valPhoneNo($Check) {
-	$pattern = '/^\d+$/';
-	return preg_match($pattern, $Check)||$Check=="";
-}
-//=========================================Gender=========================================
-//=========================================BrithDay=========================================
-function valBirthday ( $Month , $Year , $Day) {
-	$DaysInEatchMonth = array(0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31);
-	if (((int)$Year % 4 === 0) && ((int)$Year % 100 !== 0) || ((int)$Year % 400 === 0))
-		$DaysInEatchMonth[2]=29;
-	return ((int)$Day<=$DaysInEatchMonth[(int)$Month]);
-}
-//########################################################################################## MangeUsers ##########################################################################################
-$Order = array("ID", "Password", "name", "email", "PhoneNo", "Gender", "BirthdayDay", "BirthdayMonth", "BirthdayYear", "RegisterDay", "RegisterMonth", "RegisterYear", "Photo","Status", "About");
-$OrderSize = 15;
+require_once("ControlFunctions.php");
+
+$UserOrder = array("ID", "Password", "name", "email", "PhoneNo", "Gender", "BirthdayDay", "BirthdayMonth", "BirthdayYear", "RegisterDay", "RegisterMonth", "RegisterYear", "Photo","Status", "About");
+$UserOrderSize = 15;
 $Seperator = "~#*$%#";
-$FileLoc = "Data\Users\UsersList.txt";
+$UserFileLoc = "Data".DIRECTORY_SEPARATOR."Users".DIRECTORY_SEPARATOR."UsersList.txt";
 //=========================================appendUser=========================================
 function appendUser($User) {
-	global $OrderSize , $Order , $Seperator , $FileLoc;
-		$file = fopen($FileLoc, "a+") or die("Unable to open file!");
+	global $UserOrderSize , $UserOrder , $Seperator , $UserFileLoc;
+		$file = fopen($UserFileLoc, "a+") or die("Unable to open file!");
 		fwrite($file, UserToString($User));
 		fclose($file);
 	}
 //=========================================ArrToUser=========================================	
 function ArrToUser($arr) {
-	global $OrderSize , $Order ;
-	for ($i = 0; $i < $OrderSize && isset($arr[$i]) ; $i++) {
-		$User[$Order[$i]] = $arr[$i];
+	global $UserOrderSize , $UserOrder ;
+	for ($i = 0; $i < $UserOrderSize && isset($arr[$i]) ; $i++) {
+		$User[$UserOrder[$i]] = $arr[$i];
 	}
 	return $User;
 	}
 //=========================================UserToString=========================================
 function UserToString($User) {
-	global $OrderSize , $Order , $Seperator , $FileLoc;
+	global $UserOrderSize , $UserOrder , $Seperator , $UserFileLoc;
 		$txt = "";
-		for ($i = 0; $i < $OrderSize; $i++) {
-			if(isset($User[$Order[$i]])){
-				$txt .= $User[$Order[$i]].$Seperator;
+		for ($i = 0; $i < $UserOrderSize; $i++) {
+			if(isset($User[$UserOrder[$i]])&& NULL!=$User[$UserOrder[$i]]){
+				$txt .= $User[$UserOrder[$i]].$Seperator;
 			}
 			else {
-				$txt .= "".$Seperator;
+				$txt .= " ".$Seperator;
 			}
 		}
-		return "\r\n".$txt;
+		return $txt."\r\n";
 	}
 //=========================================LoadUser=========================================
 function LoadUser($ID) {
-	global $OrderSize , $Order , $Seperator , $FileLoc;
-	$file = fopen($FileLoc, "a+") or die("Unable to open file!");
+	global $UserOrderSize , $UserOrder , $Seperator , $UserFileLoc;
+	$file = fopen($UserFileLoc, "a+") or die("Unable to open file!");
 	while ((!feof($file))) {
 		$arr = explode("~#*$%#", fgets($file));
 		if ($arr[0] == $ID) {
@@ -85,9 +48,10 @@ function LoadUser($ID) {
 	fclose($file);
 	return false;
 }
+// returns an array of Users
 function LoadAllUser() {
-	global $OrderSize , $Order , $Seperator , $FileLoc;
-	$file = fopen($FileLoc, "a+") or die("Unable to open file!");
+	global $UserOrderSize , $UserOrder , $Seperator , $UserFileLoc;
+	$file = fopen($UserFileLoc, "a+") or die("Unable to open file!");
 	$user=array();
 	$i =0;
 	while ((!feof($file))) {
@@ -96,9 +60,10 @@ function LoadAllUser() {
 	fclose($file);
 	return $user;
 }
+// returns a user
 function SearchAllUser($find) {
-	global $OrderSize , $Order , $Seperator , $FileLoc;
-	$file = fopen($FileLoc, "a+") or die("Unable to open file!");
+	global $UserOrderSize , $UserOrder , $Seperator , $UserFileLoc;
+	$file = fopen($UserFileLoc, "a+") or die("Unable to open file!");
 	$user=array();
 	$i =0;
 	while ((!feof($file))) {
@@ -110,21 +75,66 @@ function SearchAllUser($find) {
 	fclose($file);
 	return $user;
 }
+// returns a sting with the exact match
+function SearchIDUserSTR($find) {
+	global $UserOrderSize , $UserOrder , $Seperator , $UserFileLoc;
+	$file = fopen($UserFileLoc, "a+") or die("Unable to open file!");
+	$i =0;
+	while ((!feof($file))) {
+		$temp = fgets($file);
+		$usertemp = explode("~#*$%#", $temp );
+		$IDtemp = $usertemp[0];
+		if($IDtemp==$find){
+			fclose($file);
+			return $temp;
+		}
+	}
+	fclose($file);
+	return NULL;
+}
+
 //=========================================UpdateRecord=========================================
-function UpdateRecord($Newrecord,$OldRecord){
-	global $OrderSize , $Order , $Seperator , $FileLoc;
-	$file = fopen($FileLoc, "a+") or die("Unable to open file!");
-	$contents = file_get_contents($file);
-	$contents = str_replace($OldRecord,$Newrecord, $contents);
-	file_put_contents($file, $contents);
+function DeleteUser($ID){
+	global $UserOrderSize , $UserOrder , $Seperator , $UserFileLoc;
+	$temp = SearchIDUserSTR($ID);
+	UserUpdateRecord("",$temp);
+}
+function MakeAdmin($ID){
+	global $UserOrderSize , $UserOrder , $Seperator , $UserFileLoc;
+	$User = LoadUser($ID);
+	$temp = SearchIDUserSTR($ID);
+	$User["Status"]="A";
+	UserUpdateRecord(UserToString($User),$temp);
+}
+function UpdateUser($user){
+	global $UserOrderSize , $UserOrder , $Seperator , $UserFileLoc;
+	$temp = SearchIDUserSTR($user["ID"]);
+	$User2STR = UserToString($user);
+	UserUpdateRecord($User2STR,$temp);
+}
+function AdminChangePW($ID , $PW){
+	global $UserOrderSize , $UserOrder , $Seperator , $UserFileLoc;
+	$temp = SearchIDUserSTR($ID);
+	$arr = explode("~#*$%#", $temp);
+	$User = ArrToUser($arr);
+	$User["Password"]=Encrypt_And_Hash($PW);
+	$User2STR = UserToString($User);
+	UserUpdateRecord($User2STR,$temp);
 }
 function Login($ID , $PW ){
-	global $OrderSize , $Order , $Seperator , $FileLoc;
+	global $UserOrderSize , $UserOrder , $Seperator , $UserFileLoc;
 	$User=LoadUser($ID);
 	if(isset($User)){
-		if($User["Password"]==$PW){
+		if($User["Password"]==Encrypt_And_Hash($PW)){
 			return $User;
 		}
 	}
+}
+function UserUpdateRecord($Newrecord,$OldRecord){
+	global $OrderSize , $Order , $Seperator , $UserFileLoc;
+//	$file = fopen($FileLoc, "a+") or die("Unable to open file!");
+	$contents = file_get_contents($UserFileLoc);
+	$contents = str_replace($OldRecord,$Newrecord, $contents);
+	file_put_contents($UserFileLoc, $contents);
 }
 ?>

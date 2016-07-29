@@ -1,41 +1,21 @@
 <!DOCTYPE html>
-
-<html>
+<html lang="en">
 <head>
-<title>Edit profile</title>
-<meta charset="iso-8859-1">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="layout/styles/layout.css" type="text/css" media="all">
-<link rel="stylesheet" href="layout/styles/mediaqueries.css" type="text/css" media="all">
-<script src="layout/scripts/jquery.min.js"></script>
-<script src="layout/scripts/jquery-mobilemenu.min.js"></script>
-
+<title>ACU Times | Title</title>
+<?php require_once("Header.php");?>
 </head>
 <body>
-<?php include ("Header.php");?>
+<?php include ("Navbar.php");?>
 <!-------------------------------------------------------------------------- content -------------------------------------------------------------------------->
-<div class="wrapper row3">
-	<div id="container"> 
-		<!-- ################################################################################################ -->
-		<div id="fof" class="clear"> 
-			<!-- ####################################################################################################### -->
-			<div class="clear">
-				<div class="ER_404">
-					<h1>404</h1>
-				</div>
-				<div class="ER_SSWW">
-					<h2>Error - Sorry Something Went Wrong !</h2>
-				</div>
-			</div>
-			<div class="divider2"></div>
-			<p class="notice">For Some Reason The Page You Requested Could Not Be Found On Our Server</p>
-			<p class="clear"><a class="fl_left" href="javascript:history.go(-1)">&laquo; Go Back</a> <a class="fl_right" href="index.php">Go Home &raquo;</a></p>
-			<!-- ####################################################################################################### --> 
-		</div>
-		<!-- ################################################################################################ -->
-		<div class="clear"></div>
+<div class="text-center center-block">
+	<div class="error-code">404 <i class="fa fa-warning"></i></div>
+	<h3>We couldn't find the page..</h3>
+	<div class="text-muted"> Sorry, but the page you are looking for was either not found or does not exist. <br/>
+		Try refreshing the page or click the button below to go back to the Homepage.
+		<div> <a class="login-detail-panel-button btn" href="javascript:history.go(-1)"> <i class="fa fa-arrow-left"></i> Go back</a> 
+				<a class=" login-detail-panel-button btn" href="index.php">Homepage <i class="fa fa-arrow-right"></i></a> </div>
 	</div>
 </div>
-<?php include ("Footer.html");?>
+<?php include ("Footer.php");?>
 </body>
 </html>
