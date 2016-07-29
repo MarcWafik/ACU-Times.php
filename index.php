@@ -60,37 +60,65 @@
 			<div id="homepage"> 
 				<!-- Introduction -->
 				<section id="intro" class="clear">
-					<article class="one_fifth first"><a href="#"><img src="images/demo/166x130.gif" alt=""></a>
-						<h2>Indonectetus facilis</h2>
-						<p>Nullamlacus dui ipsum conseque loborttis non euisque morbi penas dapibulum orna.</p>
-						<footer class="more"><a href="#">Read More &raquo;</a></footer>
-					</article>
-					<article class="one_fifth"><a href="#"><img src="images/demo/166x130.gif" alt=""></a>
-						<h2>Indonectetus facilis</h2>
-						<p>Nullamlacus dui ipsum conseque loborttis non euisque morbi penas dapibulum orna.</p>
-						<footer class="more"><a href="#">Read More &raquo;</a></footer>
-					</article>
-					<article class="one_fifth"><a href="#"><img src="images/demo/166x130.gif" alt=""></a>
-						<h2>Indonectetus facilis</h2>
-						<p>Nullamlacus dui ipsum conseque loborttis non euisque morbi penas dapibulum orna.</p>
-						<footer class="more"><a href="#">Read More &raquo;</a></footer>
-					</article>
-					<article class="one_fifth"><a href="#"><img src="images/demo/166x130.gif" alt=""></a>
-						<h2>Indonectetus facilis</h2>
-						<p>Nullamlacus dui ipsum conseque loborttis non euisque morbi penas dapibulum orna.</p>
-						<footer class="more"><a href="#">Read More &raquo;</a></footer>
-					</article>
-					<article class="one_fifth last"><a href="#"><img src="images/demo/166x130.gif" alt=""></a>
-						<h2>Indonectetus facilis</h2>
-						<p>Nullamlacus dui ipsum conseque loborttis non euisque morbi penas dapibulum orna.</p>
-						<footer class="more"><a href="#">Read More &raquo;</a></footer>
-					</article>
+					<div>
+						<article class="one_fifth first"><a href="#"><img src="images/demo/166x130.gif" alt=""></a>
+							<h2>Indonectetus facilis</h2>
+							<p>Nullamlacus dui ipsum conseque loborttis non euisque morbi penas dapibulum orna.</p>
+							<footer class="more"><a href="#">Read More &raquo;</a></footer>
+						</article>
+						<article class="one_fifth"><a href="#"><img src="images/demo/166x130.gif" alt=""></a>
+							<h2>Indonectetus facilis</h2>
+							<p>Nullamlacus dui ipsum conseque loborttis non euisque morbi penas dapibulum orna.</p>
+							<footer class="more"><a href="#">Read More &raquo;</a></footer>
+						</article>
+						<article class="one_fifth"><a href="#"><img src="images/demo/166x130.gif" alt=""></a>
+							<h2>Indonectetus facilis</h2>
+							<p>Nullamlacus dui ipsum conseque loborttis non euisque morbi penas dapibulum orna.</p>
+							<footer class="more"><a href="#">Read More &raquo;</a></footer>
+						</article>
+						<article class="one_fifth"><a href="#"><img src="images/demo/166x130.gif" alt=""></a>
+							<h2>Indonectetus facilis</h2>
+							<p>Nullamlacus dui ipsum conseque loborttis non euisque morbi penas dapibulum orna.</p>
+							<footer class="more"><a href="#">Read More &raquo;</a></footer>
+						</article>
+						<article class="one_fifth last"><a href="#"><img src="images/demo/166x130.gif" alt=""></a>
+							<h2>Indonectetus facilis</h2>
+							<p>Nullamlacus dui ipsum conseque loborttis non euisque morbi penas dapibulum orna.</p>
+							<footer class="more"><a href="#">Read More &raquo;</a></footer>
+						</article>
+					</div>
+					<div>
+						<article class="one_fifth first"><a href="#"><img src="images/demo/166x130.gif" alt=""></a>
+							<h2>Indonectetus facilis</h2>
+							<p>Nullamlacus dui ipsum conseque loborttis non euisque morbi penas dapibulum orna.</p>
+							<footer class="more"><a href="#">Read More &raquo;</a></footer>
+						</article>
+						<article class="one_fifth"><a href="#"><img src="images/demo/166x130.gif" alt=""></a>
+							<h2>Indonectetus facilis</h2>
+							<p>Nullamlacus dui ipsum conseque loborttis non euisque morbi penas dapibulum orna.</p>
+							<footer class="more"><a href="#">Read More &raquo;</a></footer>
+						</article>
+						<article class="one_fifth"><a href="#"><img src="images/demo/166x130.gif" alt=""></a>
+							<h2>Indonectetus facilis</h2>
+							<p>Nullamlacus dui ipsum conseque loborttis non euisque morbi penas dapibulum orna.</p>
+							<footer class="more"><a href="#">Read More &raquo;</a></footer>
+						</article>
+						<article class="one_fifth"><a href="#"><img src="images/demo/166x130.gif" alt=""></a>
+							<h2>Indonectetus facilis</h2>
+							<p>Nullamlacus dui ipsum conseque loborttis non euisque morbi penas dapibulum orna.</p>
+							<footer class="more"><a href="#">Read More &raquo;</a></footer>
+						</article>
+						<article class="one_fifth last"><a href="#"><img src="images/demo/166x130.gif" alt=""></a>
+							<h2>Indonectetus facilis</h2>
+							<p>Nullamlacus dui ipsum conseque loborttis non euisque morbi penas dapibulum orna.</p>
+							<footer class="more"><a href="#">Read More &raquo;</a></footer>
+						</article>
+					</div>
 				</section>
 				<!-- / Introduction --> 
 				<!-- ########################################################################################## --> 
 				<!-- Services -->
 				<section id="services" class="last clear">
-					<h1 class="hidden">Services We Offer</h1>
 					<article class="one_third first">
 						<figure class="clear"><img src="images/demo/48x48.gif" alt="">
 							<figcaption>
@@ -108,6 +136,30 @@
 						</figure>
 					</article>
 					<article class="one_third">
+						<figure class="clear"><img src="images/demo/48x48.gif" alt="">
+							<figcaption>
+								<h2>Indonectetus facilis</h2>
+								<p>Proin quam etiam ultrices suspen disse in justo eu magna.</p>
+							</figcaption>
+						</figure>
+					</article>
+					<article class="one_third first">
+						<figure class="clear"><img src="images/demo/48x48.gif" alt="">
+							<figcaption>
+								<h2>Indonectetus facilis</h2>
+								<p>Proin quam etiam ultrices suspen disse in justo eu magna.</p>
+							</figcaption>
+						</figure>
+					</article>
+					<article class="one_third">
+						<figure class="clear"><img src="images/demo/48x48.gif" alt="">
+							<figcaption>
+								<h2>Indonectetus facilis</h2>
+								<p>Proin quam etiam ultrices suspen disse in justo eu magna.</p>
+							</figcaption>
+						</figure>
+					</article>
+					<article class="one_third last">
 						<figure class="clear"><img src="images/demo/48x48.gif" alt="">
 							<figcaption>
 								<h2>Indonectetus facilis</h2>
