@@ -4,6 +4,7 @@
 	<head>
 		<title>ACU Times | Title</title>
 		<?php require_once("Header.php"); ?>
+		<script src="js/Validate.js"></script>
 	</head>
 	<body>
 		<?php include ("Navbar.php"); ?>
@@ -11,9 +12,9 @@
 		<div class="container">
 			<h3>
 				<ul class="nav nav-pills">
-					<li role="presentation" class="active"><a>Change PW</a></li>
-					<li role="presentation" ><a>ID :</a></li>
-					<li role="presentation" ><a><?php echo $_GET["ID"] ?></a></li>
+					<li role="presentation"><a href="Profile.php">Profile</a></li>
+					<li role="presentation"><a href="EditProfile.php">Change personal info</a></li>
+					<li role="presentation" class="active"><a>Change Password</a></li>
 				</ul>
 			</h3>
 			<br>
@@ -21,7 +22,15 @@
 			if ($Passed)
 				echo '<div class="alert alert-info alert-dismissable"> <a class="panel-close close" data-dismiss="alert">×</a> <i class="fa fa-check"></i> Password updated succsesfuly </div>'
 				?>
-			<form role="form" action="MangeUsers_ChangePW.php?ID=<?php echo $_GET["ID"] ?>" method="post">
+			<form role="form" action="ChangePW.php" method="post">
+				<!-- #################################################################### Old Password #################################################################### -->
+				<div class="form-group">
+					<label for="OldPassword">Old password :</label>
+					<input type="password" name="OldPassword" id="OldPassword" value="" class="form-control" required>
+					<div id="Validate_Password" name = "Validate_OldPassword" class="MyAlret">
+						<?php if (isset($iscorrect["OldPassword"]) && !$iscorrect["OldPassword"]) echo "Password is incorrect" ?>
+					</div>
+				</div>
 				<!-- #################################################################### Password #################################################################### -->
 				<div class="form-group">
 					<label for="Password">New password :</label>
@@ -39,14 +48,11 @@
 					</div>
 				</div>
 				<!-- #################################################################### Submit #################################################################### -->
-				<div class="form-group pull-right">
-					<a class="btn btn-default" href="Members.php">Go back</a>
-					<span></span>
-					<input class="btn btn-primary" value="Change Password" type="submit">
-				</div>
-				<!-- ####################################################################  #################################################################### -->
-			</form>
+				<button type="submit" class="btn btn-primary pull-right">Change Password</button>
 		</div>
-		<?php include ("Footer.php"); ?>
-	</body>
+		<!-- ####################################################################  #################################################################### -->
+	</form>
+</div>
+<?php include ("Footer.php"); ?>
+</body>
 </html>

@@ -14,6 +14,7 @@
 class User extends EntityUser implements iCRUD {
 
 // photo is stored as 4141235.jpeg
+	protected $nameArabic; //32
 	protected $password; //32
 	protected $gender; //1 - 0 dont say 1 male 2 female 
 	protected $accses; //1 - 0 regular 1 editor 2 admin
@@ -123,6 +124,14 @@ class User extends EntityUser implements iCRUD {
 	}
 
 //===================================================SET===================================================
+	public function setNameArabic($nameArabic) {
+		if (Validation::isStringMinMaxLenth($nameArabic, 0, 32)) {
+			$this->nameArabic = htmlspecialchars($nameArabic);
+			return TRUE;
+		}
+		return FALSE;
+	}
+
 	public function setID($id) {
 		if (Validation::isNumMinMaxLenth($id, 7, 7)) {
 			$this->id = (int) $id;
@@ -172,6 +181,10 @@ class User extends EntityUser implements iCRUD {
 	}
 
 //===================================================GET===================================================
+	public function getNameArabic() {
+		return $this->nameArabic;
+	}
+
 	public function getIsCorrectPassword($password) {
 		return (isset($password) && hash("sha256", $password) == $password);
 	}

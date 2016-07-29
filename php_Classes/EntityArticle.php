@@ -13,8 +13,8 @@
  */
 abstract class EntityArticle extends Entity {
 
-	protected $titleEnglish; //128
-	protected $titleArabic; //128
+	protected $titleEnglish; //64
+	protected $titleArabic; //64
 	protected $display; //1
 	protected $writerID;
 	protected $editorID;
@@ -29,14 +29,15 @@ abstract class EntityArticle extends Entity {
 	}
 
 //=================================================Const===================================================
-	const DISPLAY_HIDEN = 0;
-	const DISPLAY_SHOWN = 1;
-	const DISPLAY_DENIED = 2;
+	const DISPLAY_NEW = 0;
+	const DISPLAY_DENIED = 1;
+	const DISPLAY_HIDEN = 2;
+	const DISPLAY_SHOWN = 3;
 
 //===================================================SET===================================================
 	public function setTitleEnglish($title) {
 		$this->Title = $title;
-		if (Validation::isStringMinMaxLenth($title, 4, 128)) {
+		if (Validation::isStringMinMaxLenth($title, 4, 64)) {
 			$this->titleEnglish = htmlspecialchars($title);
 			return TRUE;
 		}
@@ -45,7 +46,7 @@ abstract class EntityArticle extends Entity {
 
 	public function setTitleArabic($title) {
 		$this->Title = $title;
-		if (Validation::isStringMinMaxLenth($title, 4, 128)) {
+		if (Validation::isStringMinMaxLenth($title, 4, 64)) {
 			$this->titleArabic = htmlspecialchars($title);
 			return TRUE;
 		}

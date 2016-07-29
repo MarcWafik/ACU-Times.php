@@ -13,7 +13,7 @@
  */
 class EntityUser extends Entity {
 
-	protected $fullName; //64
+	protected $fullName; //32
 	protected $email; // 254
 	protected $phoneNumber; //13
 
@@ -27,7 +27,7 @@ class EntityUser extends Entity {
 //===================================================SET===================================================
 
 	public function setfullName($name) {
-		if (isset($name) && preg_match('/^[A-Za-z ].{3,64}$/', $name)) {
+		if (isset($name) && preg_match('/^[A-Za-z ].{3,32}$/', $name)) {
 			$this->fullName = (String) $name;
 			return TRUE;
 		}

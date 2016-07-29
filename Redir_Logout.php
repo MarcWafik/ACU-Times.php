@@ -1,4 +1,6 @@
-<?php require_once 'autoload.php';
+<?php
+
+require_once 'autoload.php';
 session_start();
 $_SESSION = array();
 session_destroy();

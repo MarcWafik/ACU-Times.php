@@ -1,7 +1,8 @@
 <?php
+
 function __autoload($className) {
-    $filename = $className . ".php";
-    if (is_readable($filename)) {
-        require_once( $filename );
-    }
+	$filename = $className . ".php";
+	if (is_readable($filename)) {
+		require_once( $filename );
+	}
 }

@@ -14,8 +14,8 @@
 class Category extends Entity {
 
 	public $possition;
-	public $nameEn;
-	public $nameAr;
+	public $nameEnglish;
+	public $nameArabic;
 	public $arrSubCategorys;
 
 }

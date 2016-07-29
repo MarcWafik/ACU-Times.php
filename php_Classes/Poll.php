@@ -13,15 +13,11 @@
  */
 class Poll extends EntityArticle implements iCRUD {
 
-	protected $optionQuestionEnglish = array(); // an array of English Questions
-	protected $optionQuestionArabic = array(); // an array of Arabic Questions
-	protected $optionClicked = array(); // an array of how many times that question got clicked
+	protected $choices = array(); // an array of poll choices
 
 	public function init() {
 		parent::init();
-		$this->optionQuestionEnglish = array();
-		$this->optionQuestionArabic = array();
-		$this->optionClicked = array();
+		$this->choices = array();
 	}
 
 //==================================================CRUD===================================================
@@ -47,45 +43,57 @@ class Poll extends EntityArticle implements iCRUD {
 	}
 
 //===================================================SET===================================================
-	public function addOption($Question) {
-		//if  is any not set
-		if (!(isset($this->optionClicked) && isset($this->optionQuestionEnglish) && isset($this->optionQuestionArabic))) {
-			$this->optionClicked = array();
-			$this->optionQuestionEnglish = array();
-			$this->optionQuestionArabic = array();
-		}
-		// if parameter is correct
-		if (count($this->optionQuestionEnglish) <= 4 && Validation::isNumMinMaxLenth($Question, 2, 100)) {
-			array_push($this->optionQuestionEnglish, htmlspecialchars($Question));
-			array_push($this->optionClicked, 0);
-			return TRUE;
-		}
-		return FALSE;
+	public function addOption(PollChoice $opt) {
+		array_push($this->choices, $opt);
+		return TRUE;
 	}
 
-	public function deleteOption($Location) {
-		if (isValidLocation($Location)) {
-			unset($this->optionQuestionEnglish[(int) $Location]);
-			unset($this->optionClicked[(int) $Location]);
-			return TRUE;
+}
+
+class PollChoice {
+
+	private $id;
+	private $textEnglish;
+	private $textArabic;
+	private $votes;
+
+	public function init() {
+		$this->id = 0;
+		$this->textEnglish = "";
+		$this->textArabic = "";
+		$this->votes = 0;
+	}
+//===================================================SET===================================================
+	public function increment() {
+		if (!isset($this->votes)) {
+			$this->votes = 1;
+		} else {
+			$this->votes ++;
 		}
-		return FALSE;
 	}
 
-	public function incrementOption($Location) {
-		if (isValidLocation($Location)) {
-			$this->optionClicked[(int) $Location] ++; // increment the index of location
-			return TRUE;
-		}
-		return FALSE;
+	public function setTextEnglish($textEnglish) {
+		$this->textEnglish = $textEnglish;
 	}
 
-	public function isValidLocation($Location) {
-		return (
-				isset($Location) && is_numeric($Location) &&
-				isset($this->optionClicked[(int) $Location]) &&
-				isset($this->optionQuestionArabic[(int) $Location]) &&
-				isset($this->optionQuestionEnglish[(int) $Location]));
+	public function setTextArabic($textArabic) {
+		$this->textArabic = $textArabic;
+	}
+//===================================================GET===================================================
+	public function getId() {
+		return $this->id;
+	}
+
+	public function getTextEnglish() {
+		return $this->textEnglish;
+	}
+
+	public function getTextArabic() {
+		return $this->textArabic;
+	}
+
+	public function getClicked() {
+		return $this->votes;
 	}
 
 }

@@ -13,14 +13,22 @@
  */
 class PrintHTML {
 
-	static public function numericOption($start, $end) {
-		//$right_now = getdate();
-		//$this_year = $right_now['year'];
+	static public function numericOption($start, $end, $selected = 0) {
 		for ($i = $start; $i >= $end; $i--) {
-			echo "<option value='{$i}' >{$i}</option>";
+			($selected == $i) ? $temp = "selected" : $temp = "";
+			echo "<option value='{$i}' {$temp}>{$i}</option>";
 		}
 		for ($i = $start; $i <= $end; $i++) {
-			echo "<option value='{$i}' >{$i}</option>";
+			($selected == $i) ? $temp = "selected" : $temp = "";
+			echo "<option value='{$i}' {$temp}>{$i}</option>";
+		}
+	}
+
+	static public function numericOptionMonth($selected = 0) {
+		$MonthName = array("", "January", "February", "March", "April", "May", "June", "Jully", "August", "September", "October", "November", "December");
+		for ($i = 1; $i <= 12; $i++) {
+			($selected == ($i)) ? $temp = "selected" : $temp = "";
+			echo "<option value='{$i}' {$temp}>{$MonthName[$i]}</option>";
 		}
 	}
 
@@ -60,6 +68,7 @@ class PrintHTML {
 			<p>' . $description . '</p>
 		</div>';
 	}
+
 	static public function portofolio_4row_under_small($title, $link, $description, $time, $img) {
 		echo
 		'<div class="col-md-4 img-portfolio"> 
@@ -69,4 +78,5 @@ class PrintHTML {
 			<p>' . $description . '</p>
 		</div>';
 	}
+
 }

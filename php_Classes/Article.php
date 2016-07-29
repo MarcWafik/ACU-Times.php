@@ -14,10 +14,10 @@
 class Article extends Youtube implements iCRUD {
 
 	protected $categoryID;
-	protected $language; //0 for ENG  1 for Arabic
+	protected $language; //0 for ENG  1 for Arabic 2 for both
 	protected $importance; // 0~9
-	protected $imageNumber;
-	protected $views = 0;
+	protected $imageNumber; // how many images  max is 99 (just for db)
+	protected $views = 0; // max 11
 
 	public function init() {
 		parent::init();

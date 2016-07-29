@@ -1,4 +1,5 @@
 <?php
+
 class Category {
 
 	public $Name;
@@ -62,34 +63,34 @@ function PrintCategory(Category $Category) {
 
 //=====================================================================================================================================================================
 //=====================================================================================================================================================================
-function FillCategory(){
-	
-
-$CategoryList = array();
-
-$tempsubcat = array(new Category("Local News", "LocalNews"),
-	new Category("World News", "WorldNews"),
-	new Category("ACU College News", "ACUCollegeNews"));
-
-array_push($CategoryList, new Category("News", "News", $tempsubcat));
+function FillCategory() {
 
 
-$tempsubcat = array(new Category("Cinema", "Cinema", NULL),
-	new Category("Drama", "Drama", NULL),
-	new Category("Theater", "Theater", NULL));
-array_push($CategoryList, new Category("Art", "Art", $tempsubcat));
+	$CategoryList = array();
 
-$tempsubcat = array(new Category("Local Footaball", "LocalFootaball", NULL),
-	new Category("International Football", "InternationalFootball", NULL),
-	new Category("Other", "Other", NULL));
-array_push($CategoryList, new Category("Sport", "Sport", $tempsubcat));
+	$tempsubcat = array(new Category("Local News", "LocalNews"),
+		new Category("World News", "WorldNews"),
+		new Category("ACU College News", "ACUCollegeNews"));
 
-$tempsubcat == NULL;
-array_push($CategoryList, new Category("Interviews", "Interviews", NULL));
-array_push($CategoryList, new Category("TechScience", "TechScience", NULL));
-array_push($CategoryList, new Category("Economy", "Economy", NULL));
+	array_push($CategoryList, new Category("News", "News", $tempsubcat));
+
+
+	$tempsubcat = array(new Category("Cinema", "Cinema", NULL),
+		new Category("Drama", "Drama", NULL),
+		new Category("Theater", "Theater", NULL));
+	array_push($CategoryList, new Category("Art", "Art", $tempsubcat));
+
+	$tempsubcat = array(new Category("Local Footaball", "LocalFootaball", NULL),
+		new Category("International Football", "InternationalFootball", NULL),
+		new Category("Other", "Other", NULL));
+	array_push($CategoryList, new Category("Sport", "Sport", $tempsubcat));
+
+	$tempsubcat == NULL;
+	array_push($CategoryList, new Category("Interviews", "Interviews", NULL));
+	array_push($CategoryList, new Category("TechScience", "TechScience", NULL));
+	array_push($CategoryList, new Category("Economy", "Economy", NULL));
 //array_push($CategoryList, new Category("Multimedia","Multimedia"));
 //array_push($CategoryList, new Category("Gallery","Gallery"));
 
-return $CategoryList;
+	return $CategoryList;
 }
