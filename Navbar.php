@@ -31,7 +31,7 @@ else
 				}
 				?>
 				<li><a href="Multimedia.php">Multimedia</a></li>
-				<li><a href="Gallery.php">Gallery</a></li>
+				<!--<li><a href="Gallery.php">Gallery</a></li>-->
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li class="dropdown"> <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></a>
@@ -52,19 +52,19 @@ else
 if(isset($_SESSION['user'])){
 	$temp = "";
 	if($_SESSION['user']["Status"]=="A"){
-		$temp = "<li><a href='MangeUsers.php'>Mange Users</a></li>";
+		$temp = '<li><a href="MangeUsers.php">Mange Users</a></li>';
 	}
-echo "
-<li class='dropdown'> <a class='dropdown-toggle' data-toggle='dropdown' href=''><span class='glyphicon glyphicon-user'></span> {$_SESSION['user']['name']} <span class='caret'></span></a>
-	<ul class='dropdown-menu'>
-		<li><a href='Profile.php'>Profile</a></li>
-		<li><a href='WriteArticle.php'>Write Article</a></li>
-		{$temp}
-		<li><a href='Redir_Logout.php'>Logout</a></li>
+echo '
+<li class="dropdown"> <a class="dropdown-toggle" data-toggle="dropdown" href=""><span class="glyphicon glyphicon-user"></span> '.$_SESSION["user"]["name"].'<span class="caret"></span></a>
+	<ul class="dropdown-menu">
+		<li><a href="Profile.php">Profile</a></li>
+		<li><a href="WriteArticle.php">Write Article</a></li>'
+		.$temp.
+		'<li><a href="Redir_Logout.php">Logout</a></li>
 	</ul>
-</li>";
+</li>';
 } else {
-echo"<li><a href='LogIn.php'><span class='glyphicon glyphicon-log-in'></span> Login</a></li>";
+echo'<li><a href="LogIn.php"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>';
 }
 
 ?>

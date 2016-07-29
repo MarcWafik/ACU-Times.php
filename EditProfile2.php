@@ -11,8 +11,9 @@ if(valAllNotnull()){
 	$iscorrect["Password"] = FALSE ;  
 	if ((Encrypt_And_Hash($_POST["Password"]) == $user["Password"]))$iscorrect["Password"] = TRUE;
 	
-	//if(valAll($iscorrect)){
+	if(valAll($iscorrect)){
 		$user = LoadUser($_SESSION['user']["ID"]);
+		
 		$user["name"]=$_POST["name"];
 		$user["email"]=$_POST["email"];
 		$user["PhoneNo"]=$_POST["PhoneNo"];
@@ -25,7 +26,7 @@ if(valAllNotnull()){
 		UpdateUser($user);
 		$_SESSION["user"] = $user;
 		$Passed = TRUE ;
-	//}
+	}
 }
 //=========================================validate=========================================
 function valAll($iscorrect) {
@@ -81,7 +82,7 @@ function valAllNotnull() {
 		<!-- left column -->
 		<div class="col-md-4 col-sm-6 col-xs-12">
 			<div class="text-center"> <img src="<?php if(isset($user["Photo"]) && $user["Photo"]!="" && $user["Photo"]!=" ") echo $user["Photo"] ; else echo "images/User.png"; ?>" style="height:200px; width:200px;" class="avatar img-circle" alt="avatar">
-				<input type="file" class="text-center center-block well well-sm">
+				<!--<input type="file" class="text-center center-block well well-sm">-->
 			</div>
 		</div>
 		<!-- edit form column -->
@@ -179,10 +180,10 @@ function valAllNotnull() {
 					</div>
 				</div>
 				<!-- ####################################################################  #################################################################### -->
-				<div class="form-group" style="display:none">
+				<div class="form-group">
 					<label class="col-md-3 control-label">Current Password:</label>
 					<div class="col-md-8">
-						<input type="password" name="Password" id="Password" value="" class="form-control" >
+						<input type="password" name="Password" id="Password" value="" class="form-control" required>
 						<div id="Validate_Password" name = "Validate_Password" class="MyAlret">
 							<?php if(isset($iscorrect["Password"])&&!$iscorrect["Password"]) echo "Password is incorrect" ?>
 						</div>

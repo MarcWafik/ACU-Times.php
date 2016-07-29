@@ -4,7 +4,7 @@ require_once("ControlFunctions.php");
 $UserOrder = array("ID", "Password", "name", "email", "PhoneNo", "Gender", "BirthdayDay", "BirthdayMonth", "BirthdayYear", "RegisterDay", "RegisterMonth", "RegisterYear", "Photo","Status", "About");
 $UserOrderSize = 15;
 $Seperator = "~#*$%#";
-$UserFileLoc = "Data\Users\UsersList.txt";
+$UserFileLoc = "Data".DIRECTORY_SEPARATOR."Users".DIRECTORY_SEPARATOR."UsersList.txt";
 //=========================================appendUser=========================================
 function appendUser($User) {
 	global $UserOrderSize , $UserOrder , $Seperator , $UserFileLoc;
@@ -97,20 +97,20 @@ function SearchIDUserSTR($find) {
 function DeleteUser($ID){
 	global $UserOrderSize , $UserOrder , $Seperator , $UserFileLoc;
 	$temp = SearchIDUserSTR($ID);
-	UpdateRecord("",$temp);
+	UserUpdateRecord("",$temp);
 }
 function MakeAdmin($ID){
 	global $UserOrderSize , $UserOrder , $Seperator , $UserFileLoc;
 	$User = LoadUser($ID);
 	$temp = SearchIDUserSTR($ID);
 	$User["Status"]="A";
-	UpdateRecord(UserToString($User),$temp);
+	UserUpdateRecord(UserToString($User),$temp);
 }
 function UpdateUser($user){
 	global $UserOrderSize , $UserOrder , $Seperator , $UserFileLoc;
 	$temp = SearchIDUserSTR($user["ID"]);
 	$User2STR = UserToString($user);
-	UpdateRecord($User2STR,$temp);
+	UserUpdateRecord($User2STR,$temp);
 }
 function AdminChangePW($ID , $PW){
 	global $UserOrderSize , $UserOrder , $Seperator , $UserFileLoc;
@@ -119,7 +119,7 @@ function AdminChangePW($ID , $PW){
 	$User = ArrToUser($arr);
 	$User["Password"]=Encrypt_And_Hash($PW);
 	$User2STR = UserToString($User);
-	UpdateRecord($User2STR,$temp);
+	UserUpdateRecord($User2STR,$temp);
 }
 function Login($ID , $PW ){
 	global $UserOrderSize , $UserOrder , $Seperator , $UserFileLoc;
@@ -129,5 +129,12 @@ function Login($ID , $PW ){
 			return $User;
 		}
 	}
+}
+function UserUpdateRecord($Newrecord,$OldRecord){
+	global $OrderSize , $Order , $Seperator , $UserFileLoc;
+//	$file = fopen($FileLoc, "a+") or die("Unable to open file!");
+	$contents = file_get_contents($UserFileLoc);
+	$contents = str_replace($OldRecord,$Newrecord, $contents);
+	file_put_contents($UserFileLoc, $contents);
 }
 ?>

@@ -1,9 +1,3 @@
-!doctype>
-<html>
-<head>
-
-</head> 
-<body>
 <?php
 $ds= DIRECTORY_SEPARATOR;  //1
  
@@ -21,6 +15,4 @@ if (!empty($_FILES)) {
      
 }
 
-?>     
-</body>
-</html>
+?>

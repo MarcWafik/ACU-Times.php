@@ -39,7 +39,7 @@ else{
 			if(isset($Article["ID"])&&$Article["ID"]!=""&&$Article["ID"]!=" "){
 				echo
 				 printPortofolio_1Line ( 
-				 $Article["ID"]."-1.jpeg" , 
+				 $Article["IMG"], 
 				 $Article["Name"], 
 				 "Article.php?ID=".$Article["ID"], 
 				 $Article["Brief"], 

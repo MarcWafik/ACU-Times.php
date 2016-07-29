@@ -1,12 +1,12 @@
 <?php
 require_once("ControlFunctions.php");
 
-$Order = array("ID", "Name", "Category", "Language", "Youtubelink", "Brief", "Rate", "ArticleDay", "ArticleMonth", "ArticleYear", "WriterID", "EditorID" , "ArticleName" );
-$OrderSize = 12;
+$Order = array("ID", "Name", "Category", "Language", "Youtubelink", "Brief", "Rate", "ArticleDay", "ArticleMonth", "ArticleYear", "WriterID", "EditorID" , "IMG" );
+$OrderSize = 13;
 $Seperator = "~#*$%#";
-$FileLoc = "Data\Articles\Article-info.txt";
+$FileLoc = "Data".DIRECTORY_SEPARATOR."Users".DIRECTORY_SEPARATOR."ArticlesList.txt";
 
-function save_article_info($Article) {
+function SaveArticle($Article) {
 	global $OrderSize, $Order, $Seperator, $FileLoc;
 	$ID = 0;
 	$file = fopen($FileLoc, "a+") or die("Unable to open file!");
@@ -32,7 +32,7 @@ function ArticleToString($Article) {
 			$txt.= "".$Seperator;
 		}
 	}
-	return "\r\n".$txt;
+	return $txt."\r\n";
 }
 function LastID() {
 	global $FileLoc;
@@ -69,9 +69,12 @@ function LoadArticleCategory($Find) {
 	$AllArticle = array();
 	$i = 0;
 	while ((!feof($file))) {
-		$Article = ArrToArticle(explode($Seperator, fgets($file)));
-		if (strpos($Article["Category"], $Find) !== FALSE) {
-			$AllArticle[$i++] = $Article;
+		$temp = fgets($file);
+		if($temp!=""){
+			$Article = ArrToArticle(explode($Seperator, $temp));
+			if (strpos($Article["Category"], $Find) !== FALSE) {
+				$AllArticle[$i++] = $Article;
+			}
 		}
 	}
 	return $AllArticle;
@@ -80,9 +83,12 @@ function LoadArticle($ID) {
 	global $FileLoc, $Seperator;
 	$file = fopen($FileLoc, "a+") or die("Unable to open file!");
 	while ((!feof($file))) {
-		$Article = explode($Seperator, fgets($file));
-		if ($Article[0] == $ID) {
-			return ArrToArticle($Article);
+		$temp = fgets($file);
+		if($temp!=""){
+			$Article = explode($Seperator, $temp);
+			if ($Article[0] == $ID) {
+				return ArrToArticle($Article);
+			}
 		}
 	}
 	return NULL;
@@ -91,10 +97,12 @@ function SearchStringID($Find) {
 	global $FileLoc, $Seperator;
 	$file = fopen($FileLoc, "a+") or die("Unable to open file!");
 	while ((!feof($file))) {
-		$tempArticle = fgets($file);
-		$Article =explode($Seperator,$tempArticle );
-		if ($Article[0] == $Find) {
-			return $tempArticle;
+		$temp = fgets($file);
+		if($temp!=""){
+			$Article = explode($Seperator, $temp);
+			if ($Article[0] == $Find) {
+				return $temp;
+			}
 		}
 	}
 	return NULL;
@@ -105,9 +113,12 @@ function SearchArticleTitle($Find) {
 	$AllArticle = array();
 	$i = 0;
 	while ((!feof($file))) {
-		$Article = ArrToArticle(explode($Seperator, fgets($file)));
-		if (strpos($Article["Name"], $Find) !== FALSE) {
-			$AllArticle[$i++] = $Article;
+		$temp = fgets($file);
+		if($temp!=""){
+			$Article = ArrToArticle(explode($Seperator, $temp));
+			if (strpos($Article["Name"], $Find) !== FALSE) {
+				$AllArticle[$i++] = $Article;
+			}
 		}
 	}
 	return $AllArticle;
@@ -118,8 +129,11 @@ function LoadAllArticle() {
 	$AllArticle = array();
 	$i = 0;
 	while ((!feof($file))) {
-		$Article = ArrToArticle(explode($Seperator, fgets($file)));
-		$AllArticle[$i++] = $Article;
+		$temp = fgets($file);
+		if($temp!=""){
+			$Article = ArrToArticle(explode($Seperator, $temp));
+			$AllArticle[$i++] = $Article;
+		}
 	}
 	return $AllArticle;
 }

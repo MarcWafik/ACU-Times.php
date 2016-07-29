@@ -19,7 +19,7 @@
 				<ul class="list-unstyled list-inline pull-left">
 					<li><a href="#">Terms of Service</a></li>
 					<li><a href="#">Contact Us</a></li>
-					<li><a href="#">Privacy</a></li>
+					<li><a href="#">About Us</a></li>
 				</ul>
 			</div>
 			<div class="col-xs-4">
