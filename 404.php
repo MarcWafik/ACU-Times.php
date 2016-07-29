@@ -16,6 +16,27 @@
 				<a class=" login-detail-panel-button btn" href="index.php">Homepage <i class="fa fa-arrow-right"></i></a> </div>
 	</div>
 </div>
+<?php 
+
+
+function youtubeID($url){
+     $res = explode("v",$url);
+     if(isset($res[1])) {
+        $res1 = explode('&',$res[1]);
+        if(isset($res1[1])){
+            $res[1] = $res1[0];
+        }
+        $res1 = explode('#',$res[1]);
+        if(isset($res1[1])){
+            $res[1] = $res1[0];
+        }
+     }
+     return substr($res[1],1,12);
+     return false;
+ }
+$url = "http://www.youtube.com/watch/v/y40ND8kXDlg";
+echo youtubeID($url1);
+?>
 <?php include ("Footer.php");?>
 </body>
 </html>
