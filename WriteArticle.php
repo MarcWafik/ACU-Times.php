@@ -70,7 +70,7 @@ tinymce.init({
   </script>
   </head>
   <body>
-	<?php include ("Header.php");?>
+	<?php include ("Navbar.php");?>
 	<!-- content -->
 
 	<div class="wrapper row3">
@@ -137,6 +137,6 @@ tinymce.init({
 			<!-- ################################################################################################ --> 
 		</div>
 </div>
-	<?php include ("Footer.html");?>
+	<?php include ("Footer.php");?>
 </body>
 </html>

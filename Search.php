@@ -1,219 +1,161 @@
 <!DOCTYPE html>
-
-<html>
+<html lang="en">
 <head>
-<title>ACU Times | Search</title>
-<meta charset="iso-8859-1">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="layout/styles/layout.css" type="text/css" media="all">
-<link rel="stylesheet" href="layout/styles/mediaqueries.css" type="text/css" media="all">
-<script src="layout/scripts/jquery.min.js"></script>
-<script src="layout/scripts/jquery-mobilemenu.min.js"></script>
-<script src="bootstrap/js/bootstrap.min.js"></script>
-<style>
-#SNAV { display: none; }
-</style>
+<title>ACU Times | Title</title>
+<?php require_once("Header.php");?>
 </head>
 <body>
-<?php include ("Header.php");?>
+<?php include ("Navbar.php");?>
 <!-- content -->
 
-<div class="wrapper row3">
-	<div id="container"> 
-		
-		<!-- ################################################################################################ -->
-		
-		<div id="advSearchBarDiv" class="pad">
-			<form action="Search.php" method="get">
-				<fieldset>
-					<div style="width:100%">
-						<div style="height:35px; width:100% ;border:1px solid #686868;border-radius:3px; margin:0; position:relative;">
-							<input id="advSearch" name="advSearch" type="text" value="Search Our Website&hellip;" class="MySearchBar" onFocus="this.value=(this.value=='Search Our Website&hellip;')? '' : this.value ;" autocomplete="off">
-							<input type="submit" value="&#xf002;" class="  MySearchButton" >
-							<input type="button" value="&#9660;" class="MyadvSearchButton" onClick="AdvSR()" >
-						</div>
-						<div class="clear"></div>
-						<div id="AdvSearchBox" class="AdvSearchBox" >
-							<div class="AdvSearchLine"><br>
-								<label class="MyLable" style="border-color:#686868;">Category:</label>
-								<br>
+<div class="container">
+	<!-------------------------------- advSearch -------------------------------->
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<form class="input-group" id="adv-search" role="form" action="Search.php" method="get">
+					<input id="advSearch" name="advSearch" type="text" class="form-control" placeholder="Search our website" />
+					<div class="input-group-btn">
+						<div class="btn-group" role="group">
+							<div class="dropdown dropdown-lg">
+								<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></button>
+								<div class="dropdown-menu dropdown-menu-right" role="menu">
+									<div class="form-horizontal">
+										<div class="form-group">
+											<label for="advCategory">Category</label>
+											<select class="form-control" id="advCategory" name="advCategory">
+												<option value="" selected>All</option>
+												<optgroup label="News">
+												<option value="">World News</option>
+												<option value="">ACU College News</option>
+												</optgroup>
+												<optgroup label="Art">
+												<option value="">Cinema</option>
+												<option value="">Drama</option>
+												<option value="">Theater</option>
+												</optgroup>
+												<optgroup label="Sport">
+												<option value="">Local Footaball</option>
+												<option value="">International Football</option>
+												<option value="">Other</option>
+												</optgroup>
+												<option value="">Interviews</option>
+												<option value="">Tech &amp; Science</option>
+												<option value="">Economy</option>
+												<option value="">Multimedia</option>
+												<option value="">Gallery</option>
+											</select>
+										</div>
+										<div class="form-group">
+											<label for="Date">Date</label>
+											<select class="form-control" id="advDate" name="advDate">
+												<option value="0" selected>Any</option>
+												<option value="7">past week</option>
+												<option value="31">past month</option>
+												<option value="365">past year</option>
+											</select>
+										</div>
+										<div class="form-group">
+											<label for="contain">Author</label>
+											<input class="form-control" type="text" id="advAuthor" name="advAuthor"/>
+										</div>
+										<button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+									</div>
+								</div>
 							</div>
-							<div class="AdvSearchLine">
-								<select id="advCategory" name="advCategory" class="MyImput">
-									<option selected>All</option>
-									<optgroup label="News">
-									<option>World News</option>
-									<option>ACU College News</option>
-									</optgroup>
-									<optgroup label="Art">
-									<option>Cinema</option>
-									<option>Drama</option>
-									<option>Theater</option>
-									</optgroup>
-									<optgroup label="Sport">
-									<option>Local Footaball</option>
-									<option>International Football</option>
-									<option>Other</option>
-									</optgroup>
-									<option>Interviews</option>
-									<option>Tech &amp; Science</option>
-									<option>Economy</option>
-									<option>Multimedia</option>
-									<option>Gallery</option>
-								</select>
-								<br>
-							</div>
-							<div class="AdvSearchLine"><br>
-								<label class="MyLable">Author :</label>
-								<br>
-							</div>
-							<div class="AdvSearchLine">
-								<input type="text" value="" class="MyImput">
-							</div>
-							<div class="clear"><br>
-							</div>
+							<button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
 						</div>
 					</div>
-				</fieldset>
-			</form>
-			<div class="clear"><br>
-				<br>
+				</form>
 			</div>
 		</div>
-		
-		<!-- ################################################################################################ --> 
-		<!-- content body -->
-		
-		<section id="portfolio" class="clear">
-			<ul>
-				<li class="first">
-					<article>
-						<figure><img src="images/demo/440x190.gif" alt="">
-							<figcaption>
-								<header>Metridiculis conseque quis</header>
-								<p>Orciinterdum condimenterdum nullamcorper elit nam curabitur laoreet met praesenean et iaculum. Metridiculis conseque quis iaculum aenean nunc aenean quis nam nis dui.</p>
-								<footer><a href="#">Read more &raquo;</a></footer>
-							</figcaption>
-						</figure>
-					</article>
-				</li>
-				<li>
-					<article>
-						<figure><img src="images/demo/440x190.gif" alt="">
-							<figcaption>
-								<header>Metridiculis conseque quis</header>
-								<p>Orciinterdum condimenterdum nullamcorper elit nam curabitur laoreet met praesenean et iaculum. Metridiculis conseque quis iaculum aenean nunc aenean quis nam nis dui.</p>
-								<footer><a href="#">Read more &raquo;</a></footer>
-							</figcaption>
-						</figure>
-					</article>
-				</li>
-				<li class="first">
-					<article>
-						<figure><img src="images/demo/440x190.gif" alt="">
-							<figcaption>
-								<header>Metridiculis conseque quis</header>
-								<p>Orciinterdum condimenterdum nullamcorper elit nam curabitur laoreet met praesenean et iaculum. Metridiculis conseque quis iaculum aenean nunc aenean quis nam nis dui.</p>
-								<footer><a href="#">Read more &raquo;</a></footer>
-							</figcaption>
-						</figure>
-					</article>
-				</li>
-				<li>
-					<article>
-						<figure><img src="images/demo/440x190.gif" alt="">
-							<figcaption>
-								<header>Metridiculis conseque quis</header>
-								<p>Orciinterdum condimenterdum nullamcorper elit nam curabitur laoreet met praesenean et iaculum. Metridiculis conseque quis iaculum aenean nunc aenean quis nam nis dui.</p>
-								<footer><a href="#">Read more &raquo;</a></footer>
-							</figcaption>
-						</figure>
-					</article>
-				</li>
-				<li class="first">
-					<article>
-						<figure><img src="images/demo/440x190.gif" alt="">
-							<figcaption>
-								<header>Metridiculis conseque quis</header>
-								<p>Orciinterdum condimenterdum nullamcorper elit nam curabitur laoreet met praesenean et iaculum. Metridiculis conseque quis iaculum aenean nunc aenean quis nam nis dui.</p>
-								<footer><a href="#">Read more &raquo;</a></footer>
-							</figcaption>
-						</figure>
-					</article>
-				</li>
-				<li>
-					<article>
-						<figure><img src="images/demo/440x190.gif" alt="">
-							<figcaption>
-								<header>Metridiculis conseque quis</header>
-								<p>Orciinterdum condimenterdum nullamcorper elit nam curabitur laoreet met praesenean et iaculum. Metridiculis conseque quis iaculum aenean nunc aenean quis nam nis dui.</p>
-								<footer><a href="#">Read more &raquo;</a></footer>
-							</figcaption>
-						</figure>
-					</article>
-				</li>
-				<li class="first">
-					<article>
-						<figure><img src="images/demo/440x190.gif" alt="">
-							<figcaption>
-								<header>Metridiculis conseque quis</header>
-								<p>Orciinterdum condimenterdum nullamcorper elit nam curabitur laoreet met praesenean et iaculum. Metridiculis conseque quis iaculum aenean nunc aenean quis nam nis dui.</p>
-								<footer><a href="#">Read more &raquo;</a></footer>
-							</figcaption>
-						</figure>
-					</article>
-				</li>
-				<li>
-					<article>
-						<figure><img src="images/demo/440x190.gif" alt="">
-							<figcaption>
-								<header>Metridiculis conseque quis</header>
-								<p>Orciinterdum condimenterdum nullamcorper elit nam curabitur laoreet met praesenean et iaculum. Metridiculis conseque quis iaculum aenean nunc aenean quis nam nis dui.</p>
-								<footer><a href="#">Read more &raquo;</a></footer>
-							</figcaption>
-						</figure>
-					</article>
-				</li>
-			</ul>
-		</section>
-		<!-- ####################################################################################################### --> 
-		<!-- ####################################################################################################### -->
-		<div class="pagination">
-			<ul>
-				<li class="prev"><a href="#">&laquo; Previous</a></li>
-				<li><a href="#">1</a></li>
-				<li><a href="#">2</a></li>
-				<li class="splitter"><strong>&hellip;</strong></li>
-				<li><a href="#">6</a></li>
-				<li class="current"><strong>7</strong></li>
-				<li><a href="#">8</a></li>
-				<li class="splitter"><strong>&hellip;</strong></li>
-				<li><a href="#">14</a></li>
-				<li><a href="#">15</a></li>
-				<li class="next"><a href="#">Next &raquo;</a></li>
-			</ul>
-		</div>
-		<!-- / content body --> 
-		<!-- ################################################################################################ -->
-		<div class="clear"></div>
 	</div>
-	<!-- ################################################################################################ --> 
+	<!-------------------------------- Articles -------------------------------->
+	<div class="container">
+		<hr>
+		<div class="row">
+			<div class="col-md-3"> <a href="#"> <img class="img-responsive" src="http://placehold.it/700x400" alt=""> </a> </div>
+			<div class="col-md-9">
+				<h5 class="pull-right">03/03/2016</h5>
+				<h3>Project Two</h3>
+				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, odit velit cumque vero doloremque repellendus distinctio maiores rem expedita a nam vitae modi quidem similique ducimus! Velit, esse totam tempore.</p>
+				<a class="btn btn-primary pull-right" href="#">Read more <span class="glyphicon glyphicon-chevron-right"></span></a> </div>
+		</div>
+		<hr>
+		<div class="row">
+			<div class="col-md-3"> <a href="#"> <img class="img-responsive" src="http://placehold.it/700x400" alt=""> </a> </div>
+			<div class="col-md-9">
+				<h5 class="pull-right">03/03/2016</h5>
+				<h3>Project Two</h3>
+				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, odit velit cumque vero doloremque repellendus distinctio maiores rem expedita a nam vitae modi quidem similique ducimus! Velit, esse totam tempore.</p>
+				<a class="btn btn-primary pull-right" href="#">Read more <span class="glyphicon glyphicon-chevron-right"></span></a> </div>
+		</div>
+		<hr>
+		<div class="row">
+			<div class="col-md-3"> <a href="#"> <img class="img-responsive" src="http://placehold.it/700x400" alt=""> </a> </div>
+			<div class="col-md-9">
+				<h5 class="pull-right">03/03/2016</h5>
+				<h3>Project Two</h3>
+				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, odit velit cumque vero doloremque repellendus distinctio maiores rem expedita a nam vitae modi quidem similique ducimus! Velit, esse totam tempore.</p>
+				<a class="btn btn-primary pull-right" href="#">Read more <span class="glyphicon glyphicon-chevron-right"></span></a> </div>
+		</div>
+		<hr>
+		<div class="row">
+			<div class="col-md-3"> <a href="#"> <img class="img-responsive" src="http://placehold.it/700x400" alt=""> </a> </div>
+			<div class="col-md-9">
+				<h5 class="pull-right">03/03/2016</h5>
+				<h3>Project Two</h3>
+				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, odit velit cumque vero doloremque repellendus distinctio maiores rem expedita a nam vitae modi quidem similique ducimus! Velit, esse totam tempore.</p>
+				<a class="btn btn-primary pull-right" href="#">Read more <span class="glyphicon glyphicon-chevron-right"></span></a> </div>
+		</div>
+		<hr>
+		<div class="row">
+			<div class="col-md-3"> <a href="#"> <img class="img-responsive" src="http://placehold.it/700x400" alt=""> </a> </div>
+			<div class="col-md-9">
+				<h5 class="pull-right">03/03/2016</h5>
+				<h3>Project Two</h3>
+				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, odit velit cumque vero doloremque repellendus distinctio maiores rem expedita a nam vitae modi quidem similique ducimus! Velit, esse totam tempore.</p>
+				<a class="btn btn-primary pull-right" href="#">Read more <span class="glyphicon glyphicon-chevron-right"></span></a> </div>
+		</div>
+		<hr>
+		<div class="row">
+			<div class="col-md-3"> <a href="#"> <img class="img-responsive" src="http://placehold.it/700x400" alt=""> </a> </div>
+			<div class="col-md-9">
+				<h5 class="pull-right">03/03/2016</h5>
+				<h3>Project Two</h3>
+				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, odit velit cumque vero doloremque repellendus distinctio maiores rem expedita a nam vitae modi quidem similique ducimus! Velit, esse totam tempore.</p>
+				<a class="btn btn-primary pull-right" href="#">Read more <span class="glyphicon glyphicon-chevron-right"></span></a> </div>
+		</div>
+		<hr>
+		<div class="row">
+			<div class="col-md-3"> <a href="#"> <img class="img-responsive" src="http://placehold.it/700x400" alt=""> </a> </div>
+			<div class="col-md-9">
+				<h5 class="pull-right">03/03/2016</h5>
+				<h3>Project Two</h3>
+				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, odit velit cumque vero doloremque repellendus distinctio maiores rem expedita a nam vitae modi quidem similique ducimus! Velit, esse totam tempore.</p>
+				<a class="btn btn-primary pull-right" href="#">Read more <span class="glyphicon glyphicon-chevron-right"></span></a> </div>
+		</div>
+		<hr>
+		<div class="row">
+			<div class="col-md-3"> <a href="#"> <img class="img-responsive" src="http://placehold.it/700x400" alt=""> </a> </div>
+			<div class="col-md-9">
+				<h5 class="pull-right">03/03/2016</h5>
+				<h3>Project Two</h3>
+				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, odit velit cumque vero doloremque repellendus distinctio maiores rem expedita a nam vitae modi quidem similique ducimus! Velit, esse totam tempore.</p>
+				<a class="btn btn-primary pull-right" href="#">Read more <span class="glyphicon glyphicon-chevron-right"></span></a> </div>
+		</div>
+		<hr>
+	</div>
+	<!-------------------------------- pagination -------------------------------->
+	<div class="text-center center-block">
+		<ul class = "pagination">
+			<li><a href = "#">&laquo;</a></li>
+			<li><a href = "?Page=1">1</a></li>
+			<li><a href = "#">&raquo;</a></li>
+		</ul>
+	</div>
+	<div class="clear"></div>
 </div>
-</div>
-<?php include ("Footer.html");?>
-<script type="text/javascript">
-	document.getElementById("AdvSearchBox").style.display="none";
-	function AdvSR( ) 
-	{
-		if(document.getElementById("AdvSearchBox").style.display == "none")
-		{
-			document.getElementById("AdvSearchBox").style.display = "block";
-		}
-		else
-		{
-			document.getElementById("AdvSearchBox").style.display = "none";
-		}
-	}
-</script>
+<?php include ("Footer.php");?>
 </body>
 </html>

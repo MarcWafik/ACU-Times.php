@@ -1,56 +1,49 @@
 <!DOCTYPE html>
-
-<html>
+<html lang="en">
 <head>
-<title>Edit profile</title>
-<meta charset="iso-8859-1">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="layout/styles/layout.css" type="text/css" media="all">
-<link rel="stylesheet" href="layout/styles/mediaqueries.css" type="text/css" media="all">
-<script src="layout/scripts/jquery.min.js"></script>
-<script src="layout/scripts/jquery-mobilemenu.min.js"></script>
+<title>ACU Times | Title</title>
+<?php require_once("Header.php");?>
+<script src="layout/js/Validate.js"></script>
 </head>
 <body>
-<?php include ("Header.php");?>
+<?php include ("Navbar.php");?>
 <!-------------------------------------------------------------------------- content -------------------------------------------------------------------------->
-<div class="wrapper row3">
-	<div class="clear"><br>
-		<br>
-	</div>
-	<div style="margin: 0 auto; width: 340px;text-align:left;"> <br>
-		<form action="#" method="post">
-				<div class="MyContainer">
-				<label for="Password">Old password :</label>
-				<br>
-				<input type="password" name="OldPassword" id="OldPassword" value="" class="MyInput" onBlur="valPassword()" required>
-				<small>
-				<div id="Validate_OldPassword" name = "Validate_OldPassword" class="MyAlret"></div>
-				</small> </div>
-			<div class="MyContainer">
-				<label for="NewPassword">New password :</label>
-				<br>
-				<input type="password" name="NewPassword" id="NewPassword" value="" class="MyInput" onBlur="valPassword()" required>
-				<small>
-				<div id="Validate_NewPassword" name = "Validate_NewPassword" class="MyAlret"></div>
-				</small> </div>
-			<div class="MyContainer">
-				<label for="RePassword">Reenter password :</label>
-				<br>
-				<input type="password" name="RePassword" id="RePassword" value="" class="MyInput" onBlur="valRePassword()" required>
-				<small>
-				<div id="Validate_RePassword" name = "Validate_RePassword" class="MyAlret"></div>
-				</small> </div>
-			<div  class="MyContainer" style="text-align:center">
-				<div class="center">
-					<input class="Mysubmit" style="border-radius:5px" name="submit" type="submit" id="submit" value="Change PW">
-				</div>
-			</div>
-		</form>
-		<div class="clear"><br>
-			<br>
+
+
+<div class="container">
+	<h3>
+		<ul class="nav nav-pills">
+			<li role="presentation"><a href="Profile.php">Profile</a></li>
+			<li role="presentation"><a href="EditProfile.php">Change personal info</a></li>
+			<li role="presentation" class="active"><a>Change Password</a></li>
+		</ul>
+	</h3>
+	<br>
+	<form role="form" action="ChangePW.php" method="post">
+		<!-- #################################################################### Old Password #################################################################### -->
+		<div class="form-group">
+			<label for="Password">Old password :</label>
+			<input type="password" name="OldPassword" id="OldPassword" value="" class="form-control" required>
+			<div id="Validate_Password" name = "Validate_OldPassword" class="MyAlret"></div>
 		</div>
-	</div>
+		<!-- #################################################################### Password #################################################################### -->
+		<div class="form-group">
+			<label for="Password">New password :</label>
+			<input type="password" name="Password" id="Password" value="" class="form-control" onBlur="valPassword(this,Validate_Password)" required>
+			<div id="Validate_Password" name = "Validate_Password" class="MyAlret"></div>
+		</div>
+		<!-- #################################################################### RePassword #################################################################### -->
+		<div class="form-group">
+			<label for="RePassword">Reenter password :</label>
+			<input type="password" name="RePassword" id="RePassword" value="" class="form-control" onBlur="valRePassword(this,Validate_RePassword,Password)" required>
+			<div id="Validate_RePassword" name = "Validate_RePassword" class="MyAlret"></div>
+		</div>
+		<!-- #################################################################### Submit #################################################################### -->
+			<button type="submit" class="btn btn-primary pull-right">Change Password</button>
+		</div>
+		<!-- ####################################################################  #################################################################### -->
+	</form>
 </div>
-<?php include ("Footer.html");?>
+<?php include ("Footer.php");?>
 </body>
 </html>

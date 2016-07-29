@@ -1,207 +1,131 @@
 <!DOCTYPE html>
-
-<html>
+<html lang="en">
 <head>
 <title>ACU Times | Home</title>
-<meta charset="iso-8859-1">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="layout/styles/layout.css" type="text/css" media="all">
-<link rel="stylesheet" href="layout/styles/mediaqueries.css" type="text/css" media="all">
-<script src="layout/scripts/jquery.min.js"></script>
-<script src="layout/scripts/jquery-mobilemenu.min.js"></script>
-<!-- slider -->
-<link rel="stylesheet" href="layout/scripts/flexslider/flexslider.css" type="text/css" media="all">
-<script src="layout/scripts/flexslider/jquery-flexslider.min.js"></script>
-<!-- / slider -->
-
+<?php require_once("Header.php");?>
 </head>
 <body>
-<?php include ("Header.php");?>
-<!-- content -->
-<div class="wrapper row3">
-	<div id="container"> 
-		<!-- ################################################################################################ -->
-		<div class="pad"> 
-			<!-- ################################################################################################ --> 
-			<!-- Slider -->
-			<div id="featured_slide">
-				<section class="flexslider">
-					<ul class="slides">
-						<li>
-							<figure><a href="#"><img src="images/demo/960x360.gif" alt=""></a>
-								<figcaption class="flex-caption">
-									<h2>Slide 1 Caption</h2>
-									<p>Dapiensociis temper donec auctortortis cumsan et curabitur condis lorem loborttis leo.</p>
-									<footer class="more"><a href="#">Read More Here &raquo;</a></footer>
-								</figcaption>
-							</figure>
-						</li>
-						<li>
-							<figure><a href="#"><img src="images/demo/960x360.gif" alt=""></a>
-								<figcaption class="flex-caption">
-									<h2>Slide 2 Caption</h2>
-									<p>Dapiensociis temper donec auctortortis cumsan et curabitur condis lorem loborttis leo.</p>
-									<footer class="more"><a href="#">Read More Here &raquo;</a></footer>
-								</figcaption>
-							</figure>
-						</li>
-						<li class="last">
-							<figure><a href="#"><img src="images/demo/960x360.gif" alt=""></a>
-								<figcaption class="flex-caption">
-									<h2>Slide 3 Caption</h2>
-									<p>Dapiensociis temper donec auctortortis cumsan et curabitur condis lorem loborttis leo.</p>
-									<footer class="more"><a href="#">Read More Here &raquo;</a></footer>
-								</figcaption>
-							</figure>
-						</li>
-					</ul>
-				</section>
-			</div>
-			<!-- main content -->
-			<div id="homepage"> 
-				<!-- Introduction -->
-				<section id="intro" class="clear">
-					<div>
-						<article class="one_fifth first"><a href="#"><img src="images/demo/166x130.gif" alt=""></a>
-							<h2>Indonectetus facilis</h2>
-							<p>Nullamlacus dui ipsum consequ?e loborttis non euisque morbi penas dapibulum orna.</p>
-							<footer class="more"><a href="#">Read More &raquo;</a></footer>
-						</article>
-						<article class="one_fifth"><a href="#"><img src="images/demo/166x130.gif" alt=""></a>
-							<h2>Indonectetus facilis</h2>
-							<p>Nullamlacus dui ipsum conseque loborttis non euisque morbi penas dapibulum orna.</p>
-							<footer class="more"><a href="#">Read More &raquo;</a></footer>
-						</article>
-						<article class="one_fifth"><a href="#"><img src="images/demo/166x130.gif" alt=""></a>
-							<h2>Indonectetus facilis</h2>
-							<p>Nullamlacus dui ipsum conseque loborttis non euisque morbi penas dapibulum orna.</p>
-							<footer class="more"><a href="#">Read More &raquo;</a></footer>
-						</article>
-						<article class="one_fifth"><a href="#"><img src="images/demo/166x130.gif" alt=""></a>
-							<h2>Indonectetus facilis</h2>
-							<p>Nullamlacus dui ipsum conseque loborttis non euisque morbi penas dapibulum orna.</p>
-							<footer class="more"><a href="#">Read More &raquo;</a></footer>
-						</article>
-						<article class="one_fifth last"><a href="#"><img src="images/demo/166x130.gif" alt=""></a>
-							<h2>Indonectetus facilis</h2>
-							<p>Nullamlacus dui ipsum conseque loborttis non euisque morbi penas dapibulum orna.</p>
-							<footer class="more"><a href="#">Read More &raquo;</a></footer>
-						</article>
-					</div>
-					<div>
-						<article class="one_fifth first"><a href="#"><img src="images/demo/166x130.gif" alt=""></a>
-							<h2>Indonectetus facilis</h2>
-							<p>Nullamlacus dui ipsum conseque loborttis non euisque morbi penas dapibulum orna.</p>
-							<footer class="more"><a href="#">Read More &raquo;</a></footer>
-						</article>
-						<article class="one_fifth"><a href="#"><img src="images/demo/166x130.gif" alt=""></a>
-							<h2>Indonectetus facilis</h2>
-							<p>Nullamlacus dui ipsum conseque loborttis non euisque morbi penas dapibulum orna.</p>
-							<footer class="more"><a href="#">Read More &raquo;</a></footer>
-						</article>
-						<article class="one_fifth"><a href="#"><img src="images/demo/166x130.gif" alt=""></a>
-							<h2>Indonectetus facilis</h2>
-							<p>Nullamlacus dui ipsum conseque loborttis non euisque morbi penas dapibulum orna.</p>
-							<footer class="more"><a href="#">Read More &raquo;</a></footer>
-						</article>
-						<article class="one_fifth"><a href="#"><img src="images/demo/166x130.gif" alt=""></a>
-							<h2>Indonectetus facilis</h2>
-							<p>Nullamlacus dui ipsum conseque loborttis non euisque morbi penas dapibulum orna.</p>
-							<footer class="more"><a href="#">Read More &raquo;</a></footer>
-						</article>
-						<article class="one_fifth last"><a href="#"><img src="images/demo/166x130.gif" alt=""></a>
-							<h2>Indonectetus facilis</h2>
-							<p>Nullamlacus dui ipsum conseque loborttis non euisque morbi penas dapibulum orna.</p>
-							<footer class="more"><a href="#">Read More &raquo;</a></footer>
-						</article>
-					</div>
-				</section>
-				<!-- / Introduction --> 
-				<!-- ########################################################################################## --> 
-				<!-- Services -->
-				<section id="services" class="last clear">
-					<article class="one_third first">
-						<figure class="clear"><img src="images/demo/48x48.gif" alt="">
-							<figcaption>
-								<h2>Indonectetus facilis</h2>
-								<p>Proin quam etiam ultrices suspen disse in justo eu magna.</p>
-							</figcaption>
-						</figure>
-					</article>
-					<article class="one_third">
-						<figure class="clear"><img src="images/demo/48x48.gif" alt="">
-							<figcaption>
-								<h2>Indonectetus facilis</h2>
-								<p>Proin quam etiam ultrices suspen disse in justo eu magna.</p>
-							</figcaption>
-						</figure>
-					</article>
-					<article class="one_third">
-						<figure class="clear"><img src="images/demo/48x48.gif" alt="">
-							<figcaption>
-								<h2>Indonectetus facilis</h2>
-								<p>Proin quam etiam ultrices suspen disse in justo eu magna.</p>
-							</figcaption>
-						</figure>
-					</article>
-					<article class="one_third first">
-						<figure class="clear"><img src="images/demo/48x48.gif" alt="">
-							<figcaption>
-								<h2>Indonectetus facilis</h2>
-								<p>Proin quam etiam ultrices suspen disse in justo eu magna.</p>
-							</figcaption>
-						</figure>
-					</article>
-					<article class="one_third">
-						<figure class="clear"><img src="images/demo/48x48.gif" alt="">
-							<figcaption>
-								<h2>Indonectetus facilis</h2>
-								<p>Proin quam etiam ultrices suspen disse in justo eu magna.</p>
-							</figcaption>
-						</figure>
-					</article>
-					<article class="one_third last">
-						<figure class="clear"><img src="images/demo/48x48.gif" alt="">
-							<figcaption>
-								<h2>Indonectetus facilis</h2>
-								<p>Proin quam etiam ultrices suspen disse in justo eu magna.</p>
-							</figcaption>
-						</figure>
-					</article>
-					<article class="one_third first">
-						<figure class="clear"><img src="images/demo/48x48.gif" alt="">
-							<figcaption>
-								<h2>Indonectetus facilis</h2>
-								<p>Proin quam etiam ultrices suspen disse in justo eu magna.</p>
-							</figcaption>
-						</figure>
-					</article>
-					<article class="one_third">
-						<figure class="clear"><img src="images/demo/48x48.gif" alt="">
-							<figcaption>
-								<h2>Indonectetus facilis</h2>
-								<p>Proin quam etiam ultrices suspen disse in justo eu magna.</p>
-							</figcaption>
-						</figure>
-					</article>
-					<article class="one_third last">
-						<figure class="clear"><img src="images/demo/48x48.gif" alt="">
-							<figcaption>
-								<h2>Indonectetus facilis</h2>
-								<p>Proin quam etiam ultrices suspen disse in justo eu magna.</p>
-							</figcaption>
-						</figure>
-					</article>
-				</section>
-				<!-- / Services --> 
-			</div>
-			<!-- ################################################################################################ -->
-			<div class="clear"></div>
-		</div>
-		<!-- ################################################################################################ --> 
-	</div>
+<?php include ("Navbar.php");?>
+<div class="container">
+	<!-------------------------------- Slider -------------------------------->
+
+<div style="height:410px">
+<div id="myCarousel" class="carousel slide" data-ride="carousel">
+  <!-- Indicators -->
+  <ol class="carousel-indicators">
+    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+    <li data-target="#myCarousel" data-slide-to="1"></li>
+    <li data-target="#myCarousel" data-slide-to="2"></li>
+    <li data-target="#myCarousel" data-slide-to="3"></li>
+  </ol>
+
+  <!-- Wrapper for slides -->
+  <div class="carousel-inner" role="listbox">
+    <div class="item active">
+      <img class="Slider-IMG" src="http://placehold.it/900x500" alt="Flower" style="width:100%">
+      <div class="carousel-caption">
+        <h3>Flowers</h3>
+        <p>Beatiful flowers in Kolymbari, Crete.</p>
+      </div>
+    </div>
+    <div class="item">
+      <img class="Slider-IMG" src="http://placehold.it/900x500" alt="Flower" style="width:100%">
+      <div class="carousel-caption">
+        <h3>Flowers</h3>
+        <p>Beatiful flowers in Kolymbari, Crete.</p>
+      </div>
+    </div>
+    <div class="item">
+      <img class="Slider-IMG" src="http://placehold.it/900x500" alt="Flower" style="width:100%">
+      <div class="carousel-caption">
+        <h3>Flowers</h3>
+        <p>Beatiful flowers in Kolymbari, Crete.</p>
+      </div>
+    </div>
+    <div class="item">
+      <img class="Slider-IMG" src="http://placehold.it/900x500" alt="Flower" style="width:100%">
+      <div class="carousel-caption">
+        <h3>Flowers</h3>
+        <p>Beatiful flowers in Kolymbari, Crete.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Left and right controls -->
+  <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev" style="background:transparent">
+    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next" style="background:transparent">
+    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
 </div>
-<!-- Footer -->
-<?php include ("Footer.html");?>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ <!-- Page Heading/Breadcrumbs -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h2 class="page-header">Three Column Portfolio</h2>
+            </div>
+        </div>
+        <!-- /.row -->
+		
+        <!-- Projects Row -->
+        <div class="row">
+            <div class="col-md-4 img-portfolio">
+                <a href="portfolio-item.html">
+                    <img class="img-responsive img-hover" src="http://placehold.it/700x400" alt="">
+                </a>
+                <h3>
+                    <a href="portfolio-item.html">Project Name</a>
+                </h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
+				<a class="btn btn-primary pull-right" href="#">Read more <span class="glyphicon glyphicon-chevron-right"></span></a>
+            </div>
+            <div class="col-md-4 img-portfolio">
+                <a href="portfolio-item.html">
+                    <img class="img-responsive img-hover" src="http://placehold.it/700x400" alt="">
+                </a>
+                <h3>
+                    <a href="portfolio-item.html">Project Name</a>
+                </h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
+				<a class="btn btn-primary pull-right" href="#">Read more <span class="glyphicon glyphicon-chevron-right"></span></a>
+            </div>
+            <div class="col-md-4 img-portfolio">
+                <a href="portfolio-item.html">
+                    <img class="img-responsive img-hover" src="http://placehold.it/700x400" alt="">
+                </a>
+                <h3>
+                    <a href="portfolio-item.html">Project Name</a>
+                </h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
+				<a class="btn btn-primary pull-right" href="#">Read more <span class="glyphicon glyphicon-chevron-right"></span></a>
+            </div>
+        </div>
+
+
+
+
+
+
+
+</div>
+<?php include ("Footer.php");?>
 </body>
 </html>
