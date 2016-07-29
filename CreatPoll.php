@@ -1,29 +1,4 @@
-<?php
-require_once("ControlSession.php");
-require_once("ControlFunctions.php");
-Check_Login();
-
-if(ValContent()){
-    if(ValAllIsCorrect()){
-		$FileLoc = "Data\Vote\question.file.txt";
-		global $FileLoc;
-		$data="";
-		$myfile = fopen($FileLoc, "a") or die("Unable to open file!");
-		$data=$_POST["question"]."~#*$%#".$_POST["choice1"]."~#*$%#".$_POST["choice2"]."\r\n";
-		fwrite($myfile,$data);
-		fclose($myfile);
-		header("Location: SubmitQuestion.php");
-    } 
-}
-
-function ValAllIsCorrect(){
-     return   valTitle($_POST["question"])&&  valTitle($_POST["choice1"])&& valTitle($_POST["choice2"]) ; 
-}
-
-function ValContent(){
-    return isset($_POST["question"])&&isset($_POST["choice1"])&&isset($_POST["choice2"]);
-}
-?>
+<?php require_once 'autoload.php';?>
 <!DOCTYPE html>
 <html>
 <html lang="en">
@@ -36,13 +11,13 @@ function ValContent(){
 <div class="container">
 	<h3>
 		<ul class="nav nav-pills">
-			<li role="presentation" ><a href="WriteArticle.php">Write Article</a></li>
+			<li role="presentation" ><a href="CreatArticle.php">Write Article</a></li>
 			<li role="presentation" class="active"><a>Creat Poll</a></li>
 			<li role="presentation"><a href="#">Multimedia</a></li>
 		</ul>
 	</h3>
 	<br>
-	<form class="form-horizontal" role="form" method="post" action="Poll.php">
+	<form class="form-horizontal" role="form" method="post" action="CreatPoll.php">
 	
 		<div class="form-group">
 			<label class="control-label col-sm-2" for="question">Quetion :</label>

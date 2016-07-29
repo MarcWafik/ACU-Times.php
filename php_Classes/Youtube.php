@@ -11,17 +11,22 @@
  *
  * @author marcw
  */
-class Youtube implements iCRUD {
+class Youtube extends EntityArticle implements iCRUD {
 
 	protected $youtubeID;
+	protected $descriptionEnglish;
+	protected $descriptionArabic;
+
+	public function init() {
+		parent::init();
+		$this->youtubeID = "";
+		$this->descriptionEnglish = "";
+		$this->descriptionArabic = "";
+	}
 
 //==================================================CRUD===================================================
 
-	public function creat() {
-		
-	}
-
-	public function delete() {
+	public function create() {
 		
 	}
 
@@ -29,11 +34,15 @@ class Youtube implements iCRUD {
 		
 	}
 
-	public function search($in) {
+	public function update() {
 		
 	}
 
-	public function update() {
+	public function delete() {
+		
+	}
+
+	public function search($imput) {
 		
 	}
 
@@ -46,11 +55,37 @@ class Youtube implements iCRUD {
 		return FALSE;
 	}
 
+	public function setDescriptionEnglish($description) {
+		if (Validation::isStringMinMaxLenth($description, 0, 256)) {
+			$this->descriptionEnglish = htmlspecialchars($description);
+			return TRUE;
+		}
+		return FALSE;
+	}
+
+	public function setDescriptionArabic($description) {
+		if (Validation::isStringMinMaxLenth($description, 0, 256)) {
+			$this->descriptionArabic = htmlspecialchars($description);
+			return TRUE;
+		}
+		return FALSE;
+	}
+
 //===================================================GET===================================================
 	public function getyoutubeID() {
 		return $this->youtubeID;
 	}
+
+	public function getDescriptionEnglish() {
+		return $this->descriptionEnglish;
+	}
+
+	public function getDescriptionArabic() {
+		return $this->descriptionArabic;
+	}
+
 	static function ExtractYoutubeID($url) {
+		$ID_youtube = array();
 		parse_str(parse_url($url, PHP_URL_QUERY), $ID_youtube);
 		return $ID_youtube['v'];
 	}

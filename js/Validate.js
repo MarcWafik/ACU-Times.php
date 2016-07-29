@@ -94,6 +94,4 @@ function valBirthday(Month , Year , Day , Warnning) {
 		option.value = j;
 		x.add(option);
 	}
-	//Warnning.innerHTML = Day.value+"/"+Month.value+"/"+Year+ " is not a valid date";
-	//Warnning.innerHTML = "";
 }

@@ -50,7 +50,7 @@ function printUser( $ID , $name , $ImgPath , $Status ){
 <div class="container"> 
 	<!-------------------------------- Search -------------------------------->
 	<div class="col-md-6 col-md-offset-3">
-		<form action="MangeUsers.php" method="get">
+		<form action="Members.php" method="get">
 			<div class="input-group">
 				<input type="text" class="form-control" placeholder="Search for..." id="Search" name="Search">
 				<span class="input-group-btn">

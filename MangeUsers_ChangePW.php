@@ -1,45 +1,4 @@
-<?php
-require_once("ControlUsers.php");
-require_once("ControlSession.php");
-require_once("ControlFunctions.php");
-Check_Login();
-Check_Admin();
-if(!isset($_GET["ID"]) || NULL == $_GET["ID"]){
-		header("Location: 404.php");
-}
-
-$Passed = FALSE ;
-$user = LoadUser($_GET["ID"]);
-$iscorrect = Array();
-
-if(!isset($user) || NULL == $user){
-		header("Location: 404.php");
-}
-
-if(NULL != $user && valAllNotnull()){
-	$iscorrect = valArrIscorrect();
-	if(valAll($iscorrect)){
-		$user["Password"]=Encrypt_And_Hash($_POST["Password"]);	
-		UpdateUser($user);
-		$Passed = TRUE ;
-	}
-}
-//=========================================validate=========================================
-function valAll($iscorrect) {
-foreach ($iscorrect as $key => $value){
-	if(FALSE == $value){
-		return FALSE;	
-		}
-	}
-	return TRUE;
-}
-function valArrIscorrect() {
-	return Array( "Password"=>valPassword($_POST["Password"]) , "RePassword"=>valRePassword($_POST["RePassword"] , $_POST["Password"]));
-}
-function valAllNotnull() {
-	return isset($_POST["Password"]) && isset($_POST["RePassword"]);
-}
-?>
+<?php require_once 'autoload.php';?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -79,7 +38,7 @@ echo '<div class="alert alert-info alert-dismissable"> <a class="panel-close clo
 	</div>
 	<!-- #################################################################### Submit #################################################################### -->
 	<div class="form-group pull-right">
-		<a class="btn btn-default" href="MangeUsers.php">Go back</a>
+		<a class="btn btn-default" href="Members.php">Go back</a>
 		<span></span>
 		<input class="btn btn-primary" value="Change Password" type="submit">
 	</div>

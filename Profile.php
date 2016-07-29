@@ -1,17 +1,4 @@
-<?php require_once ("ControlUsers.php");?>
-<?php require_once ("ControlSession.php");?>
-<?php
-Check_Login();
-if(isset($_GET["ID"])){
-	$user = LoadUser($_GET["ID"]);
-	if($user==NULL){
-		header("Location: 404.php");
-		exit();
-	}
-}else{
-$user = $_SESSION['user'];
-}
-?>
+<?php require_once 'autoload.php';?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

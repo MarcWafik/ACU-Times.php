@@ -1,5 +1,4 @@
-<?php require_once("PrintPortofolio.php");?>
-<?php require_once("ControlArticle.php");?>
+<?php require_once 'autoload.php';?>
 <?php
 $ArticleArr = Array();
 if(Null===@$_GET["Search"]||""===@$_GET["Search"]){

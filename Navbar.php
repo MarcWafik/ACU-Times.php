@@ -1,14 +1,5 @@
-<?php
-require_once ("ControlCategory.php");
-require_once ("ControlSession.php");
-session_start_once();
-
-if(isset($_GET["Category"]))
-	$sCategory = $_GET["Category"];
-else
-	$sCategory = "0";
-?>
-<nav class="navbar navbar-inverse"> <!--navbar-fixed-top-->
+<?php require_once 'autoload.php';?>
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 	<div class="container-fluid">
 		<div class="navbar-header">
 			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
@@ -17,21 +8,17 @@ else
 
 			<ul class="nav navbar-nav">
 				<li class="active"><a href="index.php"><span class="glyphicon glyphicon-home"></span></a></li>
-				<!--
+				
 				<li class="dropdown"> <a class="dropdown-toggle" data-toggle="dropdown" href="Category.php?Category=News">News <span class="caret"></span></a>
 					<ul class="dropdown-menu">
 						<li><a href="#">Page 1-1</a></li>
 						<li><a href="#">Page 1-2</a></li>
 						<li><a href="#">Page 1-3</a></li>
 					</ul>
-				</li> -->
-				<?php 
-				foreach($CategoryList as $Category){
-				PrintCategory($Category);
-				}
-				?>
+				</li> 
+				<?php //foreach($CategoryList as $Category){PrintCategory($Category);}?>
 				<li><a href="Multimedia.php">Multimedia</a></li>
-				<!--<li><a href="Gallery.php">Gallery</a></li>-->
+				<li><a href="Gallery.php">Gallery</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li class="dropdown"> <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></a>
@@ -49,7 +36,7 @@ else
 				</li>
 				<!--<li><a href="SignUp.php"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li> -->
 <?php
-if(isset($_SESSION['user'])){
+if(isset($_SESSION['id'])){
 	$temp = "";
 	if($_SESSION['user']["Status"]=="A"){
 		$temp = '<li><a href="MangeUsers.php">Mange Users</a></li>';

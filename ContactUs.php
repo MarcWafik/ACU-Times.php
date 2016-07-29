@@ -1,8 +1,4 @@
-<?php 
-require_once("ControlContactUs.php");
-
-
-?>
+<?php require_once 'autoload.php';?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

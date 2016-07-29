@@ -1,27 +1,4 @@
-<?php 
-require_once ("ControlUsers.php");
-require_once ("ControlSession.php");
-?>
-<?php
-session_start_once();
-if(isset($_SESSION['user'])){
-	header("Location: index.php");
-	exit;
-}
-
-$FirstOpen = false;
-if(isset($_POST["ID"])&&isset($_POST["Password"])){
-	$user = Login($_POST["ID"] ,$_POST["Password"] );
-	if(isset($user)){
-		session_start_once();
-		$_SESSION["user"] = $user;
-		header("Location: index.php");
-		exit;
-	}
-	else
-		$FirstOpen=true;
-}
-?>
+<?php require_once 'autoload.php';?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

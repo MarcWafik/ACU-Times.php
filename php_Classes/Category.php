@@ -11,6 +11,11 @@
  *
  * @author marcw
  */
-class Category {
-	//put your code here
+class Category extends Entity {
+
+	public $possition;
+	public $nameEn;
+	public $nameAr;
+	public $arrSubCategorys;
+
 }

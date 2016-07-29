@@ -1,36 +1,4 @@
-<?php require_once ("ControlArticle.php");?>
-<?php require_once ("ControlUsers.php");?>
-<?php
-$article = array();
-if(isset($_GET["ID"])){
-	$article = LoadArticle($_GET["ID"]);
-	if($article==null){
-		header("Location: 404.php");
-		exit();
-	}
-}else{
-	header("Location: 404.php");
-	exit();
-}
-$WriterName =  "Unknown";
-if(isset($article["WriterID"])){
-	$Writer = LoadUser($article["WriterID"]);
-	if($Writer!=NULL){
-		$WriterName =$Writer["name"];
-	}
-}
-?>
-<?php 
-
-$R = "Data\Vote\question.file.txt";
-global $R;
-
-
-$myfile = fopen($R, "r") or die("Unable to open file!");
-$lines    = file($R);
-$lastLine = array_pop($lines);
-$filecontent = explode('~#*$%#', $lastLine);
-?>
+<?php require_once 'autoload.php';?>
 <!DOCTYPE html>
 <html>
 <!DOCTYPE html>
@@ -60,14 +28,6 @@ $filecontent = explode('~#*$%#', $lastLine);
 	
 	<!-- Date/Time -->
 	<p><span class="glyphicon glyphicon-time"></span><?php echo $article["ArticleDay"]."/".$article["ArticleMonth"]."/".$article["ArticleYear"] ?></p>
-	<?php 
-			if(isset($_SESSION['user']) && $_SESSION['user']['Status']=="A"){
-			echo	
-			"<div class='btn-group  pull-right'>
-				<a class='btn btn-danger' href='Redir_DeleteArticle.php?ID={$article['ID']}'><i class='fa fa-trash-o'></i></i></a>
-				<!--<a class='btn btn-warning' href='WriteArticle.php?ID={$article['ID']}'><i class='fa fa-pencil'></i></a>-->
-			</div>
-			<div class='clearfix'></div>"; }?>
 	<hr>
 	
 	<!-- Preview Image --> 

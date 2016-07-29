@@ -1,6 +1,5 @@
 <?php
-require_once('ControlFunctions.php');
-require_once('ControlUsers.php');
+require_once 'autoload.php';
 if(valAllNotnull()){
 	$iscorrect = valArrIscorrect();
 	$iscorrect["IDtaken"] = (bool)(NULL == SearchIDUserSTR($_POST["ID"]));

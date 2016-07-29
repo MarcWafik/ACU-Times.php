@@ -1,61 +1,4 @@
-<?php 
-require_once("ControlUsers.php");
-require_once("ControlSession.php");
-require_once("ControlFunctions.php");
-Check_Login();
-$user =$_SESSION['user'];
-$iscorrect = Array();
-$Passed = FALSE ;
-if(valAllNotnull()){
-	$iscorrect = valArrIscorrect();
-	$iscorrect["Password"] = FALSE ;  
-	if ((Encrypt_And_Hash($_POST["Password"]) == $user["Password"]))$iscorrect["Password"] = TRUE;
-	
-	//if(valAll($iscorrect)){
-		$user = LoadUser($_SESSION['user']["ID"]);
-		$user["name"]=$_POST["name"];
-		$user["email"]=$_POST["email"];
-		$user["PhoneNo"]=$_POST["PhoneNo"];
-		$user["Gender"]=$_POST["Gender"];
-		$user["BirthdayDay"]=$_POST["BirthdayDay"];
-		$user["BirthdayMonth"]=$_POST["BirthdayMonth"];
-		$user["BirthdayYear"]=$_POST["BirthdayYear"];
-		$user["About"]=$_POST["About"];
-					
-		UpdateUser($user);
-		$_SESSION["user"] = $user;
-		$Passed = TRUE ;
-	//}
-}
-//=========================================validate=========================================
-function valAll($iscorrect) {
-foreach ($iscorrect as $key => $value){
-	if(FALSE == $value){
-		return FALSE;	
-		}
-	}
-	return TRUE;
-}
-function valArrIscorrect() {
-	$iscorrect = Array(
-			"name"=>valName($_POST["name"]) , 
-			"email"=>valEmail($_POST["email"]) , 
-			"Birthday"=>valBirthday ($_POST["BirthdayMonth"] , $_POST["BirthdayYear"] , $_POST["BirthdayDay"]) , 
-			"PhoneNo"=>valPhoneNo($_POST["PhoneNo"]),);
-	return 	$iscorrect;
-}
-function valAllNotnull() {
-	return 	
-	isset($_POST["name"]) && 
-	isset($_POST["email"]) && 
-	isset($_POST["Password"]) && 
-	isset($_POST["BirthdayMonth"]) && 
-	isset($_POST["BirthdayYear"])&& 
-	isset($_POST["BirthdayDay"]) && 
-	isset($_POST["PhoneNo"]) && 
-	isset($_POST["About"]);
-}
-?>
+<?php require_once 'autoload.php';?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -179,7 +122,7 @@ function valAllNotnull() {
 					</div>
 				</div>
 				<!-- ####################################################################  #################################################################### -->
-				<div class="form-group" style="display:none">
+				<div class="form-group">
 					<label class="col-md-3 control-label">Current Password:</label>
 					<div class="col-md-8">
 						<input type="password" name="Password" id="Password" value="" class="form-control" >

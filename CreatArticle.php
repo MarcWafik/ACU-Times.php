@@ -1,43 +1,4 @@
-<?php 
-require_once("ControlArticle.php");
-require_once("ControlUsers.php");
-require_once("ControlSession.php");
-require_once("ControlFunctions.php");
-Check_Login();
-$user =$_SESSION['user'];
-$Article = array();
-$ID="";
-if (isset($_POST['submit-article']) && valAll()) {
-	$ID = LastID()+1;
-	$AricleTime = getdate();
-	$Article = array(	
-					"ID"=>$ID,
-					"Name"=>$_POST["Title"],
-					"Category"=>$_POST["Category"],
-					"Language"=>$_POST["lang"],
-					"Youtubelink"=>$_POST["Youtubelink"],
-					"Brief"=>$_POST["Brief"],
-					"Rate"=>$_POST["Rate"],
-					"ArticleDay"=>$AricleTime["mday"],
-					"ArticleMonth"=>$AricleTime["mon"],
-					"ArticleYear"=>$AricleTime["year"],
-					"WriterID"=>$user["ID"],
-					"EditorID"=>" ",
-					"IMG"=>$_POST["IMG"]);
-					
-	SaveBodyHtml($ID ,$_POST["article"]);
-	SaveArticle($Article);
-	header("Location: Article.php?ID=".$ID);
-	exit();
-}
-//=========================================validate=========================================
-function valAllnull() {
-	return isset($_POST["Title"]) && isset($_POST["Brief"]) && isset($_POST["Youtube-link"]);
-}
-function valAll() {
-	return valTitle($_POST["Title"]) && valTitle($_POST["Brief"]) && (valYouTube($_POST["Youtube-link"])||$_POST["Youtube-link"]=="");
-}
-?>
+<?php require_once 'autoload.php';?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -71,12 +32,12 @@ function valAll() {
 	<h3>
 			<ul class="nav nav-pills">
 			<li role="presentation" class="active"><a>Write Article</a></li>
-			<li role="presentation"><a href="Poll.php">Creat Poll</a></li>
+			<li role="presentation"><a href="CreatPoll.php">Creat Poll</a></li>
 			<li role="presentation"><a href="#">Multimedia</a></li>
 		</ul>
 		</h3>
 	<br>
-	<form class="form-horizontal" role="form" method="post" action="WriteArticle.php">
+	<form class="form-horizontal" role="form" method="post" action="CreatArticle.php">
 			<div class="form-group">
 			<label class="control-label col-sm-2" for="Title">Title:</label>
 			<div class="col-sm-10">
@@ -95,21 +56,23 @@ function valAll() {
 			<label class="control-label col-sm-2" for="Category">Category:</label>
 			<div class="col-sm-10">
 					<select class="form-control" id="Category" name="Category">
-					<?php foreach($CategoryList as $Category){ PrintOptionCategory($Category); }?>
+					<?php // foreach($CategoryList as $Category){ PrintOptionCategory($Category); }?>
 				</select>
 				</div>
 		</div>
 			<div class="form-group">
 			<label class="control-label col-sm-2" for="Youtube-link">Youtube Url:</label>
 			<div class="col-sm-10">
-					<input type="text" class="form-control" placeholder="paste the youtube vedio link here"  name="Youtubelink" id="Youtubelink" onBlur="valYouTube(this,Validate_Youtubelink)">
+					<input type="text" class="form-control" placeholder="paste the youtube vedio link here or leave it empty"  name="Youtubelink" id="Youtubelink" onBlur="valYouTube(this,Validate_Youtubelink)">
 					<div id="Validate_Youtubelink" name = "Validate_Youtubelink" class="MyAlret"></div>
 				</div>
 		</div>
 			<div class="form-group">
-			<label class="control-label col-sm-2" for="Rate">Rate:</label>
+			<label class="control-label col-sm-2" for="Rate">Importance:</label>
 			<div class="col-sm-10">
-					<input type="range" min="1" max="10" value="5" step="1" name="Rate" id="Rate">
+				<select class="form-control" id="Importance" name="Importance">
+					<?php PrintHTML::numericOption(0,9) ?>
+				</select>
 				</div>
 		</div>
 			<div class="form-group">
@@ -166,7 +129,7 @@ var cleanFilename = function(name) {
 
 var myDropzone = new Dropzone("div#upload-widget", {
 	url: "upload.php",
-	maxFilesize: 8,
+	maxFilesize: 4,
 	maxFiles: 1,
 	parallelUploads: 1,
 	acceptedFiles: "image/*",

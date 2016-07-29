@@ -17,6 +17,12 @@ abstract class Entity {
 	protected $creatDate;
 	protected $lastUpdateDate;
 
+	public function init() {
+		$this->id = 0;
+		$this->setCreatDate();
+		$this->setLastUpdateDate();
+	}
+
 //===================================================SET===================================================
 	public function setLastUpdateDate() {
 		date_default_timezone_set('Africa/Cairo');

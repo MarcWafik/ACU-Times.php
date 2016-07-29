@@ -12,13 +12,13 @@
  */
 interface iCRUD {
 
-	function creat();
+	public function create();
 
-	function read($id);
+	public function read($id);
 
-	function update();
+	public function update();
 
-	function delete();
+	public function delete();
 
-	function search($in);
+	public function search($imput);
 }
