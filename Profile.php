@@ -21,7 +21,7 @@ $user = $_SESSION['user'];
 <?php include ("Navbar.php");?>
 <!-- content -->
 	<div class="container">
-		<h3>
+		<h3 <?php if(isset($_GET["ID"])){ echo 'style="display:none"'; }?>>
 		<ul class="nav nav-pills">
 			<li role="presentation" class="active"><a>Profile</a></li>
 			<li role="presentation"><a href="EditProfile.php">Change personal info</a></li>

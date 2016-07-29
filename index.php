@@ -22,7 +22,7 @@
   <!-- Wrapper for slides -->
   <div class="carousel-inner" role="listbox">
     <div class="item active">
-      <img class="Slider-IMG" src="http://placehold.it/900x500" alt="Flower" style="width:100%">
+      <img class="Slider-IMG" src="http://placehold.it/700x100" alt="Flower" style="width:100%">
       <div class="carousel-caption">
         <h3>Flowers</h3>
         <p>Beatiful flowers in Kolymbari, Crete.</p>
@@ -87,7 +87,7 @@
 		
         <!-- Projects Row -->
         <div class="row">
-            <div class="col-md-4 img-portfolio">
+            <div class="col-md-4 img-portfolio" style="padding-bottom:50px;">
                 <a href="portfolio-item.html">
                     <img class="img-responsive img-hover" src="http://placehold.it/700x400" alt="">
                 </a>

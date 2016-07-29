@@ -3,21 +3,23 @@ require_once("ControlUsers.php");
 require_once("ControlSession.php");
 require_once("ControlFunctions.php");
 Check_Login();
-$Passed = FALSE ;
-$user =$_SESSION['user'];
-$iscorrect = Array();
-if(valAllNotnull()){
-	$iscorrect = valArrIscorrect();
-	$iscorrect["OldPassword"] = FALSE ;  
-	if ((Encrypt_And_Hash($_POST["OldPassword"]) == $user["Password"]))$iscorrect["OldPassword"] = TRUE;
-	
-	if(valAll($iscorrect)){
-		$user = LoadUser($_SESSION['user']["ID"]);
+if(!isset($_GET["ID"]) || NULL == $_GET["ID"]){
+		header("Location: 404.php");
+}
 
-		$user["Password"]=Encrypt_And_Hash($_POST["Password"]);
-				
+$Passed = FALSE ;
+$user = LoadUser($_GET["ID"]);
+$iscorrect = Array();
+
+if(!isset($user) || NULL == $user){
+		header("Location: 404.php");
+}
+
+if(NULL != $user && valAllNotnull()){
+	$iscorrect = valArrIscorrect();
+	if(valAll($iscorrect)){
+		$user["Password"]=Encrypt_And_Hash($_POST["Password"]);	
 		UpdateUser($user);
-		$_SESSION["user"] = $user; 
 		$Passed = TRUE ;
 	}
 }
@@ -31,17 +33,10 @@ foreach ($iscorrect as $key => $value){
 	return TRUE;
 }
 function valArrIscorrect() {
-	$iscorrect = Array(
-						"Password"=>valPassword($_POST["Password"]) , 
-						"RePassword"=>valRePassword($_POST["RePassword"] , $_POST["Password"])
-						);
-	return 	$iscorrect;
+	return Array( "Password"=>valPassword($_POST["Password"]) , "RePassword"=>valRePassword($_POST["RePassword"] , $_POST["Password"]));
 }
 function valAllNotnull() {
-	return 	
-	isset($_POST["Password"]) &&
-	isset($_POST["RePassword"]) &&
-	isset($_POST["OldPassword"]);
+	return isset($_POST["Password"]) && isset($_POST["RePassword"]);
 }
 ?>
 <!DOCTYPE html>
@@ -49,7 +44,6 @@ function valAllNotnull() {
 <head>
 <title>ACU Times | Title</title>
 <?php require_once("Header.php");?>
-<script src="js/Validate.js"></script>
 </head>
 <body>
 <?php include ("Navbar.php");?>
@@ -57,23 +51,15 @@ function valAllNotnull() {
 <div class="container">
 <h3>
 	<ul class="nav nav-pills">
-		<li role="presentation"><a href="Profile.php">Profile</a></li>
-		<li role="presentation"><a href="EditProfile.php">Change personal info</a></li>
-		<li role="presentation" class="active"><a>Change Password</a></li>
+		<li role="presentation" class="active"><a>Change PW</a></li>
+		<li role="presentation" ><a>ID :</a></li>
+		<li role="presentation" ><a><?php echo $_GET["ID"]  ?></a></li>
 	</ul>
 </h3>
 <br>
 <?php if($Passed) 
 echo '<div class="alert alert-info alert-dismissable"> <a class="panel-close close" data-dismiss="alert">×</a> <i class="fa fa-check"></i> Password updated succsesfuly </div>' ?>
-<form role="form" action="ChangePW.php" method="post">
-	<!-- #################################################################### Old Password #################################################################### -->
-	<div class="form-group">
-		<label for="OldPassword">Old password :</label>
-		<input type="password" name="OldPassword" id="OldPassword" value="" class="form-control" required>
-		<div id="Validate_Password" name = "Validate_OldPassword" class="MyAlret">
-			<?php if(isset($iscorrect["OldPassword"])&&!$iscorrect["OldPassword"]) echo "Password is incorrect" ?>
-		</div>
-	</div>
+<form role="form" action="MangeUsers_ChangePW.php?ID=<?php echo $_GET["ID"]  ?>" method="post">
 	<!-- #################################################################### Password #################################################################### -->
 	<div class="form-group">
 		<label for="Password">New password :</label>
@@ -91,7 +77,10 @@ echo '<div class="alert alert-info alert-dismissable"> <a class="panel-close clo
 		</div>
 	</div>
 	<!-- #################################################################### Submit #################################################################### -->
-	<button type="submit" class="btn btn-primary pull-right">Change Password</button>
+	<div class="form-group pull-right">
+		<a class="btn btn-default" href="MangeUsers.php">Go back</a>
+		<span></span>
+		<input class="btn btn-primary" value="Change Password" type="submit">
 	</div>
 	<!-- ####################################################################  #################################################################### -->
 </form>
