@@ -71,12 +71,16 @@ function PrintCategory(Category $Category){
 				<!--<li><a href="SignUp.php"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li> -->
 <?php
 if(isset($_SESSION['user'])){
+	$temp = "";
+	if($_SESSION['user']["Status"]=="A"){
+		$temp = "<li><a href='MangeUsers.php'>Mange Users</a></li>";
+	}
 echo "
 <li class='dropdown'> <a class='dropdown-toggle' data-toggle='dropdown' href=''><span class='glyphicon glyphicon-user'></span> {$_SESSION['user']['name']} <span class='caret'></span></a>
 	<ul class='dropdown-menu'>
 		<li><a href='Profile.php'>Profile</a></li>
 		<li><a href='WriteArticle.php'>Write Article</a></li>
-		<li><a href='MangeUsers.php'>Mange Users</a></li>
+		{$temp}
 		<li><a href='Redir_Logout.php'>Logout</a></li>
 	</ul>
 </li>";

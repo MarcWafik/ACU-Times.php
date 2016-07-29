@@ -204,7 +204,7 @@
 }
 }
 .dropzone, .dropzone * { box-sizing: border-box; }
-.dropzone { min-height: 200px; border: dashed 2px #CCCCCC; background-color: rgba(164,155,155,0.20); box-shadow: 2px 5px rgba(118,118,118,0.50); border-radius: 20px; padding: 20px 20px; }
+.dropzone { min-height: 200px; border: dashed 2px #428bca; border-radius: 5px; padding: 20px 20px; color:#428bca; font-size:18px }
 .dropzone.dz-clickable { cursor: pointer; }
 .dropzone.dz-clickable * { cursor: default; }
 .dropzone.dz-clickable .dz-message, .dropzone.dz-clickable .dz-message * { cursor: pointer; }

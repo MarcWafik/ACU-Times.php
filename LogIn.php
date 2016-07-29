@@ -5,7 +5,7 @@ require_once ("ControlSession.php");
 <?php
 session_start_once();
 if(isset($_SESSION['user'])){
-	header("Location: MangeUsers.php");
+	header("Location: index.php");
 	exit;
 }
 
@@ -15,7 +15,7 @@ if(isset($_POST["ID"])&&isset($_POST["Password"])){
 	if(isset($user)){
 		session_start_once();
 		$_SESSION["user"] = $user;
-		header("Location: MangeUsers.php");
+		header("Location: index.php");
 		exit;
 	}
 	else

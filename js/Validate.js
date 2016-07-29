@@ -1,3 +1,22 @@
+//=========================================Title=========================================
+function valTitle(Check, Warnning) {
+	var patt = /^[A-Za-z0-9 _]*[A-Za-z0-9][A-Za-z0-9 _]*$/;
+	if (patt.test(Check.value)) {
+		Warnning.innerHTML = "";
+	} else {
+		Warnning.innerHTML = "Letters , numbers and space only";
+	}
+}
+//=========================================YouTube=========================================
+function valYouTube(Check, Warnning) {
+	//var patt = /^(https?\:\/\/)?(www\.youtube\.com|youtu\.?be)\/.+$/;
+	var patt = /(?:https?:\/\/)?(?:youtu\.be\/|(?:www\.)?youtube\.com\/watch(?:\.php)?\?.*v=)([a-zA-Z0-9\-_]+)/;
+	if (patt.test(Check.value)) {
+		Warnning.innerHTML = "";
+	} else {
+		Warnning.innerHTML = "invalid link ";
+	}
+}
 //=========================================Name=========================================
 function valName(Check, Warnning) {
 	var patt = /^[A-Za-z\s]+$/;

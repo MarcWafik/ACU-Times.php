@@ -5,11 +5,11 @@
 		<div class="row">
 			<div class="col-xs-12">
 				<div class="text-center"> 
-					<a href=""><i class="social fa fa-facebook-square fa-3x social-fb"></i></a>
-					<a href=""><i class="social fa fa-twitter-square fa-3x social-tw"></i></a>
-					<a href=""><i class="social fa fa-google-plus-square fa-3x social-gp"></i></a>
+					<a href=""><i class="social fa fa-facebook fa-3x social-fb"></i></a>
+					<a href=""><i class="social fa fa-twitter fa-3x social-tw"></i></a>
+					<a href=""><i class="social fa fa-google-plus fa-3x social-gp"></i></a>
 					<a href=""><i class="social fa fa-instagram fa-3x social-is"></i></a>
-					<a href=""><i class="social fa fa-youtube-play fa-3x social-yt"></i></a>
+					<a href=""><i class="social fa fa-youtube fa-3x social-yt"></i></a>
 				</div>
 			</div>
 		</div>
