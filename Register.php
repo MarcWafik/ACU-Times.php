@@ -122,7 +122,6 @@
 var fullName = document.getElementById("name");
 var fullNameAlert = document.getElementById("Validate_name");
  function valName() {
-	fullNameAlert.innerHTML = fullName.value;
 		var patt =  /^[A-Za-z\s]+$/;
 	if(!patt.test(fullName.value))
 	{
@@ -138,13 +137,14 @@ var fullNameAlert = document.getElementById("Validate_name");
 var ID = document.getElementById("ID");
 var IDAlert = document.getElementById("Validate_ID");
  function valID() {
-	if((isNaN(ID.value))&&((int(ID.value)>1000000)&&(int(ID.value)<9999999)))
+	 var patt =  /^\d+$/;
+	if(!patt.test(ID.value))
 	{
-		IDAlert.innerHTML ="";
+		IDAlert.innerHTML ="Enter your university ID";
 	}
 	else
 	{
-		IDAlert.innerHTML ="Enter your university ID";
+		IDAlert.innerHTML ="";
 	}
 }
 //=========================================Email=========================================
@@ -193,9 +193,9 @@ var RePasswordAlert = document.getElementById("Validate_RePassword");
 var PhoneNo = document.getElementById("PhoneNo");
 var PhoneNoAlert = document.getElementById("Validate_PhoneNo");
  function valPhoneNo() {
-	PhoneNoAlert.innerHTML = PhoneNo.value;
+	var patt =  /^\d+$/;
 	
-	if((isNaN(PhoneNo.value)&&((int(PhoneNo.value)>1000)&&(int(PhoneNo.value)<9999999999)))||PhoneNo.value=="")
+	if(patt.test(PhoneNo.value))
 	{
 		PhoneNoAlert.innerHTML ="";
 	}
