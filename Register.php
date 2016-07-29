@@ -2,7 +2,7 @@
 
 <html>
 <head>
-<title>Register</title>
+<title>ACU Times | Register</title>
 <meta charset="iso-8859-1">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="layout/styles/layout.css" type="text/css" media="all">
@@ -15,7 +15,7 @@
 <?php include ("Header.html");?>
 <!-------------------------------------------------------------------------- content -------------------------------------------------------------------------->
 <div class="wrapper row3">
-	<div style="margin: 0 auto; width: 350px;text-align:left;"> <br>
+	<div style="margin: 0 auto; width: 325px;text-align:left;"> <br>
 		<form action="#" method="post">
 			<p>
 			<div>

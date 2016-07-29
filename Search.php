@@ -2,7 +2,7 @@
 
 <html>
 <head>
-<title>ACU Times | Category</title>
+<title>ACU Times | Search</title>
 <meta charset="iso-8859-1">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="layout/styles/layout.css" type="text/css" media="all">

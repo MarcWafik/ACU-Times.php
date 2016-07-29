@@ -2,7 +2,7 @@
 
 <html>
 <head>
-<title>Log in</title>
+<title>ACU Times | Log in</title>
 <meta charset="iso-8859-1">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="layout/styles/layout.css" type="text/css" media="all">
@@ -21,14 +21,14 @@
 			<div class="row3">
 				<label for="name"><small>ID :</small></label>
 				<br>
-				<input type= "text" name="ID" id="ID" value="" size="50%">
+				<input style=" width:250px" type= "text" name="ID" id="ID" value="">
 			</div>
 			</p>
 			<p>
 			<div class="row3">
 				<label for="Password"><small>Password :</small></label>
 				<br>
-				<input type="password" name="Password" id="Password" value="" size="50%">
+				<input style=" width:250px" type="password" name="Password" id="Password" value="">
 			</div>
 			</p>
 			<p><a href="##################"><small>Forgotten your username or password?</small></a></p>
