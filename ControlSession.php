@@ -6,8 +6,14 @@ function Check_Login(){
 		header("Location: Login.php");
 }
 }
+function Check_Admin(){
+	Check_Login();
+	if($_SESSION['user']['Status']!="A"){
+		header("Location: AccsesDenied.php");
+}
+}
 function session_start_once(){
-	if (session_status() == PHP_SESSION_NONE) {
+	if (!isset($_SESSION)) {//session_status() == PHP_SESSION_NONE
     	session_start();
 	}
 }

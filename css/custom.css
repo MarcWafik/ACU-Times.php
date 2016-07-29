@@ -21,15 +21,18 @@
 .Social-container { margin: auto; height: 30px; }
 .Social-container ul div { display: inline; }
 .Social-container li { display: inline; width: auto; float: left; padding: 0 10px; }
+
 /*==================================================== Portofolio Article ====================================================*/
 @media screen and (min-width: 992px) {
 .img-portofolio-1line { max-height: 150px; min-height: 75px; }
 }
+
 @media screen and (max-width: 992px) {
 .img-portofolio-1line { max-height: 400px; min-height: 200px; }
 }
 /*==================================================== Navbar  ====================================================*/
 .Search-navbar { width: 500px; }
+
 @media screen and (max-width: 767px) {
 .Search-navbar { width: auto; }
 }

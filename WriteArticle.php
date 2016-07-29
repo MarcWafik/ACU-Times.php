@@ -1,58 +1,61 @@
 <?php 
-if(isset($_POST['submit-article'])){
-	
-	$Order = array("ID","Name","Write-in","Language","Brief","Rate","ArticleDay","ArticleMonth","ArticleYear","Writer",		"Editor","NumOfImages");
+if (isset($_POST['submit-article'])) {
+
+	$Order = array("ID", "Name", "Category", "Language", "Youtube-link", "Brief", "Rate", "ArticleDay", "ArticleMonth", "ArticleYear", "Writer", "Editor");
 	$OrderSize = 12;
 	$Seperator = "~#*$%#";
 	$FileLoc = "Data\Articles\Article-info.txt";
-	
-	
-	function save_article_info(){
-		global $OrderSize , $Order , $Seperator , $FileLoc , $Article;
-		$ID =0;
+
+	echo "fuck";
+
+	function save_article_info() {
+		global $OrderSize, $Order, $Seperator, $FileLoc, $Article;
+		$ID = 0;
 		$file = fopen($FileLoc, "a+") or die("Unable to open file!");
 		fwrite($file, ArticleToString($Article));
 		fclose($file);
-		}
+	}
+
 	function ArrToArticle($arr) {
-		global $OrderSize , $Order ;
-		for ($i = 0; $i < $OrderSize && isset($arr[$i]) ; $i++) {
+		global $OrderSize, $Order;
+		for ($i = 0; $i < $OrderSize && isset($arr[$i]); $i++) {
 			$Article[$Order[$i]] = $arr[$i];
 		}
 		return $Article;
-		}
-	
+	}
+
 	function ArticleToString($Article) {
-	global $OrderSize , $Order , $Seperator , $FileLoc;
+		global $OrderSize, $Order, $Seperator, $FileLoc;
 		$txt = "";
 		for ($i = 0; $i < $OrderSize; $i++) {
-			if(isset($Article[$Order[$i]])){
-				$txt .= $Article[$Order[$i]].$Seperator;
-			}
-			else {
-				$txt .= "".$Seperator;
+			if (isset($Article[$Order[$i]])) {
+				$txt.= $Article[$Order[$i]].$Seperator;
+			} else {
+				$txt.= "".$Seperator;
 			}
 		}
 		return "\r\n".$txt;
 	}
-	function id_count(){
-		global $FileLoc,$ID;
-			$file = fopen($FileLoc, "a+") or die("Unable to open file!");
+
+	function id_count() {
+		global $FileLoc, $ID;
+		$file = fopen($FileLoc, "a+") or die("Unable to open file!");
 		while ((!feof($file))) {
-		$arr = explode("~#*$%#", fgets($file));
-			
+			$arr = explode("~#*$%#", fgets($file));
+
 			$ID = $arr[0];
 		}
 
 		fclose($file);
-}
+	}
 	id_count();
 	$AricleTime = getdate();
 	$arr = array(
-		$ID+1,
+		$ID + 1,
 		$_POST["Title"],
-		$_POST["Write-in"],
+		$_POST["Category"],
 		$_POST["lang"],
+		$_POST["Youtube-link"],
 		$_POST["Brief"],
 		$_POST["Rate"],
 		$AricleTime["mday"],
@@ -60,100 +63,125 @@ if(isset($_POST['submit-article'])){
 		$AricleTime["year"],
 		" ",
 		" "
-		
-		
-);
+
+
+	);
 
 
 	$Article = ArrToArticle($arr);
 	save_article_info($Article);
 
-//=========================================validate=========================================
+	//=========================================validate=========================================
 
-function valAllnull() {
-	return 	isset($_POST["Title"]) && isset($_POST["Brief"]) && isset($_POST["Youtube-link"]) ;
-}
-$ArticleBody = $_POST["article"];
+	function valAllnull() {
+		return isset($_POST["Title"]) && isset($_POST["Brief"]) && isset($_POST["Youtube-link"]);
+	}
+	$ArticleBody = $_POST["article"];
 
-//"Data\Articles\Article-info.txt"
-function Save_Article(){
-	$ds= DIRECTORY_SEPARATOR;
-	global $ID, $FileLoc,$ArticleBody;
-	$destination = 'Data\Articles'.$ds.$ID.'.html';
-	$file = fopen($destination, "x+") or die("Unable to open file!");
+	function Save_Article() {
+		$ds = DIRECTORY_SEPARATOR;
+		global $ID, $FileLoc, $ArticleBody;
+		$destination = 'Data\Articles'.$ds.$ID.
+		'.html';
+		$file = fopen($destination, "x+") or die("Unable to open file!");
 		fwrite($file, $ArticleBody);
 		fclose($file);
 	}
 
-Save_Article();
 
-	function LoadAllArticles() {
-	global $FileLoc, $Seperator;
-	$file = fopen($FileLoc, "a+") or die("Unable to open file!");
-	$Article=array();
-	$i =0;
-	while ((!feof($file))) {
-		$Article[$i++] = ArrToArticle(explode($Seperator , fgets($file)));
+
+
+	function SearchTitle($Find) {
+		global $FileLoc, $Seperator;
+		$file = fopen($FileLoc, "a+") or die("Unable to open file!");
+		$AllArticle = array();
+		$i = 0;
+		while ((!feof($file))) {
+			$Article = ArrToArticle(explode($Seperator, fgets($file)));
+			if (strpos($Article["Name"], $Find) !== FALSE) {
+				$AllArticle[$i++] = $Article;
+			}
+		}
+		return $AllArticle;
 	}
-	fclose($file);
-	
-	return $Article;
-}
 
-function SearchTitle($Find) {
-global $FileLoc, $Seperator;
-$file = fopen($FileLoc, "a+") or die("Unable to open file!");
-$AllArticle=array();
-$i =0;
-while ((!feof($file))) {
-	$Article = ArrToArticle(explode($Seperator , fgets($file)));
-	if(strpos($Article["Name"],$Find)!==FALSE){
-		$AllArticle[$i++]= $Article;
+
+	function SearchCategory($Find) {
+		global $FileLoc, $Seperator;
+		$file = fopen($FileLoc, "a+") or die("Unable to open file!");
+		$AllArticle = array();
+		$i = 0;
+		while ((!feof($file))) {
+			$Article = ArrToArticle(explode($Seperator, fgets($file)));
+			if (strpos($Article["Category"], $Find) !== FALSE) {
+				$AllArticle[$i++] = $Article;
+			}
+		}
+
+		return $AllArticle;
 	}
-}
-fclose($file);
 
-return $AllArticle;
-}
 
-function SearchTitle($searcWWord){
-			global $FileLoc, $Seperator,$Article;
-			$file = fopen($FileLoc, "a+") or die("Unable to open file!");
-			$Article = array();
-			$Article = LoadAllArticles();
-			$linecount = 0;
-			$x = array();
-			$y = array();
-			while(!feof($file)){
-			$line = fgets($file);
-			$linecount++;
+	function SearchID($Find) {
+		global $FileLoc, $Seperator;
+		$file = fopen($FileLoc, "a+") or die("Unable to open file!");
+		$AllArticle = array();
+		$i = 0;
+		while ((!feof($file))) {
+			$Article = ArrToArticle(explode($Seperator, fgets($file)));
+			if ($Article["ID"] == $Find) {
+				$AllArticle[$i++] = $Article;
 			}
-			echo $linecount;
-			for ($j = 0; $j < $linecount; $j++) {
-				$y = $Article[$j];
-				if($y["Name"] == $searcWWord){
-					array_push($x,$Article[$j]);
-					}
-				
-			}
-			echo $x["Name"];
-			return $x;
-			
-			}
-			
-			
-			
-SearchTitle("aaa");
+		}
 
-}
+		return $AllArticle;
+	}
+
+	$mark = SearchID(2);
 	
+
+	function UpdateRecord($Newrecord, $OldRecord) {
+		global $OrderSize, $Order, $Seperator, $FileLoc;
+		$contents = file_get_contents($FileLoc);
+		$contents = str_replace($OldRecord, $Newrecord, $contents);
+		file_put_contents($FileLoc, $contents);
+	}
+
+	function DeleteID($ID) {
+		$ds = DIRECTORY_SEPARATOR;
+		global $OrderSize, $Order, $Seperator, $FileLoc;
+		$temp = SearchID($ID);
+		$file = fopen($FileLoc, "a+") or die("Unable to open file!");
+		$AllArticle = array();
+		$i = 0;
+		while ((!feof($file))) {
+			$Article = ArrToArticle(explode($Seperator, fgets($file)));
+
+
+		}
+		echo $Article["2"];
+		UpdateRecord("", $temp);
+		//unlink("Data\Articles".$ds.$ID.".html");
+	}
+
+	function UpdateTitle($user) {
+		global $OrderSize, $Order, $Seperator, $FileLoc;
+		$temp = SearchTitle($Article["ID"]);
+
+		$Article2STR = ArticleToString($Article);
+		UpdateRecord($Article2STR, $temp);
+	}
+
+	DeleteID(2);
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
   <title>ACU Times | Title</title>
   <?php require_once("Header.php");?>
-  <script src='//cdn.tinymce.com/4/tinymce.min.js'></script>
+  <!--<script src='//cdn.tinymce.com/4/tinymce.min.js'></script>-->
+  <script src='js/tinymce/tinymce.min.js'></script>
   <link rel="stylesheet" href="css/dropezone.css" type="text/css" media="all">
   <script src="js/dropzone.js"></script>
   <script>
@@ -204,8 +232,6 @@ tinymce.init({
       paste_data_images: true
 
 });
-
-
 
 tinymce.init({
   selector: "#article",  
@@ -266,9 +292,9 @@ tinymce.init({
 				</div>
 		</div>
 			<div class="form-group">
-			<label class="control-label col-sm-2" for="Breif">Youtube Url:</label>
+			<label class="control-label col-sm-2" for="Youtube-link">Youtube Url:</label>
 			<div class="col-sm-10">
-					<input type="text" class="form-control" placeholder="paste the youtube vedio link here" id="Brief" name="Youtube-link" id="Youtube-link">
+					<input type="text" class="form-control" placeholder="paste the youtube vedio link here"  name="Youtube-link" id="Youtube-link">
 				</div>
 		</div>
 			<div class="form-group">
@@ -278,7 +304,7 @@ tinymce.init({
 				</div>
 		</div>
 			<div class="form-group">
-			<label class="control-label col-sm-2" for="Breif">Language:</label>
+			<label class="control-label col-sm-2" for="lang">Language:</label>
 			<div class="col-sm-10">
 					<label class="radio-inline">
 					<input type="radio" value="Arabic" name="lang" id="lang">
@@ -288,24 +314,23 @@ tinymce.init({
 					English</label>
 				</div>
 		</div>
-			<br>
+			<div class="form-group">
+			<div  class="dropzone" id="upload-widget"> </div>
+		</div>
 			<div class="form-group">
 			<textarea id="article" name="article"></textarea>
 		</div>
 			<div class="form-group">
-			<button type="submit" class="btn btn-primary pull-right">Submit</button>
+			<button type="submit" class="btn btn-primary pull-right" name="submit-article">Submit</button>
 		</div>
 		</form>
-	<form  class="dropzone" id="upload-widget">
-		</form>
-	<script type="text/javascript">
-var myDropzone = new Dropzone("form#upload-widget", { url: "http://localhost/project/upload.php", maxFilesize: 8,maxFiles: 15,parallelUploads:1,acceptedFiles: "image/*", autoProcessQueue: false});
-
-$('#upload-widget').click(function(){           
-     myDropzone.processQueue();
-});	
-</script> 
 </div>
 	<?php include ("Footer.php");?>
+	<script>
+var cleanFilename = function (name) {
+   return name.toLowerCase().replace(/^[\w.]+$/i, 'a.jpg');
+};
+var myDropzone = new Dropzone("div#upload-widget", { url: "http://localhost/Project-v6.04/upload.php", maxFilesize: 8,maxFiles: 1,parallelUploads:1,acceptedFiles: "image/*",renameFilename: cleanFilename, addRemoveLinks: true});
+</script>
 </body>
 </html>

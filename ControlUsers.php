@@ -145,6 +145,13 @@ function DeleteUser($ID){
 	$temp = SearchIDUserSTR($ID);
 	UpdateRecord("",$temp);
 }
+function MakeAdmin($ID){
+	global $OrderSize , $Order , $Seperator , $FileLoc;
+	$User = LoadUser($ID);
+	$temp = SearchIDUserSTR($ID);
+	$User["Status"]="A";
+	UpdateRecord(UserToString($User),$temp);
+}
 function UpdateUser($user){
 	global $OrderSize , $Order , $Seperator , $FileLoc;
 	$temp = SearchIDUserSTR($user["ID"]);

@@ -20,7 +20,7 @@ if(isset($_POST["ID"])&&isset($_POST["Password"])){
 	}
 	else
 		$FirstOpen=true;
-	}
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">

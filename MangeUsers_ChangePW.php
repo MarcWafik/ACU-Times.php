@@ -1,8 +1,9 @@
-<?php 
+<?php
 require_once("ControlUsers.php");
 require_once("ControlSession.php");
 require_once("ControlFunctions.php");
 Check_Login();
+Check_Admin();
 if(!isset($_GET["ID"]) || NULL == $_GET["ID"]){
 		header("Location: 404.php");
 }
