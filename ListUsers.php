@@ -72,7 +72,7 @@
 					<div class="MyOut">Example@example.com</div>
 				</div>
 			</div>
-			<div class="MyClear"> <span style="color:#E88C06 ;">Publisher</span>
+			<div class="MyClear"><span style="color:#E88C06 ;">Publisher </span>
 				<hr>
 			</div>
 			<!-- End --> 

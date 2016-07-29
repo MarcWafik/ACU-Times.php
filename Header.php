@@ -9,7 +9,7 @@
 				<fieldset>
 					<legend>Search:</legend>
 					<input id="NSearch" name="NSearch" type="text" value="Search Our Website&hellip;" onFocus="this.value=(this.value=='Search Our Website&hellip;')? '' : this.value ;">
-					<input type="submit" id="Search" value="" style="background-image:url(images/demo/search.png)">
+					<input type="submit" id="Search" value="&#xf002;">
 				</fieldset>
 			</form>
 		</div>

@@ -1,3 +1,18 @@
+<?php
+$FirstOpen = false;
+require_once('Control_Users.php');
+if(isset($_POST["ID"])&&isset($_POST["Password"])){
+	$User = Login($_POST["ID"] ,$_POST["Password"] );
+	if(isset($User)){
+		header("Location: WriteArticle.php");
+		exit;
+	}
+	else
+		$FirstOpen=true;
+	}
+
+//=========================================All=========================================
+?>
 <!DOCTYPE html>
 
 <html>
@@ -10,18 +25,10 @@
 <script src="layout/scripts/jquery.min.js"></script>
 <script src="layout/scripts/jquery-mobilemenu.min.js"></script>
 <style>
-.MyAlret {
-	color: red;
-	padding-top: 5px;
-}
-.MyLable {
-}
-.MyInput {
-	width: 320px;
-}
-.MyContainer {
-	padding:10px;
-}
+.MyAlret { color: red; padding-top: 5px; }
+.MyLable { }
+.MyInput { width: 320px; }
+.MyContainer { padding: 10px; }
 </style>
 </head>
 <body>
@@ -38,27 +45,24 @@
 		<br>
 	</div>
 	<div style="margin: 0 auto; width: 340px;text-align:left;">
-		<form action="#" method="post">
-<div class="MyContainer">
+		<form action="LogIn.php" method="post">
+			<div class="MyContainer">
 				<label for="ID">University ID :</label>
 				<br>
 				<input type="text" name="ID" id="ID" value="" class="MyInput" onBlur="valID()" required>
 				<small>
 				<div id="Validate_ID" name = "Validate_ID" class="MyAlret"></div>
 				</small> </div>
-<div class="MyContainer">
+			<div class="MyContainer">
 				<label for="Password">Password :</label>
 				<br>
 				<input type="password" name="Password" id="Password" value="" class="MyInput" onBlur="valPassword()" required>
 				<small>
-				<div id="Validate_Password" name = "Validate_Password" class="MyAlret"></div>
+				<div id="Validate_Password" name = "Validate_Password" class="MyAlret"><?php if($FirstOpen) echo" ID or Password is incorrect "; ?></div>
 				</small> </div>
-				
-				<div class="MyContainer" style="text-align:right">
+			<div class="MyContainer" style="text-align:right">
 				<input class="Mysubmit" style="border-radius:5px;" name="submit" type="submit" id="submit" value="Login">
-				</div>
-				
-				
+			</div>
 		</form>
 	</div>
 	<div class="clear"><br>

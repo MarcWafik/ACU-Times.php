@@ -11,69 +11,6 @@
 <script src="layout/scripts/jquery-mobilemenu.min.js"></script>
 <script src="bootstrap/js/bootstrap.min.js"></script>
 <style>
-.AdvSearchBox {
-	width: 100%;
-	border: 1px solid #686868;
-	border-top: none;
-	border-bottom-left-radius:4px;
-	border-bottom-right-radius:4px;
-	box-shadow: 3px 3px 10px #999999;
-}
-.AdvSearchLine {
-	padding: 10px;
-	clear: both;
-	width: 100%;
-}
-.MySearchButton {
-	background-image: url(images/demo/search.png);
-	background-color: #FF8238;
-	width: 45px;
-	height: 100%;
-	background-repeat: no-repeat;
-	cursor: pointer;
-	background-position: center;
-	color: #FFFFFF;
-	border: none;
-	position: absolute;
-	border-bottom-right-radius: 3px;
-	border-top-right-radius: 3px;
-	top: 0px;
-	right: 0px;
-}
-.MyadvSearchButton {
-	background-image: url(images/demo/setting.png);
-	background-color: inherit;
-	width: 35px;
-	height: 100%;
-	background-repeat: no-repeat;
-	cursor: pointer;
-	background-position: center;
-	border: none;
-	position: absolute;
-	font-size: 14px;
-	color: black;
-	top: 0px;
-	right: 45px;
-}
-.MyLable {
-	padding: 4px;
-}
-.MyImput {
-	width: 85%;
-	padding: 4px;
-	margin: 1px;
-	float: left;
-	border-radius: 3px;
-}
-.MySearchBar {
-	width: 90%;
-	height: 100%;
-	position:absolute;
-	margin: 0;
-	padding: 0 10px;
-	border: none;
-	background-color:transparent;
-}
 #SNAV { display:none; }
 </style>
 </head>
@@ -86,13 +23,13 @@
 		
 		<!-- ################################################################################################ -->
 	
-		<div class="pad">
+		<div id="advSearchBarDiv" class="pad">
 			<form action="Search.php" method="get">
 				<fieldset>
 					<div style="width:100%">
 						<div style="height:35px; width:100% ;border:1px solid #686868;border-radius:3px; margin:0; position:relative;">
 							<input id="advSearch" name="advSearch" type="text" value="Search Our Website&hellip;" class="MySearchBar" onFocus="this.value=(this.value=='Search Our Website&hellip;')? '' : this.value ;">
-							<input type="submit" value="" class="MySearchButton" >
+							<input type="submit" value="&#xf002;" class="  MySearchButton" >
 							<input type="button" value="&#9660;" class="MyadvSearchButton" onClick="AdvSR()" >
 						</div>
 						<div class="clear"></div>

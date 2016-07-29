@@ -30,7 +30,7 @@
 			</div>
 			<div class="divider2"></div>
 			<p class="notice"><h3>You can now continue to control panel and edit your info</h3></p>
-			<p class="clear"><a class="fl_left" href="index.php">&laquo; Go Home</a> <a class="fl_right" href="Login.php">Login &raquo;</a></p>
+			<p class="clear"><a class="fl_left" href="index.php">&laquo; Go Home</a> <a class="fl_right" href="LogIn.php">Login &raquo;</a></p>
 			<!-- ####################################################################################################### --> 
 		</div>
 		<!-- ################################################################################################ -->

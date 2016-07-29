@@ -10,7 +10,7 @@ input, textarea, select{font-size:1em; font-family:Georgia,"Times New Roman",Tim
 #header form{display:block; position:relative; float:right; margin:20px 0 0 0; padding:0 75px 0 0; overflow:hidden; white-space:nowrap;}
 #header form input{display:block; width:200px; margin:0; padding:5px; color:#C0BAB6; background-color:#333333; border:1px solid #666666;}
 #header form #sf_submit{display:block; position:absolute; top:0; right:0; width:70px; font-size:1em; font-weight:bold; text-align:center; text-transform:uppercase; color:#FFFFFF; background-color:#C0BAB6; border:none; cursor:pointer;}
-#header form #Search{display:block; position:absolute; top:0px; right:39px;;color:#FFFFFF; background-color:#FF8238; border:none; cursor:pointer; background-repeat:no-repeat ; background-position:center ; width:35px ; height:30px;
+#header form #Search{display:block; position:absolute; top:0px; right:39px;;color:#FFFFFF; background-color:#FF8238; border:none; cursor:pointer; background-repeat:no-repeat ; background-position:center ; width:35px ; height:30px;font-family: FontAwesome; content: "\f015";font-size:20px;
 }
 /* ----------------------------------------------Forms in Content Area------------------------------------- */
 

@@ -20,12 +20,12 @@ if(valAll()){
 	appendUser($User);
 	header("Location: SignupSuccessful.php");
 }
-else
-echo "asdf";
+else{
 	header("Location: SignUp.php");
+}
 exit;
 //=========================================All=========================================
 function valAll() {
-	return valName($_POST["name"]) && valID($_POST["ID"]) && valEmail($_POST["email"]) && valPassword($_POST["Password"]) && valRePassword($_POST["RePassword"] , $_POST["Password"]) && valPhoneNo($_POST["PhoneNo"]) &&valBirthday ($_POST["BirthdayMonth"] , $_POST["BirthdayYear"] , $_POST["BirthdayDay"]);
+	return 	valName($_POST["name"]) && valID($_POST["ID"]) && valEmail($_POST["email"]) && valPassword($_POST["Password"]) && valRePassword($_POST["RePassword"] , $_POST["Password"]) && valBirthday ($_POST["BirthdayMonth"] , $_POST["BirthdayYear"] , $_POST["BirthdayDay"]) && valPhoneNo($_POST["PhoneNo"]);
 }
 ?>

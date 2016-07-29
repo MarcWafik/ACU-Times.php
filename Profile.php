@@ -7,7 +7,6 @@
 <link rel="stylesheet" href="layout/styles/layout.css" type="text/css" media="all">
 <link rel="stylesheet" href="layout/styles/mediaqueries.css" type="text/css" media="all">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
 <script src="layout/scripts/jquery.min.js"></script>
 <script src="layout/scripts/jquery-mobilemenu.min.js"></script>
 </head>

@@ -119,7 +119,7 @@
 					<input class="Mysubmit" style="border-radius:5px" name="submit" type="submit" id="submit" value="Creat Account">
 				</div>
 			</div>
-				<div id="Validate_name" name = "Validate_name" class="MyAlret" style="text-align:center">  error</div>
+				<div id="Error" name = "Error" class="MyAlret" style="text-align:center"></div>
 			<!-- ####################################################################  #################################################################### -->
 		</form>
 		<div class="clear"><br>
