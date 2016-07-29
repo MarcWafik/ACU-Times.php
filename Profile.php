@@ -1,5 +1,5 @@
-<?php require ("ControlUsers.php");?>
-<?php require ("ControlSession.php");?>
+<?php require_once ("ControlUsers.php");?>
+<?php require_once ("ControlSession.php");?>
 <?php
 Check_Login();
 if(isset($_GET["ID"])){
@@ -33,7 +33,7 @@ $user = $_SESSION['user'];
     <!-- left column -->
     <div class="col-md-4 col-sm-6 col-xs-12">
       <div class="text-center">
-        <img src="<?php if(isset($user["Photo"]) && $user["Photo"]!="") echo $user["Photo"] ; else echo "images/User.png"; ?>" style="height:200px; width:200px;" class="avatar img-circle img-thumbnail" alt="avatar">
+        <img src="<?php if(isset($user["Photo"]) && $user["Photo"]!="" && $user["Photo"]!=" ") echo $user["Photo"] ; else echo "images/User.png"; ?>" style="height:200px; width:200px;" class="avatar img-circle" alt="avatar">
       </div>
     </div>
     <!-- edit form column -->
@@ -65,18 +65,18 @@ $user = $_SESSION['user'];
         </div>
 		<!-- ####################################################################  #################################################################### -->
         <div class="form-group">
+          <label class="col-lg-3 control-label">Gender:</label>
+		  <p class=" col-lg-8 form-control-static">
+		  <?php 
+		  if(@$user["Gender"]=="F"){
+		  	echo "Female";
+		  }else if(@$user["Gender"]=="M"){
+			  echo "Male";}?></p>
+        </div>
+		<!-- ####################################################################  #################################################################### -->
+        <div class="form-group">
           <label class="col-lg-3 control-label">Birthday:</label>
 		  <p class=" col-lg-8 form-control-static"><?php echo @$user["BirthdayDay"]."/".$user["BirthdayMonth"]."/".$user["BirthdayYear"]; ?></p>
-		</div>
-		<!-- ####################################################################  #################################################################### -->
-		<div class="form-group">
-          <label class="col-lg-3 control-label">Country:</label>
-		  <p class=" col-lg-8 form-control-static"><?php echo @$user["Country"]; ?></p>
-		</div>
-		<!-- ####################################################################  #################################################################### -->
-		<div class="form-group">
-          <label class="col-lg-3 control-label">Address:</label>
-		  <p class=" col-lg-8 form-control-static"><?php echo @$user["Address"]; ?></p>
 		</div>
 		<!-- ####################################################################  #################################################################### -->
 		<div class="form-group">

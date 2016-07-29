@@ -5,7 +5,7 @@ Check_Login();
 $user = $_SESSION['user'];
 ?>
 <?php
-if(Null===@$_GET["Search"]){
+if(Null===@$_GET["Search"]||""===@$_GET["Search"]){
 	$userArr = LoadAllUser();
 }
 else{
@@ -19,7 +19,7 @@ function printUser( $ID ,$name , $ImgPath ){
 	 }
 	return	
 	"<div class='row'>
-		<div class='col-md-2 text-center'><a href='Profile.php?ID={$ID}'><img src='{$ImgPath}' style='height:90px; width:90px;' class='avatar img-circle img-thumbnail' alt='avatar'></a></div>
+		<div class='col-md-2 text-center'><a href='Profile.php?ID={$ID}'><img src='{$ImgPath}' style='height:90px; width:90px;' class='avatar img-circle' alt='avatar'></a></div>
 		<div class='col-md-10'>
 			<h4 class='col-xs-2 text-right'>Name:</h4>
 			<h4 class='col-xs-10'>{$name}</h4>
@@ -58,7 +58,9 @@ function printUser( $ID ,$name , $ImgPath ){
 	<hr>
 		<?php 
 		foreach ($userArr as &$user){
-		echo printUser( $user["ID"],$user["name"] , $user["Photo"]  ); 
+			if(isset($user["ID"])&&$user["ID"]!=""&&$user["ID"]!=" "){
+				echo printUser( $user["ID"],$user["name"] , $user["Photo"]  ); 
+			}
 		}
 		?>
 	<!-------------------------------- pagination -------------------------------->

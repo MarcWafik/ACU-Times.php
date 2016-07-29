@@ -55,16 +55,29 @@ function PrintCategory(Category $Category){
 				<li><a href="Gallery.php">Gallery</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
+				<li class="dropdown"> <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></a>
+					<ul class="dropdown-menu">
+						<li class="Search-navbar">
+							<form action="Search.php" method="get">
+								<div class="input-group">
+									<input type="text" class="form-control" placeholder="Search for..." id="Search" name="Search">
+									<span class="input-group-btn">
+									<button class="btn btn-primary" type="submit"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+									</span> </div>
+							</form>
+						</li>
+					</ul>
+				</li>
 				<!--<li><a href="SignUp.php"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li> -->
 <?php
 if(isset($_SESSION['user'])){
 echo "
-<li class='dropdown'> <a class='dropdown-toggle' data-toggle='dropdown' href=''><span class='glyphicon glyphicon-user'></span> {$_SESSION['user']['name']}<span class='caret'></span></a>
+<li class='dropdown'> <a class='dropdown-toggle' data-toggle='dropdown' href=''><span class='glyphicon glyphicon-user'></span> {$_SESSION['user']['name']} <span class='caret'></span></a>
 	<ul class='dropdown-menu'>
 		<li><a href='Profile.php'>Profile</a></li>
 		<li><a href='WriteArticle.php'>Write Article</a></li>
 		<li><a href='MangeUsers.php'>Mange Users</a></li>
-		<li><a href='Logout.php'>Logout</a></li>
+		<li><a href='Redir_Logout.php'>Logout</a></li>
 	</ul>
 </li>";
 } else {
@@ -74,14 +87,7 @@ echo"<li><a href='LogIn.php'><span class='glyphicon glyphicon-log-in'></span> Lo
 ?>
 				
 			</ul>
-			<form class="navbar-form navbar-right" role="search" action="Search.php" method="get">
-				<div class="input-group">
-					<input type="text" class="form-control" placeholder="Search" name="Search">
-					<div class="input-group-btn">
-						<button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
-					</div>
-				</div>
-			</form>
 		</div>
 	</div>
 </nav>
+<div class="clearfix"></div>

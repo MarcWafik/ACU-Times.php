@@ -12,12 +12,11 @@
 .social-yt:hover { color: red; }
 /*==================================================== Forms ====================================================*/
 .MyAlret { color: red; }
-/*==================================================== 404 ====================================================*/
+/*==================================================== Code 404 & Succses====================================================*/
 .error-code { bottom: 60%; color: black; font-size: 96px; line-height: 100px; margin-top: 50px!important; margin-bottom: 50px!important; }
-/*==================================================== Succses ====================================================*/
 .Succses-code { bottom: 60%; color: green; font-size: 200px; line-height: 100px; margin-top: 50px!important; margin-bottom: 50px!important; }
 /*==================================================== HomePage Slider ====================================================*/
-.Slider-IMG { max-height:400px; min-height:150px; }
+.Slider-IMG { max-height: 400px; min-height: 150px; }
 /*==================================================== Adv Search ====================================================*/
 .dropdown.dropdown-lg .dropdown-menu { margin-top: -1px; padding: 6px 20px; }
 .input-group-btn .btn-group { display: flex !important; }
@@ -36,10 +35,17 @@
 .Social-container { margin: auto; height: 30px; }
 .Social-container ul div { display: inline; }
 .Social-container li { display: inline; width: auto; float: left; padding: 0 10px; }
+
 /*==================================================== Portofolio Article ====================================================*/
 @media screen and (min-width: 992px) {
-.img-portofolio-1line{ max-height:150px; min-height:75px; }
+.img-portofolio-1line { max-height: 150px; min-height: 75px; }
 }
+
 @media screen and (max-width: 992px) {
-.img-portofolio-1line{ max-height:400px; min-height:200px; }
+.img-portofolio-1line { max-height: 400px; min-height: 200px; }
+}
+/*==================================================== Navbar  ====================================================*/
+.Search-navbar { width: 500px; }
+@media screen and (max-width: 767px) {
+.Search-navbar { width: auto; }
 }

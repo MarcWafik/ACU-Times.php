@@ -29,7 +29,7 @@ function valEmail(Check, Warnning) {
 function valPassword(Check, Warnning) {
 	var patt = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/;
 	if (!patt.test(Check.value)) {
-		Warnning.innerHTML = "Must contain a number ,upercase letter (A-Z) & lowercase letter (a-z)";
+		Warnning.innerHTML = "Must contain a number (0-9) ,upercase letter (A-Z) & lowercase letter (a-z)";
 	} else {
 		Warnning.innerHTML = "";
 	}
@@ -46,7 +46,7 @@ function valRePassword(Check, Warnning, Original) {
 }
 //=========================================PhoneNo=========================================
 function valPhoneNo(Check, Warnning) {
-	var patt = /^\d+$/;
+	var patt = /^[0-9]*$/;
 	if (patt.test(Check.value)) {
 		Warnning.innerHTML = "";
 	} else {
@@ -55,15 +55,26 @@ function valPhoneNo(Check, Warnning) {
 }
 //=========================================BrithDay=========================================
 function valBirthday(Month , Year , Day , Warnning) {
+//	var x = document.getElementById("BirthdayDay");
+	var x = Day;
+	var Lin=x.length-1+1;
 	Year = Year.value;
+	
 	var DaysInEatchMonth = [0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-	if ((parseInt(Year) % 4 === 0) && (parseInt(Year) % 100 !== 0) || (parseInt(Year) % 400 === 0))	{	DaysInEatchMonth[2]=29;	}
-	if(Day.value>DaysInEatchMonth[Month.value])
-	{
-		Warnning.innerHTML = Day.value+"/"+Month.value+"/"+Year+ " is not a valid date";
+	if ((parseInt(Year) % 4 === 0) && (parseInt(Year) % 100 !== 0) || (parseInt(Year) % 400 === 0))	{	
+		DaysInEatchMonth[2]=29;	
 	}
-	else{
-		Warnning.innerHTML = "";
+	
+	for(var i=Lin-1 ; i >= DaysInEatchMonth[Month.value] ; i--){
+		x.remove(i);
 	}
-    //var sel = document.getElementById("BirthdayDay").options[3];
+	
+	for(var j=Lin+1 ; j <= DaysInEatchMonth[Month.value] ; j++){
+		var option = document.createElement("option");
+		option.text = j;
+		option.value = j;
+		x.add(option);
+	}
+	//Warnning.innerHTML = Day.value+"/"+Month.value+"/"+Year+ " is not a valid date";
+	//Warnning.innerHTML = "";
 }

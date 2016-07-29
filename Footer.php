@@ -1,3 +1,4 @@
+<div class="clearfix"><br><br><br></div>
 <footer class="footer">
 	<div class="container">
 		<hr>
@@ -27,3 +28,4 @@
 		</div>
 	</div>
 </footer>
+<pre><?php print_r(get_defined_vars ()); ?></pre>

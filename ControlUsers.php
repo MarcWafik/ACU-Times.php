@@ -1,4 +1,5 @@
 <?php
+require_once("ControlFunctions.php");
 //########################################################################################## Validate ##########################################################################################
 //=========================================Name=========================================
  function valName($Check) {
@@ -26,7 +27,7 @@
 }
 //=========================================PhoneNo=========================================
  function valPhoneNo($Check) {
-	$pattern = '/^\d+$/';
+	$pattern = '/^[0-9]*$/';
 	return preg_match($pattern, $Check)||$Check=="";
 }
 //=========================================Gender=========================================
@@ -62,14 +63,14 @@ function UserToString($User) {
 	global $OrderSize , $Order , $Seperator , $FileLoc;
 		$txt = "";
 		for ($i = 0; $i < $OrderSize; $i++) {
-			if(isset($User[$Order[$i]])){
+			if(isset($User[$Order[$i]])&& NULL!=$User[$Order[$i]]){
 				$txt .= $User[$Order[$i]].$Seperator;
 			}
 			else {
-				$txt .= "".$Seperator;
+				$txt .= " ".$Seperator;
 			}
 		}
-		return "\r\n".$txt;
+		return $txt."\r\n";
 	}
 //=========================================LoadUser=========================================
 function LoadUser($ID) {
@@ -116,7 +117,6 @@ function SearchAllUser($find) {
 function SearchIDUserSTR($find) {
 	global $OrderSize , $Order , $Seperator , $FileLoc;
 	$file = fopen($FileLoc, "a+") or die("Unable to open file!");
-	$user=array();
 	$i =0;
 	while ((!feof($file))) {
 		$temp = fgets($file);
@@ -134,8 +134,8 @@ function SearchIDUserSTR($find) {
 //=========================================UpdateRecord=========================================
 function UpdateRecord($Newrecord,$OldRecord){
 	global $OrderSize , $Order , $Seperator , $FileLoc;
-	$file = fopen($FileLoc, "a+") or die("Unable to open file!");
-	$contents = file_get_contents($file);
+//	$file = fopen($FileLoc, "a+") or die("Unable to open file!");
+	$contents = file_get_contents($FileLoc);
 	$contents = str_replace($OldRecord,$Newrecord, $contents);
 	file_put_contents($FileLoc, $contents);
 }
@@ -143,16 +143,28 @@ function UpdateRecord($Newrecord,$OldRecord){
 function DeleteUser($ID){
 	global $OrderSize , $Order , $Seperator , $FileLoc;
 	$temp = SearchIDUserSTR($ID);
-	//$User2STR = UserToString($User);
 	UpdateRecord("",$temp);
 }
-
-
+function UpdateUser($user){
+	global $OrderSize , $Order , $Seperator , $FileLoc;
+	$temp = SearchIDUserSTR($user["ID"]);
+	$User2STR = UserToString($user);
+	UpdateRecord($User2STR,$temp);
+}
+function AdminChangePW($ID , $PW){
+	global $OrderSize , $Order , $Seperator , $FileLoc;
+	$temp = SearchIDUserSTR($ID);
+	$arr = explode("~#*$%#", $temp);
+	$User = ArrToUser($arr);
+	$User["Password"]=Encrypt_And_Hash($PW);
+	$User2STR = UserToString($User);
+	UpdateRecord($User2STR,$temp);
+}
 function Login($ID , $PW ){
 	global $OrderSize , $Order , $Seperator , $FileLoc;
 	$User=LoadUser($ID);
 	if(isset($User)){
-		if($User["Password"]==$PW){
+		if($User["Password"]==Encrypt_And_Hash($PW)){
 			return $User;
 		}
 	}
