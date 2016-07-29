@@ -1,9 +1,161 @@
+<?php 
+if(isset($_POST['submit-article'])){
+	
+	$Order = array("ID","Name","Write-in","Language","Brief","Rate","ArticleDay","ArticleMonth","ArticleYear","Writer",		"Editor","NumOfImages");
+	$OrderSize = 12;
+	$Seperator = "~#*$%#";
+	$FileLoc = "Data\Articles\Article-info.txt";
+	
+	
+	function save_article_info(){
+		global $OrderSize , $Order , $Seperator , $FileLoc , $Article;
+		$ID =0;
+		$file = fopen($FileLoc, "a+") or die("Unable to open file!");
+		fwrite($file, ArticleToString($Article));
+		fclose($file);
+		}
+	function ArrToArticle($arr) {
+		global $OrderSize , $Order ;
+		for ($i = 0; $i < $OrderSize && isset($arr[$i]) ; $i++) {
+			$Article[$Order[$i]] = $arr[$i];
+		}
+		return $Article;
+		}
+	
+	function ArticleToString($Article) {
+	global $OrderSize , $Order , $Seperator , $FileLoc;
+		$txt = "";
+		for ($i = 0; $i < $OrderSize; $i++) {
+			if(isset($Article[$Order[$i]])){
+				$txt .= $Article[$Order[$i]].$Seperator;
+			}
+			else {
+				$txt .= "".$Seperator;
+			}
+		}
+		return "\r\n".$txt;
+	}
+	function id_count(){
+		global $FileLoc,$ID;
+			$file = fopen($FileLoc, "a+") or die("Unable to open file!");
+		while ((!feof($file))) {
+		$arr = explode("~#*$%#", fgets($file));
+			
+			$ID = $arr[0];
+		}
+
+		fclose($file);
+}
+	id_count();
+	$AricleTime = getdate();
+	$arr = array(
+		$ID+1,
+		$_POST["Title"],
+		$_POST["Write-in"],
+		$_POST["lang"],
+		$_POST["Brief"],
+		$_POST["Rate"],
+		$AricleTime["mday"],
+		$AricleTime["mon"],
+		$AricleTime["year"],
+		" ",
+		" "
+		
+		
+);
+
+
+	$Article = ArrToArticle($arr);
+	save_article_info($Article);
+
+//=========================================validate=========================================
+
+function valAllnull() {
+	return 	isset($_POST["Title"]) && isset($_POST["Brief"]) && isset($_POST["Youtube-link"]) ;
+}
+$ArticleBody = $_POST["article"];
+
+//"Data\Articles\Article-info.txt"
+function Save_Article(){
+	$ds= DIRECTORY_SEPARATOR;
+	global $ID, $FileLoc,$ArticleBody;
+	$destination = 'Data\Articles'.$ds.$ID.'.html';
+	$file = fopen($destination, "x+") or die("Unable to open file!");
+		fwrite($file, $ArticleBody);
+		fclose($file);
+	}
+
+Save_Article();
+
+	function LoadAllArticles() {
+	global $FileLoc, $Seperator;
+	$file = fopen($FileLoc, "a+") or die("Unable to open file!");
+	$Article=array();
+	$i =0;
+	while ((!feof($file))) {
+		$Article[$i++] = ArrToArticle(explode($Seperator , fgets($file)));
+	}
+	fclose($file);
+	
+	return $Article;
+}
+
+function SearchTitle($Find) {
+global $FileLoc, $Seperator;
+$file = fopen($FileLoc, "a+") or die("Unable to open file!");
+$AllArticle=array();
+$i =0;
+while ((!feof($file))) {
+	$Article = ArrToArticle(explode($Seperator , fgets($file)));
+	if(strpos($Article["Name"],$Find)!==FALSE){
+		$AllArticle[$i++]= $Article;
+	}
+}
+fclose($file);
+
+return $AllArticle;
+}
+
+function SearchTitle($searcWWord){
+			global $FileLoc, $Seperator,$Article;
+			$file = fopen($FileLoc, "a+") or die("Unable to open file!");
+			$Article = array();
+			$Article = LoadAllArticles();
+			$linecount = 0;
+			$x = array();
+			$y = array();
+			while(!feof($file)){
+			$line = fgets($file);
+			$linecount++;
+			}
+			echo $linecount;
+			for ($j = 0; $j < $linecount; $j++) {
+				$y = $Article[$j];
+				if($y["Name"] == $searcWWord){
+					array_push($x,$Article[$j]);
+					}
+				
+			}
+			echo $x["Name"];
+			return $x;
+			
+			}
+			
+			
+			
+SearchTitle("aaa");
+
+}
+	
+?>
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<title>ACU Times | WriteArticle</title>
-<?php require_once("Header.php");?>
+  <head>
+  <title>ACU Times | Title</title>
+  <?php require_once("Header.php");?>
   <script src='//cdn.tinymce.com/4/tinymce.min.js'></script>
+  <link rel="stylesheet" href="css/dropezone.css" type="text/css" media="all">
+  <script src="js/dropzone.js"></script>
   <script>
   tinymce.init({
   selector: '#article',
@@ -53,6 +205,8 @@ tinymce.init({
 
 });
 
+
+
 tinymce.init({
   selector: "#article",  
   plugins: "paste",
@@ -65,64 +219,93 @@ tinymce.init({
   </head>
   <body>
 	<?php include ("Navbar.php");?>
-	<div id="container"> 
-			<div class="pad"> 
-			<form method="post" >
-					<div style="position:relative;bottom:30px;margin:0 auto;">
-					<p style="position:relative;top:32px">Language :</p>
-					<input type="radio" value="Arabic" name="lang" style="margin:0 auto; position:relative;left:100px">
-					<span style="position:relative;left:102px" >Arabic</span>
-					<input type="radio" name="lang" style="margin:0 auto;position:relative;left:150px">
-					<span style="position:relative;left:152px">English</span> <br>
-					<label style="position:relative;">Write In :</label>
-					<select required style="margin-top:20px">
-							<optgroup label="News">
-						<option>World News</option>
-						<option>ACU College News</option>
-						</optgroup>
-							<optgroup label="Art">
-						<option>Cinema</option>
-						<option>Drama</option>
-						<option>Theater</option>
-						</optgroup>
-							<optgroup label="Sport">
-						<option>Local Footaball</option>
-						<option>International Football</option>
-						<option>Other</option>
-						</optgroup>
-							<option>Interviews</option>
-							<option>Tech &amp; Science</option>
-							<option>Economy</option>
-							<option>Multimedia</option>
-							<option>Gallery</option>
-						</select>
-					<br>
-					<div style="margin-top:15px;">
-							<label for="Title">Title</label>
-							<input type="text" style="width:230px">
-						</div>
-					</select>
-					<br>
-					<div style="">
-							<label for="Title">Brief</label>
-							<input type="text" style="width:230px">
-						</div>
-					<iframe src="upload-pic.html" style="width:1000px;height:220px; border:none;margin-top:10px"></iframe>
-					
-					<!--<div id="drag_drop"   >
-                <p style="text-align:center;font-size:24px;line-height:300px">Drop photos Here</p>
-                </div>--> 
-					
+	<div class="container">
+	<h3>
+			<ul class="nav nav-pills">
+			<li role="presentation" class="active"><a href="WriteArticle.php">WriteArticle</a></li>
+			<li role="presentation"><a href="#">Creat Vote</a></li>
+			<li role="presentation"><a href="#">Multimedia</a></li>
+		</ul>
+		</h3>
+	<br>
+	<form class="form-horizontal" role="form" method="post" action="WriteArticle.php">
+			<div class="form-group">
+			<label class="control-label col-sm-2" for="email">Title:</label>
+			<div class="col-sm-10">
+					<input type="text" class="form-control" name="Title" id="Title">
 				</div>
-					<textarea id="article"></textarea>
-				</form>
-			
-			<!-- / content body --> 
-			<!-- ################################################################################################ -->
-			<div class="clear"></div>
 		</div>
-			<!-- ################################################################################################ --> 
+			<div class="form-group">
+			<label class="control-label col-sm-2" for="Breif">Breif:</label>
+			<div class="col-sm-10">
+					<input type="text" class="form-control" placeholder="Enter 1 line description of the article" id="Brief" name="Brief">
+				</div>
 		</div>
+			<div class="form-group">
+			<label class="control-label col-sm-2" for="Category">Category:</label>
+			<div class="col-sm-10">
+					<select class="form-control" id="Category" name="Category">
+					<optgroup label="News">
+						<option value="WorldNews">World News</option>
+						<option value=">ACUCollegeNews">ACU College News</option>
+						</optgroup>
+					<optgroup label="Art">
+						<option value="Cinema">Cinema</option>
+						<option value="Drama">Drama</option>
+						<option value="Theater">Theater</option>
+						</optgroup>
+					<optgroup label="Sport">
+						<option value="Local Footaball">Local Footaball</option>
+						<option value="International Football">International Football</option>
+						<option value="Other">Other</option>
+						</optgroup>
+					<option value="Interviews">Interviews</option>
+					<option value="TechandScience">Tech &amp; Science</option>
+					<option value="Economy">Economy</option>
+				</select>
+				</div>
+		</div>
+			<div class="form-group">
+			<label class="control-label col-sm-2" for="Breif">Youtube Url:</label>
+			<div class="col-sm-10">
+					<input type="text" class="form-control" placeholder="paste the youtube vedio link here" id="Brief" name="Youtube-link" id="Youtube-link">
+				</div>
+		</div>
+			<div class="form-group">
+			<label class="control-label col-sm-2" for="Rate">Rate:</label>
+			<div class="col-sm-10">
+					<input type="range" class="" min="1" max="10" value="5" step="1" name="Rate" id="Rate">
+				</div>
+		</div>
+			<div class="form-group">
+			<label class="control-label col-sm-2" for="Breif">Language:</label>
+			<div class="col-sm-10">
+					<label class="radio-inline">
+					<input type="radio" value="Arabic" name="lang" id="lang">
+					Arabic</label>
+					<label class="radio-inline">
+					<input type="radio" value="English" name="lang" id="lang">
+					English</label>
+				</div>
+		</div>
+			<br>
+			<div class="form-group">
+			<textarea id="article" name="article"></textarea>
+		</div>
+			<div class="form-group">
+			<button type="submit" class="btn btn-primary pull-right">Submit</button>
+		</div>
+		</form>
+	<form  class="dropzone" id="upload-widget">
+		</form>
+	<script type="text/javascript">
+var myDropzone = new Dropzone("form#upload-widget", { url: "http://localhost/project/upload.php", maxFilesize: 8,maxFiles: 15,parallelUploads:1,acceptedFiles: "image/*", autoProcessQueue: false});
+
+$('#upload-widget').click(function(){           
+     myDropzone.processQueue();
+});	
+</script> 
+</div>
 	<?php include ("Footer.php");?>
 </body>
 </html>
