@@ -14,10 +14,7 @@
 <script src="layout/scripts/flexslider/jquery-flexslider.min.js"></script>
 <!-- / slider -->
 <style>
-p {
-	font-size: 17px;
-	line-height: 28px;
-}
+p { font-size: 17px; line-height: 28px; }
 </style>
 </head>
 <body>
@@ -72,8 +69,6 @@ p {
 					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer congue quis nunc quis egestas. Nulla quis diam lobortis, pellentesque erat sed, scelerisque sem. Nulla nisl libero, iaculis et nibh non, sollicitudin eleifend risus. Suspendisse potenti. Ut gravida, urna euismod suscipit tempor, lacus lorem dictum arcu, eget fringilla dui arcu ut sem. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Ut molestie, dolor et ultrices accumsan, sem risus finibus elit, eget efficitur lorem sapien nec lacus. Suspendisse viverra id tellus id ultricies. Vestibulum ut sollicitudin neque, at lobortis nisi. Donec condimentum laoreet magna eu pellentesque.</p>
 					<p>Praesent sed massa placerat justo hendrerit tristique vitae quis nulla. Quisque hendrerit lorem sapien, ut ullamcorper ipsum condimentum a. Sed vel quam metus. Pellentesque sit amet odio dictum, ullamcorper lacus id, lacinia mi. Curabitur ante justo, ullamcorper nec ornare vel, varius id tortor. Aenean ligula nibh, mattis sed erat vel, volutpat vestibulum leo. In tristique sagittis luctus. Cras massa sem, placerat at ornare sit amet, volutpat sed odio. Nam ultrices rutrum arcu, in iaculis est. Etiam gravida massa a libero molestie lobortis.</p>
 					<p>Vestibulum sit amet pellentesque mauris. Morbi nec consectetur nulla. Integer in orci augue. Etiam quis lorem sed purus tempus vulputate. Integer sit amet lacinia est. Curabitur volutpat, nibh eu facilisis posuere, mi turpis tempus arcu, vitae blandit nibh felis vel sapien. Mauris enim magna, egestas eget rhoncus in, tempus in sapien. Curabitur ac blandit elit. Suspendisse vitae eros eget quam eleifend convallis. Morbi sodales massa condimentum, aliquam nisl ut, cursus velit.</p>
-					<p>Vestibulum ut volutpat elit, et ornare sapien. Duis magna nulla, egestas at aliquet id, rhoncus nec tortor. Maecenas ullamcorper dictum nisi, ac iaculis dolor vestibulum eu. Sed mattis eleifend ex, nec dictum arcu finibus non. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque egestas turpis quis dolor lacinia, volutpat imperdiet sem finibus. Sed convallis risus nulla, sed ullamcorper velit sollicitudin sit amet.</p>
-					<p>Donec ornare diam at vulputate tristique. Vestibulum vitae massa volutpat, dictum augue eu, porttitor ligula. Proin et blandit velit, in aliquet metus. Pellentesque rutrum, ipsum nec tempor lobortis, nulla magna cursus erat, eu tristique lorem erat vel odio. Donec arcu enim, aliquet id dictum ut, tincidunt a lorem. Suspendisse nisl metus, efficitur id neque in, venenatis tempor nunc. Nam tristique posuere magna in feugiat. Maecenas ac convallis mauris. Quisque dignissim sapien odio, a convallis arcu interdum at. Vivamus rhoncus nec nunc eu pellentesque.</p>
 				</section>
 				<section>
 					<h1>Table(s)</h1>
@@ -113,7 +108,45 @@ p {
 							</tr>
 						</tbody>
 					</table>
+					<p>Vestibulum ut volutpat elit, et ornare sapien. Duis magna nulla, egestas at aliquet id, rhoncus nec tortor. Maecenas ullamcorper dictum nisi, ac iaculis dolor vestibulum eu. Sed mattis eleifend ex, nec dictum arcu finibus non. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque egestas turpis quis dolor lacinia, volutpat imperdiet sem finibus. Sed convallis risus nulla, sed ullamcorper velit sollicitudin sit amet.</p>
+					<p>Donec ornare diam at vulputate tristique. Vestibulum vitae massa volutpat, dictum augue eu, porttitor ligula. Proin et blandit velit, in aliquet metus. Pellentesque rutrum, ipsum nec tempor lobortis, nulla magna cursus erat, eu tristique lorem erat vel odio. Donec arcu enim, aliquet id dictum ut, tincidunt a lorem. Suspendisse nisl metus, efficitur id neque in, venenatis tempor nunc. Nam tristique posuere magna in feugiat. Maecenas ac convallis mauris. Quisque dignissim sapien odio, a convallis arcu interdum at. Vivamus rhoncus nec nunc eu pellentesque.</p>
 				</section>
+				<!-- ########################################################################################## Script ########################################################################################## --> 
+				<!---------------------------------------------------------- Facebook ---------------------------------------------------------->
+				<div id="fb-root"></div>
+				<script>(function(d, s, id) {
+				  var js, fjs = d.getElementsByTagName(s)[0];
+				  if (d.getElementById(id)) return;
+				  js = d.createElement(s); js.id = id;
+				  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5";
+				  fjs.parentNode.insertBefore(js, fjs);
+				}(document, 'script', 'facebook-jssdk'));</script> 
+				<!---------------------------------------------------------- Twitter ----------------------------------------------------------> 
+				
+				<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script> 
+				<!---------------------------------------------------------- Google + ----------------------------------------------------------> 
+				<script type="text/javascript">
+				  (function() {
+					var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+					po.src = 'https://apis.google.com/js/platform.js';
+					var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+				  })();
+				</script> 
+				<!-- ########################################################################################## /Script ########################################################################################## --> 
+				<!-- ########################################################################################## /Socail Media ########################################################################################## -->
+				<div class="Social-container">
+					<ul>
+						<li><!---------------------------------------------------------- Facebook ---------------------------------------------------------->
+							<div class="fb-like" data-href="http://acujournal.netai.net" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>
+						</li>
+						<li><!---------------------------------------------------------- Twitter ----------------------------------------------------------> 
+							<a href="https://twitter.com/share" class="twitter-share-button" data-url="http://acujournal.netai.net" data-text="ACU Times" data-via="ACUTimes">Tweet</a> </li>
+						<li> <!---------------------------------------------------------- Google + ---------------------------------------------------------->
+							<div class="g-plusone" data-annotation="inline" data-width="120" data-href="http://acujournal.netai.net"></div>
+						</li>
+					</ul>
+				</div>
+				<!-- ########################################################################################## /Socail Media ########################################################################################## -->
 				<section id="comments">
 					<h2>Comments</h2>
 					<ul>

@@ -9,20 +9,6 @@
 <link rel="stylesheet" href="layout/styles/mediaqueries.css" type="text/css" media="all">
 <script src="layout/scripts/jquery.min.js"></script>
 <script src="layout/scripts/jquery-mobilemenu.min.js"></script>
-<style>
-.MyAlret {
-	color: red;
-	padding-top: 5px;
-}
-.MyLable {
-}
-.MyInput {
-	width: 320px;
-}
-.MyContainer {
-	padding: 10px;
-}
-</style>
 </head>
 <body>
 <?php include ("Header.php");?>

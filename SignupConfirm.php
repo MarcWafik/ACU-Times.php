@@ -2,7 +2,8 @@
 if(valAll()){
 	$myfile = fopen("Data\Users\UsersList.txt", "a+") or die("Unable to open file!");
 	echo fread($myfile,filesize("webdictionary.txt"));
-	$txt = $_POST["ID"]."~#*$%#".$_POST["Password"]."~#*$%#".$_POST["name"]."~#*$%#".$_POST["email"]."~#*$%#".$_POST["PhoneNo"]."\n";
+	//ID ~#*$%# PassHash ~#*$%# Name ~#*$%# E-Mail ~#*$%# PhoneNumber ~#*$%# Gender[M][F][D] ~#*$%# Brithdate ~#*$%# Registration Date~#*$%#About
+	$txt = $_POST["ID"]."~#*$%#".$_POST["Password"]."~#*$%#".$_POST["name"]."~#*$%#".$_POST["email"]."~#*$%#".$_POST["PhoneNo"]."~#*$%#"."~#*$%#"."~#*$%#"."\n";
 	fwrite($myfile, $txt);
 	fclose($myfile);
 	header("Location: SignupSuccessful.php");
@@ -46,5 +47,4 @@ function valAll() {
 }
 //=========================================Gender=========================================
 //=========================================BrithDay=========================================
-
 ?>

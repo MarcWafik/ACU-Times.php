@@ -11,20 +11,7 @@
 <script src="layout/scripts/jquery-mobilemenu.min.js"></script>
 <script src="layout/scripts/Validate.js"></script>
 <script src="https://www.google.com/recaptcha/api.js"></script>
-
 <style>
-.MyAlret {
-	color: red;
-	padding-top: 5px;
-}
-.MyLable {
-}
-.MyInput {
-	width: 320px;
-}
-.MyContainer {
-	padding: 10px;
-}
 </style>
 </head>
 <body>
@@ -37,6 +24,7 @@
 	</div>
 	<div style="margin: 0 auto; width: 340px;text-align:left;"> <br>
 		<form action="SignupConfirm.php" method="post">
+			<!-- #################################################################### name #################################################################### -->
 			<div class="MyContainer">
 				<label for="name">Full name :</label>
 				<br>
@@ -44,6 +32,7 @@
 				<small>
 				<div id="Validate_name" name = "Validate_name" class="MyAlret"></div>
 				</small> </div>
+			<!-- #################################################################### ID #################################################################### -->
 			<div class="MyContainer">
 				<label for="ID">University ID :</label>
 				<br>
@@ -51,6 +40,7 @@
 				<small>
 				<div id="Validate_ID" name = "Validate_ID" class="MyAlret"></div>
 				</small> </div>
+			<!-- #################################################################### email #################################################################### -->
 			<div class="MyContainer">
 				<label for="email">E-Mail :</label>
 				<br>
@@ -58,6 +48,7 @@
 				<small>
 				<div id="Validate_email" name = "Validate_email" class="MyAlret"></div>
 				</small> </div>
+			<!-- #################################################################### Password #################################################################### -->
 			<div class="MyContainer">
 				<label for="Password">Password :</label>
 				<br>
@@ -65,6 +56,7 @@
 				<small>
 				<div id="Validate_Password" name = "Validate_Password" class="MyAlret"></div>
 				</small> </div>
+			<!-- #################################################################### RePassword #################################################################### -->
 			<div class="MyContainer">
 				<label for="RePassword">Reenter password :</label>
 				<br>
@@ -72,6 +64,7 @@
 				<small>
 				<div id="Validate_RePassword" name = "Validate_RePassword" class="MyAlret"></div>
 				</small> </div>
+			<!-- #################################################################### PhoneNo #################################################################### -->
 			<div class="MyContainer">
 				<label for="PhoneNo">Phone Number (optional) :</label>
 				<br>
@@ -79,17 +72,19 @@
 				<small>
 				<div id="Validate_PhoneNo" name = "Validate_PhoneNo" class="MyAlret"></div>
 				</small> </div>
+			<!-- #################################################################### Gender #################################################################### -->
 			<div class="MyContainer">
 				<label for="Gender" >Gender :</label>
 				<br>
-				<select  style="padding:3px;"  class="MyInput" name="Gender" required >
-					<option>Male</option>
-					<option>Female</option>
-					<option selected="selected">Do not specify</option>
+				<select  style="padding:3px;"  class="MyInput" name="Gender" id="Gender" required >
+					<option value="M">Male</option>
+					<option value="F">Female</option>
+					<option value="" selected="selected">Do not specify</option>
 				</select>
 				<small>
 				<div id="Validate_Gender" name = "Validate_Gender" class="MyAlret"></div>
 				</small> </div>
+			<!-- #################################################################### Birthday #################################################################### -->
 			<div class="MyContainer">
 				<label for="Birthday" >Birthday :</label>
 				<br>
@@ -97,9 +92,11 @@
 				<small>
 				<div id="Validate_Birthday" name = "Validate_Birthday" class="MyAlret"></div>
 				</small> </div>
+			<!-- #################################################################### g-recaptcha #################################################################### -->
 			<div class="MyContainer">
 				<div class="g-recaptcha" data-sitekey="6Ldh-RkTAAAAAPtk9mzLYazqa7A9twsF8-2dMPuC"> </div>
 			</div>
+			<!-- #################################################################### Submit #################################################################### -->
 			<div  class="MyContainer" style="text-align:center"> <small>Clicking Create account means that you agree to <br>
 				our <a href="Register.html" title="Services Agreement">Services Agreement</a> and <a href="Register.html">Privacy Policy</a><br>
 				<br>
@@ -108,6 +105,7 @@
 					<input class="Mysubmit" style="border-radius:5px" name="submit" type="submit" id="submit" value="Creat Account">
 				</div>
 			</div>
+			<!-- ####################################################################  #################################################################### -->
 		</form>
 		<div class="clear"><br>
 			<br>

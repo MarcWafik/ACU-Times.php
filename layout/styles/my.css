@@ -7,4 +7,12 @@
 .ER_SSWW { font-size: 26px; }
 .ER_404 { font-size: 100px; float: none; text-align: center; }
 }
-/* ----------------------------------------------- ######------------------------------------ */
+/* ----------------------------------------------- Social Media Bar ------------------------------------ */
+.Social-container { margin: auto; height: 30px; }
+.Social-container ul div { display: inline; }
+.Social-container li { display: inline; width: auto; float: left; padding: 0 10px; }
+/* ----------------------------------------------- Signup forms ------------------------------------ */
+.MyAlret { color: red; padding-top: 5px; }
+.MyLable { }
+.MyInput { width: 320px; }
+.MyContainer { padding: 10px; }
