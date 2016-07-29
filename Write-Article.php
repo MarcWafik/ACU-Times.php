@@ -1,18 +1,16 @@
 <!DOCTYPE html>
 
-<html><head>
-<title>ACU Times | Write Article</title>
-<meta charset="iso-8859-1">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="layout/styles/layout.css" type="text/css" media="all">
-<link rel="stylesheet" href="layout/styles/mediaqueries.css" type="text/css" media="all">
-
-<script src="layout/scripts/jquery.min.js"></script>
-<script src="layout/scripts/jquery-mobilemenu.min.js"></script>
-<script src='//cdn.tinymce.com/4/tinymce.min.js'></script>
-
-
- <script>
+<html>
+  <head>
+  <title>ACU Times | Write Article</title>
+  <meta charset="iso-8859-1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="layout/styles/layout.css" type="text/css" media="all">
+  <link rel="stylesheet" href="layout/styles/mediaqueries.css" type="text/css" media="all">
+  <script src="layout/scripts/jquery.min.js"></script>
+  <script src="layout/scripts/jquery-mobilemenu.min.js"></script>
+  <script src='//cdn.tinymce.com/4/tinymce.min.js'></script>
+  <script>
   tinymce.init({
   selector: '#article',
   height: 500,
@@ -61,8 +59,6 @@ tinymce.init({
 
 });
 
-
-
 tinymce.init({
   selector: "#article",  
   plugins: "paste",
@@ -72,26 +68,27 @@ tinymce.init({
 });
 
   </script>
-</head>
-<body>
-<?php include ("Header.html");?>
-<!-- content -->
+  </head>
+  <body>
+	<?php include ("Header.html");?>
+	<!-- content -->
 
-<div class="wrapper row3">
+	<div class="wrapper row3">
 	<div id="container"> 
-		<!-- ################################################################################################ -->
-	  <div class="pad"> 
+			<!-- ################################################################################################ -->
+			<div class="pad"> 
 			<!-- ################################################################################################ --> 
 			<!-- content body -->
-
-  <form method="post" >
-<div style="position:relative;bottom:30px;margin:0 auto;">
-  <p style="position:relative;top:32px">Language :</p>
-
-  <input type="radio" value="Arabic" name="lang" style="margin:0 auto; position:relative;left:100px"><span style="position:relative;left:102px" >Arabic</span>
-  <input type="radio" name="lang" style="margin:0 auto;position:relative;left:150px"><span style="position:relative;left:152px">English</span>
- <br> <label style="position:relative;">Write In :</label>
-                <select required style="margin-top:20px">
+			
+			<form method="post" >
+					<div style="position:relative;bottom:30px;margin:0 auto;">
+					<p style="position:relative;top:32px">Language :</p>
+					<input type="radio" value="Arabic" name="lang" style="margin:0 auto; position:relative;left:100px">
+					<span style="position:relative;left:102px" >Arabic</span>
+					<input type="radio" name="lang" style="margin:0 auto;position:relative;left:150px">
+					<span style="position:relative;left:152px">English</span> <br>
+					<label style="position:relative;">Write In :</label>
+					<select required style="margin-top:20px">
 							<optgroup label="News">
 						<option>World News</option>
 						<option>ACU College News</option>
@@ -111,40 +108,35 @@ tinymce.init({
 							<option>Economy</option>
 							<option>Multimedia</option>
 							<option>Gallery</option>
-                </select><br><div style="margin-top:15px;">
-                <label for="Title">Title</label>
-                <input type="text" style="width:230px">
-                </div>
-                
-                </select><br><div style="">
-                <label for="Title">Brief</label>
-                <input type="text" style="width:230px">
-                </div>
-<iframe src="upload-pic.html" style="width:1000px;height:220px; border:none;margin-top:10px"></iframe>
-                
-
-                
-                <!--<div id="drag_drop"   >
+						</select>
+					<br>
+					<div style="margin-top:15px;">
+							<label for="Title">Title</label>
+							<input type="text" style="width:230px">
+						</div>
+					</select>
+					<br>
+					<div style="">
+							<label for="Title">Brief</label>
+							<input type="text" style="width:230px">
+						</div>
+					<iframe src="upload-pic.html" style="width:1000px;height:220px; border:none;margin-top:10px"></iframe>
+					
+					<!--<div id="drag_drop"   >
                 <p style="text-align:center;font-size:24px;line-height:300px">Drop photos Here</p>
-                </div>-->
-               
-        
-</div>
-<textarea id="article">
-  
-</textarea>  
-  </form>
-  
- 
+                </div>--> 
+					
+				</div>
+					<textarea id="article"></textarea>
+				</form>
 			
-		  <!-- / content body --> 
+			<!-- / content body --> 
 			<!-- ################################################################################################ -->
 			<div class="clear"></div>
-	  </div>
-		<!-- ################################################################################################ --> 
-  </div>
+		</div>
+			<!-- ################################################################################################ --> 
+		</div>
 </div>
-
-<?php include ("Footer.html");?>
+	<?php include ("Footer.html");?>
 </body>
 </html>

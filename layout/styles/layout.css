@@ -7,6 +7,7 @@
 @import url("homepage.css");
 @import url("gallery.css");
 @import url("portfolio.css");
+@import url("my.css");
 
 html{overflow-y:scroll;}
 body{margin:0; padding:0; font-size:100%; font-family:Arial, Helvetica , sans-serif; color:#919191; background-color:#232323;}
@@ -46,8 +47,8 @@ address, article, aside, figcaption, figure, footer, header, nav, section{displa
 
 div.wrapper{display:block; width:100%; margin:0; padding:0; text-align:left;}
 .row1, .row1 a{color:#C0BAB6; background-color:#333333;}
-.row2{color:#555555; background-color:#232323;}
-.row3{color:#555555; background-color:#FFFFFF;}
+.row2{color:#333333; background-color:#232323;}
+.row3{color:#333333; background-color:#FFFFFF;}
 .row3 a{color:#FF9900; background-color:#FFFFFF;}
 .row4{color:#989898; background-color:#333333;}
 .row4 a{color:#FF9900; background-color:#333333;}
@@ -83,7 +84,7 @@ blockquote::after, q::after{content:' �'; font-size:26px; line-height:0;}
 
 /* Content */
 
-#container #content{float:left; width:65.625%; margin-bottom:0;}
+#container #content{float:left; width:70%; margin-bottom:0;}
 
 /* Comments */
 
@@ -103,7 +104,7 @@ blockquote::after, q::after{content:' �'; font-size:26px; line-height:0;}
 
 /* Right Column */
 
-#container #right_column{float:right; width:31.25%;}
+#container #right_column{float:right; width:27%;}
 aside h2{padding-bottom:8px; font-size:1.2em; text-transform:uppercase; border-bottom:5px solid #CCCCCC; text-align:right;}
 
 /* ----------------------------------------------Footer------------------------------------- */

@@ -1,0 +1,10 @@
+@charset "utf-8";
+/* ----------------------------------------------404 & signup succses------------------------------------- */
+.ER_SSWW { font-size: 36px; padding: 10px; }
+.ER_404 { font-size: 200px; }
+
+@media screen and (min-width : 250px) and (max-width : 650px) {
+.ER_SSWW { font-size: 26px; }
+.ER_404 { font-size: 100px; float: none; text-align: center; }
+}
+/* ----------------------------------------------- ######------------------------------------ */

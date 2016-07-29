@@ -7,7 +7,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="layout/styles/layout.css" type="text/css" media="all">
 <link rel="stylesheet" href="layout/styles/mediaqueries.css" type="text/css" media="all">
-<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
 <script src="layout/scripts/jquery.min.js"></script>
 <script src="layout/scripts/jquery-mobilemenu.min.js"></script>
 <script src="bootstrap/js/bootstrap.min.js"></script>
@@ -36,8 +35,8 @@
 	color: #FFFFFF;
 	border: none;
 	position: absolute;
-	border-bottom-right-radius: 4px;
-	border-top-right-radius: 4px;
+	border-bottom-right-radius: 3px;
+	border-top-right-radius: 3px;
 	top: 0px;
 	right: 0px;
 }
@@ -73,26 +72,28 @@
 	margin: 0;
 	padding: 0 10px;
 	border: none;
+	background-color:transparent;
 }
+#SNAV { display:none; }
 </style>
 </head>
 <body>
-<?php include ("Header.html");?>
+<?php include ("Header.php");?>
 <!-- content -->
 
 <div class="wrapper row3">
 	<div id="container"> 
 		
 		<!-- ################################################################################################ -->
+	
 		<div class="pad">
-			<form action="#" method="post">
+			<form action="Search.php" method="get">
 				<fieldset>
 					<div style="width:100%">
-						<div style="height:35px; width:100% ;border:1px solid #686868;border-radius:6px; margin:0; position:relative;">
-							<div style="float:left">&nbsp; </div>
-							<input type="text" value="Search Our Website&hellip;" class="MySearchBar" onFocus="this.value=(this.value=='Search Our Website&hellip;')? '' : this.value ;">
-							<input type="submit" id="Search" value="" class="MySearchButton" >
-							<input type="button" id="AdvSearch" value="&#9660;" class="MyadvSearchButton" onClick="AdvSR()" >
+						<div style="height:35px; width:100% ;border:1px solid #686868;border-radius:3px; margin:0; position:relative;">
+							<input id="advSearch" name="advSearch" type="text" value="Search Our Website&hellip;" class="MySearchBar" onFocus="this.value=(this.value=='Search Our Website&hellip;')? '' : this.value ;">
+							<input type="submit" value="" class="MySearchButton" >
+							<input type="button" value="&#9660;" class="MyadvSearchButton" onClick="AdvSR()" >
 						</div>
 						<div class="clear"></div>
 						<div id="AdvSearchBox" class="AdvSearchBox" >
@@ -101,8 +102,8 @@
 								<br>
 							</div>
 							<div class="AdvSearchLine">
-								<select class="MyImput">
-									<option>All</option>
+								<select id="advCategory" name="advCategory" class="MyImput">
+									<option selected>All</option>
 									<optgroup label="News">
 									<option>World News</option>
 									<option>ACU College News</option>
@@ -264,18 +265,18 @@
 </div>
 <?php include ("Footer.html");?>
 <script type="text/javascript">
-		document.getElementById("AdvSearchBox").style.display="none";
-		function AdvSR( ) 
+	document.getElementById("AdvSearchBox").style.display="none";
+	function AdvSR( ) 
+	{
+		if(document.getElementById("AdvSearchBox").style.display == "none")
 		{
-			if(document.getElementById("AdvSearchBox").style.display == "none")
-			{
-				document.getElementById("AdvSearchBox").style.display = "block";
-			}
-			else
-			{
-				document.getElementById("AdvSearchBox").style.display = "none";
-			}
+			document.getElementById("AdvSearchBox").style.display = "block";
 		}
-		</script>
+		else
+		{
+			document.getElementById("AdvSearchBox").style.display = "none";
+		}
+	}
+</script>
 </body>
 </html>
