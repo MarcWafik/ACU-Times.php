@@ -28,6 +28,24 @@ abstract class EntityArticle extends Entity {
 		$this->editorID = 0;
 	}
 
+	protected function fillFromAssoc($DBrow) {
+		parent::fillFromAssoc($DBrow);
+		$this->titleEnglish = $DBrow['titleEnglish'];
+		$this->titleArabic = $DBrow['titleArabic'];
+		$this->display = $DBrow['display'];
+		$this->writerID = $DBrow['writerID'];
+		$this->editorID = $DBrow['editorID'];
+	}
+
+	protected function bindParamClass($stmt) {
+		parent::bindParamClass($stmt);
+		$stmt->bindParam('titleEnglish', $this->titleEnglish);
+		$stmt->bindParam('titleArabic', $this->titleArabic);
+		$stmt->bindParam('display', $this->display);
+		$stmt->bindParam('writerID', $this->writerID);
+		$stmt->bindParam('editorID', $this->editorID);
+	}
+
 //=================================================Const===================================================
 	const DISPLAY_NEW = 0;
 	const DISPLAY_DENIED = 1;
@@ -76,11 +94,11 @@ abstract class EntityArticle extends Entity {
 
 //===================================================GET===================================================
 	public function getTitleEnglish() {
-		return $this->titleEnglishle;
+		return $this->titleEnglish;
 	}
 
 	public function getTitleArabic() {
-		return $this->titleArabicitle;
+		return $this->titleArabic;
 	}
 
 	public function getDisplay() {

@@ -15,7 +15,7 @@ if (valAllNotnull()) {
 		"email" => (bool) $User->setEmail($_POST["email"]),
 		"PhoneNo" => (bool) $User->setPhoneNumber($_POST["PhoneNo"]),
 		"Gender" => (bool) $User->setGender($_POST["Gender"]),
-		"Birthday" => (bool) $User->setBirthDate($_POST["BirthdayDay"], $_POST["BirthdayMonth"], $_POST["BirthdayYear"]),
+		"Birthday" => (bool) $User->setBirthDate($_POST["BirthdayYear"], $_POST["BirthdayMonth"], $_POST["BirthdayDay"]),
 		"IDtaken" => (bool) $User->isIDAvailable($_POST["ID"]),
 		"emailtaken" => (bool) $User->isEmailAvailable($_POST["email"]),
 	);
@@ -179,7 +179,7 @@ function valAllNotnull() {
 								required>
 							<option value="1">Male</option>
 							<option value="2">Female</option>
-							<option value="3" selected="selected">Leave Empty</option>
+							<option value="0" selected="selected">Leave Empty</option>
 						</select>
 						<span class="help-block"></span></div>
 				</div>

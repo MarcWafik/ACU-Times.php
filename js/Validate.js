@@ -99,7 +99,17 @@ function valBirthday(Month, Year, Day) {
 	}
 }
 //=========================================Title=========================================
+function valTitle(Check) {
+
+	isAllOkay.Name = true;
+	return ChangeHelpBlock(Check, isAllOkay.Name, "only Letters, space and symbols are allowed)");
+}
 //=========================================Description=========================================
+function valDescription(Check) {
+
+	isAllOkay.Name = true;
+	return ChangeHelpBlock(Check, isAllOkay.Name, "only Letters, space and symbols are allowed");
+}
 //=========================================Arabic=========================================
 function valArabic(Check) {
 	var patt = /^[\u0600-\u06FF]*$]/;

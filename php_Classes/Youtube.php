@@ -18,6 +18,8 @@ class Youtube extends EntityArticle implements iCRUD {
 	protected $descriptionArabic;
 	protected $ArrComments; // and array of class comment
 
+	const DB_TABLE_NAME = "youtube";
+
 	function __construct() {
 		$this->__init();
 	}
@@ -30,30 +32,54 @@ class Youtube extends EntityArticle implements iCRUD {
 		$this->ArrComments = array();
 	}
 
-	public function getComments() {
-		
+	protected function fillFromAssoc($DBrow) {
+		parent::fillFromAssoc($DBrow);
+		$this->youtubeID = $DBrow['youtubeID'];
+		$this->descriptionEnglish = $DBrow['descriptionEnglish'];
+		$this->descriptionArabic = $DBrow['descriptionArabic'];
 	}
 
-	public function addComment(Comment $imput) {
-		
+	protected function bindParamClass($stmt) {
+		parent::bindParamClass($stmt);
+		$stmt->bindParam('youtubeID', $this->youtubeID);
+		$stmt->bindParam('descriptionEnglish', $this->descriptionEnglish);
+		$stmt->bindParam('descriptionArabic', $this->descriptionArabic);
 	}
 
 //==================================================CRUD===================================================
-
 	public function create() {
-		
-	}
-
-	public function read($id) {
-		
+		return $this->Do_comand_Update_Creat("INSERT INTO " . static::DB_TABLE_NAME . "
+				(	titleEnglish, 
+					titleArabic, 
+					display, 
+					writerID, 
+					editorID, 
+					youtubeID, 
+					descriptionEnglish, 
+					descriptionArabic
+				) VALUES ( 
+					:titleEnglish, 
+					:titleArabic, 
+					:display, 
+					:writerID, 
+					:editorID, 
+					:youtubeID, 
+					:descriptionEnglish, 
+					:descriptionArabic 
+				)", FALSE, TRUE);
 	}
 
 	public function update() {
-		
-	}
-
-	public function delete() {
-		
+		return $this->Do_comand_Update_Creat("UPDATE " . static::DB_TABLE_NAME . " SET 
+					titleEnglish = :titleEnglish, 
+					titleArabic = :titleArabic, 
+					display = :display, 
+					writerID = :writerID, 
+					editorID = :editorID, 
+					youtubeID = :youtubeID, 
+					descriptionEnglish = :descriptionEnglish, 
+					descriptionArabic = :descriptionArabic, 
+				WHERE id=:id", TRUE, FALSE);
 	}
 
 	public function search($imput) {
@@ -88,6 +114,14 @@ class Youtube extends EntityArticle implements iCRUD {
 //===================================================GET===================================================
 	public function getyoutubeID() {
 		return $this->youtubeID;
+	}
+
+	public function getyoutubeURLString() {
+		return "https://www.youtube.com/watch?v=" . $this->youtubeID;
+	}
+
+	public function getyoutubeEmbededString() {
+		return "https://www.youtube.com/embed/" . $this->youtubeID;
 	}
 
 	public function getDescriptionEnglish() {

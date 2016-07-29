@@ -19,6 +19,4 @@ interface iCRUD {
 	public function update();
 
 	public function delete();
-
-	public function search($imput);
 }

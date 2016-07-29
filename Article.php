@@ -1,4 +1,17 @@
-<?php require_once 'autoload.php';
+<?php
+require_once 'autoload.php';
+$article = new Article();
+if (isset($_GET["id"]) && $article->read($_GET["id"])) {
+	
+} else {
+	header("Location: 404.php");
+	exit;
+}
+
+$writer = new User();
+if (!$writer->read($article->getWriterID())) {
+	$writer = new User();
+}
 ?><!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -21,19 +34,19 @@
 						<!-- Blog Post --> 
 
 						<!-- Title -->
-						<h1>Lorem ipsum dolor sit amet.</h1>
-				<div class="dropdown pull-right">
-					<button class="btn-setting btn btn-default " data-toggle="dropdown" aria-haspopup="true" > <i class="fa fa-bars" aria-hidden="true"></i> </button>
-					<ul class="dropdown-menu" aria-labelledby="dLabel">
-						<li><a href="#"><i class="fa fa-pencil"></i> Edit</a></li>
-						<li><a  href="#"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</a></li>
-					</ul>
-				</div>
+						<h1><?php echo $article->getTitleEnglish() ?></h1>
+						<div class="dropdown pull-right">
+							<button class="btn-setting btn btn-default " data-toggle="dropdown" aria-haspopup="true" > <i class="fa fa-bars" aria-hidden="true"></i> </button>
+							<ul class="dropdown-menu" aria-labelledby="dLabel">
+								<li><a href="#"><i class="fa fa-pencil"></i> Edit</a></li>
+								<li><a  href="#"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</a></li>
+							</ul>
+						</div>
 						<div class="container">
 							<a href="#"> <img class="img-64x64 img-responsive img-circle pull-left " src="images/User.png"> </a>
 							<div class="pull-left" style="padding-left:20px">
-								<h5><strong>By <a href="#">Name of writer</a>, ACU Times</strong></h5>
-								<h5> <span class="glyphicon glyphicon-time"></span> 3:00PM 10/10/2015 </h5>
+								<h5><strong>By <a href="Profile.php?id=<?php echo $article->getWriterID; ?>"><?php echo $writer->getfullName(); ?></a>, ACU Times</strong></h5>
+								<h5> <span class="glyphicon glyphicon-time"></span> <?php echo $article->getCreatDate_StringLong() ?> </h5>
 							</div>
 						</div>
 						<hr>
@@ -44,13 +57,7 @@
 
 						<!-- Post Content -->
 
-						<?php
-						$ds = DIRECTORY_SEPARATOR;
-						$loc = 'Data\Articles' . $ds . $article["ID"] . '.html';
-						if (file_exists($loc)) {
-							include( $loc );
-						}
-						?>
+						<?php echo $youtube->getBodyEnglish(); ?>
 						<!---------------------------------------------- Socail Media ---------------------------------------------------------->
 						<?php
 						$url = "//{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}";
@@ -73,30 +80,6 @@
 						</div>
 						<!---------------------------------------------- Posted Comments ----------------------------------------------------------> 
 
-
-
-
-
-
-
- <!-- Comment -->
-                <div class="media">
-                    <a class="pull-left" href="#">
-                        <img class="img-64x64 media-object img-circle" src="images/User.png" alt="">
-                    </a>
-                    <div class="media-body">
-                        <h4 class="media-heading">User Name
-                            <small> August 25, 2014 at 9:30 PM</small>
-                        </h4>
-                       <p class="comment-text"> Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>
-                    </div>
-                </div>
-
-
-
-
-
-
 					</div>
 
 					<!-- Blog Sidebar Widgets Column -->
@@ -110,7 +93,7 @@
 						</div>
 
 
-						<div class="well affix" data-spy="affix" data-offset-top="80" data-offset-bottom="200">
+						<div class="well">
 							<h3> Poll: Browser Statistics </h3>
 							<div> 
 								<a name="poll_bar" href="#">Chrome </a> <span name="poll_val">50.1% </span><br/>
@@ -121,7 +104,6 @@
 							</div>
 						</div>
 					</div>
-
 				</div>
 				<!-- /.row -->
 				<hr>

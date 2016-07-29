@@ -18,8 +18,10 @@ class Article extends Youtube implements iCRUD {
 	protected $importance; // 0~9
 	protected $imageNumber; // how many images  max is 99 (just for db)
 	protected $views = 0; // max 11
-	protected $bodyEnglish = 0; // max 64k
-	protected $bodyArabic = 0; // max 64k
+	protected $bodyEnglish = ""; // max 64k
+	protected $bodyArabic = ""; // max 64k
+
+	const DB_TABLE_NAME = "article";
 
 	function __construct() {
 		$this->__init();
@@ -29,27 +31,92 @@ class Article extends Youtube implements iCRUD {
 		parent::__init();
 		$this->categoryID = 0;
 		$this->language = 0;
-		$this->importance = 0; // 0~9
+		$this->importance = 0;
 		$this->imageNumber = 0;
 		$this->views = 0;
+		$this->bodyEnglish = "";
+		$this->bodyArabic = "";
+	}
+
+	protected function fillFromAssoc($DBrow) {
+		parent::fillFromAssoc($DBrow);
+
+		$this->categoryID = $DBrow['categoryID'];
+		$this->language = $DBrow['language'];
+		$this->importance = $DBrow['importance'];
+		$this->imageNumber = $DBrow['imageNumber'];
+		$this->views = $DBrow['views'];
+		$this->bodyEnglish = $DBrow['bodyEnglish'];
+		$this->bodyArabic = $DBrow['bodyArabic'];
+	}
+
+	protected function bindParamClass($stmt) {
+		parent::bindParamClass($stmt);
+
+		$stmt->bindParam('categoryID', $this->categoryID);
+		$stmt->bindParam('language', $this->language);
+		$stmt->bindParam('importance', $this->importance);
+		$stmt->bindParam('imageNumber', $this->imageNumber);
+		$stmt->bindParam('views', $this->views);
+		$stmt->bindParam('bodyEnglish', $this->bodyEnglish);
+		$stmt->bindParam('bodyArabic', $this->bodyArabic);
 	}
 
 //==================================================CRUD===================================================
-
 	public function create() {
-		
-	}
-
-	public function read($id) {
-		
+		return $this->Do_comand_Update_Creat("INSERT INTO " . static::DB_TABLE_NAME . "
+				(	titleEnglish, 
+					titleArabic, 
+					display, 
+					writerID, 
+					editorID, 
+					youtubeID, 
+					descriptionEnglish, 
+					descriptionArabic, 
+					bodyEnglish, 
+					bodyArabic, 
+					categoryID, 
+					language, 
+					importance, 
+					imageNumber, 
+					views
+				) VALUES ( 
+					:titleEnglish, 
+					:titleArabic, 
+					:display, 
+					:writerID, 
+					:editorID, 
+					:youtubeID, 
+					:descriptionEnglish, 
+					:descriptionArabic, 
+					:bodyEnglish, 
+					:bodyArabic, 
+					:categoryID, 
+					:language, 
+					:importance, 
+					:imageNumber, 
+					:views
+				)", FALSE, TRUE);
 	}
 
 	public function update() {
-		
-	}
-
-	public function delete() {
-		
+		return $this->Do_comand_Update_Creat("UPDATE " . static::DB_TABLE_NAME . " SET 
+					titleEnglish = :titleEnglish, 
+					titleArabic = :titleArabic, 
+					display = :display, 
+					writerID = :writerID, 
+					editorID = :editorID, 
+					youtubeID = :youtubeID, 
+					descriptionEnglish = :descriptionEnglish, 
+					descriptionArabic = :descriptionArabic, 
+					bodyEnglish = :bodyEnglish, 
+					bodyArabic = :bodyArabic, 
+					categoryID = :categoryID, 
+					language = :language, 
+					importance = :importance, 
+					imageNumber = :imageNumber, 
+					views = :views
+				WHERE id=:id", TRUE,TRUE);
 	}
 
 	public function search($imput) {

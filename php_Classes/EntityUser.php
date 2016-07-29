@@ -22,6 +22,18 @@ class EntityUser extends Entity {
 		$this->email = "";
 	}
 
+	protected function fillFromAssoc($DBrow) {
+		parent::fillFromAssoc($DBrow);
+		$this->fullName = $DBrow['fullName'];
+		$this->email = $DBrow['email'];
+	}
+
+	protected function bindParamClass($stmt) {
+		parent::bindParamClass($stmt);
+		$stmt->bindParam(':fullName', $this->fullName);
+		$stmt->bindParam(':email', $this->email);
+	}
+
 //===================================================SET===================================================
 
 	public function setfullName($name) {

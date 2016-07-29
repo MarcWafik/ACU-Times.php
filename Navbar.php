@@ -15,9 +15,9 @@
 
 				<li class="dropdown"> <a class="dropdown-toggle" data-toggle="dropdown" href="Category.php?Category=News">News <span class="caret"></span></a>
 					<ul class="dropdown-menu">
-						<li><a href="#">Page 1-1</a></li>
-						<li><a href="#">Page 1-2</a></li>
-						<li><a href="#">Page 1-3</a></li>
+						<li><a href="Category.php">Category 1</a></li>
+						<li><a href="Category.php">Category</a></li>
+						<li><a href="Category.php">Category</a></li>
 					</ul>
 				</li> 
 				<?php //foreach($CategoryList as $Category){PrintCategory($Category);}?>
@@ -27,26 +27,26 @@
 			<ul class="nav navbar-nav navbar-right">
 				<li class="dropdown"> <a class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></a>
 					<ul class="dropdown-menu">
-						<form action="Search.php" method="get" class="Search-navbar input-group">
-							<input type="text" class="form-control" placeholder="Search for..." id="Search" name="Search">
-							<span class="input-group-btn"><button class="btn btn-primary" type="submit"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button></span> 
-						</form>
+						<li>
+							<form action="Search.php" method="get" class="Search-navbar input-group">
+								<input type="text" class="form-control" placeholder="Search for..." id="Search" name="Search">
+								<span class="input-group-btn">
+									<button class="btn btn-primary" type="submit"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+								</span> 
+							</form>
+						</li>
 					</ul>
 				</li>
-				<!--<li><a href="SignUp.php"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li> -->
 				<?php
-				if (isset($_SESSION['id'])) {
-					$temp = "";
-					if ($_SESSION['user']["Status"] == "A") {
-						$temp = '<li><a href="MangeUsers.php">Mange Users</a></li>';
-					}
+				if (User::isLogin()) {
 					echo
-					'<li class="dropdown"> <a class="dropdown-toggle" data-toggle="dropdown" href=""><span class="glyphicon glyphicon-user"></span> ' . $_SESSION["user"]["name"] . '<span class="caret"></span></a>
+					'<li class="dropdown"> <a class="dropdown-toggle" data-toggle="dropdown" href=""><span class="glyphicon glyphicon-user"></span> '
+					. User::getSessionUserFullName() . ' <span class="caret"></span></a>
 	<ul class="dropdown-menu">
 		<li><a href="Profile.php">Profile</a></li>
-		<li><a href="WriteArticle.php">Write Article</a></li>'
-					. $temp .
-					'<li><a href="Redir_Logout.php">Logout</a></li>
+		<li><a href="CreatArticle.php">Write Article</a></li>
+		<li><a href="Members.php">Members</a></li>
+		<li><a href="Redir_Logout.php">Logout</a></li>
 	</ul>
 </li>';
 				} else {

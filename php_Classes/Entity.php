@@ -23,25 +23,48 @@ abstract class Entity {
 		$this->setLastUpdateDate();
 	}
 
+	protected function fillFromAssoc($DBrow) {
+		$this->id = $DBrow['id'];
+		$this->creatDate = new DateTime($DBrow['creatDate']);
+		$this->lastUpdateDate = new DateTime($DBrow['lastUpdateDate']);
+	}
+
+	protected function bindParamClass($stmt) {
+		
+	}
+
 //=================================================Const===================================================
 	const LANGUAGE_ENGLISH = 0;
 	const LANGUAGE_ARABIC = 1;
 	const LANGUAGE_Both = 2;
 	const DB_TABLE_NAME = "";
 
-//================================================Delete===================================================
-	public function delete() {
+//================================================CUID===================================================
+	protected function Do_comand_Update_Creat($comand, $bindID = FALSE, $creat = FALSE) {
 		$conn = DataBase::getConnection();
 		if ($conn === null) {
 			return FALSE;
 		}
 		try {
-			$sql = "DELETE FROM " . self::DB_TABLE_NAME . " WHERE id=" . $this->id;
-			return $conn->exec($sql);
+			$stmt = $conn->prepare($comand);
+
+			$this->bindParamClass($stmt);
+			if ($bindID) {
+				$stmt->bindParam(':id', $this->id);
+			}
+			$ret = $stmt->execute();
+			if ($creat && $ret) {
+				$this->id = $conn->lastInsertId();
+			}
+			return $ret;
 		} catch (PDOException $e) {
-			//echo $sql . "<br>" . $e->getMessage();
+			echo "Error: " . $e->getMessage();
 			return FALSE;
 		}
+	}
+
+	public function delete() {
+		static::delete_Static($this->id);
 	}
 
 	public static function delete_Static($id) {
@@ -50,11 +73,59 @@ abstract class Entity {
 			return FALSE;
 		}
 		try {
-			$sql = "DELETE FROM " . self::DB_TABLE_NAME . " WHERE id=" . $id;
-			return $conn->exec($sql);
+			$stmt = $conn->prepare("DELETE FROM " . static::DB_TABLE_NAME . " WHERE ID=:imputID");
+			$stmt->bindParam(':imputID', $id);
+			$stmt->execute();
+			return TRUE;
 		} catch (PDOException $e) {
-			//echo $sql . "<br>" . $e->getMessage();
+			echo $sql . "<br>" . $e->getMessage();
 			return FALSE;
+		}
+	}
+
+	public function read($id) {
+		$conn = DataBase::getConnection();
+		if ($conn === null) {
+			return FALSE;
+		}
+
+		try {
+
+			$stmt = $conn->prepare("SELECT * FROM " . static::DB_TABLE_NAME . " WHERE ID=:imputID");
+			$stmt->bindParam(':imputID', $id);
+			$stmt->execute();
+			$stmt->setFetchMode(PDO::FETCH_ASSOC);
+
+			$temp = $stmt->fetch();
+			if ($temp != false) {
+				$this->fillFromAssoc($temp);
+				return TRUE;
+			}
+			return FALSE;
+		} catch (PDOException $e) {
+			echo "Error: " . $e->getMessage();
+			return FALSE;
+		}
+	}
+
+	public static function readAllLimit($offset, $size) {
+
+
+		try {
+			$conn = DataBase::getConnection();
+			$stmt = $conn->prepare("SELECT * FROM " . static::DB_TABLE_NAME . " LIMIT $size OFFSET $offset");
+			$stmt->execute();
+			$stmt->setFetchMode(PDO::FETCH_ASSOC);
+
+			$result = array();
+			foreach ($stmt->fetchAll() as $value) {
+				$temp = new static();
+				$temp->fillFromAssoc($value);
+				array_push($result, $temp);
+			}
+			return $result;
+		} catch (PDOException $e) {
+			echo "Error: " . $e->getMessage();
 		}
 	}
 

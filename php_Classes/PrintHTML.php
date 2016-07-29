@@ -125,10 +125,10 @@ class PrintHTML {
 		if (!$isAdmin) {
 			$MakeAdmin = '<li><a href="#"><i class="fa fa-user"></i> Make Admin</a></li>';
 		}
-		return '<hr>
+		echo '<hr>
 			<div class="container">
 				<div class=" col-xs-10">
-					<div class="col-sm-2 text-center"><a href="Profile.php?ID=' . $ID . '"><img src="' . $IMG . '" class="mg-80x80 img-circle"></a></div>
+					<div class="col-sm-2 text-center"><a href="Profile.php?ID=' . $ID . '"><img src="' . $IMG . '" class="img-80x80 img-circle"></a></div>
 					<div class="col-sm-10">
 						<h4><a href="Profile.php?ID=' . $ID . '">' . $name . '</a><br>
 							<small>' . $ID . '<br>' . $Email . '</small></h4>

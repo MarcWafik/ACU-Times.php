@@ -22,6 +22,8 @@
 			<div class="clearfix"></div>
 
 
+
+			<!-------			
 			<hr>
 			<div class="container">
 				<div class=" col-xs-11">
@@ -41,13 +43,13 @@
 					</ul>
 				</div>
 			</div>
-			<hr>
-			<?php 
-	
-			
-			echo substr (md5(uniqid(rand(), true)) , 0 ,8 ); 
+			<hr>--------->
 
-			
+			<?php
+			$arr = User::readAllLimit(0, 9999999);
+			foreach ($arr as $value) {
+				PrintHTML::Member($value->getId(), $value->getfullName(), $value->getEmail(), User::isAdmin(), "images/User.png");
+			}
 			?>
 			<!-------------------------------- pagination -------------------------------->
 			<button type="button" class="btn btn-primary center-block" onClick="">Load more <i class="fa fa-arrow-down" aria-hidden="true"></i></button>
