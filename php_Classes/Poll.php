@@ -13,7 +13,7 @@
  */
 class Poll extends EntityArticle implements iCRUD {
 
-	protected $choices = array(); // an array of poll choices
+	protected $arrChoices = array(); // an array of poll choices
 
 	function __construct() {
 		$this->__init();
@@ -47,15 +47,35 @@ class Poll extends EntityArticle implements iCRUD {
 	}
 
 //===================================================SET===================================================
-	public function addOption(PollChoice $opt) {
-		array_push($this->choices, $opt);
+	public function addOption($textEnglish, $textArabic) {
+		$temp = new PollChoice();
+		if ($temp->setText($textEnglish, $textArabic)) {
+			array_push($this->arrChoices, $temp);
+			return TRUE;
+		}
+		return False;
+	}
+
+	public function clearAllOption() {
+		$this->arrChoices = array();
 		return TRUE;
+	}
+
+	public function setDisplayFromSession(Accses $Accses) {
+		$this->display = $Accses->getPoll();
+	}
+
+//===================================================GET===================================================
+	public function getArrChoices() {
+		return $this->arrChoices;
 	}
 
 	public function hasAccsesToModify(Accses $Accses) {
 		return $this->hasAccsesToModify_private($Accses->getPoll());
 	}
-	public function setDisplayFromSession(Accses $Accses) {
-		$this->display = $Accses->getPoll();
+
+	public function isValidPoll() {
+		return count($this->arrChoices) >= 2;
 	}
+
 }
