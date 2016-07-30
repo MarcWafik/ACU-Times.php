@@ -333,7 +333,7 @@ function valAllNotnull() {
 			 }
 			 });
 			 };*/
-
+			//Dropzone.autoDiscover = false;
 			var myDropzone = new Dropzone("div#upload-widget", {
 				url: "creat_article.php",
 				maxFilesize: 4,
@@ -344,6 +344,9 @@ function valAllNotnull() {
 						//renameFilename: cleanFilename,
 
 			});
+
+
+
 		</script>
 		<script>
 			function onLoad() {

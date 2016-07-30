@@ -1,41 +1,58 @@
 <?php
 require_once 'autoload.php';
-$Youtube = new Youtube();
+// Check for accses
+User::CheckLogin();
+$Multimedia = new Youtube();
+$access = User::getSessionAccses();
+if (!$Multimedia->hasAccsesToModify($access)) {
+	header("Location: accses_denied.php");
+}
+
+// Update
 if (isset($_GET["id"])) {
-	if ($Youtube->read($_GET["id"]) === FALSE) {
+	if ($Multimedia->read($_GET["id"])) {
+		$Data = array(
+			"Youtubelink" => $Multimedia->getyoutubeURLString(),
+			"title_en" => $Multimedia->getTitleEnglish(),
+			"description_en" => $Multimedia->getDescriptionEnglish(),
+			"title_ar" => $Multimedia->getTitleArabic(),
+			"description_ar" => $Multimedia->getDescriptionArabic()
+		);
+	} else {
 		header("Location: 404.php");
 		exit;
-	} else {
-		$Data = array(
-			"Youtubelink" => $Youtube->getyoutubeURLString(),
-			"title_en" => $Youtube->getTitleEnglish(),
-			"description_en" => $Youtube->getDescriptionEnglish(),
-			"title_ar" => $Youtube->getTitleArabic(),
-			"description_ar" => $Youtube->getDescriptionArabic()
-		);
 	}
 }
 
 if (valAllNotnull()) {
-	$iscorrect = array(
-		"Youtubelink" => (bool) $Youtube->setyoutubeID($_POST["Youtubelink"]),
-		"title_en" => (bool) $Youtube->setTitleEnglish($_POST["title_en"]),
-		"description_en" => (bool) $Youtube->setDescriptionEnglish($_POST["description_en"]),
-		"title_ar" => (bool) $Youtube->setTitleArabic($_POST["title_ar"]),
-		"description_ar" => (bool) $Youtube->setDescriptionArabic($_POST["description_ar"])
-	);
 
+	// setting the data
+	$iscorrect = array(
+		"Youtubelink" => (bool) $Multimedia->setyoutubeID($_POST["Youtubelink"]),
+		"title_en" => (bool) $Multimedia->setTitleEnglish($_POST["title_en"]),
+		"description_en" => (bool) $Multimedia->setDescriptionEnglish($_POST["description_en"]),
+		"title_ar" => (bool) $Multimedia->setTitleArabic($_POST["title_ar"]),
+		"description_ar" => (bool) $Multimedia->setDescriptionEnglish($_POST["description_ar"]));
+
+
+	// set the publish or aprove or creat
+	$Multimedia->setDisplayFromSession($access);
+	$passed = FALSE;
+	// check if the imput is valid
 	if (Validation::valAll($iscorrect)) {
 
 		if (isset($_GET["id"])) {
-			$passed = (bool) $Youtube->update();
+			$passed = (bool) $Multimedia->update();
 		} else {
-			$passed = (bool) $Youtube->create();
+			$Multimedia->setWriterID(User::getSessionUserID());
+			$passed = (bool) $Multimedia->create();
 		}
-		if ($passed) {
-			header("Location: video.php?id=$Youtube->getId");
-			exit;
-		}
+	}
+
+	// check if every thing went right
+	if ($passed) {
+		header("Location: multimedia.php?id=" . $Multimedia->getId());
+		exit;
 	} else {
 		$Data = array(
 			"Youtubelink" => $_POST["Youtubelink"],
@@ -46,6 +63,8 @@ if (valAllNotnull()) {
 		);
 	}
 }
+
+
 
 function valAllNotnull() {
 	return
@@ -89,7 +108,7 @@ function valAllNotnull() {
 							   onBlur="valYouTube(this)" 
 							   value="<?php echo @$Data["Youtubelink"] ?>">
 						<span class="help-block"><ul>
-								<?php PrintHTML::validation("IDtaken", @$iscorrect["IDtaken"], "ID is Already Taken") ?>
+								<?php PrintHTML::validation("Youtubelink", @$iscorrect["Youtubelink"], "Invalid Input") ?>
 							</ul></span> </div>
 				</div>
 				<div id="en">
@@ -111,7 +130,7 @@ function valAllNotnull() {
 								   autocomplete="on">
 							<span class="help-block">
 								<ul>
-									<?php PrintHTML::validation("IDtaken", @$iscorrect["IDtaken"], "ID is Already Taken") ?>
+									<?php PrintHTML::validation("title_en", @$iscorrect["title_en"], "Invalid Input") ?>
 								</ul>
 							</span></div>
 					</div>
@@ -132,7 +151,7 @@ function valAllNotnull() {
 								   autocomplete="on">
 							<span class="help-block">
 								<ul>
-									<?php PrintHTML::validation("IDtaken", @$iscorrect["IDtaken"], "ID is Already Taken") ?>
+									<?php PrintHTML::validation("description_en", @$iscorrect["description_en"], "Invalid Input") ?>
 								</ul>
 							</span></div>
 					</div>
@@ -157,7 +176,7 @@ function valAllNotnull() {
 								   autocomplete="on">
 							<span class="help-block">
 								<ul>
-									<?php PrintHTML::validation("IDtaken", @$iscorrect["IDtaken"], "ID is Already Taken") ?>
+									<?php PrintHTML::validation("title_ar", @$iscorrect["title_ar"], "Invalid Input") ?>
 								</ul>
 							</span></div>
 					</div>
@@ -177,7 +196,7 @@ function valAllNotnull() {
 								   autocomplete="on">
 							<span class="help-block">
 								<ul>
-									<?php PrintHTML::validation("IDtaken", @$iscorrect["IDtaken"], "ID is Already Taken") ?>
+									<?php PrintHTML::validation("description_ar", @$iscorrect["description_ar"], "Invalid Input") ?>
 								</ul>
 							</span></div>
 					</div>

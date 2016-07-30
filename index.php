@@ -2,19 +2,12 @@
 ?><!DOCTYPE html>
 <html lang="en">
 	<head>
-		<script type="text/javascript">
-			(function (G, o, O, g, L, e) {
-				G[g] = G[g] || function () {
-					(G[g]['q'] = G[g]['q'] || []).push(
-							arguments)
-				}, G[g]['t'] = 1 * new Date;
-				L = o.createElement(O), e = o.getElementsByTagName(
-						O)[0];
-				L.async = 1;
-				L.src = '//www.google.com/adsense/search/async-ads.js';
-				e.parentNode.insertBefore(L, e)
-			})(window, document, 'script', '_googCsa');
-		</script>
+<script type="text/javascript" charset="utf-8">
+  (function(G,o,O,g,L,e){G[g]=G[g]||function(){(G[g]['q']=G[g]['q']||[]).push(
+   arguments)},G[g]['t']=1*new Date;L=o.createElement(O),e=o.getElementsByTagName(
+   O)[0];L.async=1;L.src='//www.google.com/adsense/search/async-ads.js';
+  e.parentNode.insertBefore(L,e)})(window,document,'script','_googCsa');
+</script>
 		<title>ACU Times | Home</title>
 		<?php require_once("header.php"); ?>
 
@@ -124,11 +117,10 @@
 			</div>
 		</div>
 	<center><div id="adcontainer1"></div></center>
-
-	<script type="text/javascript">
+	<script type="text/javascript" charset="utf-8">
 		var pageOptions = {
 			'pubId': 'pub-9616389000213823',
-			'query': 'journal',
+			'query': 'news',
 			'hl': 'en',
 			'adPage': 1
 		};
@@ -142,22 +134,6 @@
 
 	</script>
 
-	<script>
-		(function (i, s, o, g, r, a, m) {
-			i['GoogleAnalyticsObject'] = r;
-			i[r] = i[r] || function () {
-				(i[r].q = i[r].q || []).push(arguments)
-			}, i[r].l = 1 * new Date();
-			a = s.createElement(o),
-					m = s.getElementsByTagName(o)[0];
-			a.async = 1;
-			a.src = g;
-			m.parentNode.insertBefore(a, m)
-		})(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
-
-		ga('create', 'UA-77729154-1', 'auto');
-		ga('send', 'pageview');
-	</script>
 	<?php require_once("footer.php"); ?> 
 </body>
 </html>

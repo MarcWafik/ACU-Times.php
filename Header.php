@@ -6,6 +6,7 @@
 <link rel="stylesheet" href="css/bootstrap.min.css">
 <script src="js/jquery-1.12.3.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
+<script src="js/analytics.js"></script>
 <!--[if lt IE 9]-->
 <?php
 if (FALSE) {//will find a proper condition later

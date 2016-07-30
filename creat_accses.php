@@ -36,7 +36,9 @@ if (valAllNotnull()) {
 		"Poll" => (bool) $access->setPoll($_POST["Poll"]),
 		"Gallery" => (bool) $access->setGallery($_POST["title_en"]),
 		"Multimedia" => (bool) $access->setYoutube($_POST["Multimedia"]),
-		"User" => (bool) $access->setUser($_POST["User"]));
+		"User" => (bool) $access->setUser($_POST["User"])
+			);
+	$passed = FALSE;
 
 	// check if the imput is valid
 	if (Validation::valAll($iscorrect)) {
@@ -50,7 +52,7 @@ if (valAllNotnull()) {
 
 	// check if every thing went right
 	if ($passed) {
-		header("Location: members.php");
+		header("Location: index.php");
 		exit;
 	} else {
 		$Data = array(

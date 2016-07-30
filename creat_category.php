@@ -27,7 +27,7 @@ if (valAllNotnull()) {
 	// setting the data
 	$iscorrect = array(
 		"title_en" => (bool) $category->setNameEnglish($_POST["title_en"]),
-		"title_ar" => (bool) $category->setNameEnglish($_POST["title_ar"]),
+		"title_ar" => (bool) $category->setName($_POST["title_ar"]),
 		"Category" => (bool) $category->setParentID($_POST["Category"])
 	);
 

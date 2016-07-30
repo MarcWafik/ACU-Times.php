@@ -1,3 +1,84 @@
+<?php
+require_once 'autoload.php';
+// Check for accses
+User::CheckLogin();
+$Gallery = new Gallery();
+$access = User::getSessionAccses();
+if (!$Gallery->hasAccsesToModify($access)) {
+	header("Location: accses_denied.php");
+}
+
+// Update
+if (isset($_GET["id"])) {
+	if ($Gallery->read($_GET["id"])) {
+		$Data = array(
+			"title_en" => $Gallery->getTitleEnglish(),
+			"title_ar" => $Gallery->getTitleArabic()
+		);
+	} else {
+		header("Location: 404.php");
+		exit;
+	}
+}
+
+if (valAllNotnull()) {
+
+	// setting the data
+	$iscorrect = array(
+		"title_en" => (bool) $Gallery->setTitleEnglish($_POST["title_en"]),
+		"title_ar" => (bool) $Gallery->setTitleArabic($_POST["title_ar"])
+	);
+
+
+	// set the publish or aprove or creat
+	$Gallery->setDisplayFromSession($access);
+	$passed = FALSE;
+	// check if the imput is valid
+	if (Validation::valAll($iscorrect)) {
+
+		if (isset($_GET["id"])) {
+			$passed = (bool) $Gallery->update();
+			if ($passed) {
+				$x = new Updates;
+				$x->setEditorID(User::getSessionUserID());
+				$x->setTargetType(Updates::TARGET_TYPE_GALLERY);
+				$x->setTargetID($Gallery->getId());
+				$x->setMessageType(Updates::MESSAGE_TYPE_UPDATE);
+				$x->create();
+
+				$y = new Notification;
+				$y->setUserID($Gallery->getWriterID());
+				$y->setSource(Notification::SOURCE_GALLERY);
+				$y->setsourceID($Gallery->getId());
+				$y->setMessage("Gallery was updated succsesfuly");
+				$y->create();
+			}
+		} else {
+			$Gallery->setWriterID(User::getSessionUserID());
+			$passed = (bool) $Gallery->create();
+		}
+	}
+
+	// check if every thing went right
+	if ($passed) {
+		header("Location: multimedia.php?id=" . $Gallery->getId());
+		exit;
+	} else {
+		$Data = array(
+			"title_en" => $_POST["title_en"],
+			"title_ar" => $_POST["title_ar"]
+		);
+	}
+}
+
+function valAllNotnull() {
+	return
+
+			isset($_POST["title_en"]) &&
+			isset($_POST["title_ar"]);
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -38,7 +119,7 @@
 							   autocomplete="on">
 						<span class="help-block">
 							<ul>
-								<?php PrintHTML::validation("IDtaken", @$iscorrect["IDtaken"], "ID is Already Taken") ?>
+								<?php PrintHTML::validation("title_en", @$iscorrect["title_en"], "Invalid Input") ?>
 							</ul>
 						</span></div>
 				</div>
@@ -58,7 +139,7 @@
 							   autocomplete="on">
 						<span class="help-block">
 							<ul>
-								<?php PrintHTML::validation("IDtaken", @$iscorrect["IDtaken"], "ID is Already Taken") ?>
+								<?php PrintHTML::validation("title_ar", @$iscorrect["title_ar"], "Invalid Input") ?>
 							</ul>
 						</span></div>
 				</div>

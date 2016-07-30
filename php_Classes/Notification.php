@@ -25,8 +25,10 @@ class Notification extends Entity implements iCRUD {
 	const IMPORTANCE_WARNING = 2;
 	const IMPORTANCE_DANGER = 3;
 	const SOURCE_USER = 0;
-	const SOURCE_COMMENT = 1;
-	const SOURCE_ARTICLE = 2;
+	const SOURCE_ARTICLE = 1;
+	const SOURCE_GALLERY = 2;
+	const SOURCE_POLL = 3;
+	const SOURCE_MULTIMEDIA = 4;
 	const DB_TABLE_NAME = "notification";
 
 	function __construct() {
