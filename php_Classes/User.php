@@ -43,7 +43,7 @@ class User extends EntityUser implements iCRUD {
 		$this->nameArabic = $DBrow['nameArabic'];
 		$this->password = $DBrow['password'];
 		$this->gender = $DBrow['gender'];
-		$this->accsesID = $DBrow['accses'];
+		$this->accsesID = $DBrow['accsesID'];
 		$this->about = $DBrow['about'];
 		$this->birthDate = new DateTime($DBrow['birthDate']);
 	}
@@ -54,7 +54,7 @@ class User extends EntityUser implements iCRUD {
 		$stmt->bindParam(':nameArabic', $this->nameArabic);
 		$stmt->bindParam(':password', $this->password);
 		$stmt->bindParam(':gender', $this->gender);
-		$stmt->bindParam(':accses', $this->accsesID);
+		$stmt->bindParam(':accsesID', $this->accsesID);
 		$stmt->bindParam(':about', $this->about);
 		$stmt->bindParam(':birthDate', $this->birthDate->format('Y-m-d'));
 	}
@@ -81,7 +81,7 @@ class User extends EntityUser implements iCRUD {
 							nameArabic, 
 							password, 
 							gender, 
-							accses, 
+							accsesID, 
 							about, 
 							birthDate
 						) VALUES (
@@ -92,7 +92,7 @@ class User extends EntityUser implements iCRUD {
 							:nameArabic, 
 							:password, 
 							:gender, 
-							:accses, 
+							:accsesID, 
 							:about, 
 							:birthDate
 						)", TRUE);
@@ -106,7 +106,7 @@ class User extends EntityUser implements iCRUD {
 				nameArabic = :nameArabic, 
 				password = :password, 
 				gender = :gender, 
-				accses = :accses, 
+				accsesID = :accsesID, 
 				about = :about, 
 				birthDate = :birthDate 
 				WHERE id=:id", TRUE);

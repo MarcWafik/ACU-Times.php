@@ -3,9 +3,6 @@ require_once 'autoload.php';
 
 if (valAllNotnull()) {
 	$User = new User();
-	$User->setAccses(User::ACCSES_REGULAR);
-	$User->setCreatDate();
-	$User->setLastUpdateDate();
 	$iscorrect = array();
 	$iscorrect = array(
 		"ID" => (bool) $User->setID($_POST["ID"]),
@@ -21,8 +18,8 @@ if (valAllNotnull()) {
 	);
 	if (Validation::valAll($iscorrect)) {
 		$User->create();
-		header("Location: signup_success.php");
-		exit;
+	//	header("Location: signup_success.php");
+	//	exit;
 	}
 }
 
