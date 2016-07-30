@@ -16,7 +16,8 @@ class Notification extends Entity implements iCRUD {
 	private $message;
 	private $importance;
 	private $source;
-	private $targetID;
+	private $sourceID;
+	private $userID;
 
 	function __construct() {
 		$this->__init();
@@ -27,7 +28,8 @@ class Notification extends Entity implements iCRUD {
 		$this->message = "";
 		$this->importance = 0;
 		$this->source = 0;
-		$this->targetID = 0;
+		$this->sourceID = 0;
+		$this->userID = 0;
 	}
 
 //=================================================Const===================================================
@@ -88,9 +90,9 @@ class Notification extends Entity implements iCRUD {
 		return FALSE;
 	}
 
-	public function setTargetID($ID) {
+	public function setUserID($ID) {
 		if (Validation::isNumLagerThan($ID, 0)) {
-			$this->targetID = (int) $ID;
+			$this->userID = (int) $ID;
 			return TRUE;
 		}
 		return FALSE;
@@ -109,8 +111,8 @@ class Notification extends Entity implements iCRUD {
 		return $this->source;
 	}
 
-	public function getTargetID() {
-		return $this->targetID;
+	public function getUserID() {
+		return $this->userID;
 	}
 
 }

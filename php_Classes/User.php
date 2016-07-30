@@ -21,7 +21,6 @@ class User extends EntityUser implements iCRUD {
 	protected $accsesID;   //11
 	protected $about;  //2048
 	protected $birthDate;  // using datetime class
-	protected $arrNotification; // an array of notification
 
 	function __construct() {
 		$this->__init();
@@ -114,7 +113,27 @@ class User extends EntityUser implements iCRUD {
 		return TRUE;
 	}
 
-//==========================================NOTIFICATION===================================================
+//============================================GETrelated===================================================
+	function LoadArrNotification() {
+		
+	}
+
+	function LoadArrArticle() {
+		
+	}
+
+	function LoadArrPoll() {
+		
+	}
+
+	function LoadArrGallery() {
+		
+	}
+
+	function LoadArrYoutube() {
+		
+	}
+
 //===============================================Session===================================================
 	function Login($id, $password) {
 		if ($this->read($id) && $this->isCorrectPassword($password)) {

@@ -1,16 +1,5 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
- * Description of Accses
- *
- * @author marcw
- */
 class Accses extends Entity implements iCRUD {
 
 	protected $poll;
@@ -18,6 +7,7 @@ class Accses extends Entity implements iCRUD {
 	protected $youtube;
 	protected $gallery;
 	protected $user;
+	protected $email;
 	protected $titleEnglish;
 	protected $titleArabic;
 
@@ -31,6 +21,7 @@ class Accses extends Entity implements iCRUD {
 		$this->youtube = 0;
 		$this->gallery = 0;
 		$this->user = 0;
+		$this->email = 0;
 		$this->titleEnglish = "";
 		$this->titleArabic = "";
 	}
@@ -41,6 +32,7 @@ class Accses extends Entity implements iCRUD {
 		$this->youtube = $DBrow['youtube'];
 		$this->gallery = $DBrow['gallery'];
 		$this->user = $DBrow['user'];
+		$this->email = $DBrow['email'];
 		$this->titleEnglish = $DBrow['titleEnglish'];
 		$this->titleArabic = $DBrow['titleArabic'];
 	}
@@ -52,6 +44,7 @@ class Accses extends Entity implements iCRUD {
 		$stmt->bindParam(':youtube', $this->youtube);
 		$stmt->bindParam(':gallery', $this->gallery);
 		$stmt->bindParam(':user', $this->user);
+		$stmt->bindParam(':email', $this->email);
 		$stmt->bindParam(':titleEnglish', $this->titleEnglish);
 		$stmt->bindParam(':titleArabic', $this->titleArabic);
 	}
@@ -61,8 +54,9 @@ class Accses extends Entity implements iCRUD {
 	const DB_TABLE_NAME = "accses";
 	const READ = 0;
 	const CREAT = 1;
-	const UPDATE = 2;
-	const FULL = 3;
+	const APPROVE = 2;
+	const PUBLISH = 3;
+	const FULL = 4;
 
 //==================================================CRUD===================================================
 	public function create() {
@@ -93,6 +87,10 @@ class Accses extends Entity implements iCRUD {
 
 	function getUser() {
 		return $this->user;
+	}
+
+	function getEmail() {
+		return $this->email;
 	}
 
 	function getTitleEnglish() {

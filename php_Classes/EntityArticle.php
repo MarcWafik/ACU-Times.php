@@ -17,7 +17,7 @@ abstract class EntityArticle extends Entity {
 	protected $titleArabic; //64
 	protected $display; //1
 	protected $writerID;
-	protected $editorID;
+	protected $arrUpdates;
 
 	public function __init() {
 		parent::__init();
@@ -47,10 +47,12 @@ abstract class EntityArticle extends Entity {
 	}
 
 //=================================================Const===================================================
-	const DISPLAY_NEW = 0;
-	const DISPLAY_DENIED = 1;
-	const DISPLAY_HIDEN = 2;
-	const DISPLAY_SHOWN = 3;
+	const DISPLAY_DRAFT = 0;
+	const DISPLAY_NEW = 1;
+	const DISPLAY_DENIED = 2;
+	const DISPLAY_APPROVED = 3;
+	const DISPLAY_PUBLISHED = 4;
+	const DISPLAY_HIDEN = 5;
 
 //===================================================SET===================================================
 	public function setTitleEnglish($title) {
@@ -72,7 +74,7 @@ abstract class EntityArticle extends Entity {
 	}
 
 	public function setDisplay($display) {
-		if (Validation::isNumInRange($display, 0, 2)) {
+		if (Validation::isNumInRange($display, 0, 4)) {
 			$this->display = (int) $display;
 		}
 		return FALSE;
