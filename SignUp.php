@@ -1,6 +1,6 @@
 <?php
 require_once 'autoload.php';
-UserController::Creat();
+UserController::Create();
 ?><!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -21,7 +21,7 @@ UserController::Creat();
 			<br>
 			<form  role="form" action="signup.php" method="post" onSubmit="return isAllValid()">
 				<div class="form-group">
-					<label  class="control-label" class="control-label" for="fullName">Full name :</label>
+					<label  class="control-label" for="fullName">Full name :</label>
 					<div class="controls">
 						<input type="text" 
 							   name="fullName" 
@@ -33,7 +33,6 @@ UserController::Creat();
 							   autocomplete="on"
 							   maxlength="32">
 						<span class="help-block"><ul>
-								<?php PrintHTML::validation("fullName", @$iscorrect["fullName"], "Enter a Valid Name (Letters and space only)") ?>
 							</ul></span>
 					</div>
 				</div>
@@ -51,8 +50,6 @@ UserController::Creat();
 							   required 
 							   autocomplete="on">
 						<span class="help-block"><ul>
-								<?php PrintHTML::validation("ID", @$iscorrect["ID"], "") ?>
-								<?php PrintHTML::validation("IDtaken", @$iscorrect["IDtaken"], "ID is Already Taken") ?>
 							</ul></span> </div>
 				</div>
 
@@ -70,7 +67,6 @@ UserController::Creat();
 							   autocomplete="on" 
 							   maxlength="256">
 						<span class="help-block"><ul>
-								<?php PrintHTML::validation("email", @$iscorrect["email"], "Enter a Valid E-mail") ?>
 							</ul></span>
 					</div>
 				</div>
@@ -87,9 +83,7 @@ UserController::Creat();
 							   onBlur="valPassword(this)" 
 							   maxlength="32" 
 							   required>
-						<span class="help-block"><ul>
-								<?php PrintHTML::validation("password", @$iscorrect["password"], "Must contain a number (0-9) ,upercase letter (A-Z) & lowercase letter (a-z)") ?>
-							</ul></span>
+						<span class="help-block"><ul></ul></span>
 					</div>
 				</div>
 
@@ -105,9 +99,7 @@ UserController::Creat();
 							   onBlur="valRePassword(this, Password)" 
 							   maxlength="32" 
 							   required>
-						<span class="help-block"><ul>
-								<?php PrintHTML::validation("RePassword", @$iscorrect["RePassword"], "password does not match") ?>
-							</ul></span>
+						<span class="help-block"><ul></ul></span>
 					</div>
 				</div>
 
@@ -123,9 +115,7 @@ UserController::Creat();
 							   maxlength="13" 
 							   onBlur="valPhoneNo(this)" 
 							   autocomplete="on">
-						<span class="help-block"><ul>
-								<?php PrintHTML::validation("phoneNumber", @$iscorrect["phoneNumber"], "Enter a correct Phone Number") ?>
-							</ul></span>
+						<span class="help-block"><ul></ul></span>
 					</div>
 				</div>
 
@@ -175,22 +165,18 @@ UserController::Creat();
 										<?php PrintHTML::numericOption(1, 31, @$_POST["BirthdayDay"]) ?>
 							</select>
 						</div>
-						<span class="help-block"><ul>
-								<?php PrintHTML::validation("birthDate", @$iscorrect["birthDate"], "Enter a valid date") ?>
-							</ul></span>
+						<span class="help-block"><ul></ul></span>
 					</div>
 				</div>
+				<!-- #################################################################### Submit #################################################################### -->
+				<div  class="MyContainer text-center">Clicking Create account means that you agree to <br>
+					our <a href="Register.html" title="Services Agreement">Services Agreement</a> and <a href="Register.html">Privacy Policy</a><br>
+					<br>
+					<button type="submit" name="submit" id="submit" class="btn btn-primary center-block" >Creat Account</button>
+				</div>
+			</form>
 		</div>
-
-		<!-- #################################################################### Submit #################################################################### -->
-		<div  class="MyContainer text-center">Clicking Create account means that you agree to <br>
-			our <a href="Register.html" title="Services Agreement">Services Agreement</a> and <a href="Register.html">Privacy Policy</a><br>
-			<br>
-			<button type="submit" name="submit" id="submit" class="btn btn-primary center-block" >Creat Account</button>
-		</div>
-	</form>
-</div>
-<!-------------------------------------------------------------------------- content -------------------------------------------------------------------------->
-<?php include ("footer.php"); ?>
-</body>
+		<!-------------------------------------------------------------------------- content -------------------------------------------------------------------------->
+		<?php include ("footer.php"); ?>
+	</body>
 </html>

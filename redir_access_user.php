@@ -9,9 +9,9 @@ if (isset($_GET["id"]) && isset($_GET["accessID"])) {
 	if (User::getSessionAccses()->hasAccsesUser(Access::FULL) && $user->read($_GET["id"])) {
 		$user->setAccsesID($_GET["accessID"]);
 		$user->update();
-		header("Location: members.php");
+		Header::Location("members.php");
 		exit;
 	}
 }
-header("Location: accses_denied.php");
+Header::ResponseCode(Header::UNAUTHORIZED);
 exit;

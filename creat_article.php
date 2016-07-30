@@ -1,14 +1,14 @@
 <?php
 require_once 'autoload.php';
-ArticleController::Create();
+//ArticleController::Create();
 ?><!DOCTYPE html>
 <html lang="en">
 	<head>
 		<title>ACU Times | Creat Article</title>
+		<link rel="stylesheet" href="lib/dropzone-4.3.0/dist/dropzone.css" type="text/css" media="all">
 		<?php require_once("header.php"); ?>
-		<link rel="stylesheet" href="css/dropezone.css" type="text/css" media="all">
-		<script src='js/tinymce/tinymce.min.js'></script>
-		<script src="js/dropzone.js"></script>
+		<script src="lib/dropzone-4.3.0/dist/dropzone.js"></script>
+		<script src='lib/tinymce/js/tinymce/tinymce.min.js'></script>
 		<script src="js/Validate.js"></script>
 	</head>
 	<body  onload="onLoad()">
@@ -19,6 +19,7 @@ ArticleController::Create();
 					<li role="presentation" class="active"><a> Article </a></li>
 					<li role="presentation"><a  href="creat_poll.php"> Poll </a></li>
 					<li role="presentation"><a href="creat_multimedia.php"> Multimedia </a></li>
+					<li role="presentation"><a href="creat_gallery.php"> Gallery </a></li>
 				</ul>
 			</h3>
 			<br>
@@ -30,7 +31,7 @@ ArticleController::Create();
 						<select class="form-control" id="Category" name="Category">
 							<?php
 							foreach (Category::readAll() as $Category) {
-								$Category->PrintOptionCategory(@$Data["Category"]);
+								$Category->PrintOptionCategory(@$_POST["Category"]);
 							}
 							?>
 						</select>
@@ -41,7 +42,7 @@ ArticleController::Create();
 					<label class="control-label col-sm-2" for="Rate">Importance:</label>
 					<div class="col-sm-10">
 						<select class="form-control" id="Importance" name="Importance">
-							<?php PrintHTML::numericOption(0, 9, @$Data["Importance"]) ?>
+							<?php PrintHTML::numericOption(0, 9, @$_POST["Importance"]) ?>
 						</select>
 					</div>
 				</div>
@@ -56,9 +57,8 @@ ArticleController::Create();
 							   id="Youtubelink" 
 							   maxlength="256" 
 							   onBlur="valYouTube(this)" 
-							   value="<?php echo @$Data["Youtubelink"] ?>">
+							   value="<?php echo @$_POST["Youtubelink"] ?>">
 						<span class="help-block"><ul>
-								<?php PrintHTML::validation("Youtubelink", @$iscorrect["Youtubelink"], "Please Check your input") ?>
 							</ul></span> </div>
 				</div>
 				<!-- #################################################################### Language #################################################################### -->
@@ -66,19 +66,16 @@ ArticleController::Create();
 					<label class="control-label col-sm-2" for="lang">Language:</label>
 					<div class="col-sm-10">
 						<select class="form-control" name="lang" id="lang" onBlur="changeLang(this)" onChange="changeLang(this)">
-							<option value="<?php echo Language::ENGLISH ?>" <?php if (@$Data[lang] == 0) echo ' selected="selected"'; ?>>English</option>
-							<option value="<?php echo Language::ARABIC ?>" <?php if (@$Data[lang] == 1) echo ' selected="selected"'; ?>>Arabic</option>
-							<option value="<?php echo Language::BOTH ?>"<?php if (@$Data[lang] == 2) echo ' selected="selected"'; ?>>English & Arabic</option>
+							<option value="<?php echo Language::ENGLISH ?>" <?php if (@$_POST[lang] == 0) echo ' selected="selected"'; ?>>English</option>
+							<option value="<?php echo Language::ARABIC ?>" <?php if (@$_POST[lang] == 1) echo ' selected="selected"'; ?>>Arabic</option>
+							<option value="<?php echo Language::BOTH ?>"<?php if (@$_POST[lang] == 2) echo ' selected="selected"'; ?>>English & Arabic</option>
 						</select>
 					</div>
 				</div>
 				<!-- #################################################################### DropZone #################################################################### -->
 				<br>
 				<div class="form-group">
-					<div  class="dropzone " id="upload-widget"> </div>
-
-
-
+					<div class="dropzone" id="dropzone"> </div>
 				</div>
 				<div id="en">
 					<br>
@@ -91,7 +88,7 @@ ArticleController::Create();
 							<input type="text" 
 								   name="titleEnglish" 
 								   id="titleEnglish" 
-								   value="<?php echo @$Data["titleEnglish"]; ?>" 
+								   value="<?php echo @$_POST["titleEnglish"]; ?>" 
 								   placeholder="Enter title in English" 
 								   class="form-control" 
 								   onBlur="valTitle(this)" 
@@ -99,11 +96,9 @@ ArticleController::Create();
 								   autocomplete="on">
 							<span class="help-block">
 								<ul>
-									<?php PrintHTML::validation("titleEnglish", @$iscorrect["titleEnglish"], "Please Check your input") ?>
 								</ul>
 							</span></div>
 					</div>
-
 					<!-- #################################################################### Description-EN #################################################################### -->
 					<div class="form-group">
 						<label class="control-label col-sm-2" for="description_en">Description :</label>
@@ -111,22 +106,21 @@ ArticleController::Create();
 							<input	type="text" 
 								   name="description_en" 
 								   id="description_en" 
-								   value="<?php echo @$Data["description_en"]; ?>" 
-								   placeholder="Enter 1 line description of the video in english" 
+								   value="<?php echo @$_POST["description_en"]; ?>" 
+								   placeholder="Enter 1 line description of the video in English" 
 								   class="form-control" 
 								   onBlur="valDescription(this)" 
 								   maxlength="256" 
 								   autocomplete="on">
 							<span class="help-block">
 								<ul>
-									<?php PrintHTML::validation("description_en", @$iscorrect["description_en"], "Please Check your input") ?>
 								</ul>
 							</span></div>
 					</div>
 					<!-- #################################################################### BODY-EN #################################################################### -->
 					<div class="clearfix"></div>
 					<div class="form-group">
-						<textarea class="tinymce" id="body_en" name="body_en" ><?php echo @$Data["body_en"] ?></textarea>
+						<textarea class="tinymce" id="body_en" name="body_en" ><?php echo @$_POST["body_en"] ?></textarea>
 					</div>
 				</div>
 
@@ -141,7 +135,7 @@ ArticleController::Create();
 							<input type="text" 
 								   name="title_ar" 
 								   id="title_ar" 
-								   value="<?php echo @$Data["title_ar"]; ?>" 
+								   value="<?php echo @$_POST["title_ar"]; ?>" 
 								   placeholder="Enter title in arabic" 
 								   class="form-control" 
 								   onBlur="valTitle(this)" 
@@ -149,10 +143,8 @@ ArticleController::Create();
 								   autocomplete="on">
 							<span class="help-block">
 								<ul>
-									<?php PrintHTML::validation("title_ar", @$iscorrect["title_ar"], "Please Check your input") ?>
 								</ul>
 							</span></div>
-
 					</div>
 					<!-- #################################################################### Breif-AR #################################################################### -->
 					<div class="form-group">
@@ -161,7 +153,7 @@ ArticleController::Create();
 							<input type="text" 
 								   name="description_ar" 
 								   id="description_ar" 
-								   value="<?php echo @$Data["description_ar"]; ?>" 
+								   value="<?php echo @$_POST["description_ar"]; ?>" 
 								   placeholder="Enter 1 line description of the video in arabic" 
 								   class="form-control" 
 								   onBlur="valDescription(this)" 
@@ -169,14 +161,13 @@ ArticleController::Create();
 								   autocomplete="on">
 							<span class="help-block">
 								<ul>
-									<?php PrintHTML::validation("description_ar", @$iscorrect["description_ar"], "Please Check your input") ?>
 								</ul>
 							</span></div>
 					</div>
 					<!-- #################################################################### BODY-AR #################################################################### -->
 					<div class="clearfix"></div>
 					<div class="form-group">
-						<textarea class="tinymce" id="body_ar" name="body_ar" ><?php echo @$Data["body_ar"] ?></textarea>
+						<textarea class="tinymce" id="body_ar" name="body_ar" ><?php echo @$_POST["body_ar"] ?></textarea>
 					</div>
 				</div>
 
@@ -190,30 +181,31 @@ ArticleController::Create();
 				height: 500,
 				theme: 'modern',
 				plugins: [
-					'advlist autolink lists link image charmap print preview hr anchor pagebreak',
-					'searchreplace wordcount visualblocks visualchars code fullscreen',
-					'insertdatetime media nonbreaking save table contextmenu directionality',
-					'emoticons template paste textcolor colorpicker textpattern imagetools print code textcolor paste'
+					'advlist lists table directionality',
+					'print preview visualblocks visualchars code charmap',
+					'emoticons textcolor textpattern textcolor colorpicker ',
+					'autosave contextmenu save paste wordcount searchreplace',
+					'link autolink image imagetools media',
+					'hr pagebreak insertdatetime'
 				],
-				toolbar1: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
-				toolbar2: 'print preview media | forecolor backcolor emoticons',
+				contextmenu: "cut copy paste | bold italic underline strikethrough ",
+				contextmenu_never_use_native: true,
+				toolbar1: 'undo redo | formatselect | forecolor backcolor | bold italic underline strikethrough | subscript superscript | alignleft aligncenter alignright alignjustify | bullist numlist | outdent indent | link image media | print preview searchreplace'
 			});
 		</script>
 		<script>
-
+			var imageCount = 0;
 			var cleanFilename = function (name) {
-				//document.getElementById("IMG").value = name;
-
-				return name.toLowerCase().replace(/^[\w.]+$/i, 'upload.jpg');
-
+				return 'upload' + imageCount + '.jpg';
 			};
-			var myDropzone = new Dropzone("div#upload-widget", {
+			var myDropzone = new Dropzone("div#dropzone", {
 				url: "uploadArticle.php",
 				maxFilesize: 4,
-				maxFiles: 1,
+				maxFiles: 10,
 				parallelUploads: 1,
 				acceptedFiles: "image/*",
-				renameFilename: cleanFilename
+				renameFilename: cleanFilename,
+				uploadMultiple: true
 
 			});
 		</script>

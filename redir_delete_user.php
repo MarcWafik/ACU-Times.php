@@ -5,9 +5,9 @@ User::CheckLogin();
 if (isset($_GET["id"])) {
 	if (User::getSessionAccses()->hasAccsesUser(Access::FULL)) {
 		User::delete_static($_GET["id"]);
-		header("Location: index.php");
+		Header::Location(Header::REDIR_HOME);
 		exit;
 	}
 }
-header("Location: accses_denied.php");
+Header::ResponseCode(Header::UNAUTHORIZED);
 exit;

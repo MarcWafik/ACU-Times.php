@@ -18,7 +18,7 @@ class GalleryController {
 		$Gallery = new Gallery();
 		$access = User::getSessionAccses();
 		if (!$Gallery->hasAccsesToModify($access)) {
-			header("Location: accses_denied.php");
+			Header::ResponseCode(Header::UNAUTHORIZED);
 		}
 
 // Update
@@ -30,7 +30,7 @@ class GalleryController {
 				);
 				$Gallery->setImageNumber(1);
 			} else {
-				header("Location: 404.php");
+				Header::ResponseCode(Header::NOT_FOUND);
 				exit;
 			}
 		}
@@ -76,7 +76,7 @@ class GalleryController {
 
 			// check if every thing went right
 			if ($passed) {
-				header("Location: gallery.php");
+				Header::Location("Location: gallery.php");
 				exit;
 			} else {
 				$Data = array(

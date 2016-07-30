@@ -13,13 +13,13 @@
  */
 class PollController {
 
-	public static function Creat() {
+	public static function Create() {
 		// Check for accses
 		User::CheckLogin();
 		$poll = new Poll();
 		$access = User::getSessionAccses();
 		if (!$poll->hasAccsesToModify($access)) {
-			header("Location: accses_denied.php");
+			Header::ResponseCode(Header::UNAUTHORIZED);
 		}
 
 		$choises = $poll->getArrChoices();
@@ -40,12 +40,12 @@ class PollController {
 					"choice4_ar" => $choises['8']
 				);
 			} else {
-				header("Location: 404.php");
+				Header::ResponseCode(Header::NOT_FOUND);
 				exit;
 			}
 		}
 
-		if (valAllNotnull()) {
+		if (isset($_POST["submit"])) {
 
 			// setting the data
 			$iscorrect = array(
@@ -78,8 +78,7 @@ class PollController {
 
 			// check if every thing went right
 			if ($passed) {
-				uploadpic();
-				header("Location: article.php?id=" . $poll->getId());
+				header("Location: article.php?id=" . $poll->getId());//<<<<<<<<<<<<<<<<<<======================================================
 				exit;
 			} else {
 				$Data = array(
@@ -95,32 +94,6 @@ class PollController {
 					"choice4_ar" => $_POST["choice4_ar"]
 				);
 			}
-		}
-
-		function uploadpic() {
-			$ds = DIRECTORY_SEPARATOR;
-			$storeFolder = '\images\article';
-
-			if (!empty($_FILES)) {
-				$tempFile = $_FILES['file']['tmp_name'];
-				$targetPath = dirname(__FILE__) . $ds . $storeFolder . $ds;
-				$targetFile = $targetPath . $_FILES['file']['name'];
-				move_uploaded_file($tempFile, $targetFile);
-			}
-		}
-
-		function valAllNotnull() {
-			return
-					isset($_POST["titleEnglish"]) &&
-					isset($_POST["titleArabic"]) &&
-					isset($_POST["choice1_en"]) &&
-					isset($_POST["choice1_ar"]) &&
-					isset($_POST["choice2_en"]) &&
-					isset($_POST["choice2_ar"]) &&
-					isset($_POST["choice3_en"]) &&
-					isset($_POST["choice3_ar"]) &&
-					isset($_POST["choice4_en"]) &&
-					isset($_POST["choice4_ar"]);
 		}
 
 		return $iscorrect;

@@ -19,7 +19,7 @@ class AccessController {
 		$access = new Access();
 		$UserAccess = User::getSessionAccses();
 		if (!$UserAccess->hasAccsesAdmin()) {
-			header("Location: accses_denied.php");
+			Header::ResponseCode(Header::UNAUTHORIZED);
 		}
 
 // Update
@@ -35,7 +35,7 @@ class AccessController {
 					"user" => $access->getUser()
 				);
 			} else {
-				header("Location: 404.php");
+				Header::ResponseCode(Header::NOT_FOUND);
 				exit;
 			}
 		}
@@ -66,7 +66,7 @@ class AccessController {
 
 			// check if every thing went right
 			if ($passed) {
-				header("Location: index.php");
+				Header::Location(Header::REDIR_HOME);
 				exit;
 			} else {
 				$Data = array(

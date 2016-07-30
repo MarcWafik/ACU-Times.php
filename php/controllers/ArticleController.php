@@ -19,7 +19,7 @@ class ArticleController {
 		$article = new Article();
 		$access = User::getSessionAccses();
 		if (!$article->hasAccsesToModify($access)) {
-			header("Location: accses_denied.php");
+			Header::ResponseCode(Header::UNAUTHORIZED);
 		}
 
 // Update
@@ -38,7 +38,7 @@ class ArticleController {
 					"bodyArabic" => $article->getBodyArabic()
 				);
 			} else {
-				header("Location: 404.php");
+				Header::ResponseCode(Header::NOT_FOUND);
 				exit;
 			}
 		}
@@ -100,7 +100,7 @@ class ArticleController {
 			// check if every thing went right
 			if ($passed) {
 
-				header("Location: article.php?id=" . $article->getId());
+				Header::Location("article.php?id=" . $article->getId());
 				exit;
 			} else {
 				$Data = array(

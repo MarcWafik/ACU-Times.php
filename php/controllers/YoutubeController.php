@@ -13,13 +13,13 @@
  */
 class YoutubeController {
 
-	public static function Creat() {
+	public static function Create() {
 		// Check for accses
 		User::CheckLogin();
 		$Multimedia = new Youtube();
 		$access = User::getSessionAccses();
 		if (!$Multimedia->hasAccsesToModify($access)) {
-			header("Location: accses_denied.php");
+			Header::ResponseCode(Header::UNAUTHORIZED);
 		}
 
 // Update
@@ -33,7 +33,7 @@ class YoutubeController {
 					"descriptionArabic" => $Multimedia->getDescriptionArabic()
 				);
 			} else {
-				header("Location: 404.php");
+				Header::ResponseCode(Header::NOT_FOUND);
 				exit;
 			}
 		}
@@ -80,7 +80,7 @@ class YoutubeController {
 
 			// check if every thing went right
 			if ($passed) {
-				header("Location: multimedia.php?id=" . $Multimedia->getId());
+				Header::Location("multimedia.php?id=" . $Multimedia->getId());
 				exit;
 			} else {
 				$Data = array(

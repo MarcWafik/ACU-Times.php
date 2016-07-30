@@ -13,9 +13,9 @@
  */
 class UserController {
 
-	public static function Creat() {
+	public static function Create() {
 
-		if (valAllNotnull()) {
+		if ($_POST["submit"]) {
 			$User = new User();
 			$iscorrect = array();
 			$iscorrect = array(
@@ -32,27 +32,10 @@ class UserController {
 			);
 			if (Validation::valAll($iscorrect)) {
 				$User->create();
-				header("Location: signup_success.php");
+				Header::Location("signup_success.php");
 				exit;
 			}
 		}
-
-//=========================================validate=========================================
-
-		function valAllNotnull() {
-			return
-					isset($_POST["submit"]) &&
-					isset($_POST["fullName"]) &&
-					isset($_POST["ID"]) &&
-					isset($_POST["email"]) &&
-					isset($_POST["password"]) &&
-					isset($_POST["RePassword"]) &&
-					isset($_POST["BirthdayMonth"]) &&
-					isset($_POST["BirthdayYear"]) &&
-					isset($_POST["BirthdayDay"]) &&
-					isset($_POST["phoneNumber"]);
-		}
-
 	}
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -61,7 +44,7 @@ class UserController {
 		$User = new User();
 		$User->read(User::getSessionUserID());
 
-		if (valAllNotnull()) {
+		if (isset($_POST["submit"])) {
 			$User->setLastUpdateDate();
 			$iscorrect = array(
 				"OldPassword" => (bool) $User->isCorrectPassword($_POST["OldPassword"]),
@@ -78,28 +61,13 @@ class UserController {
 				$Passed = true;
 			}
 		}
-
-//=========================================validate=========================================
-		function valAllNotnull() {
-			return
-					isset($_POST["submit"]) &&
-					isset($_POST["fullName"]) &&
-					isset($_POST["email"]) &&
-					isset($_POST["OldPassword"]) &&
-					isset($_POST["BirthdayMonth"]) &&
-					isset($_POST["BirthdayYear"]) &&
-					isset($_POST["BirthdayDay"]) &&
-					isset($_POST["about"]) &&
-					isset($_POST["phoneNumber"]);
-		}
-
 	}
 
 	public static function UpdatePW() {
 		User::CheckLogin();
 		$User = new User();
 		$User->read(User::getSessionUserID());
-		if (isset($_POST["submit"]) && isset($_POST["password"]) && isset($_POST["RePassword"]) && isset($_POST["OldPassword"])) {
+		if (isset($_POST["submit"])) {
 			$User->setLastUpdateDate();
 			$iscorrect = array(
 				"OldPassword" => (bool) $User->isCorrectPassword($_POST["OldPassword"]),
@@ -113,7 +81,7 @@ class UserController {
 	}
 
 	public static function Login() {
-		if (isset($_POST["submit"]) && isset($_POST["ID"]) && isset($_POST["Password"])) {
+		if (isset($_POST["submit"])) {
 			$user = new User();
 			$isLogin = $user->Login($_POST["ID"], $_POST["Password"]);
 			if ($isLogin) {

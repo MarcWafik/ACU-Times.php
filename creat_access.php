@@ -29,7 +29,6 @@ AccessController::Creat();
 							   autocomplete="on">
 						<span class="help-block">
 							<ul>
-								<?php PrintHTML::validation("titleEnglish", @$iscorrect["titleEnglish"], "Invalid Input") ?>
 							</ul>
 						</span></div>
 				</div>
@@ -49,7 +48,6 @@ AccessController::Creat();
 							   autocomplete="on">
 						<span class="help-block">
 							<ul>
-								<?php PrintHTML::validation("titleArabic", @$iscorrect["titleArabic"], "Invalid Input") ?>
 							</ul>
 						</span></div>
 				</div>

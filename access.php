@@ -2,7 +2,7 @@
 require_once 'autoload.php';
 User::CheckLogin();
 if (!User::getSessionAccses()->hasAccsesAdmin()) {
-	header("Location: accses_denied.php");
+	Header::ResponseCode(Header::UNAUTHORIZED);
 	exit;
 }
 $arrArticle = Access::readAll();

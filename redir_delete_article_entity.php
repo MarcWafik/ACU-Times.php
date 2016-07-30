@@ -18,14 +18,14 @@ if (isset($_GET["id"]) && isset($_GET["type"])) {
 			$temp = new Youtube;
 			break;
 		default :
-			header("Location: accses_denied.php");
+			Header::ResponseCode(Header::UNAUTHORIZED);
 			exit;
 	}
 	if ($temp->read($_GET["id"]) && $temp->hasAccsesToModify(User::getSessionAccses())) {
 		$temp->delete();
-		header("Location: index.php");
+		Header::Location(Header::REDIR_HOME);
 		exit;
 	}
 }
-header("Location: accses_denied.php");
+Header::ResponseCode(Header::UNAUTHORIZED);
 exit;

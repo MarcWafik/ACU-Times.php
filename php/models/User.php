@@ -186,14 +186,14 @@ class User extends EntityUser implements iCRUD {
 		Session::startOnce();
 		$_SESSION = array();
 		session_destroy();
-		header("Location: index.php");
+		Header::Location(Header::REDIR_HOME);
 	}
 
 //=========================================Session Check===================================================
 	static function CheckLogin() {
 		Session::startOnce();
 		if (!isset($_SESSION['id'])) {
-			header("Location: login.php");
+			Header::Location(Header::REDIR_LOGIN);
 		}
 	}
 

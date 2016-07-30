@@ -6,11 +6,11 @@ $User->__init();
 
 if (isset($_GET["id"])) {
 	if (!$User->read($_GET["id"])) {
-		header("Location: 404.php");
+		Header::ResponseCode(Header::NOT_FOUND);
 		exit();
 	}
 } else if (!$User->read(User::getSessionUserID())) {
-	header("Location: 404.php");
+	Header::ResponseCode(Header::NOT_FOUND);
 	exit();
 }
 ?><!DOCTYPE html>

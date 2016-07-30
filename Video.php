@@ -4,7 +4,7 @@ $youtube = new Youtube();
 if (isset($_GET["id"]) && $youtube->read($_GET["id"])) {
 	
 } else {
-	header("Location: 404.php");
+	Header::ResponseCode(Header::NOT_FOUND);
 	exit;
 }
 $writer = new User();

@@ -1,6 +1,6 @@
 <?php
 require_once 'autoload.php';
-$iscorrect = GalleryController::Creat();
+GalleryController::Creat();
 ?><!DOCTYPE html>
 <html lang="en">
     <head>
@@ -32,7 +32,7 @@ $iscorrect = GalleryController::Creat();
 						<input type="text" 
 							   name="titleEnglish" 
 							   id="titleEnglish" 
-							   value="<?php echo @$Data["titleEnglish"]; ?>" 
+							   value="<?php echo @$_POST["titleEnglish"]; ?>" 
 							   placeholder="Enter title in English" 
 							   class="form-control" 
 							   onBlur="valTitle(this)" 
@@ -41,7 +41,6 @@ $iscorrect = GalleryController::Creat();
 							   autocomplete="on">
 						<span class="help-block">
 							<ul>
-								<?php PrintHTML::validation("titleEnglish", @$iscorrect["titleEnglish"], "Invalid Input") ?>
 							</ul>
 						</span></div>
 				</div>
@@ -52,7 +51,7 @@ $iscorrect = GalleryController::Creat();
 						<input type="text" 
 							   name="titleArabic" 
 							   id="titleArabic" 
-							   value="<?php echo @$Data["titleArabic"]; ?>" 
+							   value="<?php echo @$_POST["titleArabic"]; ?>" 
 							   placeholder="Enter title in arabic" 
 							   class="form-control" 
 							   onBlur="valTitle(this)" 
@@ -61,7 +60,6 @@ $iscorrect = GalleryController::Creat();
 							   autocomplete="on">
 						<span class="help-block">
 							<ul>
-								<?php PrintHTML::validation("titleArabic", @$iscorrect["titleArabic"], "Invalid Input") ?>
 							</ul>
 						</span></div>
 				</div>

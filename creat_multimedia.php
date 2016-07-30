@@ -1,6 +1,6 @@
 <?php
 require_once 'autoload.php';
-$iscorrect = YoutubeController::Creat();
+$iscorrect = YoutubeController::Create();
 ?><!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -33,9 +33,8 @@ $iscorrect = YoutubeController::Creat();
 							   maxlength="256" 
 							   required 
 							   onBlur="valYouTube(this)" 
-							   value="<?php echo @$Data["Youtubelink"] ?>">
+							   value="<?php echo @$_POST["Youtubelink"] ?>">
 						<span class="help-block"><ul>
-								<?php PrintHTML::validation("Youtubelink", @$iscorrect["Youtubelink"], "Invalid Input") ?>
 							</ul></span> </div>
 				</div>
 				<div id="en">
@@ -48,7 +47,7 @@ $iscorrect = YoutubeController::Creat();
 							<input type="text" 
 								   name="titleEnglish" 
 								   id="titleEnglish" 
-								   value="<?php echo @$Data["titleEnglish"]; ?>" 
+								   value="<?php echo @$_POST["titleEnglish"]; ?>" 
 								   placeholder="Enter title in English" 
 								   class="form-control" 
 								   onBlur="valTitle(this)" 
@@ -57,7 +56,6 @@ $iscorrect = YoutubeController::Creat();
 								   autocomplete="on">
 							<span class="help-block">
 								<ul>
-									<?php PrintHTML::validation("titleEnglish", @$iscorrect["titleEnglish"], "Invalid Input") ?>
 								</ul>
 							</span></div>
 					</div>
@@ -69,7 +67,7 @@ $iscorrect = YoutubeController::Creat();
 							<input	type="text" 
 								   name="descriptionEnglish" 
 								   id="descriptionEnglish" 
-								   value="<?php echo @$Data["descriptionEnglish"]; ?>" 
+								   value="<?php echo @$_POST["descriptionEnglish"]; ?>" 
 								   placeholder="Enter 1 line description of the video in english" 
 								   class="form-control" 
 								   onBlur="valDescription(this)" 
@@ -78,7 +76,6 @@ $iscorrect = YoutubeController::Creat();
 								   autocomplete="on">
 							<span class="help-block">
 								<ul>
-									<?php PrintHTML::validation("descriptionEnglish", @$iscorrect["descriptionEnglish"], "Invalid Input") ?>
 								</ul>
 							</span></div>
 					</div>
@@ -94,7 +91,7 @@ $iscorrect = YoutubeController::Creat();
 							<input type="text" 
 								   name="titleArabic" 
 								   id="titleArabic" 
-								   value="<?php echo @$Data["titleArabic"]; ?>" 
+								   value="<?php echo @$_POST["titleArabic"]; ?>" 
 								   placeholder="Enter title in arabic" 
 								   class="form-control" 
 								   onBlur="valTitle(this)" 
@@ -103,7 +100,6 @@ $iscorrect = YoutubeController::Creat();
 								   autocomplete="on">
 							<span class="help-block">
 								<ul>
-									<?php PrintHTML::validation("titleArabic", @$iscorrect["titleArabic"], "Invalid Input") ?>
 								</ul>
 							</span></div>
 					</div>
@@ -123,7 +119,6 @@ $iscorrect = YoutubeController::Creat();
 								   autocomplete="on">
 							<span class="help-block">
 								<ul>
-									<?php PrintHTML::validation("descriptionArabic", @$iscorrect["descriptionArabic"], "Invalid Input") ?>
 								</ul>
 							</span></div>
 					</div>

@@ -5,7 +5,7 @@ $cat = new Category();
 if (isset($_GET["CategoryID"]) && $cat->read($_GET["CategoryID"])) {
 	
 } else {
-	header("Location: 404.php");
+	Header::ResponseCode(Header::NOT_FOUND);
 	exit();
 }
 ?><!DOCTYPE html>

@@ -5,7 +5,7 @@ User::CheckLogin();
 $category = new Category();
 $access = User::getSessionAccses();
 if (!$access->hasAccsesAdmin()) {
-	header("Location: accses_denied.php");
+	Header::ResponseCode(Header::UNAUTHORIZED);
 }
 
 // Update
@@ -17,7 +17,7 @@ if (isset($_GET["id"])) {
 			"Category" => $category->getParentID()
 		);
 	} else {
-		header("Location: 404.php");
+		Header::ResponseCode(Header::NOT_FOUND);
 		exit;
 	}
 }
@@ -43,7 +43,7 @@ if (valAllNotnull()) {
 
 	// check if every thing went right
 	if ($passed) {
-		header("Location: index.php");
+		Header::Location(Header::REDIR_HOME);
 		exit;
 	} else {
 		$Data = array(

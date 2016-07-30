@@ -1,6 +1,6 @@
 <?php
 require_once 'autoload.php';
-$iscorrect = PollController::Creat();
+PollController::Create();
 ?><!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -30,7 +30,7 @@ $iscorrect = PollController::Creat();
 						<input type="text" 
 							   name="titleEnglish" 
 							   id="titleEnglish" 
-							   value="<?php echo @$_POST[""]; ?>" 
+							   value="<?php echo @$_POST["titleEnglish"]; ?>" 
 							   placeholder="Enter a question in English" 
 							   class="form-control" 
 							   onBlur="valTitle(this)" 
@@ -39,7 +39,6 @@ $iscorrect = PollController::Creat();
 							   autocomplete="on">
 						<span class="help-block">
 							<ul>
-								<?php PrintHTML::validation("titleEnglish", @$iscorrect["titleEnglish"], "Invalid Input") ?>
 							</ul>
 						</span></div>
 				</div>
@@ -49,7 +48,7 @@ $iscorrect = PollController::Creat();
 						<input type="text" 
 							   name="titleArabic" 
 							   id="titleArabic" 
-							   value="<?php echo @$_POST[""]; ?>" 
+							   value="<?php echo @$_POST["titleArabic"]; ?>" 
 							   placeholder="Enter a question in Arabic" 
 							   class="form-control" 
 							   onBlur="valTitle(this)" 
@@ -58,7 +57,6 @@ $iscorrect = PollController::Creat();
 							   autocomplete="on">
 						<span class="help-block">
 							<ul>
-								<?php PrintHTML::validation("titleArabic", @$iscorrect["titleArabic"], "Invalid Input") ?>
 							</ul>
 						</span></div>
 				</div>
@@ -71,7 +69,7 @@ $iscorrect = PollController::Creat();
 							<input type="text" 
 								   name="choice1_en" 
 								   id="choice1_en" 
-								   value="<?php echo @$_POST[""]; ?>" 
+								   value="<?php echo @$_POST["choice1_en"]; ?>" 
 								   placeholder="Choice 1 in English" 
 								   class="form-control" 
 								   onBlur="valOption(this, choice1_ar)" 
@@ -80,7 +78,6 @@ $iscorrect = PollController::Creat();
 								   autocomplete="on">
 							<span class="help-block">
 								<ul>
-									<?php PrintHTML::validation("choice1_en", @$iscorrect["choice1_en"], "Invalid Input") ?>
 								</ul>
 							</span></div>
 					</div>
@@ -89,7 +86,7 @@ $iscorrect = PollController::Creat();
 							<input type="text" 
 								   name="choice1_ar" 
 								   id="choice1_ar" 
-								   value="<?php echo @$_POST[""]; ?>" 
+								   value="<?php echo @$_POST["choice1_ar"]; ?>" 
 								   placeholder="Choice 1 in Arabic" 
 								   class="form-control" 
 								   onBlur="valOption(this, choice1_en)" 
@@ -98,7 +95,6 @@ $iscorrect = PollController::Creat();
 								   autocomplete="on">
 							<span class="help-block">
 								<ul>
-									<?php PrintHTML::validation("choice1_ar", @$iscorrect["choice1_ar"], "Invalid Input") ?>
 								</ul>
 							</span></div>
 					</div>
@@ -112,7 +108,7 @@ $iscorrect = PollController::Creat();
 							<input type="text" 
 								   name="choice2_en" 
 								   id="choice1_en" 
-								   value="<?php echo @$_POST[""]; ?>" 
+								   value="<?php echo @$_POST["choice2_en"]; ?>" 
 								   placeholder="Choice 2 in English" 
 								   class="form-control" 
 								   onBlur="valOption(this, choice2_ar)" 
@@ -121,7 +117,6 @@ $iscorrect = PollController::Creat();
 								   autocomplete="on">
 							<span class="help-block">
 								<ul>
-									<?php PrintHTML::validation("choice2_en", @$iscorrect["choice2_en"], "Invalid Input") ?>
 								</ul>
 							</span></div>
 					</div>
@@ -130,7 +125,7 @@ $iscorrect = PollController::Creat();
 							<input type="text" 
 								   name="choice2_ar" 
 								   id="choice2_ar" 
-								   value="<?php echo @$_POST[""]; ?>" 
+								   value="<?php echo @$_POST["choice2_ar"]; ?>" 
 								   placeholder="Choice 2 in Arabic" 
 								   class="form-control" 
 								   onBlur="valOption(this, choice2_en)" 
@@ -139,7 +134,6 @@ $iscorrect = PollController::Creat();
 								   autocomplete="on">
 							<span class="help-block">
 								<ul>
-									<?php PrintHTML::validation("choice2_ar", @$iscorrect["choice2_ar"], "Invalid Input") ?>
 								</ul>
 							</span></div>
 					</div>
@@ -153,7 +147,7 @@ $iscorrect = PollController::Creat();
 							<input type="text" 
 								   name="choice3_en" 
 								   id="choice1_en" 
-								   value="<?php echo @$_POST[""]; ?>" 
+								   value="<?php echo @$_POST["choice3_en"]; ?>" 
 								   placeholder="Choice 3 in English" 
 								   class="form-control" 
 								   onBlur="valOption(this, choice3_ar)" 
@@ -161,7 +155,6 @@ $iscorrect = PollController::Creat();
 								   autocomplete="on">
 							<span class="help-block">
 								<ul>
-									<?php PrintHTML::validation("choice3_en", @$iscorrect["choice3_en"], "Invalid Input") ?>
 								</ul>
 							</span></div>
 					</div>
@@ -170,7 +163,7 @@ $iscorrect = PollController::Creat();
 							<input type="text" 
 								   name="choice3_ar" 
 								   id="choice3_ar" 
-								   value="<?php echo @$_POST[""]; ?>" 
+								   value="<?php echo @$_POST["choice3_ar"]; ?>" 
 								   placeholder="Choice 3 in Arabic" 
 								   class="form-control" 
 								   onBlur="valOption(this, choice3_en)" 
@@ -178,7 +171,6 @@ $iscorrect = PollController::Creat();
 								   autocomplete="on">
 							<span class="help-block">
 								<ul>
-									<?php PrintHTML::validation("choice3_ar", @$iscorrect["choice3_ar"], "Invalid Input") ?>
 								</ul>
 							</span></div>
 					</div>
@@ -192,7 +184,7 @@ $iscorrect = PollController::Creat();
 							<input type="text" 
 								   name="choice4_en" 
 								   id="choice1_en" 
-								   value="<?php echo @$_POST[""]; ?>" 
+								   value="<?php echo @$_POST["choice4_en"]; ?>" 
 								   placeholder="Choice 4 in English" 
 								   class="form-control" 
 								   onBlur="valOption(this, choice4_ar)" 
@@ -200,7 +192,6 @@ $iscorrect = PollController::Creat();
 								   autocomplete="on">
 							<span class="help-block">
 								<ul>
-									<?php PrintHTML::validation("choice4_en", @$iscorrect["choice4_en"], "Invalid Input") ?>
 								</ul>
 							</span></div>
 					</div>
@@ -209,7 +200,7 @@ $iscorrect = PollController::Creat();
 							<input type="text" 
 								   name="choice4_ar" 
 								   id="choice4_ar" 
-								   value="<?php echo @$_POST[""]; ?>" 
+								   value="<?php echo @$_POST["choice4_ar"]; ?>" 
 								   placeholder="Choice 4 in Arabic" 
 								   class="form-control" 
 								   onBlur="valOption(this, choice4_en)" 
@@ -217,13 +208,12 @@ $iscorrect = PollController::Creat();
 								   autocomplete="on">
 							<span class="help-block">
 								<ul>
-									<?php PrintHTML::validation("choice4_ar", @$iscorrect["choice4_ar"], "Invalid Input") ?>
 								</ul>
 							</span></div>
 					</div>
 				</div>
 				<hr>
-				<button type="submit" class="btn btn-primary pull-right">Submit</button>
+				<button type="submit" id="submit" class="btn btn-primary pull-right">Submit</button>
 			</form>
 		</div>
 		<?php include ("Footer.php"); ?>
