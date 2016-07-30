@@ -36,8 +36,8 @@ if (valAllNotnull()) {
 		}
 		if ($passed) {
 			uploadpic();
-			//header("Location: Article.php?id=" . $article->getId);
-			//exit;
+			header("Location: article.php?id=" . $article->getId);
+			exit;
 		}
 	} else {
 		$Data = array(
@@ -75,7 +75,7 @@ function valAllNotnull() {
 <html lang="en">
     <head>
         <title>ACU Times | Creat Article</title>
-		<?php require_once("Header.php"); ?>
+		<?php require_once("header.php"); ?>
         <link rel="stylesheet" href="css/dropezone.css" type="text/css" media="all">
         <script src='js/tinymce/tinymce.min.js'></script>
         <script src="js/dropzone.js"></script>
@@ -98,17 +98,17 @@ function valAllNotnull() {
         </script>
 	</head>
 	<body>
-		<?php include ("Navbar.php"); ?>
+		<?php include ("navbar.php"); ?>
 		<div class="container">
 			<h3>
 				<ul class="nav nav-pills">
 					<li role="presentation" class="active"><a> Article </a></li>
-					<li role="presentation"><a  href="CreatPoll.php"> Poll </a></li>
-					<li role="presentation"><a href="CreatMultimedia.php"> Multimedia </a></li>
+					<li role="presentation"><a  href="creat_poll.php"> Poll </a></li>
+					<li role="presentation"><a href="creat_multimedia.php"> Multimedia </a></li>
 				</ul>
 			</h3>
 			<br>
-			<form class="form-horizontal" role="form" method="post" action="CreatArticle.php<?php if (isset($_GET["id"])) echo "?id=" . $_GET["id"] ?>">
+			<form class="form-horizontal" role="form" method="post" action="creat_article.php<?php if (isset($_GET["id"])) echo "?id=" . $_GET["id"] ?>">
 				<div class="form-group">
 					<label class="control-label col-sm-2" for="Title">Title:</label>
 					<div class="col-sm-10">
@@ -173,7 +173,7 @@ function valAllNotnull() {
 				<input type="hidden" name="IMG" id ="IMG">
 			</form>
 		</div>
-		<?php include ("Footer.php"); ?>
+		<?php include ("footer.php"); ?>
 		<script>
 			function ImageExist(url) {
 				var img = new Image();

@@ -3,17 +3,17 @@
 <html lang="en">
 	<head>
 		<title>ACU Times | Creat Poll</title>
-		<?php require_once("Header.php"); ?>
+		<?php require_once("header.php"); ?>
 		<script src="js/Validate.js"></script>
 	</head>
 	<body>
-		<?php include ("Navbar.php"); ?>
+		<?php include ("navbar.php"); ?>
 		<div class="container">
 			<h3>
 				<ul class="nav nav-pills">
-					<li role="presentation" ><a href="CreatArticle.php"> Article </a></li>
+					<li role="presentation" ><a href="creat_article.php"> Article </a></li>
 					<li role="presentation" class="active"><a> Poll </a></li>
-					<li role="presentation"><a href="CreatMultimedia.php"> Multimedia </a></li>
+					<li role="presentation"><a href="creat_multimedia.php"> Multimedia </a></li>
 				</ul>
 			</h3>
 			<br>
@@ -21,7 +21,7 @@
 				<li  class="active"><a data-toggle="tab" href="#English">English</a></li>
 				<li><a data-toggle="tab" href="#Arabic">Arabic</a></li>
 			</ul>
-			<form class="form-horizontal" role="form" method="post" action="CreatPoll.php">
+			<form class="form-horizontal" role="form" method="post" action="creat_poll.php">
 				<!-- #################################################################### tab1 #################################################################### --> 
 				<!-- #################################################################### tab1 #################################################################### --> 
 				<!-- #################################################################### tab1 #################################################################### -->

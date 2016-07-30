@@ -2,14 +2,14 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>ACU Times | Title</title>
-		<?php require_once("Header.php"); ?>
+		<title>ACU Times | Gallery</title>
+		<?php require_once("header.php"); ?>
 		<style>
 			.link-img-gallery{padding:1px ; margin:0}
 		</style>
 	</head>
 	<body>
-		<?php include ("Navbar.php"); ?>
+		<?php include ("navbar.php"); ?>
 		<!-- content -->
 		<div class="container"> 
 			<!-------------------------------- Gallery -------------------------------->
@@ -42,6 +42,6 @@
 			</div>
 			<div class="clear"></div>
 		</div>
-		<?php include ("Footer.php"); ?>
+		<?php include ("footer.php"); ?>
 	</body>
 </html>

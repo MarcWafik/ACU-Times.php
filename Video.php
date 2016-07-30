@@ -15,10 +15,10 @@ if (!$writer->read($youtube->getWriterID())) {
 <html lang="en">
 	<head>
 		<title>ACU Times | Title</title>
-		<?php require_once("Header.php"); ?>
+		<?php require_once("header.php"); ?>
 	</head>
 	<body>
-		<?php include ("Navbar.php"); ?>
+		<?php include ("navbar.php"); ?>
 		<br><br>
 		<div class="container">
 			<div class="col-md-8 ">
@@ -36,9 +36,9 @@ if (!$writer->read($youtube->getWriterID())) {
 					</ul>
 				</div>
 				<div class="container">
-					<a href="Profile.php?id=<?php echo $youtube->getWriterID; ?>"> <img style="height:60px"class="img-responsive img-circle pull-left" src="images/User.png"> </a>
+					<a href="profile.php?id=<?php echo $youtube->getWriterID; ?>"> <img style="height:60px"class="img-responsive img-circle pull-left" src="images/User.png"> </a>
 					<div class="pull-left" style="padding-left:10px">
-						<h5><strong>By <a href="Profile.php?id=<?php echo $youtube->getWriterID; ?>"><?php echo $writer->getfullName(); ?></a>, ACU Times</strong></h5>
+						<h5><strong>By <a href="profile.php?id=<?php echo $youtube->getWriterID; ?>"><?php echo $writer->getfullName(); ?></a>, ACU Times</strong></h5>
 						<h5> <span class="glyphicon glyphicon-time"></span> <?php echo $youtube->getCreatDate_StringLong(); ?> </h5>
 					</div>
 				</div>
@@ -93,6 +93,6 @@ if (!$writer->read($youtube->getWriterID())) {
 			</div>
 		</div>
 	</div>
-	<?php include ("Footer.php"); ?>
+	<?php include ("footer.php"); ?>
 </body>
 </html>

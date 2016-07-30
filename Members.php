@@ -2,15 +2,15 @@
 ?><!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>ACU Times | Title</title>
-		<?php require_once("Header.php"); ?>
+		<title>ACU Times | Members</title>
+		<?php require_once("header.php"); ?>
 	</head>
 	<body>
-		<?php include ("Navbar.php"); ?>
+		<?php include ("navbar.php"); ?>
 		<div class="container" style="padding-top:20px;"> 
 			<!-------------------------------- Search -------------------------------->
 			<div class="col-md-6 col-md-offset-3">
-				<form action="Members.php" method="get">
+				<form action="members.php" method="get">
 					<div class="input-group">
 						<input type="text" class="form-control" placeholder="Search for..." id="Search" name="Search">
 						<span class="input-group-btn">
@@ -54,6 +54,6 @@
 			<!-------------------------------- pagination -------------------------------->
 			<button type="button" class="btn btn-primary center-block" onClick="">Load more <i class="fa fa-arrow-down" aria-hidden="true"></i></button>
 		</div>
-		<?php include ("Footer.php"); ?>
+		<?php include ("footer.php"); ?>
 	</body>
 </html>

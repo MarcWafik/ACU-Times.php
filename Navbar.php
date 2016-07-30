@@ -13,22 +13,22 @@
 			<ul class="nav navbar-nav">
 				<li class="active"><a href="index.php"><span class="glyphicon glyphicon-home"></span></a></li>
 
-				<li class="dropdown"> <a class="dropdown-toggle" data-toggle="dropdown" href="Category.php?Category=News">News <span class="caret"></span></a>
+				<li class="dropdown"> <a class="dropdown-toggle" data-toggle="dropdown" href="category.php?Category=News">News <span class="caret"></span></a>
 					<ul class="dropdown-menu">
-						<li><a href="Category.php">Category 1</a></li>
-						<li><a href="Category.php">Category</a></li>
-						<li><a href="Category.php">Category</a></li>
+						<li><a href="category.php">Category 1</a></li>
+						<li><a href="category.php">Category</a></li>
+						<li><a href="category.php">Category</a></li>
 					</ul>
 				</li> 
 				<?php //foreach($CategoryList as $Category){PrintCategory($Category);}?>
-				<li><a href="Multimedia.php">Multimedia</a></li>
-				<li><a href="Gallery.php">Gallery</a></li>
+				<li><a href="multimedia.php">Multimedia</a></li>
+				<li><a href="gallery.php">Gallery</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li class="dropdown"> <a class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></a>
 					<ul class="dropdown-menu">
 						<li>
-							<form action="Search.php" method="get" class="Search-navbar input-group">
+							<form action="search.php" method="get" class="Search-navbar input-group">
 								<input type="text" class="form-control" placeholder="Search for..." id="Search" name="Search">
 								<span class="input-group-btn">
 									<button class="btn btn-primary" type="submit"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
@@ -43,14 +43,15 @@
 					'<li class="dropdown"> <a class="dropdown-toggle" data-toggle="dropdown" href=""><span class="glyphicon glyphicon-user"></span> '
 					. User::getSessionUserFullName() . ' <span class="caret"></span></a>
 	<ul class="dropdown-menu">
-		<li><a href="Profile.php">Profile</a></li>
-		<li><a href="CreatArticle.php">Write Article</a></li>
-		<li><a href="Members.php">Members</a></li>
-		<li><a href="Redir_Logout.php">Logout</a></li>
+		<li><a href="profile.php">Profile</a></li>
+		<li><a href="creat_article.php">Write Article</a></li>
+		<li><a href="members.php">Members</a></li>
+		<li><a href="polls.php">Pollss</a></li>
+		<li><a href="redir_logout.php">Logout</a></li>
 	</ul>
 </li>';
 				} else {
-					echo'<li><a href="LogIn.php"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>';
+					echo'<li><a href="login.php"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>';
 				}
 				?>
 

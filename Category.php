@@ -2,11 +2,11 @@
 ?><!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>ACU Times | Title</title>
-		<?php require_once("Header.php"); ?>
+		<title>ACU Times | Category</title>
+		<?php require_once("header.php"); ?>
 	</head>
 	<body>
-		<?php include ("Navbar.php"); ?>
+		<?php include ("navbar.php"); ?>
 		<div class="container">
 			<br><h2 class="text-primary">Category name</h2>
 			<hr>
@@ -26,6 +26,6 @@
 			?></div>
 		<!-------------------------------- pagination -------------------------------->
 		<button type="button" class="btn btn-primary center-block" onClick="">Load more <i class="fa fa-arrow-down" aria-hidden="true"></i></button>
-			<?php include ("Footer.php"); ?>
+			<?php include ("footer.php"); ?>
 	</body>
 </html>

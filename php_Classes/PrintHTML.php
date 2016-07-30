@@ -128,9 +128,9 @@ class PrintHTML {
 		echo '<hr>
 			<div class="container">
 				<div class=" col-xs-10">
-					<div class="col-sm-2 text-center"><a href="Profile.php?ID=' . $ID . '"><img src="' . $IMG . '" class="img-80x80 img-circle"></a></div>
+					<div class="col-sm-2 text-center"><a href="profile.php?ID=' . $ID . '"><img src="' . $IMG . '" class="img-80x80 img-circle"></a></div>
 					<div class="col-sm-10">
-						<h4><a href="Profile.php?ID=' . $ID . '">' . $name . '</a><br>
+						<h4><a href="profile.php?ID=' . $ID . '">' . $name . '</a><br>
 							<small>' . $ID . '<br>' . $Email . '</small></h4>
 					</div>
 				</div>

@@ -2,11 +2,11 @@
 ?><!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>ACU Times | Title</title>
-		<?php require_once("Header.php"); ?>
+		<title>ACU Times | Multimedia</title>
+		<?php require_once("header.php"); ?>
 	</head>
 	<body>
-		<?php include ("Navbar.php"); ?>
+		<?php include ("navbar.php"); ?>
 		<br><br>
 		<div class="container">
 			<div class="col-md-8 ">
@@ -74,6 +74,6 @@
 			</div>
 		</div>
 	</div>
-	<?php include ("Footer.php"); ?>
+	<?php include ("footer.php"); ?>
 </body>
 </html>

@@ -3,10 +3,10 @@
 <html lang="en">
 	<head>
 		<title>ACU Times | Home</title>
-		<?php require_once("Header.php"); ?>
+		<?php require_once("header.php"); ?>
 	</head>
 	<body  style="<?php if (Language::isArabic()) echo 'direction: rtl'; ?>">
-		<?php include ("Navbar.php"); ?>
+		<?php include ("navbar.php"); ?>
 
 		<!-------------------------------- Slider -------------------------------->
 		<header id="myCarousel" class="carousel slide"> 
@@ -109,6 +109,6 @@
 				</div>
 			</div>
 		</div>
-		<?php include ("Footer.php"); ?>
+		<?php include ("footer.php"); ?>
 	</body>
 </html>

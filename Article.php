@@ -16,12 +16,12 @@ if (!$writer->read($article->getWriterID())) {
 <html lang="en">
 	<head>
 		<title>ACU Times | Article</title>
-		<?php require_once("Header.php"); ?>
+		<?php require_once("header.php"); ?>
 		<script type="text/javascript" src="js/Poll.js"></script>
 		<script type="text/javascript" src="js/SocialMedia.js"></script>
 	</head>
 	<body>
-		<?php include ("Navbar.php"); ?>
+		<?php include ("navbar.php"); ?>
 		<div class="container"> 
 
 			<!-- Page Content -->
@@ -45,7 +45,7 @@ if (!$writer->read($article->getWriterID())) {
 						<div class="container">
 							<a href="#"> <img class="img-64x64 img-responsive img-circle pull-left " src="images/User.png"> </a>
 							<div class="pull-left" style="padding-left:20px">
-								<h5><strong>By <a href="Profile.php?id=<?php echo $article->getWriterID; ?>"><?php echo $writer->getfullName(); ?></a>, ACU Times</strong></h5>
+								<h5><strong>By <a href="profile.php?id=<?php echo $article->getWriterID; ?>"><?php echo $writer->getfullName(); ?></a>, ACU Times</strong></h5>
 								<h5> <span class="glyphicon glyphicon-time"></span> <?php echo $article->getCreatDate_StringLong() ?> </h5>
 							</div>
 						</div>
@@ -109,6 +109,6 @@ if (!$writer->read($article->getWriterID())) {
 				<hr>
 			</div>
 		</div>
-		<?php include ("Footer.php"); ?>
+		<?php include ("footer.php"); ?>
 	</body>
 </html>

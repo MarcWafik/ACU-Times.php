@@ -33,7 +33,7 @@ if (valAllNotnull()) {
 			$passed = (bool) $Youtube->create();
 		}
 		if ($passed) {
-			header("Location: Multimedia.php?id=$Youtube->getId");
+			header("Location: video.php?id=$Youtube->getId");
 			exit;
 		}
 	} else {
@@ -59,21 +59,21 @@ function valAllNotnull() {
 <html lang="en">
 	<head>
 		<title>ACU Times | Creat Multimedia</title>
-		<?php require_once("Header.php"); ?>
+		<?php require_once("header.php"); ?>
 		<script src="js/Validate.js"></script>
 	</head>
 	<body>
-		<?php include ("Navbar.php"); ?>
+		<?php include ("navbar.php"); ?>
 		<div class="container">
 			<h3>
 				<ul class="nav nav-pills">
-					<li role="presentation" ><a href="CreatArticle.php"> Article </a></li>
-					<li role="presentation"><a  href="CreatPoll.php"> Poll </a></li>
+					<li role="presentation" ><a href="creat_article.php"> Article </a></li>
+					<li role="presentation"><a  href="creat_poll.php"> Poll </a></li>
 					<li role="presentation" class="active"><a> Multimedia </a></li>
 				</ul>
 			</h3>
 			<br>
-			<form class="form-horizontal" role="form" method="post" action="CreatMultimedia.php<?php if (isset($_GET["id"])) echo "?id=" . $_GET["id"] ?>">
+			<form class="form-horizontal" role="form" method="post" action="creat_multimedia.php<?php if (isset($_GET["id"])) echo "?id=" . $_GET["id"] ?>">
 				<!-- #################################################################### YoutubeUrl #################################################################### -->
 				<div class="form-group">
 					<label class="control-label col-sm-2" for="Youtubelink">Youtube Url:</label>
@@ -178,6 +178,6 @@ function valAllNotnull() {
 				<button type="submit" class="btn btn-primary pull-right">Submit</button>
 			</form>
 		</div>
-		<?php include ("Footer.php"); ?>
+		<?php include ("footer.php"); ?>
 	</body>
 </html>

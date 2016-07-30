@@ -3,16 +3,16 @@
 <html lang="en">
 	<head>
 		<title>ACU Times | Pools</title>
-		<?php require_once("Header.php"); ?>
+		<?php require_once("header.php"); ?>
 		<script type="text/javascript" src="js/Poll.js"></script>
 		<script type="text/javascript" src="js/SocialMedia.js"></script>
 	</head>
 	<body>
-	<?php require_once("Navbar.php"); ?>
+	<?php require_once("navbar.php"); ?>
 		<div class="container" style="padding-top:20px;"> 
 			<!-------------------------------- Search -------------------------------->
 			<div class="col-md-6 col-md-offset-3">
-				<form action="Polls.php" method="get">
+				<form action="polls.php" method="get">
 					<div class="input-group">
 						<input type="text" class="form-control" placeholder="Search for..." id="Search" name="Search">
 						<span class="input-group-btn">
@@ -87,6 +87,6 @@
 			<!-------------------------------- pagination -------------------------------->
 			<button type="button" class="btn btn-primary center-block" onClick="">Load more <i class="fa fa-arrow-down" aria-hidden="true"></i></button>
 		</div>
-		<?php include ("Footer.php"); ?>
+		<?php include ("footer.php"); ?>
 	</body>
 </html>

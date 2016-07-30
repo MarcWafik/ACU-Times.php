@@ -16,10 +16,10 @@ if (isset($_GET["ID"])) {
 <html lang="en">
 	<head>
 		<title>ACU Times | Profile</title>
-		<?php require_once("Header.php"); ?>
+		<?php require_once("header.php"); ?>
 	</head>
 	<body>
-		<?php include ("Navbar.php"); ?>
+		<?php include ("navbar.php"); ?>
 		<!-- content -->
 		<div class="container">
 			<h3 <?php
@@ -29,8 +29,8 @@ if (isset($_GET["ID"])) {
 			?>>
 				<ul class="nav nav-pills" style="<?php if (!isset($_GET["ID"])) echo "display: none"; ?>">
 					<li role="presentation" class="active"><a>Profile</a></li>
-					<li role="presentation"><a href="EditProfile.php">Change personal info</a></li>
-					<li role="presentation"><a href="EditProfilePW.php">Change Password</a></li>
+					<li role="presentation"><a href="edit_profile.php">Change personal info</a></li>
+					<li role="presentation"><a href="edit_profile_pw.php">Change Password</a></li>
 				</ul>
 			</h3>
 			<br><br><br>
@@ -93,6 +93,6 @@ if (isset($_GET["ID"])) {
 			</form>
 		</div>
 		<!-- ################################################################################################ -->
-		<?php include ("Footer.php"); ?>
+		<?php include ("footer.php"); ?>
 	</body>
 </html>

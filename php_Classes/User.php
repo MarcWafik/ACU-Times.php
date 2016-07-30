@@ -138,21 +138,21 @@ class User extends EntityUser implements iCRUD {
 	static function CheckLogin() {
 		Session::startOnce();
 		if (!isset($_SESSION['id'])) {
-			header("Location: Login.php");
+			header("Location: login.php");
 		}
 	}
 
 	static function CheckEditor() {
 		self::CheckLogin();
 		if ($_SESSION['accses'] != self::ACCSES_EDITOR) {
-			header("Location: AccsesDenied.php");
+			header("Location: accses_denied.php");
 		}
 	}
 
 	static function CheckAdmin() {
 		self::CheckLogin();
 		if ($_SESSION['accses'] != self::ACCSES_ADMIN) {
-			header("Location: AccsesDenied.php");
+			header("Location: accses_denied.php");
 		}
 	}
 

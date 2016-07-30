@@ -10,16 +10,16 @@ if (Null === @$_GET["Search"] || "" === @$_GET["Search"]) {
 <html lang="en">
 	<head>
 		<title>ACU Times | Title</title>
-		<?php require_once("Header.php"); ?>
+		<?php require_once("header.php"); ?>
 	</head>
 	<body>
-		<?php include ("Navbar.php"); ?>
+		<?php include ("navbar.php"); ?>
 		<!-- content -->
 
 		<div class="container">
 			<!-------------------------------- Search -------------------------------->
 			<div class="col-md-6 col-md-offset-3">
-				<form action="Search.php" method="get">
+				<form action="search.php" method="get">
 					<div class="input-group">
 						<input type="text" class="form-control" placeholder="Search for..." id="Search" name="Search">
 						<span class="input-group-btn">
@@ -51,6 +51,6 @@ if (Null === @$_GET["Search"] || "" === @$_GET["Search"]) {
 			</div>
 			<div class="clear"></div>
 		</div>
-		<?php include ("Footer.php"); ?>
+		<?php include ("footer.php"); ?>
 	</body>
 </html>

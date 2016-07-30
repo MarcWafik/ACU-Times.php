@@ -37,24 +37,24 @@ function valAllNotnull() {
 <html lang="en">
 	<head>
 		<title>ACU Times | Edit Profile</title>
-		<?php require_once("Header.php"); ?>
+		<?php require_once("header.php"); ?>
 		<script src="js/Validate.js"></script>
 	</head>
 	<body>
-		<?php include ("Navbar.php"); ?>
+		<?php include ("navbar.php"); ?>
 		<!-------------------------------------------------------------------------- content -------------------------------------------------------------------------->
 		<div class="container">
 			<h3>
 				<ul class="nav nav-pills">
-					<li role="presentation"><a href="Profile.php">Profile</a></li>
+					<li role="presentation"><a href="profile.php">Profile</a></li>
 					<li role="presentation" class="active"><a>Change personal info</a></li>
-					<li role="presentation"><a href="EditProfilePW.php">Change Password</a></li>
+					<li role="presentation"><a href="edit_profile_pw.php">Change Password</a></li>
 				</ul>
 			</h3>
 			<br>
 			<br>
 			<br>
-			<form class="form-horizontal" role="form" action="EditProfile.php" method="post" onSubmit="return isAllValid()">
+			<form class="form-horizontal" role="form" action="edit_profile.php" method="post" onSubmit="return isAllValid()">
 				<!-- left column -->
 				<div class="col-md-4 col-sm-6 col-xs-12">
 					<div class="text-center"> <img src="<?php echo "images/User.png"; ?>" class="img-200x200 img-circle" alt="avatar">
@@ -214,6 +214,6 @@ function valAllNotnull() {
 				</div>
 			</form>
 		</div>
-		<?php include ("Footer.php"); ?>
+		<?php include ("footer.php"); ?>
 	</body>
 </html>
