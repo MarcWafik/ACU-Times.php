@@ -2,57 +2,29 @@
 require_once 'autoload.php';
 // Check for accses
 User::CheckLogin();
+
 $article = new Article();
 $access = User::getSessionAccses();
-if (!$article->hasAccsesToModify($access)) {
-	header("Location: accses_denied.php");
-}
+
 
 // Update
 if (isset($_GET["id"])) {
 	if ($article->read($_GET["id"])) {
-		$Data = array(
-			"Category" => $article->getCategoryID(),
-			"Importance" => $article->getImportance(),
-			"Youtubelink" => $article->getyoutubeURLString(),
-			"lang" => $article->getLanguage(),
-			"title_en" => $article->getTitleEnglish(),
-			"description_en" => $article->getDescriptionEnglish(),
-			"body_en" => $article->getBodyEnglish(),
-			"title_ar" => $article->getTitleArabic(),
-			"description_ar" => $article->getDescriptionArabic(),
-			"body_ar" => $article->getBodyArabic()
-		);
+		$Data = ControlArticle::readArticleConvertToDataArr($article);
 	} else {
 		header("Location: 404.php");
 		exit;
 	}
 }
 
+if (!$article->hasAccsesToModify($access)) {
+	header("Location: accses_denied.php");
+}
 if (valAllNotnull()) {
 
-	// setting the data
-	$iscorrect = array(
-		"Category" => (bool) $article->setCategoryID($_POST["Category"]),
-		"Importance" => (bool) $article->setImportance($_POST["Importance"]),
-		"Youtubelink" => (bool) $article->setyoutubeID($_POST["Youtubelink"]),
-		"lang" => (bool) $article->setLanguage($_POST["lang"]),
-		"WriterID" => (bool) $article->setWriterID(User::getSessionUserID()));
-
-	// set the English data
-	if ($_POST["lang"] == Language::ENGLISH || $_POST["lang"] == Language::BOTH) {
-		$iscorrect["title_en"] = (bool) $article->setTitleEnglish($_POST["title_en"]);
-		$iscorrect["description_en"] = (bool) $article->setDescriptionEnglish($_POST["description_en"]);
-		$iscorrect["body_en"] = (bool) $article->setBodyEnglish($_POST["body_en"]);
-	}
-
-	// set the Arabic data
-	if ($_POST["lang"] == Language::ARABIC || $_POST["lang"] == Language::BOTH) {
-		$iscorrect["title_ar"] = (bool) $article->setTitleArabic($_POST["title_ar"]);
-		$iscorrect["description_ar"] = (bool) $article->setDescriptionArabic($_POST["description_ar"]);
-		$iscorrect["body_ar"] = (bool) $article->setBodyArabic($_POST["body_ar"]);
-	}
-	$article->setImageNumber(1);
+	ControlArticle::setData($article);
+	
+	$article->setImageNumber(1);///////////////////////////////////////
 	// set the publish or aprove or creat
 	$article->setDisplayFromSession($access);
 	$passed = FALSE;
@@ -101,20 +73,6 @@ if (valAllNotnull()) {
 			"body_ar" => $_POST["body_ar"]
 		);
 	}
-}
-
-function valAllNotnull() {
-	return
-			isset($_POST["Category"]) &&
-			isset($_POST["Importance"]) &&
-			isset($_POST["Youtubelink"]) &&
-			isset($_POST["lang"]) &&
-			isset($_POST["title_en"]) &&
-			isset($_POST["description_en"]) &&
-			isset($_POST["body_en"]) &&
-			isset($_POST["title_ar"]) &&
-			isset($_POST["description_ar"]) &&
-			isset($_POST["body_ar"]);
 }
 ?><!DOCTYPE html>
 <html lang="en">

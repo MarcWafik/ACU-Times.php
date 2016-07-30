@@ -1,12 +1,18 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="css/font-awesome.min.css" >
+
+<link rel="stylesheet" href="lib/font-awesome-4.6.3/css/font-awesome.css" >
+
 <link rel="stylesheet" type="text/css" href="css/Layout.css">
-<link rel="stylesheet" href="css/bootstrap.min.css">
-<script src="js/jquery-1.12.3.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
+
+<script src="lib/jquery/jquery-3.0.0.js"></script>
+
+<link rel="stylesheet" href="lib/bootstrap/css/bootstrap.css">
+<script src="lib/bootstrap-3.3.6-dist/js/bootstrap.js"></script>
+
 <script src="js/analytics.js"></script>
+
 <!--[if lt IE 9]-->
 <?php
 if (FALSE) {//will find a proper condition later

@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 01, 2016 at 08:27 AM
--- Server version: 10.1.10-MariaDB
--- PHP Version: 5.6.19
+-- Generation Time: Jul 02, 2016 at 06:12 PM
+-- Server version: 10.1.13-MariaDB
+-- PHP Version: 5.6.21
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -40,10 +40,6 @@ CREATE TABLE `accses` (
   `titleArabic` varchar(16) COLLATE utf8_unicode_ci NOT NULL,
   `isDeleted` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- RELATIONS FOR TABLE `accses`:
---
 
 --
 -- Dumping data for table `accses`
@@ -84,14 +80,6 @@ CREATE TABLE `article` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- RELATIONS FOR TABLE `article`:
---   `categoryID`
---       `category` -> `id`
---   `writerID`
---       `user` -> `id`
---
-
---
 -- Dumping data for table `article`
 --
 
@@ -115,7 +103,8 @@ INSERT INTO `article` (`id`, `creatDate`, `lastUpdateDate`, `titleEnglish`, `tit
 (16, '2016-05-17 12:54:05', '2016-05-17 12:54:05', 'sdfhgdf', '', 3, 4141127, '', 'hdsfgsjdsh', '', '<p>xhxfjhxgchf</p>', '', 16, 0, 0, 1, 0, 0),
 (17, '2016-05-17 12:54:47', '2016-05-17 12:54:47', 'dfhgsdsdf', '', 3, 4141127, '', 'ghdfhgshdfh', '', '<p>dsfghsdfhgsdfgh</p>', '', 2, 0, 0, 1, 0, 0),
 (18, '2016-05-17 13:12:16', '2016-05-17 13:14:28', 'testin role ', '', 3, 4141127, '', 'description', '', '<p>fdsgfdsgsdfgfdsg</p>', '', 2, 0, 0, 1, 0, 0),
-(19, '2016-05-17 13:40:56', '2016-05-17 13:40:56', 'test', '', 3, 4141127, '', 'sdfadfa', '', '<p>,jgdlsjagag</p>', '', 2, 0, 0, 1, 0, 0);
+(19, '2016-05-17 13:40:56', '2016-05-17 13:40:56', 'test', '', 3, 4141127, '', 'sdfadfa', '', '<p>,jgdlsjagag</p>', '', 2, 0, 0, 1, 0, 0),
+(20, '2016-06-25 12:54:15', '2016-06-25 12:54:15', 'cxvnbxcvnbxcvn', '', 3, 4141127, '', 'bvcxnbbbcxbbbb', '', '<p>cnbxcbcx</p>\r\n<p>by abdeltahman</p>', '', 2, 0, 0, 1, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -133,12 +122,6 @@ CREATE TABLE `category` (
   `ParentID` int(11) DEFAULT NULL,
   `isDeleted` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- RELATIONS FOR TABLE `category`:
---   `ParentID`
---       `category` -> `id`
---
 
 --
 -- Dumping data for table `category`
@@ -181,12 +164,6 @@ CREATE TABLE `gallery` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- RELATIONS FOR TABLE `gallery`:
---   `writerID`
---       `user` -> `id`
---
-
---
 -- Dumping data for table `gallery`
 --
 
@@ -214,12 +191,6 @@ CREATE TABLE `notification` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- RELATIONS FOR TABLE `notification`:
---   `userID`
---       `user` -> `id`
---
-
---
 -- Dumping data for table `notification`
 --
 
@@ -243,12 +214,6 @@ CREATE TABLE `poll` (
   `isDeleted` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
---
--- RELATIONS FOR TABLE `poll`:
---   `writerID`
---       `user` -> `id`
---
-
 -- --------------------------------------------------------
 
 --
@@ -266,12 +231,6 @@ CREATE TABLE `pollchoice` (
   `isDeleted` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
---
--- RELATIONS FOR TABLE `pollchoice`:
---   `PollID`
---       `poll` -> `id`
---
-
 -- --------------------------------------------------------
 
 --
@@ -288,12 +247,6 @@ CREATE TABLE `updates` (
   `MessageType` tinyint(2) NOT NULL,
   `isDeleted` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- RELATIONS FOR TABLE `updates`:
---   `editorID`
---       `user` -> `id`
---
 
 --
 -- Dumping data for table `updates`
@@ -325,12 +278,6 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- RELATIONS FOR TABLE `user`:
---   `accsesID`
---       `accses` -> `id`
---
-
---
 -- Dumping data for table `user`
 --
 
@@ -360,12 +307,6 @@ CREATE TABLE `youtube` (
   `descriptionArabic` varchar(256) COLLATE utf8_unicode_ci NOT NULL,
   `isDeleted` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- RELATIONS FOR TABLE `youtube`:
---   `writerID`
---       `user` -> `id`
---
 
 --
 -- Dumping data for table `youtube`
@@ -471,7 +412,7 @@ ALTER TABLE `accses`
 -- AUTO_INCREMENT for table `article`
 --
 ALTER TABLE `article`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 --
 -- AUTO_INCREMENT for table `category`
 --
