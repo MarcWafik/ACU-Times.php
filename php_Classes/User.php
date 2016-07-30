@@ -57,7 +57,9 @@ class User extends EntityUser implements iCRUD {
 		$stmt->bindParam(':gender', $this->gender);
 		$stmt->bindParam(':accsesID', $this->accsesID);
 		$stmt->bindParam(':about', $this->about);
-		$stmt->bindParam(':birthDate', $this->birthDate->format('Y-m-d'));
+
+		$temp = $this->birthDate->format('Y-m-d');
+		$stmt->bindParam(':birthDate', $temp);
 	}
 
 //=================================================Const===================================================

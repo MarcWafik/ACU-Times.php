@@ -1,6 +1,13 @@
 <?php
 require_once 'autoload.php';
+User::CheckLogin();
 $article = new Article();
+$access = User::getSessionAccses();
+if (!$article->hasAccsesToModify($access)) {
+	header("Location: accses_denied.php");
+}
+
+// Update
 if (isset($_GET["id"])) {
 	if ($article->read($_GET["id"])) {
 		$Data = array(
@@ -20,44 +27,48 @@ if (isset($_GET["id"])) {
 		exit;
 	}
 }
+
 if (valAllNotnull()) {
+
+	// setting the data
 	$iscorrect = array(
 		"Category" => (bool) $article->setCategoryID($_POST["Category"]),
 		"Importance" => (bool) $article->setImportance($_POST["Importance"]),
 		"Youtubelink" => (bool) $article->setyoutubeID($_POST["Youtubelink"]),
 		"lang" => (bool) $article->setLanguage($_POST["lang"]));
+
+	// set the English data
 	if ($_POST["lang"] == Language::ENGLISH || $_POST["lang"] == Language::BOTH) {
 		$iscorrect["title_en"] = (bool) $article->setTitleEnglish($_POST["title_en"]);
 		$iscorrect["description_en"] = (bool) $article->setDescriptionEnglish($_POST["description_en"]);
 		$iscorrect["body_en"] = (bool) $article->setBodyEnglish($_POST["body_en"]);
 	}
+
+	// set the Arabic data
 	if ($_POST["lang"] == Language::ARABIC || $_POST["lang"] == Language::BOTH) {
 		$iscorrect["title_ar"] = (bool) $article->setTitleArabic($_POST["title_ar"]);
 		$iscorrect["description_ar"] = (bool) $article->setDescriptionArabic($_POST["description_ar"]);
 		$iscorrect["body_ar"] = (bool) $article->setBodyArabic($_POST["body_ar"]);
 	}
-	if (Validation::valAll($iscorrect)) {
-		$access = User::getSessionAccses();
-		if (isset($_GET["id"])) {
-			if (+$article->hasAccsesToModify($access)) {
-				if ($article->setDisplayFromSession($access)) {
-					$passed = (bool) $article->update();
-				} else {
-					header("Location: 404.php");
-				}
-			} /* else {
 
-			  header("Location: 404.php");} */
+	// set the publish or aprove or creat
+	$article->setDisplayFromSession($access);
+
+	// check if the imput is valid
+	if (Validation::valAll($iscorrect)) {
+
+		if (isset($_GET["id"])) {
+			$passed = (bool) $article->update();
 		} else {
-			if ($article->hasAccsesToModify($access)) {
-				$passed = (bool) $article->create();
-			}
+			$passed = (bool) $article->create();
 		}
-		if ($passed) {
-			uploadpic();
-			header("Location: article.php?id=" . $article->getId());
-			exit;
-		}
+	}
+
+	// check if every thing went right
+	if ($passed) {
+		uploadpic();
+		header("Location: article.php?id=" . $article->getId());
+		exit;
 	} else {
 		$Data = array(
 			"Category" => $_POST["Category"],
@@ -76,6 +87,7 @@ if (valAllNotnull()) {
 function uploadpic() {
 	$ds = DIRECTORY_SEPARATOR;
 	$storeFolder = '\images\article';
+
 	if (!empty($_FILES)) {
 		$tempFile = $_FILES['file']['tmp_name'];
 		$targetPath = dirname(__FILE__) . $ds . $storeFolder . $ds;
@@ -95,18 +107,17 @@ function valAllNotnull() {
 			isset($_POST["body_en"]) &&
 			isset($_POST["title_ar"]) &&
 			isset($_POST["description_ar"]) &&
-			isset($_POST["body_ar"])
-	;
+			isset($_POST["body_ar"]);
 }
 ?><!DOCTYPE html>
 <html lang="en">
-    <head>
-        <title>ACU Times | Creat Article</title>
+	<head>
+		<title>ACU Times | Creat Article</title>
 		<?php require_once("header.php"); ?>
-        <link rel="stylesheet" href="css/dropezone.css" type="text/css" media="all">
-        <script src='js/tinymce/tinymce.min.js'></script>
-        <script src="js/dropzone.js"></script>
-        <script src="js/Validate.js"></script>
+		<link rel="stylesheet" href="css/dropezone.css" type="text/css" media="all">
+		<script src='js/tinymce/tinymce.min.js'></script>
+		<script src="js/dropzone.js"></script>
+		<script src="js/Validate.js"></script>
 	</head>
 	<body  onload="onLoad()">
 		<?php include ("navbar.php"); ?>
@@ -116,10 +127,9 @@ function valAllNotnull() {
 					<li role="presentation" class="active"><a> Article </a></li>
 					<li role="presentation"><a  href="creat_poll.php"> Poll </a></li>
 					<li role="presentation"><a href="creat_multimedia.php"> Multimedia </a></li>
-					<li role="presentation"><a href="creat_gallery.php"> Gallery </a></li>
 				</ul>
 			</h3>
-			<br><br>
+			<br>
 			<form class="form-horizontal" role="form" method="post" action="creat_article.php<?php if (isset($_GET["id"])) echo "?id=" . $_GET["id"] ?>">
 				<!-- #################################################################### Category #################################################################### -->
 				<div class="form-group">
@@ -128,7 +138,7 @@ function valAllNotnull() {
 						<select class="form-control" id="Category" name="Category">
 							<?php
 							foreach (Category::readAll() as $Category) {
-								$Category->PrintOptionCategory();
+								$Category->PrintOptionCategory(@$Data["Category"]);
 							}
 							?>
 						</select>
@@ -153,7 +163,6 @@ function valAllNotnull() {
 							   name="Youtubelink" 
 							   id="Youtubelink" 
 							   maxlength="256" 
-							   required 
 							   onBlur="valYouTube(this)" 
 							   value="<?php echo @$Data["Youtubelink"] ?>">
 						<span class="help-block"><ul>
@@ -165,9 +174,9 @@ function valAllNotnull() {
 					<label class="control-label col-sm-2" for="lang">Language:</label>
 					<div class="col-sm-10">
 						<select class="form-control" name="lang" id="lang" onBlur="changeLang(this)" onChange="changeLang(this)">
-							<option value="<?php echo Language::ENGLISH ?>">English</option>
-							<option value="<?php echo Language::ARABIC ?>">Arabic</option>
-							<option value="<?php echo Language::BOTH ?>">English & Arabic</option>
+							<option value="<?php echo Language::ENGLISH ?>" <?php if (@$Data[lang] == 0) echo ' selected="selected"'; ?>>English</option>
+							<option value="<?php echo Language::ARABIC ?>" <?php if (@$Data[lang] == 1) echo ' selected="selected"'; ?>>Arabic</option>
+							<option value="<?php echo Language::BOTH ?>"<?php if (@$Data[lang] == 2) echo ' selected="selected"'; ?>>English & Arabic</option>
 						</select>
 					</div>
 				</div>
@@ -193,7 +202,6 @@ function valAllNotnull() {
 								   class="form-control" 
 								   onBlur="valTitle(this)" 
 								   maxlength="128" 
-								   required 
 								   autocomplete="on">
 							<span class="help-block">
 								<ul>
@@ -201,6 +209,7 @@ function valAllNotnull() {
 								</ul>
 							</span></div>
 					</div>
+
 					<!-- #################################################################### Description-EN #################################################################### -->
 					<div class="form-group">
 						<label class="control-label col-sm-2" for="description_en">Description :</label>
@@ -213,7 +222,6 @@ function valAllNotnull() {
 								   class="form-control" 
 								   onBlur="valDescription(this)" 
 								   maxlength="256" 
-								   required 
 								   autocomplete="on">
 							<span class="help-block">
 								<ul>
@@ -227,6 +235,7 @@ function valAllNotnull() {
 						<textarea class="tinymce" id="body_en" name="body_en" ><?php echo @$Data["body_en"] ?></textarea>
 					</div>
 				</div>
+
 				<div id="ar">
 					<br>
 					<h3 class="text-center text-primary">Arabic</h3>
@@ -242,14 +251,14 @@ function valAllNotnull() {
 								   placeholder="Enter title in arabic" 
 								   class="form-control" 
 								   onBlur="valTitle(this)" 
-								   maxlength="128" 
-								   required 
+								   maxlength="128"  
 								   autocomplete="on">
 							<span class="help-block">
 								<ul>
 									<?php PrintHTML::validation("IDtaken", @$iscorrect["IDtaken"], "ID is Already Taken") ?>
 								</ul>
 							</span></div>
+
 					</div>
 					<!-- #################################################################### Breif-AR #################################################################### -->
 					<div class="form-group">
@@ -263,7 +272,6 @@ function valAllNotnull() {
 								   class="form-control" 
 								   onBlur="valDescription(this)" 
 								   maxlength="256" 
-								   required 
 								   autocomplete="on">
 							<span class="help-block">
 								<ul>
@@ -277,7 +285,8 @@ function valAllNotnull() {
 						<textarea class="tinymce" id="body_ar" name="body_ar" ><?php echo @$Data["body_ar"] ?></textarea>
 					</div>
 				</div>
-				<button type="submit" class="btn btn-primary pull-right">Submit</button>
+
+				<button type="submit" class="btn btn-primary pull-right" name="submit" id="submit" >Submit</button>
 			</form>
 		</div>
 		<?php include ("footer.php"); ?>
@@ -297,36 +306,40 @@ function valAllNotnull() {
 			});
 		</script>
 		<script>
-			function ImageExist(url) {
-				var img = new Image();
-				img.src = url;
-				return img.height != 0;
-			}
-			var cleanFilename = function (name) {
-				$.ajax({
-					url: 'Data\\Articles\\' + name,
-					type: 'HEAD',
-					error: function () {
-						var MyID = document.getElementById('IMG').value;
-						document.getElementById("IMG").value = name;
-					},
-					success: function () {
-						//var rand = Math.floor((Math.random() * 10000000) + 1);
-						//name = name.slice(0,name.length - 4);
-						//name = name+rand+".jpg";
-						var MyID = document.getElementById('IMG').value;
-						document.getElementById("IMG").value = name;
-					}
-				});
-			};
+			/*function ImageExist(url) {
+			 var img = new Image();
+			 img.src = url;
+			 return img.height != 0;
+			 }
+			 var cleanFilename = function (name) {
+			 $.ajax({
+			 url: 'images\\article\\' + name,
+			 type: 'HEAD',
+			 error: function () {
+			 var MyID = document.getElementById('IMG').value;
+			 document.getElementById("IMG").value = name;
+			 },
+			 success: function () {
+			 
+			 //var rand = Math.floor((Math.random() * 10000000) + 1);
+			 //name = name.slice(0,name.length - 4);
+			 //name = name+rand+".jpg";
+			 var MyID = document.getElementById('IMG').value;
+			 document.getElementById("IMG").value = name;
+			 
+			 }
+			 });
+			 };*/
+
 			var myDropzone = new Dropzone("div#upload-widget", {
-				url: "CreatArticle.php",
+				url: "creat_article.php",
 				maxFilesize: 4,
 				maxFiles: 1,
 				parallelUploads: 1,
 				acceptedFiles: "image/*",
-				renameFilename: cleanFilename,
 				autoProcessQueue: false
+						//renameFilename: cleanFilename,
+
 			});
 		</script>
 		<script>
@@ -349,4 +362,3 @@ function valAllNotnull() {
 		</script>
 	</body>
 </html>
-
