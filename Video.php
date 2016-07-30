@@ -36,7 +36,7 @@ if (!$writer->read($youtube->getWriterID())) {
 					</ul>
 				</div>
 				<div class="container">
-					<a href="profile.php?id=<?php echo $youtube->getWriterID; ?>"> <img style="height:60px"class="img-responsive img-circle pull-left" src="images/User.png"> </a>
+					<a href="profile.php?id=<?php echo $youtube->getWriterID; ?>"> <img style="height:60px" class="img-responsive img-circle pull-left" src="images/User.png"> </a>
 					<div class="pull-left" style="padding-left:10px">
 						<h5><strong>By <a href="profile.php?id=<?php echo $youtube->getWriterID; ?>"><?php echo $writer->getfullName(); ?></a>, ACU Times</strong></h5>
 						<h5> <span class="glyphicon glyphicon-time"></span> <?php echo $youtube->getCreatDate_StringLong(); ?> </h5>

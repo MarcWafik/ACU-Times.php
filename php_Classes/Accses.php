@@ -93,7 +93,7 @@ class Accses extends Entity implements iCRUD {
 					email = :email,
 					titleEnglish = :titleEnglish,
 					titleArabic = :titleArabic
-				WHERE id=:id", TRUE, TRUE);
+				WHERE id=:id", TRUE, FALSE);
 	}
 
 //===================================================SET===================================================

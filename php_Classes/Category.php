@@ -114,34 +114,35 @@ class Category extends Entity implements iCRUD {
 					nameEnglish = :nameEnglish,
 					nameArabic = :nameArabic,
 					ParentID = :ParentID
-				WHERE id=:id", TRUE, TRUE);
+				WHERE id=:id", TRUE, FALSE);
 	}
 
 //===================================================SET===================================================
 
-	function setPossition($possition) {
-		$this->possition = $possition;
+	public function setNameEnglish($nameEnglish) {
+		if (Validation::isStringMinMaxLenth($nameEnglish, 3, 32)) {
+			$this->nameEnglish = htmlspecialchars($nameEnglish);
+			return TRUE;
+		}
+		return FALSE;
 	}
 
-	function setNameEnglish($nameEnglish) {
-		$this->nameEnglish = $nameEnglish;
+	public function setNameArabic($nameArabic) {
+		if (Validation::isStringMinMaxLenth($nameArabic, 3, 32)) {
+			$this->nameArabic = htmlspecialchars($nameArabic);
+			return TRUE;
+		}
+		return FALSE;
 	}
 
-	function setNameArabic($nameArabic) {
-		$this->nameArabic = $nameArabic;
-	}
-
-	function setArrSubCategorys($arrSubCategorys) {
-		$this->arrSubCategorys = $arrSubCategorys;
+	public function setParentID($ParentID) {
+		$this->ParentID = $ParentID;
+		return $this;
 	}
 
 //===================================================GET===================================================
 	static function getAllCategorys() {
 		return self::$allCategorys;
-	}
-
-	function getPossition() {
-		return $this->possition;
 	}
 
 	function getNameEnglish() {
@@ -183,6 +184,14 @@ class Category extends Entity implements iCRUD {
 		} else {
 			echo "<option value='{$this->id}' {$selected}>{$this->nameEnglish}</option>";
 		}
+	}
+
+	function PrintOptionMainCategory($selected) {
+		$temp = "";
+		if ($selected == $this->id) {
+			$temp = " selected ";
+		}
+		echo "<option value='{$this->id}' {$selected}>{$this->nameEnglish}</option>";
 	}
 
 }

@@ -123,7 +123,15 @@ class PrintHTML {
 	static public function Member($ID, $name, $Email, $isAdmin, $IMG) {
 		$MakeAdmin = "";
 		if (!$isAdmin) {
-			$MakeAdmin = '<li><a href="#"><i class="fa fa-user"></i> Make Admin</a></li>';
+			$MakeAdmin = '
+				<div class="dropdown col-xs-2">
+					<button class="btn-setting btn btn-default " data-toggle="dropdown" aria-haspopup="true" > <i class="fa fa-bars" aria-hidden="true"></i> </button>
+					<ul class="dropdown-menu" aria-labelledby="dLabel">
+						<li><a  href="#"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</a></li>
+						<li><a  href="#"><i class="fa fa-key" aria-hidden="true"></i> Reset PW</a></li>
+						<li><hr></li>
+					</ul>
+				</div>';
 		}
 		echo '<hr>
 			<div class="container">
@@ -134,14 +142,7 @@ class PrintHTML {
 							<small>' . $ID . '<br>' . $Email . '</small></h4>
 					</div>
 				</div>
-				<div class="dropdown col-xs-2">
-					<button class="btn-setting btn btn-default " data-toggle="dropdown" aria-haspopup="true" > <i class="fa fa-bars" aria-hidden="true"></i> </button>
-					<ul class="dropdown-menu" aria-labelledby="dLabel">
 						' . $MakeAdmin . '
-						<li><a  href="#"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</a></li>
-						<li><a  href="#"><i class="fa fa-key" aria-hidden="true"></i> Reset PW</a></li>
-					</ul>
-				</div>
 			</div>';
 	}
 

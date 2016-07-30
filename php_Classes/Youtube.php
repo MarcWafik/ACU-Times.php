@@ -83,7 +83,7 @@ class Youtube extends EntityArticle implements iCRUD {
 				`titleEnglish` LIKE :find OR 
 				`titleArabic` LIKE :find OR
 				`descriptionEnglish` LIKE :find OR 
-				`descriptionArabic` LIKE :find OR";
+				`descriptionArabic` LIKE :find";
 		return static::Do_comand_Search($comand, $find, $offset, $size);
 	}
 

@@ -72,7 +72,7 @@ class PollChoice extends Entity implements iCRUD {
 					textArabic = :textArabic,
 					votes = :votes,
 					PollID = :PollID
-				WHERE id=:id", TRUE, TRUE);
+				WHERE id=:id", TRUE, FALSE);
 	}
 
 //===================================================SET===================================================

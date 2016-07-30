@@ -113,7 +113,13 @@ class Article extends Youtube implements iCRUD {
 					importance = :importance, 
 					imageNumber = :imageNumber, 
 					views = :views
-				WHERE id=:id", TRUE, TRUE);
+				WHERE id=:id", TRUE, FALSE);
+	}
+
+	public static function getAllInCat($find, $offset = 0, $size = 0) {
+		$comand = "SELECT * FROM " . static::DB_TABLE_NAME . " WHERE 
+				`categoryID` LIKE :find ";
+		return static::Do_comand_Search($comand, $find, $offset, $size);
 	}
 
 //===================================================SET===================================================

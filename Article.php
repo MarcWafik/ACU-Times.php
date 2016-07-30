@@ -57,7 +57,7 @@ if (!$writer->read($article->getWriterID())) {
 
 						<!-- Post Content -->
 
-						<?php echo $youtube->getBodyEnglish(); ?>
+						<?php echo $article->getBodyEnglish(); ?>
 						<!---------------------------------------------- Socail Media ---------------------------------------------------------->
 						<?php
 						$url = "//{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}";

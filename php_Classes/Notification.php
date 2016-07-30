@@ -86,7 +86,7 @@ class Notification extends Entity implements iCRUD {
 					source = :source, 
 					sourceID = sourceID, 
 					userID = :userID
-				WHERE id=:id", TRUE, TRUE);
+				WHERE id=:id", TRUE, FALSE);
 	}
 
 //===================================================SET===================================================

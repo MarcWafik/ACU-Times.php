@@ -60,7 +60,7 @@ class Gallery extends EntityArticle implements iCRUD {
 					display = :display, 
 					writerID = :writerID, 
 					imageNumber = :imageNumber, 
-				WHERE id=:id", TRUE, TRUE);
+				WHERE id=:id", TRUE, FALSE);
 	}
 
 	public function hasAccsesToModify(Accses $Accses) {

@@ -109,7 +109,7 @@ class User extends EntityUser implements iCRUD {
 				accsesID = :accsesID, 
 				about = :about, 
 				birthDate = :birthDate 
-				WHERE id=:id", TRUE);
+				WHERE id=:id", FALSE);
 	}
 
 	public static function Search($find, $offset = 0, $size = 0) {

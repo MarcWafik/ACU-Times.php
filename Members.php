@@ -1,4 +1,6 @@
-<?php require_once 'autoload.php';
+<?php
+require_once 'autoload.php';
+$arr = User::readAll();
 ?><!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -23,7 +25,7 @@
 
 
 
-			<!-------			
+						
 			<hr>
 			<div class="container">
 				<div class=" col-xs-11">
@@ -31,24 +33,27 @@
 					<div class="col-sm-10">
 						<h4><a href="Profile.php?ID={$ID}">Marc Wafik</a><br>
 							<small>4141127<br>
-								something@something.com</small></h4>
+								something@something.com<br>admin</small>
+								</h4>
 					</div>
 				</div>
 				<div class="dropdown col-xs-1">
 					<button class="btn-setting btn btn-default " data-toggle="dropdown" aria-haspopup="true" > <i class="fa fa-bars" aria-hidden="true"></i> </button>
 					<ul class="dropdown-menu" aria-labelledby="dLabel">
-						<li><a href="#"><i class="fa fa-user"></i> Make Admin</a></li>
 						<li><a  href="#"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</a></li>
 						<li><a  href="#"><i class="fa fa-key" aria-hidden="true"></i> Reset PW</a></li>
+						<li><hr></li>
+						<li><a href="#"><i class="fa fa-user"></i> Make Admin</a></li>
+						<li><a href="#"><i class="fa fa-user"></i> Make Admin</a></li>
 					</ul>
 				</div>
 			</div>
-			<hr>--------->
+			<hr>
 
 			<?php
 			$arr = User::readAll(0, 9999999);
 			foreach ($arr as $value) {
-				PrintHTML::Member($value->getId(), $value->getfullName(), $value->getEmail(), User::isAdmin(), "images/User.png");
+				PrintHTML::Member($value->getId(), $value->getfullName(), $value->getEmail(),TRUE, "images/User.png");
 			}
 			?>
 			<!-------------------------------- pagination -------------------------------->

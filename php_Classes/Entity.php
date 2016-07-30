@@ -124,7 +124,7 @@ abstract class Entity {
 
 	public static function readAll($offset = 0, $size = 0) {
 		$comand = "SELECT * FROM " . static::DB_TABLE_NAME;
-		return Do_comand_readAll($comand, $offset, $size);
+		return static::Do_comand_readAll($comand, $offset, $size);
 	}
 
 	protected static function Do_comand_readAll($comand, $offset = 0, $size = 0) {

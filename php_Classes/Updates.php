@@ -85,7 +85,7 @@ class Updates extends Entity implements iCRUD {
 					targetID = :targetID,
 					targetType = :targetType,
 					MessageType = :MessageType
-				WHERE id=:id", TRUE, TRUE);
+				WHERE id=:id", TRUE, FALSE);
 	}
 
 //===================================================SET===================================================
