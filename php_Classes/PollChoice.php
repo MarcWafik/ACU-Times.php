@@ -75,6 +75,11 @@ class PollChoice extends Entity implements iCRUD {
 				WHERE id=:id", TRUE, FALSE);
 	}
 
+	public static function readAllrelatedPoll($PollID, $offset = 0, $size = 0) {
+		$comand = "SELECT * FROM " . static::DB_TABLE_NAME . " WHERE PollID=" . $PollID;
+		return static::Do_comand_readAll($comand, $offset, $size);
+	}
+
 //===================================================SET===================================================
 	public function increment() {
 		if (!isset($this->votes)) {
@@ -108,6 +113,7 @@ class PollChoice extends Entity implements iCRUD {
 
 	function setPollID($PollID) {
 		$this->PollID = $PollID;
+		return TRUE;
 	}
 
 //===================================================GET===================================================

@@ -1,6 +1,10 @@
 <?php
 
 require_once 'autoload.php';
-Check_Admin();
-DeleteUser($_GET["ID"]);
-header("Location: MangeUsers.php");
+User::CheckLogin();
+if (isset($_GET["ID"]) && User::getSessionAccses()->hasAccsesAdmin()) {
+	DeleteUser($_GET["ID"]);
+	header("Location: MangeUsers.php");
+}
+
+

@@ -68,8 +68,7 @@ class Gallery extends EntityArticle implements iCRUD {
 	}
 
 	public function setDisplayFromSession(Access $Accses) {
-		$this->display = $Accses->getGallery();
-		return TRUE;
+		return $this->doit_setDisplayFromSession($Accses->getGallery());
 	}
 
 //===================================================SET===================================================

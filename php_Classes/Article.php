@@ -187,15 +187,15 @@ class Article extends Youtube implements iCRUD {
 		return FALSE;
 	}
 
-	public function setDisplayFromSession(Access $Accses) {
-		$this->display = $Accses->getArticle();
-		return TRUE;
+	public function setDisplayFromSession(Access $Accses){
+		return $this->doit_setDisplayFromSession($Accses->getArticle());
 	}
 
 //===================================================GET===================================================
 	public function getImgThumbnail() {
 		return Image::getMainImage($this->id, Image::ARTICLE);
 	}
+
 	public function getViews() {
 		return $this->views;
 	}

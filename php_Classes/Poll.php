@@ -97,12 +97,14 @@ class Poll extends EntityArticle implements iCRUD {
 	}
 
 	public function setDisplayFromSession(Access $Accses) {
-		$this->display = $Accses->getPoll();
-		return TRUE;
+		return $this->doit_setDisplayFromSession($Accses->getGallery());
 	}
 
 //===================================================GET===================================================
 	public function getArrChoices() {
+		if (!isset($this->arrChoices[0])) {
+			$this->arrChoices = PollChoice::readAllrelatedPoll($this->id);
+		}
 		return $this->arrChoices;
 	}
 

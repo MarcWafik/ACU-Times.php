@@ -23,7 +23,7 @@ abstract class EntityArticle extends Entity {
 		parent::__init();
 		$this->titleEnglish = "";
 		$this->titleArabic = "";
-		$this->display = 0;
+		$this->display = 1;
 		$this->writerID = 0;
 	}
 
@@ -44,10 +44,14 @@ abstract class EntityArticle extends Entity {
 	}
 
 //=================================================Const===================================================
-	const DISPLAY_NEW = 0;
-	const DISPLAY_DENIED = 1;
+	const DISPLAY_DENIED = 0;
+	const DISPLAY_NEW = 1;
 	const DISPLAY_APPROVED = 2;
 	const DISPLAY_PUBLISHED = 3;
+	const TYPE_ARTICLE = 0;
+	const TYPE_YOUTUBE = 1;
+	const TYPE_POLL = 2;
+	const TYPE_GALLERY = 3;
 
 //==================================================CRUD===================================================
 	public static function Search($find, $offset = 0, $size = 0) {
@@ -85,6 +89,7 @@ abstract class EntityArticle extends Entity {
 	public function setDisplay($display) {
 		if (Validation::isNumInRange($display, 0, 3)) {
 			$this->display = (int) $display;
+			return TRUE;
 		}
 		return FALSE;
 	}
@@ -92,11 +97,29 @@ abstract class EntityArticle extends Entity {
 	public function setWriterID($writerID) {
 		if (Validation::isNumLagerThan($writerID, 0)) {
 			$this->writerID = (int) $writerID;
+			return TRUE;
 		}
 		return FALSE;
 	}
 
 	abstract public function setDisplayFromSession(Access $Accses);
+
+	protected function doit_setDisplayFromSession($Accses_Specific) {
+		if ($Accses_Specific == Access::APPROVE) {
+			$this->display = static::DISPLAY_APPROVED;
+			return TRUE;
+		} else if ($Accses_Specific == Access::CREATE) {
+			$this->display = static::DISPLAY_NEW;
+			return TRUE;
+		} else if ($Accses_Specific == Access::PUBLISH) {
+			$this->display = static::DISPLAY_PUBLISHED;
+			return TRUE;
+		} else if ($Accses_Specific == Access::FULL) {
+			$this->display = static::DISPLAY_PUBLISHED;
+			return TRUE;
+		}
+		return FALSE;
+	}
 
 //===================================================GET===================================================
 	abstract public function hasAccsesToModify(Access $Accses);

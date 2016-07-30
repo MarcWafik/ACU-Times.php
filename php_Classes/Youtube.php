@@ -113,12 +113,11 @@ class Youtube extends EntityArticle implements iCRUD {
 	}
 
 	public function setDisplayFromSession(Access $Accses) {
-		$this->display = $Accses->getYoutube();
-		return TRUE;
+		return $this->doit_setDisplayFromSession($Accses->getGallery());
 	}
 
 //===================================================GET===================================================
-	public function getyoutubeThumbnail($param) {
+	public function getyoutubeThumbnail() {
 		return "http://img.youtube.com/vi/$this->youtubeID/mqdefault.jpg";
 	}
 
