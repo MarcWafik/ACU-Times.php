@@ -1,5 +1,9 @@
 ### ### Custom ### ###
 lib/
+images/article/
+images/gallery/
+images/demo/
+images/users/
 ### Windows ###
 # Windows image file caches
 Thumbs.db
