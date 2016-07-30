@@ -9,9 +9,7 @@ if (isset($_GET["id"]) && $article->read($_GET["id"])) {
 }
 
 $writer = new User();
-if (!$writer->read($article->getWriterID())) {
-	$writer = new User();
-}
+$writer->read($article->getWriterID());
 ?><!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -52,7 +50,7 @@ if (!$writer->read($article->getWriterID())) {
 						<hr>
 
 						<!-- Preview Image --> 
-						<img class="img-responsive" src="Data\Articles\3.jpg" alt="">
+						<img class="img-responsive" src="<?php echo Image::getMainImage($article->getId(), Image::ARTICLE) ?>" alt="">
 						<hr>
 
 						<!-- Post Content -->

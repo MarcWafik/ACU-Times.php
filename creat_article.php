@@ -1,5 +1,6 @@
 <?php
 require_once 'autoload.php';
+// Check for accses
 User::CheckLogin();
 $article = new Article();
 $access = User::getSessionAccses();
@@ -35,7 +36,8 @@ if (valAllNotnull()) {
 		"Category" => (bool) $article->setCategoryID($_POST["Category"]),
 		"Importance" => (bool) $article->setImportance($_POST["Importance"]),
 		"Youtubelink" => (bool) $article->setyoutubeID($_POST["Youtubelink"]),
-		"lang" => (bool) $article->setLanguage($_POST["lang"]));
+		"lang" => (bool) $article->setLanguage($_POST["lang"]),
+		"WriterID" => (bool) $article->setWriterID(User::getSessionUserID()));
 
 	// set the English data
 	if ($_POST["lang"] == Language::ENGLISH || $_POST["lang"] == Language::BOTH) {
@@ -53,7 +55,7 @@ if (valAllNotnull()) {
 
 	// set the publish or aprove or creat
 	$article->setDisplayFromSession($access);
-
+	$passed = FALSE;
 	// check if the imput is valid
 	if (Validation::valAll($iscorrect)) {
 
@@ -166,7 +168,7 @@ function valAllNotnull() {
 							   onBlur="valYouTube(this)" 
 							   value="<?php echo @$Data["Youtubelink"] ?>">
 						<span class="help-block"><ul>
-								<?php PrintHTML::validation("IDtaken", @$iscorrect["IDtaken"], "ID is Already Taken") ?>
+								<?php PrintHTML::validation("Youtubelink", @$iscorrect["Youtubelink"], "Please Check your input") ?>
 							</ul></span> </div>
 				</div>
 				<!-- #################################################################### Language #################################################################### -->
@@ -205,7 +207,7 @@ function valAllNotnull() {
 								   autocomplete="on">
 							<span class="help-block">
 								<ul>
-									<?php PrintHTML::validation("IDtaken", @$iscorrect["IDtaken"], "ID is Already Taken") ?>
+									<?php PrintHTML::validation("title_en", @$iscorrect["title_en"], "Please Check your input") ?>
 								</ul>
 							</span></div>
 					</div>
@@ -225,7 +227,7 @@ function valAllNotnull() {
 								   autocomplete="on">
 							<span class="help-block">
 								<ul>
-									<?php PrintHTML::validation("IDtaken", @$iscorrect["IDtaken"], "ID is Already Taken") ?>
+									<?php PrintHTML::validation("description_en", @$iscorrect["description_en"], "Please Check your input") ?>
 								</ul>
 							</span></div>
 					</div>
@@ -255,7 +257,7 @@ function valAllNotnull() {
 								   autocomplete="on">
 							<span class="help-block">
 								<ul>
-									<?php PrintHTML::validation("IDtaken", @$iscorrect["IDtaken"], "ID is Already Taken") ?>
+									<?php PrintHTML::validation("title_ar", @$iscorrect["title_ar"], "Please Check your input") ?>
 								</ul>
 							</span></div>
 
@@ -275,7 +277,7 @@ function valAllNotnull() {
 								   autocomplete="on">
 							<span class="help-block">
 								<ul>
-									<?php PrintHTML::validation("IDtaken", @$iscorrect["IDtaken"], "ID is Already Taken") ?>
+									<?php PrintHTML::validation("description_ar", @$iscorrect["description_ar"], "Please Check your input") ?>
 								</ul>
 							</span></div>
 					</div>
