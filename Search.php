@@ -2,15 +2,16 @@
 require_once 'autoload.php';
 $ArticleArr = Array();
 if (Null === @$_GET["Search"] || "" === @$_GET["Search"]) {
-	//$ArticleArr = LoadAllArticle();
+	$ArticleArr = array();
 } else {
-	//$ArticleArr = SearchArticleTitle($_GET["Search"]);
+	$ArticleArr = Article::Search($_GET["Search"]);
 }
 ?><!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>ACU Times | Title</title>
+		<title>ACU Times | Search</title>
 		<?php require_once("header.php"); ?>
+		<script src="js/load_more.js" type="text/javascript"></script>
 	</head>
 	<body>
 		<?php include ("navbar.php"); ?>
@@ -39,24 +40,15 @@ if (Null === @$_GET["Search"] || "" === @$_GET["Search"]) {
 				<span class="input-group-btn">
 					<button class="btn input-sm"><i class="fa fa-sort-amount-asc" aria-hidden="true"></i></button>
 				</span> </div><br>
-			<!-------------------------------- Articles -------------------------------->
-			<div class="container">
-				<?php
-				$title = "Sed ultrices turpis sed rhoncus semper";
-				$link = "#";
-				$description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi pellentesque scelerisque mi, eu varius eros interdum sit amet. Maecenas at vulputate nisl. Aenean in varius purus. Praesent commodo fringilla euismod. In eu eros id arcu imperdiet rutrum.";
-				$time = new DateTime;
-				$time = $time->format('g:i a - D, d F Y');
-				$img = "http://placehold.it/1920x1080";
-				PrintHTML::portofolio_12row_next_normal($title, $link, $description, $time, $img);
-				PrintHTML::portofolio_12row_next_normal($title, $link, $description, $time, $img);
-				PrintHTML::portofolio_12row_next_normal($title, $link, $description, $time, $img);
-				PrintHTML::portofolio_12row_next_normal($title, $link, $description, $time, $img);
-				?></div>
-			<!-------------------------------- pagination -------------------------------->
-			<button type="button" class="btn btn-primary center-block" onClick="">Load more <i class="fa fa-arrow-down" aria-hidden="true"></i></button>
-			<div class="clear"></div>
+
 		</div>
-		<?php include ("footer.php"); ?>
+		<div class="container" id="apendAJAX">
+			<!-------------------------------- Articles -------------------------------->
+			<?php include 'ajax_search.php'; ?>
+		</div>
+		<!-------------------------------- pagination -------------------------------->
+		<input type="hidden" value="ajax_search.php?Search=<?php echo @$_GET["Search"] ?>" id="hide" name="hide">
+		<button type="button" class="btn btn-primary center-block" onClick="loadMore(hide)">Load more <i class="fa fa-arrow-down" aria-hidden="true"></i></button>
+			<?php include ("footer.php"); ?>
 	</body>
 </html>

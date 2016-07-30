@@ -27,6 +27,7 @@ class Access extends Entity implements iCRUD {
 	}
 
 	protected function fillFromAssoc($DBrow) {
+		parent::fillFromAssoc($DBrow);
 		$this->poll = $DBrow['poll'];
 		$this->article = $DBrow['article'];
 		$this->youtube = $DBrow['youtube'];
@@ -188,7 +189,7 @@ class Access extends Entity implements iCRUD {
 	}
 
 	function hasAccsesAdmin() {
-		return	$this->poll == static::FULL &&
+		return $this->poll == static::FULL &&
 				$this->article == static::FULL &&
 				$this->youtube == static::FULL &&
 				$this->gallery == static::FULL &&

@@ -1,10 +1,11 @@
 <?php
 require_once 'autoload.php';
+User::CheckLogin();
 $User = new User();
 $User->__init();
 
-if (isset($_GET["ID"])) {
-	if (!$User->read($_GET["ID"])) {
+if (isset($_GET["id"])) {
+	if (!$User->read($_GET["id"])) {
 		header("Location: 404.php");
 		exit();
 	}
@@ -22,12 +23,10 @@ if (isset($_GET["ID"])) {
 		<?php include ("navbar.php"); ?>
 		<!-- content -->
 		<div class="container">
-			<h3 <?php
-			if (isset($_GET["ID"])) {
-				echo 'style="display:none"';
-			}
-			?>>
-				<ul class="nav nav-pills" style="<?php if (!isset($_GET["ID"])) echo "display: none"; ?>">
+			<h3 <?php if (isset($_GET["id"])) {
+			echo 'style="display:none"';
+		} ?>>
+				<ul class="nav nav-pills">
 					<li role="presentation" class="active"><a>Profile</a></li>
 					<li role="presentation"><a href="edit_profile.php">Change personal info</a></li>
 					<li role="presentation"><a href="edit_profile_pw.php">Change Password</a></li>
@@ -60,7 +59,7 @@ if (isset($_GET["ID"])) {
 					</div><hr>
 					<!-- ####################################################################  #################################################################### -->
 					<div class="form-group">
-						<label class="col-md-3 control-label">Name:</label>
+						<label class="col-lg-3 control-label">Name:</label>
 						<p class=" col-lg-8 form-control-static"><?php echo $User->getfullName() ?></p>
 					</div>
 					<!-- ####################################################################  #################################################################### -->
@@ -93,6 +92,6 @@ if (isset($_GET["ID"])) {
 			</form>
 		</div>
 		<!-- ################################################################################################ -->
-		<?php include ("footer.php"); ?>
+<?php include ("footer.php"); ?>
 	</body>
 </html>

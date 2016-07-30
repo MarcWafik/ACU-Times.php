@@ -43,13 +43,13 @@ class Gallery extends EntityArticle implements iCRUD {
 					titleArabic, 
 					display, 
 					writerID, 
-					imageNumber, 
+					imageNumber
 				) VALUES ( 
 					:titleEnglish, 
 					:titleArabic, 
 					:display, 
 					:writerID, 
-					:imageNumber, 
+					:imageNumber
 				)", FALSE, TRUE);
 	}
 
@@ -59,7 +59,7 @@ class Gallery extends EntityArticle implements iCRUD {
 					titleArabic = :titleArabic, 
 					display = :display, 
 					writerID = :writerID, 
-					imageNumber = :imageNumber, 
+					imageNumber = :imageNumber
 				WHERE id=:id", TRUE, FALSE);
 	}
 
@@ -86,6 +86,10 @@ class Gallery extends EntityArticle implements iCRUD {
 
 	public function getViews() {
 		return $this->views;
+	}
+
+	public function getImageNumber() {
+		return $this->imageNumber;
 	}
 
 }

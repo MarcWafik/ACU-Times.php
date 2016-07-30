@@ -85,14 +85,17 @@ abstract class Entity {
 			if ($Permenant) {
 				$stmt = $conn->prepare("DELETE FROM " . static::DB_TABLE_NAME . " WHERE ID=:imputID");
 			} else {
-				$stmt = $conn->prepare("UPDATE " . static::DB_TABLE_NAME . " SET isDeleted =:isDeleted WHERE id=:id");
-				$stmt->bindParam(':isDeleted', $Delete_or_Undo);
+				if (!$Delete_or_Undo == TRUE) {
+					$stmt = $conn->prepare("UPDATE " . static::DB_TABLE_NAME . " SET isDeleted =0 WHERE id=:imputID");
+				} else {
+					$stmt = $conn->prepare("UPDATE " . static::DB_TABLE_NAME . " SET isDeleted =1 WHERE id=:imputID");
+				}
 			}
 			$stmt->bindParam(':imputID', $id);
 			$stmt->execute();
 			return TRUE;
 		} catch (PDOException $e) {
-			echo $sql . "<br>" . $e->getMessage();
+			echo $e->getMessage();
 			return FALSE;
 		}
 	}
@@ -128,7 +131,7 @@ abstract class Entity {
 	}
 
 	protected static function Do_comand_readAll($comand, $offset = 0, $size = 0) {
-		if (isset($size) && isset($offset) && 0 < $size && 0 < $offset) {
+		if (isset($size) && isset($offset) && 0 < $size ) {
 			$comand .= " LIMIT $size OFFSET $offset";
 		}
 		$conn = DataBase::getConnection();
@@ -154,7 +157,7 @@ abstract class Entity {
 	}
 
 	public static function Do_comand_Search($comand, $find, $offset = 0, $size = 0) {
-		if (isset($size) && isset($offset) && 0 < $size && 0 < $offset) {
+		if (isset($size) && isset($offset) && 0 < $size ) {
 			$comand .= " LIMIT $size OFFSET $offset";
 		}
 		$conn = DataBase::getConnection();

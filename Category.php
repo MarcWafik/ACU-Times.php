@@ -6,7 +6,7 @@ if (isset($_GET["CategoryID"]) && $cat->read($_GET["CategoryID"])) {
 	
 } else {
 	header("Location: 404.php");
-	echo "hi";
+	exit();
 }
 ?><!DOCTYPE html>
 <html lang="en">
@@ -25,7 +25,9 @@ if (isset($_GET["CategoryID"]) && $cat->read($_GET["CategoryID"])) {
 			<?php include 'ajax_category.php'; ?>
 		</div>
 		<!-------------------------------- pagination -------------------------------->
-		<button type="button" class="btn btn-primary center-block" onClick="loadMore(ajax_category.php?categoryid =<?php echo @$_GET["CategoryID"] ?>)">Load more <i class="fa fa-arrow-down" aria-hidden="true"></i></button>
-			<?php include ("footer.php"); ?>
+		<input type="hidden" value="ajax_category.php?CategoryID=<?php echo @$_GET["CategoryID"] ?>" id="hide" name="hide">
+		<button type="button" class="btn btn-primary center-block" onClick="loadMore(hide)">Load more <i class="fa fa-arrow-down" aria-hidden="true"></i></button>
+		<?php include ("footer.php"); ?>
+
 	</body>
 </html>

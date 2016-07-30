@@ -43,6 +43,21 @@ if (valAllNotnull()) {
 
 		if (isset($_GET["id"])) {
 			$passed = (bool) $Multimedia->update();
+			if ($passed) {
+				$x = new Updates;
+				$x->setEditorID(User::getSessionUserID());
+				$x->setTargetType(Updates::TARGET_TYPE_YOUTUBE);
+				$x->setTargetID($Multimedia->getId());
+				$x->setMessageType(Updates::MESSAGE_TYPE_UPDATE);
+				$x->create();
+
+				$y = new Notification;
+				$y->setUserID($Multimedia->getWriterID());
+				$y->setSource(Notification::SOURCE_MULTIMEDIA);
+				$y->setsourceID($Multimedia->getId());
+				$y->setMessage("Multimedia was updated by ".User::getSessionUserFullName());
+				$y->create();
+			}
 		} else {
 			$Multimedia->setWriterID(User::getSessionUserID());
 			$passed = (bool) $Multimedia->create();
@@ -64,8 +79,6 @@ if (valAllNotnull()) {
 	}
 }
 
-
-
 function valAllNotnull() {
 	return
 			isset($_POST["Youtubelink"]) &&
@@ -78,11 +91,11 @@ function valAllNotnull() {
 <html lang="en">
 	<head>
 		<title>ACU Times | Creat Multimedia</title>
-		<?php require_once("header.php"); ?>
+<?php require_once("header.php"); ?>
 		<script src="js/Validate.js"></script>
 	</head>
 	<body>
-		<?php include ("navbar.php"); ?>
+<?php include ("navbar.php"); ?>
 		<div class="container">
 			<h3>
 				<ul class="nav nav-pills">
@@ -108,7 +121,7 @@ function valAllNotnull() {
 							   onBlur="valYouTube(this)" 
 							   value="<?php echo @$Data["Youtubelink"] ?>">
 						<span class="help-block"><ul>
-								<?php PrintHTML::validation("Youtubelink", @$iscorrect["Youtubelink"], "Invalid Input") ?>
+<?php PrintHTML::validation("Youtubelink", @$iscorrect["Youtubelink"], "Invalid Input") ?>
 							</ul></span> </div>
 				</div>
 				<div id="en">
@@ -130,7 +143,7 @@ function valAllNotnull() {
 								   autocomplete="on">
 							<span class="help-block">
 								<ul>
-									<?php PrintHTML::validation("title_en", @$iscorrect["title_en"], "Invalid Input") ?>
+<?php PrintHTML::validation("title_en", @$iscorrect["title_en"], "Invalid Input") ?>
 								</ul>
 							</span></div>
 					</div>
@@ -151,7 +164,7 @@ function valAllNotnull() {
 								   autocomplete="on">
 							<span class="help-block">
 								<ul>
-									<?php PrintHTML::validation("description_en", @$iscorrect["description_en"], "Invalid Input") ?>
+<?php PrintHTML::validation("description_en", @$iscorrect["description_en"], "Invalid Input") ?>
 								</ul>
 							</span></div>
 					</div>
@@ -176,7 +189,7 @@ function valAllNotnull() {
 								   autocomplete="on">
 							<span class="help-block">
 								<ul>
-									<?php PrintHTML::validation("title_ar", @$iscorrect["title_ar"], "Invalid Input") ?>
+<?php PrintHTML::validation("title_ar", @$iscorrect["title_ar"], "Invalid Input") ?>
 								</ul>
 							</span></div>
 					</div>
@@ -196,7 +209,7 @@ function valAllNotnull() {
 								   autocomplete="on">
 							<span class="help-block">
 								<ul>
-									<?php PrintHTML::validation("description_ar", @$iscorrect["description_ar"], "Invalid Input") ?>
+<?php PrintHTML::validation("description_ar", @$iscorrect["description_ar"], "Invalid Input") ?>
 								</ul>
 							</span></div>
 					</div>
@@ -204,6 +217,6 @@ function valAllNotnull() {
 				<button type="submit" class="btn btn-primary pull-right">Submit</button>
 			</form>
 		</div>
-		<?php include ("footer.php"); ?>
+<?php include ("footer.php"); ?>
 	</body>
 </html>

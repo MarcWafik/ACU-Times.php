@@ -17,8 +17,8 @@ class Image {
 	const USER = "user";
 	const GALLERY = "gallery";
 
-	public static function getMainImage($id, $type) {
-		return "images/" . $type . "/" . $id . ".jpg";
+	public static function getMainImage($id, $type, $imgNo = 0) {
+		return "images/" . $type . "/" . $id . "-" . $imgNo . ".jpg";
 	}
 
 	public static function upload() {
@@ -44,11 +44,11 @@ class Image {
 			return FALSE;
 		}
 // if everything is ok, try to upload file
-			if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-				echo "The file " . basename($_FILES["fileToUpload"]["name"]) . " has been uploaded.";
-			} else {
-				echo "Sorry, there was an error uploading your file.";
-			}
+		if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
+			echo "The file " . basename($_FILES["fileToUpload"]["name"]) . " has been uploaded.";
+		} else {
+			echo "Sorry, there was an error uploading your file.";
+		}
 	}
 
 }

@@ -111,7 +111,7 @@ class User extends EntityUser implements iCRUD {
 				accsesID = :accsesID, 
 				about = :about, 
 				birthDate = :birthDate 
-				WHERE id=:id", FALSE);
+				WHERE id=:id", TRUE);
 	}
 
 	public static function Search($find, $offset = 0, $size = 0) {
@@ -168,27 +168,6 @@ class User extends EntityUser implements iCRUD {
 			echo "Error: " . $e->getMessage();
 			return FALSE;
 		}
-	}
-
-//============================================GETrelated===================================================
-	function LoadArrNotification() {
-		
-	}
-
-	function LoadArrArticle() {
-		
-	}
-
-	function LoadArrPoll() {
-		
-	}
-
-	function LoadArrGallery() {
-		
-	}
-
-	function LoadArrYoutube() {
-		
 	}
 
 //===============================================Session===================================================
@@ -343,7 +322,7 @@ class User extends EntityUser implements iCRUD {
 	}
 
 	public function isCorrectPassword($password) {
-		return (isset($password) && hash("sha256", $password) == $this->password);
+		return (isset($password) && strcmp(hash("sha256", $password), $this->password));
 	}
 
 	public function getImagePath() {

@@ -91,6 +91,11 @@ class Notification extends Entity implements iCRUD {
 				WHERE id=:id", TRUE, FALSE);
 	}
 
+	public static function readAllrelatedWriterID($userID, $offset = 0, $size = 0) {
+		$comand = "SELECT * FROM " . static::DB_TABLE_NAME . " WHERE userID=" . $userID;
+		return static::Do_comand_readAll($comand, $offset, $size);
+	}
+
 //===================================================SET===================================================
 
 

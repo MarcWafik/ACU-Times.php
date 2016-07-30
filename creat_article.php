@@ -52,7 +52,7 @@ if (valAllNotnull()) {
 		$iscorrect["description_ar"] = (bool) $article->setDescriptionArabic($_POST["description_ar"]);
 		$iscorrect["body_ar"] = (bool) $article->setBodyArabic($_POST["body_ar"]);
 	}
-
+	$article->setImageNumber(1);
 	// set the publish or aprove or creat
 	$article->setDisplayFromSession($access);
 	$passed = FALSE;
@@ -61,15 +61,31 @@ if (valAllNotnull()) {
 
 		if (isset($_GET["id"])) {
 			$passed = (bool) $article->update();
+			if ($passed) {
+				$x = new Updates;
+				$x->setEditorID(User::getSessionUserID());
+				$x->setTargetType(Updates::TARGET_TYPE_ARTICLE);
+				$x->setTargetID($Gallery->getId());
+				$x->setMessageType(Updates::MESSAGE_TYPE_UPDATE);
+				$x->create();
+
+				$y = new Notification;
+				$y->setUserID($article->getWriterID());
+				$y->setSource(Notification::SOURCE_ARTICLE);
+				$y->setsourceID($article->getId());
+				$y->setMessage("Article was updated by " . User::getSessionUserFullName());
+				$y->create();
+			}
 		} else {
 			$article->setWriterID(User::getSessionUserID());
 			$passed = (bool) $article->create();
+			rename("images\\article\\upload.jpg", "images\\article\\" . $article->getId() . "-0.jpg");
 		}
 	}
 
 	// check if every thing went right
 	if ($passed) {
-		uploadpic();
+
 		header("Location: article.php?id=" . $article->getId());
 		exit;
 	} else {
@@ -84,18 +100,6 @@ if (valAllNotnull()) {
 			"description_ar" => $_POST["description_ar"],
 			"body_ar" => $_POST["body_ar"]
 		);
-	}
-}
-
-function uploadpic() {
-	$ds = DIRECTORY_SEPARATOR;
-	$storeFolder = '\images\article';
-
-	if (!empty($_FILES)) {
-		$tempFile = $_FILES['file']['tmp_name'];
-		$targetPath = dirname(__FILE__) . $ds . $storeFolder . $ds;
-		$targetFile = $targetPath . $_FILES['file']['name'];
-		move_uploaded_file($tempFile, $targetFile);
 	}
 }
 
@@ -187,7 +191,9 @@ function valAllNotnull() {
 				<br>
 				<div class="form-group">
 					<div  class="dropzone " id="upload-widget"> </div>
-					<input type="hidden" name="IMG" id ="IMG">
+
+
+
 				</div>
 				<div id="en">
 					<br>
@@ -309,41 +315,32 @@ function valAllNotnull() {
 			});
 		</script>
 		<script>
-			/*function ImageExist(url) {
-			 var img = new Image();
-			 img.src = url;
-			 return img.height != 0;
-			 }
-			 var cleanFilename = function (name) {
-			 $.ajax({
-			 url: 'images\\article\\' + name,
-			 type: 'HEAD',
-			 error: function () {
-			 var MyID = document.getElementById('IMG').value;
-			 document.getElementById("IMG").value = name;
-			 },
-			 success: function () {
-			 
-			 //var rand = Math.floor((Math.random() * 10000000) + 1);
-			 //name = name.slice(0,name.length - 4);
-			 //name = name+rand+".jpg";
-			 var MyID = document.getElementById('IMG').value;
-			 document.getElementById("IMG").value = name;
-			 
-			 }
-			 });
-			 };*/
-			//Dropzone.autoDiscover = false;
+
+			var cleanFilename = function (name) {
+				//document.getElementById("IMG").value = name;
+
+				return name.toLowerCase().replace(/^[\w.]+$/i, 'upload.jpg');
+
+			};
+
+
+
+
+
+
+
+
+
 			var myDropzone = new Dropzone("div#upload-widget", {
-				url: "creat_article.php",
+				url: "uploadArticle.php",
 				maxFilesize: 4,
 				maxFiles: 1,
 				parallelUploads: 1,
 				acceptedFiles: "image/*",
-				autoProcessQueue: false
-						//renameFilename: cleanFilename,
+				renameFilename: cleanFilename
 
 			});
+
 
 
 

@@ -1,4 +1,8 @@
-<!DOCTYPE html>
+<?php
+require_once 'autoload.php';
+User::CheckLogin();
+$arr = Gallery::readAll();
+?><!DOCTYPE html>
 <html lang="en">
 	<head>
 		<title>ACU Times | Gallery</title>
@@ -11,35 +15,11 @@
 		<div class="container">
 			<br><br>
 			<div class="gallery" >
-				<div class="row">
-					<h4>Aprile <small>hi</small></h4>
-					<div class="gallery-div"> 
-						<a class="fancybox" rel="group" href="images/demo/1_b.jpg"><img src="images/demo/1_b.jpg" height="200" class="img-gallery"/></a>
-					</div>
-					<div class="gallery-div"> 
-						<a class="fancybox" rel="group" href="images/demo/1.jpg"><img src="images/demo/1.jpg" height="200" class="img-gallery"/></a> 
-					</div>
-					<div class="gallery-div"> 
-						<a class="fancybox" rel="group" href="images/demo/3_b.jpg"><img src="images/demo/3_b.jpg"  height="200" class="img-gallery"/></a>
-					</div>
-					<div class="gallery-div"> 
-						<a class="fancybox" rel="group" href="images/demo/2.jpg"><img src="images/demo/2.jpg"  height="200" class="img-gallery"/></a> 
-					</div>
-				</div>
-				<div class="row">
-					<h4>dec</h4>
-					<div class="gallery-div"> 
-						<a class="fancybox" rel="group" href="images/demo/3_b.jpg" ><img src="images/demo/3_b.jpg" height="200" class="img-gallery"/></a>
-					</div>
-					<div class="gallery-div"> 
-						<a class="fancybox" rel="group" href="images/demo/4.jpg" ><img src="images/demo/4.jpg" height="200" class="img-gallery"/></a> 
-					</div>
-				</div>
-				<div class="row"> <h4>aho</h4>
-					<div class="gallery-div"> 
-						<a class="fancybox" rel="group" href="images/demo/4_b.jpg" ><img src="images/demo/4_b.jpg" height="200" class="img-gallery"/></a> 
-					</div>
-				</div>
+				<?php
+				foreach ($arr as $value) {
+					PrintHTML::gallery($value);
+				}
+				?>
 			</div>
 		</div>
 		<?php include ("Footer.php"); ?>
