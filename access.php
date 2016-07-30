@@ -19,14 +19,13 @@ $arrArticle = Access::readAll();
 			<br><h2 class="text-primary" >Access</h2>
 			<hr>
 			<h3>
-			<?php
-			foreach ($arrArticle as &$value) {
-				//<a href="#" class="alert-link">...</a>
-				echo '<a href="creat_access.php?id='.$value->getId().'">'.$value->getTitleEnglish().'</a><br><br>';
-		
-			}
-			?></h4>
-			<!-------------------------------- Articles -------------------------------->
+				<?php
+				foreach ($arrArticle as &$value) {
+					//<a href="#" class="alert-link">...</a>
+					echo '<a href="creat_access.php?id=' . $value->getId() . '">' . $value->getTitleEnglish() . '</a><br><br>';
+				}
+				?></h4>
+				<!-------------------------------- Articles -------------------------------->
 
 		</div>
 		<?php include ("footer.php"); ?>

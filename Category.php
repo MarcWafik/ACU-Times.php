@@ -27,7 +27,7 @@ if (isset($_GET["CategoryID"]) && $cat->read($_GET["CategoryID"])) {
 		<!-------------------------------- pagination -------------------------------->
 		<input type="hidden" value="ajax_category.php?CategoryID=<?php echo @$_GET["CategoryID"] ?>" id="hide" name="hide">
 		<button type="button" class="btn btn-primary center-block" onClick="loadMore(hide)">Load more <i class="fa fa-arrow-down" aria-hidden="true"></i></button>
-		<?php include ("footer.php"); ?>
+			<?php include ("footer.php"); ?>
 
 	</body>
 </html>

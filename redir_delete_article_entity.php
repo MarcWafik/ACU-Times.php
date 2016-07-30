@@ -22,9 +22,9 @@ if (isset($_GET["id"]) && isset($_GET["type"])) {
 			exit;
 	}
 	if ($temp->read($_GET["id"]) && $temp->hasAccsesToModify(User::getSessionAccses())) {
-			$temp->delete();
-			header("Location: index.php");
-			exit;
+		$temp->delete();
+		header("Location: index.php");
+		exit;
 	}
 }
 header("Location: accses_denied.php");

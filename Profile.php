@@ -23,9 +23,11 @@ if (isset($_GET["id"])) {
 		<?php include ("navbar.php"); ?>
 		<!-- content -->
 		<div class="container">
-			<h3 <?php if (isset($_GET["id"])) {
-			echo 'style="display:none"';
-		} ?>>
+			<h3 <?php
+			if (isset($_GET["id"])) {
+				echo 'style="display:none"';
+			}
+			?>>
 				<ul class="nav nav-pills">
 					<li role="presentation" class="active"><a>Profile</a></li>
 					<li role="presentation"><a href="edit_profile.php">Change personal info</a></li>
@@ -92,6 +94,6 @@ if (isset($_GET["id"])) {
 			</form>
 		</div>
 		<!-- ################################################################################################ -->
-<?php include ("footer.php"); ?>
+		<?php include ("footer.php"); ?>
 	</body>
 </html>

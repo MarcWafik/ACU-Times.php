@@ -1,79 +1,6 @@
 <?php
 require_once 'autoload.php';
-// Check for accses
-User::CheckLogin();
-
-$article = new Article();
-$access = User::getSessionAccses();
-
-
-// Update
-if (isset($_GET["id"])) {
-	if ($article->read($_GET["id"])) {
-		$Data = ControlArticle::readArticleConvertToDataArr($article);
-	} else {
-		header("Location: 404.php");
-		exit;
-	}
-}
-
-if (!$article->hasAccsesToModify($access)) {
-	header("Location: accses_denied.php");
-}
-if (valAllNotnull()) {
-
-	ControlArticle::setData($article);
-	
-	$article->setImageNumber(1);///////////////////////////////////////
-	// set the publish or aprove or creat
-	$article->setDisplayFromSession($access);
-	$passed = FALSE;
-	// check if the imput is valid
-	if (Validation::valAll($iscorrect)) {
-
-		if (isset($_GET["id"])) {
-			$passed = (bool) $article->update();
-			if ($passed) {
-				$x = new Updates;
-				$x->setEditorID(User::getSessionUserID());
-				$x->setTargetType(Updates::TARGET_TYPE_ARTICLE);
-				$x->setTargetID($Gallery->getId());
-				$x->setMessageType(Updates::MESSAGE_TYPE_UPDATE);
-				$x->create();
-
-				$y = new Notification;
-				$y->setUserID($article->getWriterID());
-				$y->setSource(Notification::SOURCE_ARTICLE);
-				$y->setsourceID($article->getId());
-				$y->setMessage("Article was updated by " . User::getSessionUserFullName());
-				$y->create();
-			}
-		} else {
-			$article->setWriterID(User::getSessionUserID());
-			$passed = (bool) $article->create();
-			rename("images\\article\\upload.jpg", "images\\article\\" . $article->getId() . "-0.jpg");
-		}
-	}
-
-	// check if every thing went right
-	if ($passed) {
-
-		header("Location: article.php?id=" . $article->getId());
-		exit;
-	} else {
-		$Data = array(
-			"Category" => $_POST["Category"],
-			"Importance" => $_POST["Importance"],
-			"Youtubelink" => $_POST["Youtubelink"],
-			"lang" => $_POST["lang"],
-			"title_en" => $_POST["title_en"],
-			"description_en" => $_POST["description_en"],
-			"title_ar" => $_POST["title_ar"],
-			"description_ar" => $_POST["description_ar"],
-			"body_ar" => $_POST["body_ar"]
-		);
-	}
-}
+ArticleController::Create();
 ?><!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -159,12 +86,12 @@ if (valAllNotnull()) {
 					<hr>
 					<!-- #################################################################### Title-EN #################################################################### -->
 					<div class="form-group">
-						<label class="control-label col-sm-2" for="title_en">Title :</label>
+						<label class="control-label col-sm-2" for="titleEnglish">Title :</label>
 						<div class="controls col-sm-10">
 							<input type="text" 
-								   name="title_en" 
-								   id="title_en" 
-								   value="<?php echo @$Data["title_en"]; ?>" 
+								   name="titleEnglish" 
+								   id="titleEnglish" 
+								   value="<?php echo @$Data["titleEnglish"]; ?>" 
 								   placeholder="Enter title in English" 
 								   class="form-control" 
 								   onBlur="valTitle(this)" 
@@ -172,7 +99,7 @@ if (valAllNotnull()) {
 								   autocomplete="on">
 							<span class="help-block">
 								<ul>
-									<?php PrintHTML::validation("title_en", @$iscorrect["title_en"], "Please Check your input") ?>
+									<?php PrintHTML::validation("titleEnglish", @$iscorrect["titleEnglish"], "Please Check your input") ?>
 								</ul>
 							</span></div>
 					</div>
@@ -280,15 +207,6 @@ if (valAllNotnull()) {
 				return name.toLowerCase().replace(/^[\w.]+$/i, 'upload.jpg');
 
 			};
-
-
-
-
-
-
-
-
-
 			var myDropzone = new Dropzone("div#upload-widget", {
 				url: "uploadArticle.php",
 				maxFilesize: 4,
@@ -298,10 +216,6 @@ if (valAllNotnull()) {
 				renameFilename: cleanFilename
 
 			});
-
-
-
-
 		</script>
 		<script>
 			function onLoad() {

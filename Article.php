@@ -33,22 +33,22 @@ $writer->read($article->getWriterID());
 
 						<!-- Title -->
 						<h1><?php echo $article->getTitleEnglish() ?></h1>
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 						<div class="dropdown pull-right <?php if (User::CheckLogin() && $article->hasAccsesToModify(User::getSessionAccses())) echo "hiden" ?>">
 							<button class="btn-setting btn btn-default " data-toggle="dropdown" aria-haspopup="true" > <i class="fa fa-bars" aria-hidden="true"></i> </button>
 							<ul class="dropdown-menu" aria-labelledby="dLabel">
@@ -56,18 +56,18 @@ $writer->read($article->getWriterID());
 								<li><a  href="redir_delete_article_entity.php?id=<?php echo $article->getId() . '&type=' . EntityArticle::TYPE_ARTICLE; ?>"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</a></li>
 							</ul>
 						</div>
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
+
+
+
+
+
+
+
+
+
+
+
+
 						<div class="container">
 							<a href="#"> <img class="img-64x64 img-responsive img-circle pull-left " src="images/User.png"> </a>
 							<div class="pull-left" style="padding-left:20px">

@@ -11,17 +11,17 @@ function printthem($displayLVL) {
 	global $arrArticle, $arrPoll, $arrYoutube, $arrGallery;
 	foreach ($arrArticle as &$value) {
 		if ($value->getDisplay() == $displayLVL) {
-			PrintHTML::portofolio_12row_next_normal($value->getTitleEnglish(), "creat_article.php?id=" . $value->getId(), $value->getDescriptionEnglish(), $value->getCreatDate_StringLong(), $value->getImgThumbnail());
+			ArticleView::Normal12Next($value->getTitleEnglish(), "creat_article.php?id=" . $value->getId(), $value->getDescriptionEnglish(), $value->getCreatDate_StringLong(), $value->getImgThumbnail());
 		}
 	}
 	foreach ($arrYoutube as &$value) {
 		if ($value->getDisplay() == $displayLVL) {
-			PrintHTML::YoutubeThumb($value, True);
+			YoutubeView::Thumb($value, True);
 		}
 	}
 	foreach ($arrPoll as &$value) {
 		if ($value->getDisplay() == $displayLVL) {
-			PrintHTML::Poll($imput, True);
+			PollView::Normal($imput);
 		}
 	}
 }
@@ -51,7 +51,7 @@ function printthem($displayLVL) {
 			<br><a href="#Published" class="text-primary" data-toggle="collapse"><h2>Published</h2></a>
 			<hr>
 			<div id="Published" class="collapse in container">
-				<?php printthem(EntityArticle::DISPLAY_PUBLISHED);?>
+				<?php printthem(EntityArticle::DISPLAY_PUBLISHED); ?>
 			</div>
 			<!-------------------------------- Rejected -------------------------------->
 			<br><a href="#Rejected" class="text-danger" data-toggle="collapse"><h2>Rejected</h2></a>

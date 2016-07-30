@@ -1,12 +1,6 @@
 <?php
 require_once 'autoload.php';
-if (isset($_POST["submit"]) && isset($_POST["ID"]) && isset($_POST["Password"])) {
-	$user = new User();
-	$isLogin = $user->Login($_POST["ID"], $_POST["Password"]);
-	if ($isLogin) {
-		header('Location: index.php');
-	}
-}
+$isLogin = UserController::Login();
 ?><!DOCTYPE html>
 <html lang="en">
 	<head>

@@ -7,10 +7,10 @@
  */
 
 /**
- * Description of ControlUser
+ * Description of Email
  *
  * @author marcw
  */
-class ControlUser {
+class EmailController {
 	//put your code here
 }

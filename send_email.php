@@ -1,8 +1,6 @@
 <?php
 require_once 'autoload.php';
 
-
-
 function valAllNotnull() {
 	return
 			isset($_POST["Category"]) &&
@@ -32,7 +30,7 @@ function valAllNotnull() {
 		<div class="container">
 			<br><br>
 			<form class="form-horizontal" role="form" method="post" action="creat_article.php<?php if (isset($_GET["id"])) echo "?id=" . $_GET["id"] ?>">
-					<!-- #################################################################### Title-EN #################################################################### -->
+				<!-- #################################################################### Title-EN #################################################################### -->
 				<div class="form-group">
 					<label class="control-label col-sm-2" for="email">To :</label>
 					<div class="controls col-sm-10">
@@ -50,32 +48,32 @@ function valAllNotnull() {
 							</ul></span>
 					</div>
 				</div>
-					<div class="form-group">
-						<label class="control-label col-sm-2" for="title_en">Subject :</label>
-						<div class="controls col-sm-10">
-							<input type="text" 
-								   name="title_en" 
-								   id="title_en" 
-								   value="<?php echo @$Data["title_en"]; ?>" 
-								   placeholder="Enter title in English" 
-								   class="form-control" 
-								   onBlur="valTitle(this)" 
-								   maxlength="128" 
-								   required 
-								   autocomplete="on">
-							<span class="help-block">
-								<ul>
-									<?php PrintHTML::validation("IDtaken", @$iscorrect["IDtaken"], "ID is Already Taken") ?>
-								</ul>
-							</span></div>
-					</div>
-				
-					<!-- #################################################################### BODY-EN #################################################################### -->
-					<div class="clearfix"></div>
-					<div class="form-group">
-						<textarea class="tinymce" id="body_en" name="body_en" ><?php echo @$Data["body_en"] ?></textarea>
-					</div>
-					
+				<div class="form-group">
+					<label class="control-label col-sm-2" for="title_en">Subject :</label>
+					<div class="controls col-sm-10">
+						<input type="text" 
+							   name="title_en" 
+							   id="title_en" 
+							   value="<?php echo @$Data["title_en"]; ?>" 
+							   placeholder="Enter title in English" 
+							   class="form-control" 
+							   onBlur="valTitle(this)" 
+							   maxlength="128" 
+							   required 
+							   autocomplete="on">
+						<span class="help-block">
+							<ul>
+								<?php PrintHTML::validation("IDtaken", @$iscorrect["IDtaken"], "ID is Already Taken") ?>
+							</ul>
+						</span></div>
+				</div>
+
+				<!-- #################################################################### BODY-EN #################################################################### -->
+				<div class="clearfix"></div>
+				<div class="form-group">
+					<textarea class="tinymce" id="body_en" name="body_en" ><?php echo @$Data["body_en"] ?></textarea>
+				</div>
+
 				<button type="submit" class="btn btn-primary pull-right">Submit</button>
 			</form>
 		</div>

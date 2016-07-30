@@ -48,7 +48,6 @@ class Comment extends EntityUser implements iCRUD {
 		
 	}
 
-
 	public function search($imput) {
 		
 	}

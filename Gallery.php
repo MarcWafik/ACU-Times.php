@@ -16,7 +16,7 @@ $arr = Gallery::readAll();
 			<div class="gallery" >
 				<?php
 				foreach ($arr as $value) {
-					PrintHTML::gallery($value);
+					GalleryView::Normal12($value);
 				}
 				?>
 			</div>

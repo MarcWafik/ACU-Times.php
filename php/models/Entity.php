@@ -131,7 +131,7 @@ abstract class Entity {
 	}
 
 	protected static function Do_comand_readAll($comand, $offset = 0, $size = 0) {
-		if (isset($size) && isset($offset) && 0 < $size ) {
+		if (isset($size) && isset($offset) && 0 < $size) {
 			$comand .= " LIMIT $size OFFSET $offset";
 		}
 		$conn = DataBase::getConnection();
@@ -157,7 +157,7 @@ abstract class Entity {
 	}
 
 	public static function Do_comand_Search($comand, $find, $offset = 0, $size = 0) {
-		if (isset($size) && isset($offset) && 0 < $size ) {
+		if (isset($size) && isset($offset) && 0 < $size) {
 			$comand .= " LIMIT $size OFFSET $offset";
 		}
 		$conn = DataBase::getConnection();

@@ -99,20 +99,26 @@ function valBirthday(Month, Year, Day) {
 	}
 }
 //=========================================Title=========================================
-function valTitle(Check) {
+function valTitleEnglish(Check) {
 
-	isAllOkay.Name = true;
-	return ChangeHelpBlock(Check, isAllOkay.Name, "only Letters, space and symbols are allowed)");
+	isAllOkay.Title = true;
+	return ChangeHelpBlock(Check, isAllOkay.TitleEnglish, "only Letters, space and symbols are allowed)");
 }
 //=========================================Description=========================================
-function valDescription(Check) {
+function valDescriptionEnglish(Check) {
 
-	isAllOkay.Name = true;
-	return ChangeHelpBlock(Check, isAllOkay.Name, "only Letters, space and symbols are allowed");
+	isAllOkay.Description = true;
+	return ChangeHelpBlock(Check, isAllOkay.DescriptionEnglish, "only Letters, space and symbols are allowed");
 }
 //=========================================Arabic=========================================
-function valArabic(Check) {
+function valTitleArabic(Check) {
 	var patt = /^[\u0600-\u06FF]*$]/;
 	isAllOkay.Arabic = (patt.test(Check.value));
-	return ChangeHelpBlock(Check, isAllOkay.Arabic, "only arrabic is allowed");
+	return ChangeHelpBlock(Check, isAllOkay.TitleArabic, "only arrabic is allowed");
+}
+//=========================================Arabic=========================================
+function valDescriptionArabic(Check) {
+	var patt = /^[\u0600-\u06FF]*$]/;
+	isAllOkay.Arabic = (patt.test(Check.value));
+	return ChangeHelpBlock(Check, isAllOkay.DescriptionArabic, "only arrabic is allowed");
 }

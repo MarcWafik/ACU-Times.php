@@ -1,39 +1,6 @@
 <?php
 require_once 'autoload.php';
-$User = new User();
-$User->read(User::getSessionUserID());
-
-if (valAllNotnull()) {
-	$User->setLastUpdateDate();
-	$iscorrect = array(
-		"OldPassword" => (bool) $User->isCorrectPassword($_POST["OldPassword"]),
-		"name" => (bool) $User->setfullName($_POST["name"]),
-		//"emailtaken" => (bool) $User->isEmailAvailable($_POST["email"]) || strcmp($_POST["email"], $User->getEmail()),
-		"email" => (bool) $User->setEmail($_POST["email"]),
-		"PhoneNo" => (bool) $User->setPhoneNumber($_POST["PhoneNo"]),
-		"Gender" => (bool) $User->setGender($_POST["Gender"]),
-		"Birthday" => (bool) $User->setBirthDate($_POST["BirthdayYear"], $_POST["BirthdayMonth"], $_POST["BirthdayDay"]),
-		"about" => (bool) $User->setAbout($_POST["about"])
-	);
-	if (Validation::valAll($iscorrect)) {
-		$User->update();
-		$Passed = true;
-	}
-}
-
-//=========================================validate=========================================
-function valAllNotnull() {
-	return
-			isset($_POST["submit"]) &&
-			isset($_POST["name"]) &&
-			isset($_POST["email"]) &&
-			isset($_POST["OldPassword"]) &&
-			isset($_POST["BirthdayMonth"]) &&
-			isset($_POST["BirthdayYear"]) &&
-			isset($_POST["BirthdayDay"]) &&
-			isset($_POST["about"]) &&
-			isset($_POST["PhoneNo"]);
-}
+UserController::Update();
 ?><!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -73,11 +40,11 @@ function valAllNotnull() {
 
 					<!-- #################################################################### full name #################################################################### -->	
 					<div class="form-group">
-						<label class="col-md-3 control-label" for="name">Full name :</label>
+						<label class="col-md-3 control-label" for="fullName">Full name :</label>
 						<div class="controls col-md-8 ">
 							<input type="text" 
-								   name="name" 
-								   id="name" 
+								   name="fullName" 
+								   id="fullName" 
 								   value="<?php echo $User->getfullName(); ?>" 
 								   class="form-control" 
 								   onBlur="valName(this)" 
@@ -85,24 +52,24 @@ function valAllNotnull() {
 								   autocomplete="on"
 								   maxlength="32">
 							<span class="help-block"><ul>
-									<?php PrintHTML::validation("name", @$iscorrect["name"], "Enter a Valid Name (Letters and space only)") ?>
+									<?php PrintHTML::validation("fullName", @$iscorrect["fullName"], "Enter a Valid Name (Letters and space only)") ?>
 								</ul></span>
 						</div>
 					</div>
 					<!-- #################################################################### PhoneNo #################################################################### -->
 					<div class="form-group">
-						<label class="col-md-3 control-label" for="PhoneNo">Phone Number :</label>
+						<label class="col-md-3 control-label" for="phoneNumber">Phone Number :</label>
 						<div class="col-md-8 controls">
 							<input type="text" 
-								   name="PhoneNo" 
-								   id="PhoneNo" 
+								   name="phoneNumber" 
+								   id="phoneNumber" 
 								   value="<?php echo $User->getPhoneNumber(); ?>" 
 								   class="form-control" 
 								   maxlength="13" 
 								   onBlur="valPhoneNo(this)" 
 								   autocomplete="on">
 							<span class="help-block"><ul>
-									<?php PrintHTML::validation("PhoneNo", @$iscorrect["PhoneNo"], "Enter a correct Phone Number") ?>
+									<?php PrintHTML::validation("phoneNumber", @$iscorrect["phoneNumber"], "Enter a correct Phone Number") ?>
 								</ul></span>
 						</div>
 					</div>
@@ -125,11 +92,11 @@ function valAllNotnull() {
 					</div>
 					<!-- #################################################################### Gender #################################################################### -->
 					<div class="form-group">
-						<label class="col-md-3 control-label" for="Gender">Gender :</label>
+						<label class="col-md-3 control-label" for="gender">Gender :</label>
 						<div class="col-md-8 controls">
 							<select class="selectpicker form-control" 
-									name="Gender" 
-									id="Gender" 
+									name="gender" 
+									id="gender" 
 									required>
 										<?php PrintHTML::OptionGender($User->getGender()) ?>
 							</select>
@@ -168,7 +135,7 @@ function valAllNotnull() {
 								</select>
 							</div>
 							<span class="help-block"><ul>
-									<?php PrintHTML::validation("Birthday", @$iscorrect["Birthday"], "Enter a valid date") ?>
+									<?php PrintHTML::validation("birthDate", @$iscorrect["birthDate"], "Enter a valid date") ?>
 								</ul></span>
 						</div>
 					</div>
@@ -198,7 +165,7 @@ function valAllNotnull() {
 								   maxlength="32" 
 								   required>
 							<span class="help-block"><ul>
-									<?php PrintHTML::validation("OldPassword", @$iscorrect["OldPassword"], "Password Don't Match") ?>
+									<?php PrintHTML::validation("OldPassword", @$iscorrect["OldPassword"], "password Don't Match") ?>
 								</ul></span>
 						</div>
 					</div>

@@ -1,9 +1,12 @@
 <?php
 
 function __autoload($className) {
-	$filename = "php_Classes" . DIRECTORY_SEPARATOR . $className . ".php";
-	if (is_readable($filename)) {
-		require_once( $filename );
+	if (is_readable("php/models/$className.php")) {
+		require_once ("php/models/$className.php");
+	} else if (is_readable("php/controllers/$className.php")) {
+		require_once ("php/controllers/$className.php");
+	} else if (is_readable("php/views/$className.php")) {
+		require_once ("php/views/$className.php");
 	}
 }
 

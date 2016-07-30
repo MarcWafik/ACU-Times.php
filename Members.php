@@ -27,7 +27,7 @@ $arr = User::readAll();
 			$arr = User::readAll(0, 9999999);
 			$arrAccses = Access::readAll();
 			foreach ($arr as $value) {
-				PrintHTML::Member($value->getId(), $value->getfullName(), $value->getEmail(), User::getSessionAccses()->hasAccsesUser(Access::FULL), "images/User.png", $arrAccses);
+				UserView::Normal12($value->getId(), $value->getfullName(), $value->getEmail(), User::getSessionAccses()->hasAccsesUser(Access::FULL), "images/User.png", $arrAccses);
 			}
 			?>
 			<!-------------------------------- pagination -------------------------------->

@@ -1,28 +1,6 @@
 <?php
 require_once 'autoload.php';
-$User = new User();
-$User->__init();
-$User->read(User::getSessionUserID());
-if (valAllNotnull()) {
-	$User->setLastUpdateDate();
-	$iscorrect = array(
-		"OldPassword" => (bool) $User->isCorrectPassword($_POST["OldPassword"]),
-		"RePassword" => (bool) $_POST["Password"] === $_POST["RePassword"],
-		"Password" => (bool) $User->setPassword($_POST["Password"]),
-	);
-	if (Validation::valAll($iscorrect) && $User->update()) {
-		$Passed = true;
-	}
-}
-
-//=========================================validate=========================================
-function valAllNotnull() {
-	return
-			isset($_POST["submit"]) &&
-			isset($_POST["Password"]) &&
-			isset($_POST["RePassword"]) &&
-			isset($_POST["OldPassword"]);
-}
+UserController::UpdatePW();
 ?><!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -59,25 +37,25 @@ function valAllNotnull() {
 							   maxlength="32" 
 							   required>
 						<span class="help-block"><ul>
-								<?php PrintHTML::validation("OldPassword", @$iscorrect["OldPassword"], "Password Don't Match") ?>
+								<?php PrintHTML::validation("OldPassword", @$iscorrect["OldPassword"], "password Don't Match") ?>
 							</ul></span>
 					</div>
 				</div>
 
 				<!-- #################################################################### Password #################################################################### -->
 				<div class="form-group">
-					<label class="control-label" for="Password">New password :</label>
+					<label class="control-label" for="password">New password :</label>
 					<div class="controls">
 						<input type="password" 
-							   name="Password" 
-							   id="Password" 
+							   name="password" 
+							   id="password" 
 							   value="" 
 							   class="form-control" 
 							   onBlur="valPassword(this)" 
 							   maxlength="32" 
 							   required>
 						<span class="help-block"><ul>
-								<?php PrintHTML::validation("Password", @$iscorrect["Password"], "Must contain a number (0-9) ,upercase letter (A-Z) & lowercase letter (a-z)") ?>
+								<?php PrintHTML::validation("password", @$iscorrect["password"], "Must contain a number (0-9) ,upercase letter (A-Z) & lowercase letter (a-z)") ?>
 							</ul></span>
 					</div>
 				</div>
@@ -95,7 +73,7 @@ function valAllNotnull() {
 							   maxlength="32" 
 							   required>
 						<span class="help-block"><ul>
-								<?php PrintHTML::validation("RePassword", @$iscorrect["RePassword"], "Password does not match") ?>
+								<?php PrintHTML::validation("RePassword", @$iscorrect["RePassword"], "password does not match") ?>
 							</ul></span>
 					</div>
 				</div>

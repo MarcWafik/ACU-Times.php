@@ -6,9 +6,9 @@
 
 <link rel="stylesheet" type="text/css" href="css/Layout.css">
 
-<script src="lib/jquery/jquery-3.0.0.js"></script>
+<script src="lib/jquery/jquery-2.1.4.js"></script>
 
-<link rel="stylesheet" href="lib/bootstrap/css/bootstrap.css">
+<link rel="stylesheet" href="lib/bootstrap-3.3.6-dist/css/bootstrap.css">
 <script src="lib/bootstrap-3.3.6-dist/js/bootstrap.js"></script>
 
 <script src="js/analytics.js"></script>
