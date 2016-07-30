@@ -96,7 +96,7 @@ class Poll extends EntityArticle implements iCRUD {
 		return TRUE;
 	}
 
-	public function setDisplayFromSession(Accses $Accses) {
+	public function setDisplayFromSession(Access $Accses) {
 		$this->display = $Accses->getPoll();
 		return TRUE;
 	}
@@ -106,12 +106,20 @@ class Poll extends EntityArticle implements iCRUD {
 		return $this->arrChoices;
 	}
 
-	public function hasAccsesToModify(Accses $Accses) {
+	public function hasAccsesToModify(Access $Accses) {
 		return $this->hasAccsesToModify_private($Accses->getPoll());
 	}
 
 	public function isValidPoll() {
 		return count($this->arrChoices) >= 2;
+	}
+
+	public function getTotalClicks() {
+		$total = 0;
+		foreach ($this->arrChoices as $value) {
+			$total+=$value->getVotes();
+		}
+		return $total;
 	}
 
 }

@@ -129,7 +129,7 @@ class PrintHTML {
 					<ul class="dropdown-menu" aria-labelledby="dLabel">
 						<li><a  href="#"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</a></li>
 						<li><a  href="#"><i class="fa fa-key" aria-hidden="true"></i> Reset PW</a></li>
-						<li><hr></li>
+						<li role="separator" class="divider"></li>
 					</ul>
 				</div>';
 		}
@@ -144,6 +144,22 @@ class PrintHTML {
 				</div>
 						' . $MakeAdmin . '
 			</div>';
+	}
+
+	static public function Poll(Poll $imput) {
+		$totalClicks = $imput->getTotalClicks();
+		if ($totalClicks == 0) {
+			$totalClicks = 1;
+		}
+		echo'<div class=" col-lg-4 col-sm-6 col-xs-12">
+				<h3>' . $imput->getTitleEnglish() . '</h3>
+				<div> ';
+		foreach ($imput->getArrChoices() as $value) {
+			$value = new PollChoice;
+			$percent = (int) (($value->getVotes() / $totalClicks) * 100);
+			echo '<a name="poll_bar" >' . $imput . '</a> <span name="poll_val">' . $percent . '% </span><br/>';
+		}
+		echo'</div></div>';
 	}
 
 }

@@ -136,7 +136,15 @@ class Category extends Entity implements iCRUD {
 	}
 
 	public function setParentID($ParentID) {
-		$this->ParentID = $ParentID;
+		if (Validation::isNumInRange($ParentID, 0, 99)) {
+			$this->ParentID = (int) $ParentID;
+			return TRUE;
+		}
+		return FALSE;
+	}
+
+	public function setPossition($possition) {
+		$this->possition = $possition;
 		return $this;
 	}
 
@@ -155,6 +163,14 @@ class Category extends Entity implements iCRUD {
 
 	function getArrSubCategorys() {
 		return $this->arrSubCategorys;
+	}
+
+	public function getPossition() {
+		return $this->possition;
+	}
+
+	public function getParentID() {
+		return $this->ParentID;
 	}
 
 //=================================================PRINT===================================================

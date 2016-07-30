@@ -187,13 +187,15 @@ class Article extends Youtube implements iCRUD {
 		return FALSE;
 	}
 
-	public function setDisplayFromSession(Accses $Accses) {
+	public function setDisplayFromSession(Access $Accses) {
 		$this->display = $Accses->getArticle();
 		return TRUE;
 	}
 
 //===================================================GET===================================================
-
+	public function getImgThumbnail() {
+		return Image::getMainImage($this->id, Image::ARTICLE);
+	}
 	public function getViews() {
 		return $this->views;
 	}
@@ -222,7 +224,7 @@ class Article extends Youtube implements iCRUD {
 		return $this->bodyArabic;
 	}
 
-	public function hasAccsesToModify(Accses $Accses) {
+	public function hasAccsesToModify(Access $Accses) {
 		return $this->hasAccsesToModify_private($Accses->getArticle());
 	}
 

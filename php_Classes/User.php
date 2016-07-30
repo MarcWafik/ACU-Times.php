@@ -253,7 +253,7 @@ class User extends EntityUser implements iCRUD {
 
 		Session::startOnce();
 		if (isset($_SESSION['accsesID'])) {
-			$temp = new Accses();
+			$temp = new Access();
 			$temp->read($_SESSION['accsesID']);
 
 			return $temp;
@@ -369,7 +369,7 @@ class User extends EntityUser implements iCRUD {
 	}
 
 	public function getAccses() {
-		$x = new Accses();
+		$x = new Access();
 		return $x->read($this->accsesID);
 	}
 

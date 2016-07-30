@@ -63,11 +63,11 @@ class Gallery extends EntityArticle implements iCRUD {
 				WHERE id=:id", TRUE, FALSE);
 	}
 
-	public function hasAccsesToModify(Accses $Accses) {
+	public function hasAccsesToModify(Access $Accses) {
 		return $this->hasAccsesToModify_private($Accses->getArticle());
 	}
 
-	public function setDisplayFromSession(Accses $Accses) {
+	public function setDisplayFromSession(Access $Accses) {
 		$this->display = $Accses->getGallery();
 		return TRUE;
 	}

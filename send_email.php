@@ -33,8 +33,25 @@ function valAllNotnull() {
 			<br><br>
 			<form class="form-horizontal" role="form" method="post" action="creat_article.php<?php if (isset($_GET["id"])) echo "?id=" . $_GET["id"] ?>">
 					<!-- #################################################################### Title-EN #################################################################### -->
+				<div class="form-group">
+					<label class="control-label col-sm-2" for="email">To :</label>
+					<div class="controls col-sm-10">
+						<input type="email" 
+							   name="email" 
+							   id="email" 
+							   value="<?php echo @$_POST["email"]; ?>" 
+							   class="form-control" 
+							   onBlur="valEmail(this)" 
+							   required 
+							   autocomplete="on" 
+							   maxlength="256">
+						<span class="help-block"><ul>
+								<?php PrintHTML::validation("email", @$iscorrect["email"], "Enter a Valid E-mail") ?>
+							</ul></span>
+					</div>
+				</div>
 					<div class="form-group">
-						<label class="control-label col-sm-2" for="title_en">Title :</label>
+						<label class="control-label col-sm-2" for="title_en">Subject :</label>
 						<div class="controls col-sm-10">
 							<input type="text" 
 								   name="title_en" 

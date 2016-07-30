@@ -57,6 +57,11 @@ abstract class EntityArticle extends Entity {
 		return static::Do_comand_Search($comand, $find, $offset, $size);
 	}
 
+	public static function readAllrelatedWriterID($writerID, $offset = 0, $size = 0) {
+		$comand = "SELECT * FROM " . static::DB_TABLE_NAME . " WHERE writerID=" . $writerID;
+		return static::Do_comand_readAll($comand, $offset, $size);
+	}
+
 //===================================================SET===================================================
 
 	public function setTitleEnglish($title) {
@@ -91,10 +96,10 @@ abstract class EntityArticle extends Entity {
 		return FALSE;
 	}
 
-	abstract public function setDisplayFromSession(Accses $Accses);
+	abstract public function setDisplayFromSession(Access $Accses);
 
 //===================================================GET===================================================
-	abstract public function hasAccsesToModify(Accses $Accses);
+	abstract public function hasAccsesToModify(Access $Accses);
 
 	protected function hasAccsesToModify_private($Accses_unitNumber) {
 		$WriterID = User::getSessionUserID();

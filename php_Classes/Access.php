@@ -1,6 +1,6 @@
 <?php
 
-class Accses extends Entity implements iCRUD {
+class Access extends Entity implements iCRUD {
 
 	protected $poll;
 	protected $article;
@@ -53,7 +53,7 @@ class Accses extends Entity implements iCRUD {
 
 	const DB_TABLE_NAME = "accses";
 	const READ = 0;
-	const CREAT = 1;
+	const CREATE = 1;
 	const APPROVE = 2;
 	const PUBLISH = 3;
 	const FULL = 4;
@@ -185,6 +185,15 @@ class Accses extends Entity implements iCRUD {
 
 	function hasAccsesEmail($AccsesLevel) {
 		return $this->email >= $AccsesLevel;
+	}
+
+	function hasAccsesAdmin() {
+		return	$this->poll == static::FULL &&
+				$this->article == static::FULL &&
+				$this->youtube == static::FULL &&
+				$this->gallery == static::FULL &&
+				$this->user == static::FULL &&
+				$this->email == static::FULL;
 	}
 
 //===================================================GET===================================================

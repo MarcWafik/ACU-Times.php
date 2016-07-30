@@ -62,6 +62,7 @@ if (valAllNotnull()) {
 		if (isset($_GET["id"])) {
 			$passed = (bool) $article->update();
 		} else {
+			$article->setWriterID(User::getSessionUserID());
 			$passed = (bool) $article->create();
 		}
 	}

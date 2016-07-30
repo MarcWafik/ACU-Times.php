@@ -1,11 +1,64 @@
 <?php
 require_once 'autoload.php';
-$accses = new Article();
-if (isset($_GET["id"]) && $accses->read($_GET["id"])) {
-	
-} else if (isset($_GET["id"])) {
-	header("Location: 404.php");
-	exit;
+// Check for accses
+User::CheckLogin();
+$category = new Category();
+$access = User::getSessionAccses();
+if (!$access->hasAccsesAdmin()) {
+	header("Location: accses_denied.php");
+}
+
+// Update
+if (isset($_GET["id"])) {
+	if ($category->read($_GET["id"])) {
+		$Data = array(
+			"title_en" => $category->getNameEnglish(),
+			"title_ar" => $category->getNameArabic(),
+			"Category" => $category->getParentID()
+		);
+	} else {
+		header("Location: 404.php");
+		exit;
+	}
+}
+
+if (valAllNotnull()) {
+
+	// setting the data
+	$iscorrect = array(
+		"title_en" => (bool) $category->setNameEnglish($_POST["title_en"]),
+		"title_ar" => (bool) $category->setNameEnglish($_POST["title_ar"]),
+		"Category" => (bool) $category->setParentID($_POST["Category"])
+	);
+
+	$passed = FALSE;
+	// check if the imput is valid
+	if (Validation::valAll($iscorrect)) {
+		if (isset($_GET["id"])) {
+			$passed = (bool) $category->update();
+		} else {
+			$passed = (bool) $category->create();
+		}
+	}
+
+	// check if every thing went right
+	if ($passed) {
+		header("Location: index.php");
+		exit;
+	} else {
+		$Data = array(
+			"title_en" => $_POST["title_en"],
+			"title_ar" => $_POST["title_ar"],
+			"Category" => $_POST["Category"]
+		);
+	}
+}
+
+function valAllNotnull() {
+	return
+			isset($_POST["title_en"]) &&
+			isset($_POST["title_ar"]) &&
+			isset($_POST["Category"]);
 }
 ?><!DOCTYPE html>
 <html lang="en">
@@ -19,7 +72,7 @@ if (isset($_GET["id"]) && $accses->read($_GET["id"])) {
 		<?php include ("navbar.php"); ?>
 		<div class="container"> 
 			<br><br>
-			<form class="form-horizontal" role="form" method="post" action="creat_article.php<?php if (isset($_GET["id"])) echo "?id=" . $_GET["id"] ?>">
+			<form class="form-horizontal" role="form" method="post" action="creat_category.php<?php if (isset($_GET["id"])) echo "?id=" . $_GET["id"] ?>">
 				<div class="form-group">
 					<label class="control-label col-sm-2" for="title_en">Category name:</label>
 					<div class="controls col-sm-10">
@@ -35,7 +88,7 @@ if (isset($_GET["id"]) && $accses->read($_GET["id"])) {
 							   autocomplete="on">
 						<span class="help-block">
 							<ul>
-								<?php PrintHTML::validation("IDtaken", @$iscorrect["IDtaken"], "ID is Already Taken") ?>
+								<?php PrintHTML::validation("title_en", @$iscorrect["title_en"], "Invalid Input") ?>
 							</ul>
 						</span></div>
 				</div>
@@ -55,7 +108,7 @@ if (isset($_GET["id"]) && $accses->read($_GET["id"])) {
 							   autocomplete="on">
 						<span class="help-block">
 							<ul>
-								<?php PrintHTML::validation("IDtaken", @$iscorrect["IDtaken"], "ID is Already Taken") ?>
+								<?php PrintHTML::validation("title_ar", @$iscorrect["title_ar"], "Invalid Input") ?>
 							</ul>
 						</span></div>
 				</div>
@@ -64,15 +117,16 @@ if (isset($_GET["id"]) && $accses->read($_GET["id"])) {
 					<label class="control-label col-sm-2" for="Category">Category:</label>
 					<div class="col-sm-10">
 						<select class="form-control" id="Category" name="Category">
-						<option value="-1">Major category</option>
+							<option value="-1">Major category</option>
 							<?php
 							foreach (Category::readAll() as $Category) {
-								$Category->PrintOptionMainCategory();
+								$Category->PrintOptionMainCategory(@$Data["title_ar"]);
 							}
 							?>
 						</select>
 					</div>
 				</div>
+				<button type="submit" class="btn btn-primary pull-right" name="submit" id="submit" >Submit</button>
 			</form>
 		</div>
 		<?php include ("footer.php"); ?>
