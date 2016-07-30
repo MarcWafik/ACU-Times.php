@@ -44,12 +44,10 @@ abstract class EntityArticle extends Entity {
 	}
 
 //=================================================Const===================================================
-	const DISPLAY_DRAFT = 0;
-	const DISPLAY_NEW = 1;
-	const DISPLAY_DENIED = 2;
-	const DISPLAY_APPROVED = 3;
-	const DISPLAY_PUBLISHED = 4;
-	const DISPLAY_HIDEN = 5;
+	const DISPLAY_NEW = 0;
+	const DISPLAY_DENIED = 1;
+	const DISPLAY_APPROVED = 2;
+	const DISPLAY_PUBLISHED = 3;
 
 //===================================================SET===================================================
 	public function setTitleEnglish($title) {
@@ -71,7 +69,7 @@ abstract class EntityArticle extends Entity {
 	}
 
 	public function setDisplay($display) {
-		if (Validation::isNumInRange($display, 0, 4)) {
+		if (Validation::isNumInRange($display, 0, 3)) {
 			$this->display = (int) $display;
 		}
 		return FALSE;
@@ -85,6 +83,13 @@ abstract class EntityArticle extends Entity {
 	}
 
 //===================================================GET===================================================
+	abstract public function hasAccsesToModify(Accses $Accses);
+
+	protected function hasAccsesToModify_private($Accses_unitNumber) {
+		$WriterID = User::getSessionUserID();
+		return ($this->writerID == $WriterID && $this->display <= $Accses_unitNumber) || $this->display <= $Accses_unitNumber;
+	}
+
 	public function getTitleEnglish() {
 		return $this->titleEnglish;
 	}

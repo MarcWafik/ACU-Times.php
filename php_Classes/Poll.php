@@ -52,4 +52,8 @@ class Poll extends EntityArticle implements iCRUD {
 		return TRUE;
 	}
 
+	public function hasAccsesToModify(Accses $Accses) {
+		return $this->hasAccsesToModify_private($Accses->getPoll());
+	}
+
 }

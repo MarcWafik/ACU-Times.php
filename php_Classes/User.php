@@ -139,7 +139,7 @@ class User extends EntityUser implements iCRUD {
 		if ($this->read($id) && $this->isCorrectPassword($password)) {
 			Session::startOnce();
 			$_SESSION["id"] = $this->id;
-			$_SESSION["accses"] = $this->accsesID;
+			$_SESSION["accsesID"] = $this->accsesID;
 			$_SESSION["fullName"] = $this->fullName;
 			return TRUE;
 		}
@@ -161,34 +161,10 @@ class User extends EntityUser implements iCRUD {
 		}
 	}
 
-	static function CheckEditor() {
-		self::CheckLogin();
-		if ($_SESSION['accses'] != self::ACCSES_EDITOR) {
-			header("Location: accses_denied.php");
-		}
-	}
-
-	static function CheckAdmin() {
-		self::CheckLogin();
-		if ($_SESSION['accses'] != self::ACCSES_ADMIN) {
-			header("Location: accses_denied.php");
-		}
-	}
-
 //=========================================Session IS===================================================
 	static function isLogin() {
 		Session::startOnce();
 		return isset($_SESSION['id']);
-	}
-
-	static function isEditor() {
-		Session::startOnce();
-		return ($_SESSION['accses'] == self::ACCSES_EDITOR);
-	}
-
-	static function isAdmin() {
-		Session::startOnce();
-		return ($_SESSION['accses'] == self::ACCSES_ADMIN);
 	}
 
 //===========================================Session Get===================================================
@@ -204,6 +180,26 @@ class User extends EntityUser implements iCRUD {
 		Session::startOnce();
 		if (isset($_SESSION['fullName'])) {
 			return $_SESSION['fullName'];
+		}
+		return NULL;
+	}
+
+	static function getSessionAccsesID() {
+		Session::startOnce();
+		if (isset($_SESSION['accsesID'])) {
+			return $_SESSION['accsesID'];
+		}
+		return NULL;
+	}
+
+	static function getSessionAccses() {
+
+		Session::startOnce();
+		if (isset($_SESSION['accsesID'])) {
+			$temp = new Accses();
+			$temp->read($_SESSION['accsesID']);
+
+			return $temp;
 		}
 		return NULL;
 	}

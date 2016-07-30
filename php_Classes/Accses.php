@@ -68,6 +68,32 @@ class Accses extends Entity implements iCRUD {
 	}
 
 //===================================================SET===================================================
+//===================================================HasAccses===================================================
+
+	function hasAccsesPoll($AccsesLevel) {
+		return $this->poll >= $AccsesLevel;
+	}
+
+	function hasAccsesArticle($AccsesLevel) {
+		return $this->article >= $AccsesLevel;
+	}
+
+	function hasAccsesYoutube($AccsesLevel) {
+		return $this->youtube >= $AccsesLevel;
+	}
+
+	function hasAccsesGallery($AccsesLevel) {
+		return $this->gallery >= $AccsesLevel;
+	}
+
+	function hasAccsesUser($AccsesLevel) {
+		return $this->user >= $AccsesLevel;
+	}
+
+	function hasAccsesEmail($AccsesLevel) {
+		return $this->email >= $AccsesLevel;
+	}
+
 //===================================================GET===================================================
 	function getPoll() {
 		return $this->poll;

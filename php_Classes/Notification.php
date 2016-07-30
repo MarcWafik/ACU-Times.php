@@ -47,19 +47,7 @@ class Notification extends Entity implements iCRUD {
 		
 	}
 
-	public function read($id) {
-		
-	}
-
 	public function update() {
-		
-	}
-
-	public function delete() {
-		
-	}
-
-	public function search($imput) {
 		
 	}
 
@@ -98,6 +86,14 @@ class Notification extends Entity implements iCRUD {
 		return FALSE;
 	}
 
+	public function setsourceID($ID) {
+		if (Validation::isNumLagerThan($ID, 0)) {
+			$this->sourceID = (int) $ID;
+			return TRUE;
+		}
+		return FALSE;
+	}
+
 //===================================================GET===================================================
 	public function getMessage() {
 		return $this->message;
@@ -113,6 +109,10 @@ class Notification extends Entity implements iCRUD {
 
 	public function getUserID() {
 		return $this->userID;
+	}
+
+	function getSourceID() {
+		return $this->sourceID;
 	}
 
 }

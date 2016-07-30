@@ -215,4 +215,8 @@ class Article extends Youtube implements iCRUD {
 		return $this->bodyArabic;
 	}
 
+	public function hasAccsesToModify(Accses $Accses) {
+		return $this->hasAccsesToModify_private($Accses->getArticle());
+	}
+
 }

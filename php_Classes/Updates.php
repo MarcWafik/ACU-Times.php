@@ -33,7 +33,7 @@ class Updates extends Entity implements iCRUD {
 
 	protected function fillFromAssoc($DBrow) {
 		parent::fillFromAssoc($DBrow);
-		
+
 		$this->editorID = $DBrow['editorID'];
 		$this->targetID = $DBrow['targetID'];
 		$this->targetType = $DBrow['targetType'];
@@ -42,7 +42,7 @@ class Updates extends Entity implements iCRUD {
 
 	protected function bindParamClass($stmt) {
 		parent::bindParamClass($stmt);
-		
+
 		$stmt->bindParam('editorID', $this->editorID);
 		$stmt->bindParam('targetID', $this->targetID);
 		$stmt->bindParam('targetType', $this->targetType);

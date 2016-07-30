@@ -54,7 +54,7 @@ class Category extends Entity implements iCRUD {
 
 //==================================================CUID===================================================
 
-	public static function readAll() {
+	public static function readAll($offset = 0, $size = 0) {
 		if (isset(static::$allCategorys)) {
 			return static::$allCategorys;
 		}

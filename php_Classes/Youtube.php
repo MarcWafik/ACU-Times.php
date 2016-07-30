@@ -135,4 +135,8 @@ class Youtube extends EntityArticle implements iCRUD {
 		return $ID_youtube['v'];
 	}
 
+	public function hasAccsesToModify(Accses $Accses) {
+		return $this->hasAccsesToModify_private($Accses->getYoutube());
+	}
+
 }
