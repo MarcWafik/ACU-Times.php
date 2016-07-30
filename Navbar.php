@@ -13,14 +13,18 @@
 			<ul class="nav navbar-nav">
 				<li class="active"><a href="index.php"><span class="glyphicon glyphicon-home"></span></a></li>
 
-				<li class="dropdown"> <a class="dropdown-toggle" data-toggle="dropdown" href="category.php?Category=News">News <span class="caret"></span></a>
+				<!--<li class="dropdown"> <a class="dropdown-toggle" data-toggle="dropdown" href="category.php?Category=News">News <span class="caret"></span></a>
 					<ul class="dropdown-menu">
 						<li><a href="category.php">Category 1</a></li>
 						<li><a href="category.php">Category</a></li>
 						<li><a href="category.php">Category</a></li>
 					</ul>
-				</li> 
-				<?php //foreach($CategoryList as $Category){PrintCategory($Category);}?>
+				</li> -->
+				<?php
+				foreach (Category::readAll() as $Category) {
+					$Category->PrintCategory();
+				}
+				?>
 				<li><a href="multimedia.php">Multimedia</a></li>
 				<li><a href="gallery.php">Gallery</a></li>
 			</ul>

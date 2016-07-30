@@ -46,7 +46,7 @@
 			<hr>--------->
 
 			<?php
-			$arr = User::readAllLimit(0, 9999999);
+			$arr = User::readAll(0, 9999999);
 			foreach ($arr as $value) {
 				PrintHTML::Member($value->getId(), $value->getfullName(), $value->getEmail(), User::isAdmin(), "images/User.png");
 			}

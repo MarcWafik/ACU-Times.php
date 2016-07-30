@@ -34,9 +34,6 @@ abstract class Entity {
 	}
 
 //=================================================Const===================================================
-	const LANGUAGE_ENGLISH = 0;
-	const LANGUAGE_ARABIC = 1;
-	const LANGUAGE_Both = 2;
 	const DB_TABLE_NAME = "";
 
 //================================================CUID===================================================
@@ -108,12 +105,16 @@ abstract class Entity {
 		}
 	}
 
-	public static function readAllLimit($offset, $size) {
+	public static function readAll($offset, $size) {
 
 
 		try {
 			$conn = DataBase::getConnection();
-			$stmt = $conn->prepare("SELECT * FROM " . static::DB_TABLE_NAME . " LIMIT $size OFFSET $offset");
+			if (isset($size) && isset($offset) && 0 < $size && 0 < $offset) {
+				$stmt = $conn->prepare("SELECT * FROM " . static::DB_TABLE_NAME . " LIMIT $size OFFSET $offset");
+			} else {
+				$stmt = $conn->prepare("SELECT * FROM " . static::DB_TABLE_NAME);
+			}
 			$stmt->execute();
 			$stmt->setFetchMode(PDO::FETCH_ASSOC);
 
@@ -136,10 +137,6 @@ abstract class Entity {
 
 	public function setCreatDate() {
 		$this->creatDate = new DateTime();
-	}
-
-	public static function test() {
-		echo static::DB_TABLE_NAME;
 	}
 
 //===================================================GET===================================================

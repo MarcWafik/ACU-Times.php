@@ -59,6 +59,7 @@ class PollChoice extends Entity implements iCRUD {
 	public function getClicked() {
 		return $this->votes;
 	}
+
 //==================================================CRUD===================================================
 	public function create() {
 		

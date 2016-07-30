@@ -46,7 +46,7 @@ if (valAllNotnull()) {
 			"Youtubelink" => $_POST["Youtubelink"],
 			"Importance" => $_POST["Importance"],
 			"article" => $_POST["article"],
-			//"Category" => $_POST["Category"]
+				//"Category" => $_POST["Category"]
 		);
 	}
 }
@@ -129,7 +129,11 @@ function valAllNotnull() {
 					<label class="control-label col-sm-2" for="Category">Category:</label>
 					<div class="col-sm-10">
 						<select class="form-control" id="Category" name="Category">
-							<?php // foreach($CategoryList as $Category){ PrintOptionCategory($Category); }   ?>
+							<?php
+							foreach (Category::readAll() as $Category) {
+								$Category->PrintOptionCategory();
+							}
+							?>
 						</select>
 					</div>
 				</div>

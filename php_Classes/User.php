@@ -18,7 +18,7 @@ class User extends EntityUser implements iCRUD {
 	protected $nameArabic;  //32
 	protected $password; //32             for varchar 64
 	protected $gender; //1 - 0 dont say 1 male 2 female 
-	protected $accses;   //1 - 0 regular 1 editor 2 admin
+	protected $accsesID;   //11
 	protected $about;  //2048
 	protected $birthDate;  // using datetime class
 	protected $arrNotification; // an array of notification
@@ -33,7 +33,7 @@ class User extends EntityUser implements iCRUD {
 		$this->nameArabic = "";
 		$this->password = "";
 		$this->gender = 0;
-		$this->accses = 0;
+		$this->accsesID = 0;
 		$this->about = "";
 		$this->birthDate = new DateTime();
 		$this->arrNotification = array();
@@ -45,7 +45,7 @@ class User extends EntityUser implements iCRUD {
 		$this->nameArabic = $DBrow['nameArabic'];
 		$this->password = $DBrow['password'];
 		$this->gender = $DBrow['gender'];
-		$this->accses = $DBrow['accses'];
+		$this->accsesID = $DBrow['accses'];
 		$this->about = $DBrow['about'];
 		$this->birthDate = new DateTime($DBrow['birthDate']);
 	}
@@ -56,7 +56,7 @@ class User extends EntityUser implements iCRUD {
 		$stmt->bindParam(':nameArabic', $this->nameArabic);
 		$stmt->bindParam(':password', $this->password);
 		$stmt->bindParam(':gender', $this->gender);
-		$stmt->bindParam(':accses', $this->accses);
+		$stmt->bindParam(':accses', $this->accsesID);
 		$stmt->bindParam(':about', $this->about);
 		$stmt->bindParam(':birthDate', $this->birthDate->format('Y-m-d'));
 	}
@@ -120,7 +120,7 @@ class User extends EntityUser implements iCRUD {
 		if ($this->read($id) && $this->isCorrectPassword($password)) {
 			Session::startOnce();
 			$_SESSION["id"] = $this->id;
-			$_SESSION["accses"] = $this->accses;
+			$_SESSION["accses"] = $this->accsesID;
 			$_SESSION["fullName"] = $this->fullName;
 			return TRUE;
 		}
@@ -236,9 +236,9 @@ class User extends EntityUser implements iCRUD {
 		return FALSE;
 	}
 
-	public function setAccses($accses) {
+	public function setAccsesID($accses) {
 		if (Validation::isNumInRange($accses, 0, 2)) {
-			$this->accses = (int) $accses;
+			$this->accsesID = (int) $accses;
 			return TRUE;
 		}
 		return FALSE;
@@ -292,8 +292,13 @@ class User extends EntityUser implements iCRUD {
 		}
 	}
 
+	public function getAccsesID() {
+		return $this->accsesID;
+	}
+
 	public function getAccses() {
-		return $this->accses;
+		$x = new Accses();
+		return $x->read($this->accsesID);
 	}
 
 	public function getBirthDate() {

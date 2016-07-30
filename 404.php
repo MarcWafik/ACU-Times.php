@@ -19,6 +19,9 @@
 			</div>
 			<br>
 		</div>
-		<?php include ("footer.php"); ?>
+		<?php
+		$temp = Category::readAll();
+		include ("footer.php");
+		?>
 	</body>
 </html>

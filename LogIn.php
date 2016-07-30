@@ -30,7 +30,16 @@ if (isset($_POST["submit"]) && isset($_POST["ID"]) && isset($_POST["Password"]))
 				<div class="form-group">
 					<label for="ID">University ID :</label>
 					<div class="controls">
-						<input type="number" name="ID" id="ID" value="<?php echo @$_POST["ID"]; ?>" class="form-control" onBlur="valID(this)" maxlength="7" placeholder="Enter university ID"required autocomplete="on">
+						<input type="text" 
+							   name="ID" 
+							   id="ID" 
+							   value="<?php echo @$_POST["ID"]; ?>" 
+							   class="form-control" 
+							   onBlur="valID(this)" 
+							   maxlength="7" 
+							   placeholder="Enter university ID" 
+							   required 
+							   autocomplete="on">
 						<span class="help-block"></span> 
 					</div>
 				</div>
@@ -38,7 +47,13 @@ if (isset($_POST["submit"]) && isset($_POST["ID"]) && isset($_POST["Password"]))
 				<div class="form-group">
 					<label for="Password">Password :</label>
 					<div class="controls">
-						<input type="password" name="Password" id="Password" value="" class="form-control" maxlength="32" required>
+						<input type="password" 
+							   name="Password" 
+							   id="Password" 
+							   value="" 
+							   class="form-control" 
+							   maxlength="32" 
+							   required>
 						<span class="help-block"></span>
 					</div>
 				</div>

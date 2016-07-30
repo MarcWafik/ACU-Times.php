@@ -116,7 +116,7 @@ class Article extends Youtube implements iCRUD {
 					importance = :importance, 
 					imageNumber = :imageNumber, 
 					views = :views
-				WHERE id=:id", TRUE,TRUE);
+				WHERE id=:id", TRUE, TRUE);
 	}
 
 	public function search($imput) {
