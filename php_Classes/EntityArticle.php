@@ -82,6 +82,8 @@ abstract class EntityArticle extends Entity {
 		return FALSE;
 	}
 
+	abstract public function setDisplayFromSession(Accses $Accses);
+
 //===================================================GET===================================================
 	abstract public function hasAccsesToModify(Accses $Accses);
 

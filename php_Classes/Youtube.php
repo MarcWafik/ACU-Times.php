@@ -107,7 +107,9 @@ class Youtube extends EntityArticle implements iCRUD {
 		}
 		return FALSE;
 	}
-
+	protected function setDisplayFromSession(Accses $Accses) {
+		$this->display = $Accses->getYoutube();
+	}
 //===================================================GET===================================================
 	public function getyoutubeID() {
 		return $this->youtubeID;
