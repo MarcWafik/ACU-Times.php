@@ -69,7 +69,6 @@ class Article extends Youtube implements iCRUD {
 					titleArabic, 
 					display, 
 					writerID, 
-					editorID, 
 					youtubeID, 
 					descriptionEnglish, 
 					descriptionArabic, 
@@ -85,7 +84,6 @@ class Article extends Youtube implements iCRUD {
 					:titleArabic, 
 					:display, 
 					:writerID, 
-					:editorID, 
 					:youtubeID, 
 					:descriptionEnglish, 
 					:descriptionArabic, 
@@ -105,7 +103,6 @@ class Article extends Youtube implements iCRUD {
 					titleArabic = :titleArabic, 
 					display = :display, 
 					writerID = :writerID, 
-					editorID = :editorID, 
 					youtubeID = :youtubeID, 
 					descriptionEnglish = :descriptionEnglish, 
 					descriptionArabic = :descriptionArabic, 
@@ -116,11 +113,13 @@ class Article extends Youtube implements iCRUD {
 					importance = :importance, 
 					imageNumber = :imageNumber, 
 					views = :views
-				WHERE id=:id", TRUE,TRUE);
+				WHERE id=:id", TRUE, FALSE);
 	}
 
-	public function search($imput) {
-		
+	public static function getAllInCat($find, $offset = 0, $size = 0) {
+		$comand = "SELECT * FROM " . static::DB_TABLE_NAME . " WHERE 
+				`categoryID` LIKE :find ";
+		return static::Do_comand_Search($comand, $find, $offset, $size);
 	}
 
 //===================================================SET===================================================
@@ -188,7 +187,14 @@ class Article extends Youtube implements iCRUD {
 		return FALSE;
 	}
 
+	public function setDisplayFromSession(Access $Accses){
+		return $this->doit_setDisplayFromSession($Accses->getArticle());
+	}
+
 //===================================================GET===================================================
+	public function getImgThumbnail() {
+		return Image::getMainImage($this->id, Image::ARTICLE);
+	}
 
 	public function getViews() {
 		return $this->views;
@@ -216,6 +222,10 @@ class Article extends Youtube implements iCRUD {
 
 	function getBodyArabic() {
 		return $this->bodyArabic;
+	}
+
+	public function hasAccsesToModify(Access $Accses) {
+		return $this->hasAccsesToModify_private($Accses->getArticle());
 	}
 
 }

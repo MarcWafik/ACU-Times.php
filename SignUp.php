@@ -3,9 +3,6 @@ require_once 'autoload.php';
 
 if (valAllNotnull()) {
 	$User = new User();
-	$User->setAccses(User::ACCSES_REGULAR);
-	$User->setCreatDate();
-	$User->setLastUpdateDate();
 	$iscorrect = array();
 	$iscorrect = array(
 		"ID" => (bool) $User->setID($_POST["ID"]),
@@ -21,7 +18,7 @@ if (valAllNotnull()) {
 	);
 	if (Validation::valAll($iscorrect)) {
 		$User->create();
-		header("Location: SignupSuccessful.php");
+		header("Location: signup_success.php");
 		exit;
 	}
 }
@@ -45,21 +42,21 @@ function valAllNotnull() {
 <html lang="en">
 	<head>
 		<title>ACU Times | Title</title>
-		<?php require_once("Header.php"); ?>
+		<?php require_once("header.php"); ?>
 		<script src="js/Validate.js"></script>
 	</head>
 	<body>
-		<?php include ("Navbar.php"); ?>
+		<?php include ("navbar.php"); ?>
 		<!-------------------------------------------------------------------------- content -------------------------------------------------------------------------->
 		<div class="container">
 			<h3>
 				<ul class="nav nav-pills">
-					<li role="presentation"><a href="Login.php">Login</a></li>
+					<li role="presentation"><a href="login.php">Login</a></li>
 					<li role="presentation" class="active"><a>Sign up</a></li>
 				</ul>
 			</h3>
 			<br>
-			<form  role="form" action="SignUp.php" method="post" onSubmit="return isAllValid()">
+			<form  role="form" action="signup.php" method="post" onSubmit="return isAllValid()">
 				<div class="form-group">
 					<label  class="control-label" class="control-label" for="name">Full name :</label>
 					<div class="controls">
@@ -231,6 +228,6 @@ function valAllNotnull() {
 	</form>
 </div>
 <!-------------------------------------------------------------------------- content -------------------------------------------------------------------------->
-<?php include ("Footer.php"); ?>
+<?php include ("footer.php"); ?>
 </body>
 </html>

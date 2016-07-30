@@ -2,11 +2,11 @@
 ?><!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>ACU Times | Title</title>
-		<?php require_once("Header.php"); ?>
+		<title>ACU Times | Denied</title>
+		<?php require_once("header.php"); ?>
 	</head>
 	<body>
-		<?php include ("Navbar.php"); ?>
+		<?php include ("navbar.php"); ?>
 		<!-------------------------------------------------------------------------- content -------------------------------------------------------------------------->
 		<div class="text-center center-block">
 			<div class="error-code"><i class="fa fa-warning"></i></div>
@@ -16,6 +16,6 @@
 					<a class=" login-detail-panel-button btn" href="index.php">Homepage <i class="fa fa-arrow-right"></i></a> </div>
 			</div>
 		</div>
-		<?php include ("Footer.php"); ?>
+		<?php include ("footer.php"); ?>
 	</body>
 </html>

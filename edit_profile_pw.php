@@ -26,18 +26,18 @@ function valAllNotnull() {
 ?><!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>ACU Times | Title</title>
-		<?php require_once("Header.php"); ?>
+		<title>ACU Times | Change PW</title>
+		<?php require_once("header.php"); ?>
 		<script src="js/Validate.js"></script>
 	</head>
 	<body>
-		<?php include ("Navbar.php"); ?>
+		<?php include ("navbar.php"); ?>
 		<!-------------------------------------------------------------------------- content -------------------------------------------------------------------------->
 		<div class="container">
 			<h3>
 				<ul class="nav nav-pills">
-					<li role="presentation"><a href="Profile.php">Profile</a></li>
-					<li role="presentation"><a href="EditProfile.php">Change personal info</a></li>
+					<li role="presentation"><a href="profile.php">Profile</a></li>
+					<li role="presentation"><a href="edit_profile.php">Change personal info</a></li>
 					<li role="presentation" class="active"><a>Change Password</a></li>
 				</ul>
 			</h3>
@@ -46,7 +46,7 @@ function valAllNotnull() {
 			if (@$Passed)
 				echo '<div class="alert alert-info alert-dismissable"> <a class="panel-close close" data-dismiss="alert">×</a> <i class="fa fa-check"></i> Password updated succsesfuly </div>'
 				?>
-			<form role="form" action="EditProfilePW.php" method="post" onSubmit="return isAllValid()">
+			<form role="form" action="edit_profile_pw.php" method="post" onSubmit="return isAllValid()">
 				<!-- #################################################################### Old Password #################################################################### -->	
 				<div class="form-group">
 					<label class="control-label" for="OldPassword">Old password :</label>
@@ -106,6 +106,6 @@ function valAllNotnull() {
 		<!-- ####################################################################  #################################################################### -->
 	</form>
 </div>
-<?php include ("Footer.php"); ?>
+<?php include ("footer.php"); ?>
 </body>
 </html>

@@ -1,21 +1,22 @@
 <?php
 require_once 'autoload.php';
 $User = new User();
-$User->__init();
 $User->read(User::getSessionUserID());
+
 if (valAllNotnull()) {
 	$User->setLastUpdateDate();
 	$iscorrect = array(
 		"OldPassword" => (bool) $User->isCorrectPassword($_POST["OldPassword"]),
 		"name" => (bool) $User->setfullName($_POST["name"]),
+		//"emailtaken" => (bool) $User->isEmailAvailable($_POST["email"]) || strcmp($_POST["email"], $User->getEmail()),
 		"email" => (bool) $User->setEmail($_POST["email"]),
 		"PhoneNo" => (bool) $User->setPhoneNumber($_POST["PhoneNo"]),
 		"Gender" => (bool) $User->setGender($_POST["Gender"]),
-		"Birthday" => (bool) $User->setBirthDate($_POST["BirthdayDay"], $_POST["BirthdayMonth"], $_POST["BirthdayYear"]),
-		"emailtaken" => (bool) $User->isEmailAvailable($_POST["email"]),
-		"about" => (bool) $User->setAbout($_POST["about"]),
+		"Birthday" => (bool) $User->setBirthDate($_POST["BirthdayYear"], $_POST["BirthdayMonth"], $_POST["BirthdayDay"]),
+		"about" => (bool) $User->setAbout($_POST["about"])
 	);
-	if (Validation::valAll($iscorrect) && $User->update()) {
+	if (Validation::valAll($iscorrect)) {
+		$User->update();
 		$Passed = true;
 	}
 }
@@ -37,24 +38,24 @@ function valAllNotnull() {
 <html lang="en">
 	<head>
 		<title>ACU Times | Edit Profile</title>
-		<?php require_once("Header.php"); ?>
+		<?php require_once("header.php"); ?>
 		<script src="js/Validate.js"></script>
 	</head>
 	<body>
-		<?php include ("Navbar.php"); ?>
+		<?php include ("navbar.php"); ?>
 		<!-------------------------------------------------------------------------- content -------------------------------------------------------------------------->
 		<div class="container">
 			<h3>
 				<ul class="nav nav-pills">
-					<li role="presentation"><a href="Profile.php">Profile</a></li>
+					<li role="presentation"><a href="profile.php">Profile</a></li>
 					<li role="presentation" class="active"><a>Change personal info</a></li>
-					<li role="presentation"><a href="EditProfilePW.php">Change Password</a></li>
+					<li role="presentation"><a href="edit_profile_pw.php">Change Password</a></li>
 				</ul>
 			</h3>
 			<br>
 			<br>
 			<br>
-			<form class="form-horizontal" role="form" action="EditProfile.php" method="post" onSubmit="return isAllValid()">
+			<form class="form-horizontal" role="form" action="edit_profile.php" method="post" onSubmit="return isAllValid()">
 				<!-- left column -->
 				<div class="col-md-4 col-sm-6 col-xs-12">
 					<div class="text-center"> <img src="<?php echo "images/User.png"; ?>" class="img-200x200 img-circle" alt="avatar">
@@ -148,7 +149,7 @@ function valAllNotnull() {
 										onBlur="valBirthday(BirthdayMonth, BirthdayYear, BirthdayDay)">
 											<?php
 											$right_now = getdate();
-											PrintHTML::numericOption($right_now['year'] - 16, 1900, $User->getBirthYear);
+											PrintHTML::numericOption($right_now['year'] - 16, 1900, $User->getBirthYear());
 											?>
 								</select>
 							</div>
@@ -175,14 +176,13 @@ function valAllNotnull() {
 					<!-- ####################################################################  #################################################################### -->
 
 					<div class="form-group">
-						<label class="col-md-3 control-label" for="About">About:</label>
+						<label class="col-md-3 control-label" for="about">About:</label>
 						<div class="col-md-8 controls">
 							<textarea 
 								class="form-control" 
 								rows="5" 
-								id="About" 
-								name="About" 
-								autocomplete="on" 
+								id="about" 
+								name="about" 
 								maxlength="256"><?php echo $User->getAbout(); ?></textarea>
 							<span class="help-block"></span> </div>
 					</div>
@@ -214,6 +214,6 @@ function valAllNotnull() {
 				</div>
 			</form>
 		</div>
-		<?php include ("Footer.php"); ?>
+		<?php include ("footer.php"); ?>
 	</body>
 </html>

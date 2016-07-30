@@ -16,7 +16,20 @@ class Notification extends Entity implements iCRUD {
 	private $message;
 	private $importance;
 	private $source;
-	private $targetID;
+	private $sourceID;
+	private $userID;
+
+//=================================================Const===================================================
+	const IMPORTANCE_INFO = 0;
+	const IMPORTANCE_SUCCESS = 1;
+	const IMPORTANCE_WARNING = 2;
+	const IMPORTANCE_DANGER = 3;
+	const SOURCE_USER = 0;
+	const SOURCE_ARTICLE = 1;
+	const SOURCE_GALLERY = 2;
+	const SOURCE_POLL = 3;
+	const SOURCE_MULTIMEDIA = 4;
+	const DB_TABLE_NAME = "notification";
 
 	function __construct() {
 		$this->__init();
@@ -27,38 +40,60 @@ class Notification extends Entity implements iCRUD {
 		$this->message = "";
 		$this->importance = 0;
 		$this->source = 0;
-		$this->targetID = 0;
+		$this->sourceID = 0;
+		$this->userID = 0;
 	}
 
-//=================================================Const===================================================
-	const IMPORTANCE_INFO = 0;
-	const IMPORTANCE_SUCCESS = 1;
-	const IMPORTANCE_WARNING = 2;
-	const IMPORTANCE_DANGER = 3;
-	const SOURCE_USER = 0;
-	const SOURCE_COMMENT = 1;
-	const SOURCE_ARTICLE = 2;
+	protected function fillFromAssoc($DBrow) {
+		parent::fillFromAssoc($DBrow);
+
+		$this->message = $DBrow['message'];
+		$this->importance = $DBrow['importance'];
+		$this->source = $DBrow['source'];
+		$this->sourceID = $DBrow['sourceID'];
+		$this->userID = $DBrow['userID'];
+	}
+
+	protected function bindParamClass($stmt) {
+		parent::bindParamClass($stmt);
+
+		$stmt->bindParam('message', $this->message);
+		$stmt->bindParam('importance', $this->importance);
+		$stmt->bindParam('source', $this->source);
+		$stmt->bindParam('sourceID', $this->sourceID);
+		$stmt->bindParam('userID', $this->userID);
+	}
 
 //==================================================CRUD===================================================
-
 	public function create() {
-		
-	}
-
-	public function read($id) {
-		
+		return $this->Do_comand_Update_Creat("INSERT INTO " . static::DB_TABLE_NAME . "
+				(	message, 
+					importance, 
+					source, 
+					sourceID, 
+					userID
+				) VALUES ( 
+					:message, 
+					:importance, 
+					:source, 
+					:sourceID, 
+					:userID
+				)", FALSE, TRUE);
 	}
 
 	public function update() {
-		
+		return $this->Do_comand_Update_Creat("UPDATE " . static::DB_TABLE_NAME . " SET 
+					message = :message, 
+					importance = :importance, 
+					source = :source, 
+					sourceID = sourceID, 
+					userID = :userID
+				WHERE id=:id", TRUE, FALSE);
 	}
 
-	public function delete() {
-		
-	}
-
-	public function search($imput) {
-		
+	public static function readAllrelatedWriterID($userID, $offset = 0, $size = 0) {
+		$comand = "SELECT * FROM " . static::DB_TABLE_NAME . " WHERE userID=" . $userID;
+		return static::Do_comand_readAll($comand, $offset, $size);
 	}
 
 //===================================================SET===================================================
@@ -88,9 +123,17 @@ class Notification extends Entity implements iCRUD {
 		return FALSE;
 	}
 
-	public function setTargetID($ID) {
+	public function setUserID($ID) {
 		if (Validation::isNumLagerThan($ID, 0)) {
-			$this->targetID = (int) $ID;
+			$this->userID = (int) $ID;
+			return TRUE;
+		}
+		return FALSE;
+	}
+
+	public function setsourceID($ID) {
+		if (Validation::isNumLagerThan($ID, 0)) {
+			$this->sourceID = (int) $ID;
 			return TRUE;
 		}
 		return FALSE;
@@ -109,8 +152,12 @@ class Notification extends Entity implements iCRUD {
 		return $this->source;
 	}
 
-	public function getTargetID() {
-		return $this->targetID;
+	public function getUserID() {
+		return $this->userID;
+	}
+
+	function getSourceID() {
+		return $this->sourceID;
 	}
 
 }

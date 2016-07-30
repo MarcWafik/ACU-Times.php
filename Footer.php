@@ -5,11 +5,11 @@
 		<div class="row">
 			<div class="col-xs-12">
 				<div class="text-center"> 
-					<a href=""><i class="social fa fa-facebook fa-3x social-fb"></i></a>
-					<a href=""><i class="social fa fa-twitter fa-3x social-tw"></i></a>
-					<a href=""><i class="social fa fa-google-plus fa-3x social-gp"></i></a>
-					<a href=""><i class="social fa fa-instagram fa-3x social-is"></i></a>
-					<a href=""><i class="social fa fa-youtube fa-3x social-yt"></i></a>
+					<a href="footer.php"><i class="social fa fa-facebook fa-3x social-fb"></i></a>
+					<a href="footer.php"><i class="social fa fa-twitter fa-3x social-tw"></i></a>
+					<a href="footer.php"><i class="social fa fa-google-plus fa-3x social-gp"></i></a>
+					<a href="footer.php"><i class="social fa fa-instagram fa-3x social-is"></i></a>
+					<a href="footer.php"><i class="social fa fa-youtube fa-3x social-yt"></i></a>
 				</div>
 			</div>
 		</div>
@@ -19,7 +19,7 @@
 				<ul class="list-unstyled list-inline pull-left">
 					<li><a href="#">Terms of Service</a></li>
 					<li><a href="#">Privacy</a></li>
-					<li><a href="ContactUs.php">Contact Us</a></li>
+					<li><a href="contactus.php">Contact Us</a></li>
 					<li><a href="#">About Us</a></li>
 				</ul>
 			</div>

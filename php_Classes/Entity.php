@@ -34,9 +34,6 @@ abstract class Entity {
 	}
 
 //=================================================Const===================================================
-	const LANGUAGE_ENGLISH = 0;
-	const LANGUAGE_ARABIC = 1;
-	const LANGUAGE_Both = 2;
 	const DB_TABLE_NAME = "";
 
 //================================================CUID===================================================
@@ -63,22 +60,42 @@ abstract class Entity {
 		}
 	}
 
-	public function delete() {
-		static::delete_Static($this->id);
+	public function delete($Permenant = FALSE) {
+		return static::delete_or_Undo_Static($this->id, TRUE, $Permenant);
 	}
 
-	public static function delete_Static($id) {
+	public function undoDelete() {
+		return static::delete_or_Undo_Static($this->id, FALSE);
+	}
+
+	public static function delete_static($id, $Permenant = FALSE) {
+		return static::delete_or_Undo_Static($id, TRUE, $Permenant);
+	}
+
+	public static function undoDelete_static($id) {
+		return static::delete_or_Undo_Static($id, FALSE);
+	}
+
+	protected static function delete_or_Undo_Static($id, $Delete_or_Undo = TRUE, $Permenant = FALSE) {
 		$conn = DataBase::getConnection();
 		if ($conn === null) {
 			return FALSE;
 		}
 		try {
-			$stmt = $conn->prepare("DELETE FROM " . static::DB_TABLE_NAME . " WHERE ID=:imputID");
+			if ($Permenant) {
+				$stmt = $conn->prepare("DELETE FROM " . static::DB_TABLE_NAME . " WHERE ID=:imputID");
+			} else {
+				if (!$Delete_or_Undo == TRUE) {
+					$stmt = $conn->prepare("UPDATE " . static::DB_TABLE_NAME . " SET isDeleted =0 WHERE id=:imputID");
+				} else {
+					$stmt = $conn->prepare("UPDATE " . static::DB_TABLE_NAME . " SET isDeleted =1 WHERE id=:imputID");
+				}
+			}
 			$stmt->bindParam(':imputID', $id);
 			$stmt->execute();
 			return TRUE;
 		} catch (PDOException $e) {
-			echo $sql . "<br>" . $e->getMessage();
+			echo $e->getMessage();
 			return FALSE;
 		}
 	}
@@ -108,12 +125,49 @@ abstract class Entity {
 		}
 	}
 
-	public static function readAllLimit($offset, $size) {
+	public static function readAll($offset = 0, $size = 0) {
+		$comand = "SELECT * FROM " . static::DB_TABLE_NAME;
+		return static::Do_comand_readAll($comand, $offset, $size);
+	}
 
+	protected static function Do_comand_readAll($comand, $offset = 0, $size = 0) {
+		if (isset($size) && isset($offset) && 0 < $size ) {
+			$comand .= " LIMIT $size OFFSET $offset";
+		}
+		$conn = DataBase::getConnection();
+		if ($conn === null) {
+			return FALSE;
+		}
 
 		try {
-			$conn = DataBase::getConnection();
-			$stmt = $conn->prepare("SELECT * FROM " . static::DB_TABLE_NAME . " LIMIT $size OFFSET $offset");
+			$stmt = $conn->prepare($comand);
+			$stmt->execute();
+			$stmt->setFetchMode(PDO::FETCH_ASSOC);
+
+			$result = array();
+			foreach ($stmt->fetchAll() as $value) {
+				$temp = new static();
+				$temp->fillFromAssoc($value);
+				array_push($result, $temp);
+			}
+			return $result;
+		} catch (PDOException $e) {
+			echo "Error: " . $e->getMessage();
+		}
+	}
+
+	public static function Do_comand_Search($comand, $find, $offset = 0, $size = 0) {
+		if (isset($size) && isset($offset) && 0 < $size ) {
+			$comand .= " LIMIT $size OFFSET $offset";
+		}
+		$conn = DataBase::getConnection();
+		if ($conn === null) {
+			return FALSE;
+		}
+		$find = '%' . $find . '%';
+		try {
+			$stmt = $conn->prepare($comand);
+			$stmt->bindParam(':find', $find);
 			$stmt->execute();
 			$stmt->setFetchMode(PDO::FETCH_ASSOC);
 
@@ -136,10 +190,6 @@ abstract class Entity {
 
 	public function setCreatDate() {
 		$this->creatDate = new DateTime();
-	}
-
-	public static function test() {
-		echo static::DB_TABLE_NAME;
 	}
 
 //===================================================GET===================================================

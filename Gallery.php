@@ -1,47 +1,56 @@
-<?php require_once 'autoload.php'; ?>
-<!DOCTYPE html>
+<?php
+require_once 'autoload.php';
+User::CheckLogin();
+$arr = Gallery::readAll();
+?><!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>ACU Times | Title</title>
+		<title>ACU Times | Gallery</title>
 		<?php require_once("Header.php"); ?>
-		<style>
-			.link-img-gallery{padding:1px ; margin:0}
-		</style>
+		<link rel="stylesheet" href="js/fancybox/jquery.fancybox.css" type="text/css" media="screen"/>
+		<script type="text/javascript" src="js/fancybox/jquery.fancybox.pack.js?v=2.1.5"></script> 
 	</head>
 	<body>
 		<?php include ("Navbar.php"); ?>
-		<!-- content -->
-		<div class="container"> 
-			<!-------------------------------- Gallery -------------------------------->
-			<div class="row">
-
-				<div class="col-lg-12">
-					<h1 class="page-header">Gallery</h1>
-				</div>
-
-                <a class="col-lg-3 col-md-4 col-xs-6 link-img-gallery" href="#">
-                    <img class="img-responsive img-hover img-gallery" src="http://placehold.it/1920x1080" alt="">
-                </a>
-				<a class="col-lg-3 col-md-4 col-xs-6 link-img-gallery" href="#">
-                    <img class="img-responsive img-hover img-gallery" src="http://placehold.it/1920x1080" alt="">
-                </a>
-				<a class="col-lg-3 col-md-4 col-xs-6 link-img-gallery" href="#">
-                    <img class="img-responsive img-hover img-gallery" src="http://placehold.it/1920x1080" alt="">
-                </a>
-
+		<div class="container">
+			<br><br>
+			<div class="gallery" >
+				<?php
+				foreach ($arr as $value) {
+					PrintHTML::gallery($value);
+				}
+				?>
 			</div>
-
-			<hr>
-			<!-------------------------------- pagination -------------------------------->
-			<div class="text-center center-block">
-				<ul class = "pagination">
-					<li><a href = "#">&laquo;</a></li>
-					<li><a href = "?Page=1">1</a></li>
-					<li><a href = "#">&raquo;</a></li>
-				</ul>
-			</div>
-			<div class="clear"></div>
 		</div>
 		<?php include ("Footer.php"); ?>
+		<script type="text/javascript">
+			$(document).ready(function () {
+				$(".fancybox").fancybox({
+					'transitionIn': 'elastic',
+					'transitionOut': 'elastic',
+					'autoPlay': 'true',
+					'playSpeed': '10000',
+					'autoSize': 'true',
+					'autoScale': 'true',
+					//'centerOnScroll': 'true',
+					'autoDimensions': 'true',
+					'hideOnOverlayClick': true,
+					'hideOnContentClick': true,
+					'closeBtn': true,
+					'padding': [0, 0, 0, 0],
+					'margin': [0, 0, 0, 0],
+					'fitToView': 'true',
+					openEffect: 'elastic',
+					openSpeed: 200,
+					closeEffect: 'elastic',
+					closeSpeed: 200,
+					closeClick: true/*,
+					 onStart: function(){ $("img").width("500"); },
+					 helpers: {overlay : null}
+					 */
+				});
+
+			});
+		</script>
 	</body>
 </html>

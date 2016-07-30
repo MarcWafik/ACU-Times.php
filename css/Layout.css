@@ -55,3 +55,7 @@ header.carousel .carousel { height: 70%; }
 .img-1920x1080 { width: 1920px; height: 1080px; }
 /*==================================================== coment  ====================================================*/
 .comment-text { margin: 0 10px; }
+/*==================================================== Gallery  ====================================================*/
+.gallery-div { float: left; padding: 2px; }
+.img-gallery:hover { opacity: 0.8; -webkit-transform: scale(0.97); -moz-transform: scale(0.97); -o-transform: scale(0.97); transform: scale(0.97); }
+.img-gallery { -webkit-transform: scale(1); -moz-transform: scale(1); -o-transform: scale(1); transform: scale(1); -webkit-transition-duration: 0.5s; -moz-transition-duration: 0.5s; -o-transition-duration: 0.5s; transition-duration: 0.5s; }

@@ -11,26 +11,35 @@ if (isset($_POST["submit"]) && isset($_POST["ID"]) && isset($_POST["Password"]))
 <html lang="en">
 	<head>
 		<title>ACU Times | Login</title>
-		<?php require_once("Header.php"); ?>
+		<?php require_once("header.php"); ?>
 		<script src="js/Validate.js"></script>
 	</head>
 	<body>
-		<?php include ("Navbar.php"); ?>
+		<?php include ("navbar.php"); ?>
 		<!-------------------------------------------------------------------------- content -------------------------------------------------------------------------->
 		<div class="container">
 			<h3>
 				<ul class="nav nav-pills">
 					<li role="presentation" class="active"><a>Login</a></li>
-					<li role="presentation"><a href="SignUp.php">Sign up</a></li>
+					<li role="presentation"><a href="signup.php">Sign up</a></li>
 				</ul>
 			</h3>
 			<br>
 			<?php if (isset($isLogin) && !$isLogin) PrintHTML::alert_dismissible("ID and password don't match ", PrintHTML::ALERT_DANGER); ?>
-			<form role="form" action="Login.php" method="post">
+			<form role="form" action="login.php" method="post">
 				<div class="form-group">
 					<label for="ID">University ID :</label>
 					<div class="controls">
-						<input type="number" name="ID" id="ID" value="<?php echo @$_POST["ID"]; ?>" class="form-control" onBlur="valID(this)" maxlength="7" placeholder="Enter university ID"required autocomplete="on">
+						<input type="text" 
+							   name="ID" 
+							   id="ID" 
+							   value="<?php echo @$_POST["ID"]; ?>" 
+							   class="form-control" 
+							   onBlur="valID(this)" 
+							   maxlength="7" 
+							   placeholder="Enter university ID" 
+							   required 
+							   autocomplete="on">
 						<span class="help-block"></span> 
 					</div>
 				</div>
@@ -38,7 +47,13 @@ if (isset($_POST["submit"]) && isset($_POST["ID"]) && isset($_POST["Password"]))
 				<div class="form-group">
 					<label for="Password">Password :</label>
 					<div class="controls">
-						<input type="password" name="Password" id="Password" value="" class="form-control" maxlength="32" required>
+						<input type="password" 
+							   name="Password" 
+							   id="Password" 
+							   value="" 
+							   class="form-control" 
+							   maxlength="32" 
+							   required>
 						<span class="help-block"></span>
 					</div>
 				</div>
@@ -49,6 +64,6 @@ if (isset($_POST["submit"]) && isset($_POST["ID"]) && isset($_POST["Password"]))
 			</form>
 		</div>
 		<div class="clearfix" style="padding:150px"></div>
-		<?php include ("Footer.php"); ?>
+		<?php include ("footer.php"); ?>
 	</body>
 </html>

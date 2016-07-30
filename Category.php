@@ -1,31 +1,33 @@
-<?php require_once 'autoload.php';
+<?php
+require_once 'autoload.php';
+
+$cat = new Category();
+if (isset($_GET["CategoryID"]) && $cat->read($_GET["CategoryID"])) {
+	
+} else {
+	header("Location: 404.php");
+	exit();
+}
 ?><!DOCTYPE html>
 <html lang="en">
+
 	<head>
-		<title>ACU Times | Title</title>
-		<?php require_once("Header.php"); ?>
+		<title>ACU Times | Category</title>
+		<?php require_once("header.php"); ?>
+		<script src="js/load_more.js" type="text/javascript"></script>
 	</head>
 	<body>
-		<?php include ("Navbar.php"); ?>
-		<div class="container">
-			<br><h2 class="text-primary">Category name</h2>
+		<?php include ("navbar.php"); ?>
+		<div class="container" id="apendAJAX">
+			<br><h2 class="text-primary"><?php echo $cat->getNameEnglish() ?></h2>
 			<hr>
 			<!-------------------------------- Articles -------------------------------->
-			<?php
-			$title = "Sed ultrices turpis sed rhoncus semper";
-			$link = "#";
-			$description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi pellentesque scelerisque mi, eu varius eros interdum sit amet. Maecenas at vulputate nisl. Aenean in varius purus. Praesent commodo fringilla euismod. In eu eros id arcu imperdiet rutrum.";
-			$time = new DateTime;
-			$time = $time->format('g:i a - D, d F Y');
-			$img = "http://placehold.it/1920x1080";
-			PrintHTML::portofolio_12row_next_large($title, $link, $description, $time, $img);
-			PrintHTML::portofolio_12row_next_normal($title, $link, $description, $time, $img);
-			PrintHTML::portofolio_12row_next_normal($title, $link, $description, $time, $img);
-			PrintHTML::portofolio_12row_next_normal($title, $link, $description, $time, $img);
-			PrintHTML::portofolio_12row_next_normal($title, $link, $description, $time, $img);
-			?></div>
+			<?php include 'ajax_category.php'; ?>
+		</div>
 		<!-------------------------------- pagination -------------------------------->
-		<button type="button" class="btn btn-primary center-block" onClick="">Load more <i class="fa fa-arrow-down" aria-hidden="true"></i></button>
-			<?php include ("Footer.php"); ?>
+		<input type="hidden" value="ajax_category.php?CategoryID=<?php echo @$_GET["CategoryID"] ?>" id="hide" name="hide">
+		<button type="button" class="btn btn-primary center-block" onClick="loadMore(hide)">Load more <i class="fa fa-arrow-down" aria-hidden="true"></i></button>
+		<?php include ("footer.php"); ?>
+
 	</body>
 </html>

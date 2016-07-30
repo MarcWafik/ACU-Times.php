@@ -7,5 +7,7 @@ function __autoload($className) {
 	}
 }
 
+header('Content-Type: text/html; charset=UTF-8');
+Session::startOnce();
 date_default_timezone_set('Africa/Cairo');
 Language::setFromURL();

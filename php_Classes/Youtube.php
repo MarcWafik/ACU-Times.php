@@ -16,7 +16,6 @@ class Youtube extends EntityArticle implements iCRUD {
 	protected $youtubeID;
 	protected $descriptionEnglish;
 	protected $descriptionArabic;
-	protected $ArrComments; // and array of class comment
 
 	const DB_TABLE_NAME = "youtube";
 
@@ -52,8 +51,7 @@ class Youtube extends EntityArticle implements iCRUD {
 				(	titleEnglish, 
 					titleArabic, 
 					display, 
-					writerID, 
-					editorID, 
+					writerID,  
 					youtubeID, 
 					descriptionEnglish, 
 					descriptionArabic
@@ -62,7 +60,6 @@ class Youtube extends EntityArticle implements iCRUD {
 					:titleArabic, 
 					:display, 
 					:writerID, 
-					:editorID, 
 					:youtubeID, 
 					:descriptionEnglish, 
 					:descriptionArabic 
@@ -75,15 +72,19 @@ class Youtube extends EntityArticle implements iCRUD {
 					titleArabic = :titleArabic, 
 					display = :display, 
 					writerID = :writerID, 
-					editorID = :editorID, 
 					youtubeID = :youtubeID, 
 					descriptionEnglish = :descriptionEnglish, 
-					descriptionArabic = :descriptionArabic, 
+					descriptionArabic = :descriptionArabic
 				WHERE id=:id", TRUE, FALSE);
 	}
 
-	public function search($imput) {
-		
+	public static function Search($find, $offset = 0, $size = 0) {
+		$comand = "SELECT * FROM " . static::DB_TABLE_NAME . " WHERE 
+				`titleEnglish` LIKE :find OR 
+				`titleArabic` LIKE :find OR
+				`descriptionEnglish` LIKE :find OR 
+				`descriptionArabic` LIKE :find";
+		return static::Do_comand_Search($comand, $find, $offset, $size);
 	}
 
 //===================================================SET===================================================
@@ -111,17 +112,31 @@ class Youtube extends EntityArticle implements iCRUD {
 		return FALSE;
 	}
 
+	public function setDisplayFromSession(Access $Accses) {
+		return $this->doit_setDisplayFromSession($Accses->getGallery());
+	}
+
 //===================================================GET===================================================
+	public function getyoutubeThumbnail() {
+		return "http://img.youtube.com/vi/$this->youtubeID/mqdefault.jpg";
+	}
+
 	public function getyoutubeID() {
 		return $this->youtubeID;
 	}
 
 	public function getyoutubeURLString() {
-		return "https://www.youtube.com/watch?v=" . $this->youtubeID;
+		if ($this->youtubeID != "") {
+			return "https://www.youtube.com/watch?v=" . $this->youtubeID;
+		}
+		return "";
 	}
 
 	public function getyoutubeEmbededString() {
-		return "https://www.youtube.com/embed/" . $this->youtubeID;
+		if ($this->youtubeID != "") {
+			return "https://www.youtube.com/embed/" . $this->youtubeID;
+		}
+		return "";
 	}
 
 	public function getDescriptionEnglish() {
@@ -136,6 +151,10 @@ class Youtube extends EntityArticle implements iCRUD {
 		$ID_youtube = array();
 		parse_str(parse_url($url, PHP_URL_QUERY), $ID_youtube);
 		return $ID_youtube['v'];
+	}
+
+	public function hasAccsesToModify(Access $Accses) {
+		return $this->hasAccsesToModify_private($Accses->getYoutube());
 	}
 
 }

@@ -11,13 +11,14 @@
  *
  * @author marcw
  */
-class Category extends Entity {
+class Category extends Entity implements iCRUD {
 
 	private static $allCategorys;
 	private $possition;
 	private $nameEnglish;
 	private $nameArabic;
 	private $arrSubCategorys;
+	private $ParentID;
 
 	function __construct() {
 		$this->__init();
@@ -29,63 +30,127 @@ class Category extends Entity {
 		$this->nameEnglish = "";
 		$this->nameArabic = "";
 		$this->arrSubCategorys = array();
+		$this->ParentID = 0;
 	}
 
+	protected function fillFromAssoc($DBrow) {
+		parent::fillFromAssoc($DBrow);
+		$this->possition = $DBrow['possition'];
+		$this->nameEnglish = $DBrow['nameEnglish'];
+		$this->nameArabic = $DBrow['nameArabic'];
+		$this->ParentID = $DBrow['ParentID'];
+	}
+
+	protected function bindParamClass($stmt) {
+		parent::bindParamClass($stmt);
+		$stmt->bindParam(':possition', $this->possition);
+		$stmt->bindParam(':nameEnglish', $this->nameEnglish);
+		$stmt->bindParam(':nameArabic', $this->nameArabic);
+		$stmt->bindParam(':ParentID', $this->ParentID);
+	}
+
+//=================================================Const===================================================
+	const DB_TABLE_NAME = "category";
+
 //==================================================CUID===================================================
-	public static function getAllCategory() {
 
-		$this->allCategorys = array();
+	public static function readAll($offset = 0, $size = 0) {
+		if (isset(static::$allCategorys)) {
+			return static::$allCategorys;
+		}
+		static::$allCategorys = static::readAllSubcat(NULL);
+		foreach (static::$allCategorys as $value) {
+			$subcatTemp = static::readAllSubcat($value->id);
+			if (isset($subcatTemp) && $subcatTemp !== FALSE) {
+				$value->arrSubCategorys = $subcatTemp;
+			}
+		}
+		return static::$allCategorys;
+	}
 
-		$tempsubcat = array(new Category("Local News", "LocalNews"),
-			new Category("World News", "WorldNews"),
-			new Category("ACU College News", "ACUCollegeNews"));
+	private static function readAllSubcat($id) {
 
-		array_push($this->allCategorys, new Category("News", "News", $tempsubcat));
+		try {
+			$conn = DataBase::getConnection();
+			if ($id !== NULL) {
+				$stmt = $conn->prepare("SELECT * FROM " . static::DB_TABLE_NAME . " WHERE ParentID=:imputID");
+				$stmt->bindParam(':imputID', $id);
+			} else {
+				$stmt = $conn->prepare("SELECT * FROM " . static::DB_TABLE_NAME . " WHERE ParentID is NULL");
+			}
+			$stmt->execute();
+			$stmt->setFetchMode(PDO::FETCH_ASSOC);
 
+			$result = array();
+			foreach ($stmt->fetchAll() as $value) {
+				$temp = new static();
+				$temp->fillFromAssoc($value);
+				array_push($result, $temp);
+			}
+			return $result;
+		} catch (PDOException $e) {
+			echo "Error: " . $e->getMessage();
+		}
+	}
 
-		$tempsubcat = array(new Category("Cinema", "Cinema", NULL),
-			new Category("Drama", "Drama", NULL),
-			new Category("Theater", "Theater", NULL));
-		array_push($this->allCategorys, new Category("Art", "Art", $tempsubcat));
+	public function create() {
+		return $this->Do_comand_Update_Creat("INSERT INTO " . static::DB_TABLE_NAME . "
+				(	
+					possition,
+					nameEnglish,
+					nameArabic,
+					ParentID
+				) VALUES ( 
+					:possition,
+					:nameEnglish,
+					:nameArabic,
+					:ParentID
+				)", FALSE, TRUE);
+	}
 
-		$tempsubcat = array(new Category("Local Footaball", "LocalFootaball", NULL),
-			new Category("International Football", "InternationalFootball", NULL),
-			new Category("Other", "Other", NULL));
-		array_push($this->allCategorys, new Category("Sport", "Sport", $tempsubcat));
-
-		$tempsubcat == NULL;
-		array_push($this->allCategorys, new Category("Interviews", "Interviews", NULL));
-		array_push($this->allCategorys, new Category("TechScience", "TechScience", NULL));
-		array_push($this->allCategorys, new Category("Economy", "Economy", NULL));
-
-		return $this->allCategorys;
+	public function update() {
+		return $this->Do_comand_Update_Creat("UPDATE " . static::DB_TABLE_NAME . " SET 
+					possition = :possition,
+					nameEnglish = :nameEnglish,
+					nameArabic = :nameArabic,
+					ParentID = :ParentID
+				WHERE id=:id", TRUE, FALSE);
 	}
 
 //===================================================SET===================================================
 
-	function setPossition($possition) {
+	public function setNameEnglish($nameEnglish) {
+		if (Validation::isStringMinMaxLenth($nameEnglish, 3, 32)) {
+			$this->nameEnglish = htmlspecialchars($nameEnglish);
+			return TRUE;
+		}
+		return FALSE;
+	}
+
+	public function setNameArabic($nameArabic) {
+		if (Validation::isStringMinMaxLenth($nameArabic, 3, 32)) {
+			$this->nameArabic = htmlspecialchars($nameArabic);
+			return TRUE;
+		}
+		return FALSE;
+	}
+
+	public function setParentID($ParentID) {
+		if (Validation::isNumInRange($ParentID, 0, 99)) {
+			$this->ParentID = (int) $ParentID;
+			return TRUE;
+		}
+		return FALSE;
+	}
+
+	public function setPossition($possition) {
 		$this->possition = $possition;
-	}
-
-	function setNameEnglish($nameEnglish) {
-		$this->nameEnglish = $nameEnglish;
-	}
-
-	function setNameArabic($nameArabic) {
-		$this->nameArabic = $nameArabic;
-	}
-
-	function setArrSubCategorys($arrSubCategorys) {
-		$this->arrSubCategorys = $arrSubCategorys;
+		return $this;
 	}
 
 //===================================================GET===================================================
 	static function getAllCategorys() {
 		return self::$allCategorys;
-	}
-
-	function getPossition() {
-		return $this->possition;
 	}
 
 	function getNameEnglish() {
@@ -100,45 +165,49 @@ class Category extends Entity {
 		return $this->arrSubCategorys;
 	}
 
+	public function getPossition() {
+		return $this->possition;
+	}
+
+	public function getParentID() {
+		return $this->ParentID;
+	}
+
 //=================================================PRINT===================================================
-	function PrintLargeCategory(Category $Category) {
-		echo '<li class="dropdown"> <a class="dropdown-toggle" data-toggle="dropdown" href="Category.php?Category=' . $Category->Link . '">' . $Category->Name . ' <span class="caret"></span></a><ul class="dropdown-menu">';
-		foreach ($Category->ArrSubCategorys as $SubCat) {
-			echo '<li><a href="Category.php?CategoryID=' . $SubCat->Link . '">' . $SubCat->Name . '</a></li>';
-		}
-		echo '</ul></li>';
-	}
-
-	function PrintSmallCategory(Category $Category) {
-		echo '<li><a href="Category.php?CategoryID=' . $Category->Link . '">' . $Category->Name . '</a></li>';
-	}
-
-	function PrintCategory(Category $Category) {
-		if (isset($Category->ArrSubCategorys[0])) {
-			PrintLargeCategory($Category);
+	function PrintCategory() {
+		if (isset($this->arrSubCategorys[0])) {
+			echo '<li class="dropdown"> <a class="dropdown-toggle" data-toggle="dropdown" href="Category.php?Category=' . $this->id . '">' . $this->nameEnglish . ' <span class="caret"></span></a><ul class="dropdown-menu">';
+			foreach ($this->arrSubCategorys as $value) {
+				echo '<li><a href="Category.php?CategoryID=' . $value->id . '">' . $value->nameEnglish . '</a></li>';
+			}
+			echo '</ul></li>';
 		} else {
-			PrintSmallCategory($Category);
+			echo '<li><a href="Category.php?CategoryID=' . $this->id . '">' . $this->nameEnglish . '</a></li>';
 		}
 	}
 
-	function PrintOptionLargeCategory(Category $Category) {
-		echo "<optgroup label='{$Category->Name}'>";
-		foreach ($Category->ArrSubCategorys as $SubCat) {
-			echo "<option value='{$SubCat->Link}'>{$SubCat->Name}</option>";
+	function PrintOptionCategory($selected) {
+		$temp = "";
+		if ($selected == $this->id) {
+			$temp = " selected ";
 		}
-		echo "</optgroup>";
-	}
-
-	function PrintOptionSmallCategory(Category $Category) {
-		echo "<option value='{$Category->Link}'>{$Category->Name}</option>";
-	}
-
-	function PrintOptionCategory(Category $Category) {
-		if (isset($Category->ArrSubCategorys[0])) {
-			PrintOptionLargeCategory($Category);
+		if (isset($this->arrSubCategorys[0])) {
+			echo "<optgroup label='{$this->nameEnglish}'>";
+			foreach ($this->arrSubCategorys as $value) {
+				$value->PrintOptionCategory($selected);
+			}
+			echo "</optgroup>";
 		} else {
-			PrintOptionSmallCategory($Category);
+			echo "<option value='{$this->id}' {$selected}>{$this->nameEnglish}</option>";
 		}
+	}
+
+	function PrintOptionMainCategory($selected) {
+		$temp = "";
+		if ($selected == $this->id) {
+			$temp = " selected ";
+		}
+		echo "<option value='{$this->id}' {$selected}>{$this->nameEnglish}</option>";
 	}
 
 }

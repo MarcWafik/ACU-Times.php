@@ -18,10 +18,9 @@ class User extends EntityUser implements iCRUD {
 	protected $nameArabic;  //32
 	protected $password; //32             for varchar 64
 	protected $gender; //1 - 0 dont say 1 male 2 female 
-	protected $accses;   //1 - 0 regular 1 editor 2 admin
+	protected $accsesID;   //11
 	protected $about;  //2048
 	protected $birthDate;  // using datetime class
-	protected $arrNotification; // an array of notification
 
 	function __construct() {
 		$this->__init();
@@ -33,7 +32,7 @@ class User extends EntityUser implements iCRUD {
 		$this->nameArabic = "";
 		$this->password = "";
 		$this->gender = 0;
-		$this->accses = 0;
+		$this->accsesID = 0;
 		$this->about = "";
 		$this->birthDate = new DateTime();
 		$this->arrNotification = array();
@@ -45,7 +44,7 @@ class User extends EntityUser implements iCRUD {
 		$this->nameArabic = $DBrow['nameArabic'];
 		$this->password = $DBrow['password'];
 		$this->gender = $DBrow['gender'];
-		$this->accses = $DBrow['accses'];
+		$this->accsesID = $DBrow['accsesID'];
 		$this->about = $DBrow['about'];
 		$this->birthDate = new DateTime($DBrow['birthDate']);
 	}
@@ -56,9 +55,11 @@ class User extends EntityUser implements iCRUD {
 		$stmt->bindParam(':nameArabic', $this->nameArabic);
 		$stmt->bindParam(':password', $this->password);
 		$stmt->bindParam(':gender', $this->gender);
-		$stmt->bindParam(':accses', $this->accses);
+		$stmt->bindParam(':accsesID', $this->accsesID);
 		$stmt->bindParam(':about', $this->about);
-		$stmt->bindParam(':birthDate', $this->birthDate->format('Y-m-d'));
+
+		$temp = $this->birthDate->format('Y-m-d');
+		$stmt->bindParam(':birthDate', $temp);
 	}
 
 //=================================================Const===================================================
@@ -73,19 +74,30 @@ class User extends EntityUser implements iCRUD {
 //==================================================CRUD===================================================
 
 	public function create() {
-		return $this->Do_comand_Update_Creat(
-						"INSERT INTO " . static::DB_TABLE_NAME . " (
-							id, 
-							fullName, 
-							email, 
-							phoneNumber, 
-							nameArabic, 
-							password, 
-							gender, 
-							accses, 
-							about, 
-							birthDate
-							) VALUES (:id, :fullName, :email, :phoneNumber, :nameArabic, :password, :gender, :accses, :about, :birthDate)", TRUE);
+		return $this->Do_comand_Update_Creat("INSERT INTO " . static::DB_TABLE_NAME . " 
+				(
+					id, 
+					fullName, 
+					email, 
+					phoneNumber, 
+					nameArabic, 
+					password, 
+					gender, 
+					accsesID, 
+					about, 
+					birthDate
+				) VALUES (
+					:id, 
+					:fullName, 
+					:email, 
+					:phoneNumber, 
+					:nameArabic, 
+					:password, 
+					:gender, 
+					:accsesID, 
+					:about, 
+					:birthDate
+				)", TRUE);
 	}
 
 	public function update() {
@@ -96,31 +108,74 @@ class User extends EntityUser implements iCRUD {
 				nameArabic = :nameArabic, 
 				password = :password, 
 				gender = :gender, 
-				accses = :accses, 
+				accsesID = :accsesID, 
 				about = :about, 
 				birthDate = :birthDate 
 				WHERE id=:id", TRUE);
 	}
 
-	public function search($imput) {
-		
+	public static function Search($find, $offset = 0, $size = 0) {
+		$comand = "SELECT * FROM " . static::DB_TABLE_NAME . " WHERE 
+				fullName LIKE :find OR 
+				nameArabic LIKE :find OR 
+				phoneNumber LIKE :find OR
+				email LIKE :find OR
+				id LIKE :find";
+		return static::Do_comand_Search($comand, $find, $offset, $size);
 	}
 
 	public static function isIDAvailable($id) {
-		return TRUE;
+		$conn = DataBase::getConnection();
+		if ($conn === null) {
+			return FALSE;
+		}
+
+		try {
+			$stmt = $conn->prepare("SELECT * FROM " . static::DB_TABLE_NAME . " WHERE ID=:imputID");
+			$stmt->bindParam(':imputID', $id);
+			$stmt->execute();
+			$stmt->setFetchMode(PDO::FETCH_ASSOC);
+
+			$temp = $stmt->fetch();
+			if (!$temp) {
+				return TRUE;
+			}
+			return FALSE;
+		} catch (PDOException $e) {
+			echo "Error: " . $e->getMessage();
+			return FALSE;
+		}
 	}
 
 	public static function isEmailAvailable($email) {
-		return TRUE;
+		$conn = DataBase::getConnection();
+		if ($conn === null) {
+			return FALSE;
+		}
+
+		try {
+			$stmt = $conn->prepare("SELECT * FROM " . static::DB_TABLE_NAME . " WHERE email=:email");
+			$stmt->bindParam(':email', $email);
+			$stmt->execute();
+			$stmt->setFetchMode(PDO::FETCH_ASSOC);
+
+			$temp = $stmt->fetch();
+			if (!$temp) {
+				return TRUE;
+			}
+			return FALSE;
+		} catch (PDOException $e) {
+			echo "Error: " . $e->getMessage();
+			return FALSE;
+		}
 	}
 
-//==========================================NOTIFICATION===================================================
 //===============================================Session===================================================
 	function Login($id, $password) {
 		if ($this->read($id) && $this->isCorrectPassword($password)) {
 			Session::startOnce();
 			$_SESSION["id"] = $this->id;
-			$_SESSION["accses"] = $this->accses;
+			$_SESSION["accsesID"] = $this->accsesID;
 			$_SESSION["fullName"] = $this->fullName;
 			return TRUE;
 		}
@@ -138,21 +193,7 @@ class User extends EntityUser implements iCRUD {
 	static function CheckLogin() {
 		Session::startOnce();
 		if (!isset($_SESSION['id'])) {
-			header("Location: Login.php");
-		}
-	}
-
-	static function CheckEditor() {
-		self::CheckLogin();
-		if ($_SESSION['accses'] != self::ACCSES_EDITOR) {
-			header("Location: AccsesDenied.php");
-		}
-	}
-
-	static function CheckAdmin() {
-		self::CheckLogin();
-		if ($_SESSION['accses'] != self::ACCSES_ADMIN) {
-			header("Location: AccsesDenied.php");
+			header("Location: login.php");
 		}
 	}
 
@@ -160,16 +201,6 @@ class User extends EntityUser implements iCRUD {
 	static function isLogin() {
 		Session::startOnce();
 		return isset($_SESSION['id']);
-	}
-
-	static function isEditor() {
-		Session::startOnce();
-		return ($_SESSION['accses'] == self::ACCSES_EDITOR);
-	}
-
-	static function isAdmin() {
-		Session::startOnce();
-		return ($_SESSION['accses'] == self::ACCSES_ADMIN);
 	}
 
 //===========================================Session Get===================================================
@@ -185,6 +216,26 @@ class User extends EntityUser implements iCRUD {
 		Session::startOnce();
 		if (isset($_SESSION['fullName'])) {
 			return $_SESSION['fullName'];
+		}
+		return NULL;
+	}
+
+	static function getSessionAccsesID() {
+		Session::startOnce();
+		if (isset($_SESSION['accsesID'])) {
+			return $_SESSION['accsesID'];
+		}
+		return NULL;
+	}
+
+	static function getSessionAccses() {
+
+		Session::startOnce();
+		if (isset($_SESSION['accsesID'])) {
+			$temp = new Access();
+			$temp->read($_SESSION['accsesID']);
+
+			return $temp;
 		}
 		return NULL;
 	}
@@ -236,9 +287,9 @@ class User extends EntityUser implements iCRUD {
 		return FALSE;
 	}
 
-	public function setAccses($accses) {
+	public function setAccsesID($accses) {
 		if (Validation::isNumInRange($accses, 0, 2)) {
-			$this->accses = (int) $accses;
+			$this->accsesID = (int) $accses;
 			return TRUE;
 		}
 		return FALSE;
@@ -271,7 +322,7 @@ class User extends EntityUser implements iCRUD {
 	}
 
 	public function isCorrectPassword($password) {
-		return (isset($password) && hash("sha256", $password) == $this->password);
+		return (isset($password) && strcmp(hash("sha256", $password), $this->password));
 	}
 
 	public function getImagePath() {
@@ -292,8 +343,13 @@ class User extends EntityUser implements iCRUD {
 		}
 	}
 
+	public function getAccsesID() {
+		return $this->accsesID;
+	}
+
 	public function getAccses() {
-		return $this->accses;
+		$x = new Access();
+		return $x->read($this->accsesID);
 	}
 
 	public function getBirthDate() {

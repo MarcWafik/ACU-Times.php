@@ -1,0 +1,179 @@
+<?php
+require_once 'autoload.php';
+// Check for accses
+User::CheckLogin();
+$Gallery = new Gallery();
+$access = User::getSessionAccses();
+if (!$Gallery->hasAccsesToModify($access)) {
+	header("Location: accses_denied.php");
+}
+
+// Update
+if (isset($_GET["id"])) {
+	if ($Gallery->read($_GET["id"])) {
+		$Data = array(
+			"title_en" => $Gallery->getTitleEnglish(),
+			"title_ar" => $Gallery->getTitleArabic()
+		);
+		$Gallery->setImageNumber(1);
+	} else {
+		header("Location: 404.php");
+		exit;
+	}
+}
+
+if (valAllNotnull()) {
+
+	// setting the data
+	$iscorrect = array(
+		"title_en" => (bool) $Gallery->setTitleEnglish($_POST["title_en"]),
+		"title_ar" => (bool) $Gallery->setTitleArabic($_POST["title_ar"])
+	);
+
+
+	// set the publish or aprove or creat
+	$Gallery->setDisplayFromSession($access);
+	$passed = FALSE;
+	// check if the imput is valid
+	if (Validation::valAll($iscorrect)) {
+
+		if (isset($_GET["id"])) {
+			$passed = (bool) $Gallery->update();
+			if ($passed) {
+				$x = new Updates;
+				$x->setEditorID(User::getSessionUserID());
+				$x->setTargetType(Updates::TARGET_TYPE_GALLERY);
+				$x->setTargetID($Gallery->getId());
+				$x->setMessageType(Updates::MESSAGE_TYPE_UPDATE);
+				$x->create();
+
+				$y = new Notification;
+				$y->setUserID($Gallery->getWriterID());
+				$y->setSource(Notification::SOURCE_GALLERY);
+				$y->setsourceID($Gallery->getId());
+				$y->setMessage("Gallery was updated succsesfuly");
+				$y->create();
+			}
+		} else {
+			$Gallery->setWriterID(User::getSessionUserID());
+			$Gallery->setImageNumber(1);
+			$passed = (bool) $Gallery->create();
+			rename("images\\gallery\\upload.jpg", "images\\gallery\\" . $Gallery->getId() . "-0.jpg");
+		}
+	}
+
+	// check if every thing went right
+	if ($passed) {
+		header("Location: gallery.php");
+		exit;
+	} else {
+		$Data = array(
+			"title_en" => $_POST["title_en"],
+			"title_ar" => $_POST["title_ar"]
+		);
+	}
+}
+
+function valAllNotnull() {
+	return
+
+			isset($_POST["title_en"]) &&
+			isset($_POST["title_ar"]);
+}
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>ACU Times | Creat Article</title>
+<?php require_once("header.php"); ?>
+        <link rel="stylesheet" href="css/dropezone.css" type="text/css" media="all">
+        <script src='js/tinymce/tinymce.min.js'></script>
+        <script src="js/dropzone.js"></script>
+        <script src="js/Validate.js"></script>
+	</head>
+	<body  onLoad="onLoad()">
+<?php include ("navbar.php"); ?>
+		<div class="container">
+			<h3>
+				<ul class="nav nav-pills">
+					<li role="presentation"><a href="creat_article.php"> Article </a></li>
+					<li role="presentation"><a href="creat_poll.php"> Poll </a></li>
+					<li role="presentation"><a href="creat_multimedia.php"> Multimedia </a></li>
+					<li role="presentation" class="active"><a> Gallery </a></li>
+				</ul>
+			</h3>
+			<br><br>
+			<form class="form-horizontal" role="form" method="post" action="creat_gallery.php<?php if (isset($_GET["id"])) echo "?id=" . $_GET["id"] ?>">
+
+				<!-- #################################################################### Title-EN #################################################################### -->
+				<div class="form-group">
+					<label class="control-label col-sm-2" for="title_en">Title English :</label>
+					<div class="controls col-sm-10">
+						<input type="text" 
+							   name="title_en" 
+							   id="title_en" 
+							   value="<?php echo @$Data["title_en"]; ?>" 
+							   placeholder="Enter title in English" 
+							   class="form-control" 
+							   onBlur="valTitle(this)" 
+							   maxlength="128" 
+							   required 
+							   autocomplete="on">
+						<span class="help-block">
+							<ul>
+<?php PrintHTML::validation("title_en", @$iscorrect["title_en"], "Invalid Input") ?>
+							</ul>
+						</span></div>
+				</div>
+				<!-- #################################################################### Title-AR #################################################################### -->
+				<div class="form-group">
+					<label class="control-label col-sm-2" for="title_ar">Title Arabic :</label>
+					<div class="controls col-sm-10">
+						<input type="text" 
+							   name="title_ar" 
+							   id="title_ar" 
+							   value="<?php echo @$Data["title_ar"]; ?>" 
+							   placeholder="Enter title in arabic" 
+							   class="form-control" 
+							   onBlur="valTitle(this)" 
+							   maxlength="128" 
+							   required 
+							   autocomplete="on">
+						<span class="help-block">
+							<ul>
+<?php PrintHTML::validation("title_ar", @$iscorrect["title_ar"], "Invalid Input") ?>
+							</ul>
+						</span></div>
+				</div>
+				<!-- #################################################################### DropZone #################################################################### -->
+				<br>
+				<div class="form-group">
+					<div  class="dropzone " id="upload-widget"> </div>
+					<input type="hidden" name="IMG" id ="IMG">
+				</div>
+				<button type="submit" class="btn btn-primary pull-right">Submit</button>
+			</form>
+		</div>
+<?php include ("footer.php"); ?>
+		<script>
+
+			var cleanFilename = function (name) {
+				//document.getElementById("IMG").value = name;
+				return name.toLowerCase().replace(/^[\w.]+$/i, 'upload.jpg');
+
+			};
+
+
+			var myDropzone = new Dropzone("div#upload-widget", {
+				url: "uploadGallery.php",
+				maxFilesize: 4,
+				maxFiles: 1,
+				parallelUploads: 1,
+				acceptedFiles: "image/*",
+				renameFilename: cleanFilename
+
+			});
+		</script>
+	</body>
+</html>
