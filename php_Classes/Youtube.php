@@ -52,8 +52,7 @@ class Youtube extends EntityArticle implements iCRUD {
 				(	titleEnglish, 
 					titleArabic, 
 					display, 
-					writerID, 
-					editorID, 
+					writerID,  
 					youtubeID, 
 					descriptionEnglish, 
 					descriptionArabic
@@ -62,7 +61,6 @@ class Youtube extends EntityArticle implements iCRUD {
 					:titleArabic, 
 					:display, 
 					:writerID, 
-					:editorID, 
 					:youtubeID, 
 					:descriptionEnglish, 
 					:descriptionArabic 
@@ -75,7 +73,6 @@ class Youtube extends EntityArticle implements iCRUD {
 					titleArabic = :titleArabic, 
 					display = :display, 
 					writerID = :writerID, 
-					editorID = :editorID, 
 					youtubeID = :youtubeID, 
 					descriptionEnglish = :descriptionEnglish, 
 					descriptionArabic = :descriptionArabic, 

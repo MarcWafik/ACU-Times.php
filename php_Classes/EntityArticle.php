@@ -25,7 +25,6 @@ abstract class EntityArticle extends Entity {
 		$this->titleArabic = "";
 		$this->display = 0;
 		$this->writerID = 0;
-		$this->editorID = 0;
 	}
 
 	protected function fillFromAssoc($DBrow) {
@@ -34,7 +33,6 @@ abstract class EntityArticle extends Entity {
 		$this->titleArabic = $DBrow['titleArabic'];
 		$this->display = $DBrow['display'];
 		$this->writerID = $DBrow['writerID'];
-		$this->editorID = $DBrow['editorID'];
 	}
 
 	protected function bindParamClass($stmt) {
@@ -43,7 +41,6 @@ abstract class EntityArticle extends Entity {
 		$stmt->bindParam('titleArabic', $this->titleArabic);
 		$stmt->bindParam('display', $this->display);
 		$stmt->bindParam('writerID', $this->writerID);
-		$stmt->bindParam('editorID', $this->editorID);
 	}
 
 //=================================================Const===================================================
@@ -83,13 +80,6 @@ abstract class EntityArticle extends Entity {
 	public function setWriterID($writerID) {
 		if (Validation::isNumLagerThan($writerID, 0)) {
 			$this->writerID = (int) $writerID;
-		}
-		return FALSE;
-	}
-
-	public function setEditorID($editorID) {
-		if (Validation::isNumLagerThan($editorID, 0)) {
-			$this->editorID = (int) $editorID;
 		}
 		return FALSE;
 	}
