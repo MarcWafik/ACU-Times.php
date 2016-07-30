@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: May 23, 2016 at 12:35 AM
+-- Generation Time: Jun 01, 2016 at 08:27 AM
 -- Server version: 10.1.10-MariaDB
 -- PHP Version: 5.6.19
 
@@ -42,6 +42,10 @@ CREATE TABLE `accses` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
+-- RELATIONS FOR TABLE `accses`:
+--
+
+--
 -- Dumping data for table `accses`
 --
 
@@ -78,6 +82,14 @@ CREATE TABLE `article` (
   `views` int(11) NOT NULL,
   `isDeleted` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- RELATIONS FOR TABLE `article`:
+--   `categoryID`
+--       `category` -> `id`
+--   `writerID`
+--       `user` -> `id`
+--
 
 --
 -- Dumping data for table `article`
@@ -123,6 +135,12 @@ CREATE TABLE `category` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
+-- RELATIONS FOR TABLE `category`:
+--   `ParentID`
+--       `category` -> `id`
+--
+
+--
 -- Dumping data for table `category`
 --
 
@@ -163,6 +181,12 @@ CREATE TABLE `gallery` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
+-- RELATIONS FOR TABLE `gallery`:
+--   `writerID`
+--       `user` -> `id`
+--
+
+--
 -- Dumping data for table `gallery`
 --
 
@@ -190,6 +214,12 @@ CREATE TABLE `notification` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
+-- RELATIONS FOR TABLE `notification`:
+--   `userID`
+--       `user` -> `id`
+--
+
+--
 -- Dumping data for table `notification`
 --
 
@@ -213,6 +243,12 @@ CREATE TABLE `poll` (
   `isDeleted` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- RELATIONS FOR TABLE `poll`:
+--   `writerID`
+--       `user` -> `id`
+--
+
 -- --------------------------------------------------------
 
 --
@@ -230,6 +266,12 @@ CREATE TABLE `pollchoice` (
   `isDeleted` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- RELATIONS FOR TABLE `pollchoice`:
+--   `PollID`
+--       `poll` -> `id`
+--
+
 -- --------------------------------------------------------
 
 --
@@ -246,6 +288,12 @@ CREATE TABLE `updates` (
   `MessageType` tinyint(2) NOT NULL,
   `isDeleted` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- RELATIONS FOR TABLE `updates`:
+--   `editorID`
+--       `user` -> `id`
+--
 
 --
 -- Dumping data for table `updates`
@@ -277,6 +325,12 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
+-- RELATIONS FOR TABLE `user`:
+--   `accsesID`
+--       `accses` -> `id`
+--
+
+--
 -- Dumping data for table `user`
 --
 
@@ -306,6 +360,12 @@ CREATE TABLE `youtube` (
   `descriptionArabic` varchar(256) COLLATE utf8_unicode_ci NOT NULL,
   `isDeleted` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- RELATIONS FOR TABLE `youtube`:
+--   `writerID`
+--       `user` -> `id`
+--
 
 --
 -- Dumping data for table `youtube`

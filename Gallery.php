@@ -1,6 +1,5 @@
 <?php
 require_once 'autoload.php';
-User::CheckLogin();
 $arr = Gallery::readAll();
 ?><!DOCTYPE html>
 <html lang="en">

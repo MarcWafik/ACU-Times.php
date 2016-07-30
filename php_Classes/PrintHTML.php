@@ -179,7 +179,7 @@ class PrintHTML {
 
 	static public function gallery(Gallery $gallery) {
 		echo'<div class="row">
-					<h4>' . $gallery->getTitleEnglish() . '<small>' . $gallery->getCreatDate_StringShort() . '</small></h4>';
+					<h4>' . $gallery->getTitleEnglish() . '<small>&nbsp;&nbsp;&nbsp;' . $gallery->getCreatDate_StringShort() . ' </small></h4>';
 		for ($index = 0; $index < $gallery->getImageNumber(); $index++) {
 			echo '<div class="gallery-div"> 
 						<a class="fancybox" rel="group" href="' . Image::getMainImage($gallery->getId(), Image::GALLERY, $index) . '"><img src="' . Image::getMainImage($gallery->getId(), Image::GALLERY, $index) . '" height="200" class="img-gallery"/></a>
