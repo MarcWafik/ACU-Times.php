@@ -112,16 +112,60 @@ class User extends EntityUser implements iCRUD {
 				WHERE id=:id", TRUE);
 	}
 
-	public function search($imput) {
-		
+	public static function Search($find, $offset = 0, $size = 0) {
+		$comand = "SELECT * FROM " . static::DB_TABLE_NAME . " WHERE 
+				fullName LIKE :find OR 
+				nameArabic LIKE :find OR 
+				phoneNumber LIKE :find OR
+				email LIKE :find OR
+				id LIKE :find";
+		return static::Do_comand_Search($comand, $find, $offset, $size);
 	}
 
 	public static function isIDAvailable($id) {
-		return TRUE;
+		$conn = DataBase::getConnection();
+		if ($conn === null) {
+			return FALSE;
+		}
+
+		try {
+			$stmt = $conn->prepare("SELECT * FROM " . static::DB_TABLE_NAME . " WHERE ID=:imputID");
+			$stmt->bindParam(':imputID', $id);
+			$stmt->execute();
+			$stmt->setFetchMode(PDO::FETCH_ASSOC);
+
+			$temp = $stmt->fetch();
+			if (!$temp) {
+				return TRUE;
+			}
+			return FALSE;
+		} catch (PDOException $e) {
+			echo "Error: " . $e->getMessage();
+			return FALSE;
+		}
 	}
 
 	public static function isEmailAvailable($email) {
-		return TRUE;
+		$conn = DataBase::getConnection();
+		if ($conn === null) {
+			return FALSE;
+		}
+
+		try {
+			$stmt = $conn->prepare("SELECT * FROM " . static::DB_TABLE_NAME . " WHERE email=:email");
+			$stmt->bindParam(':email', $email);
+			$stmt->execute();
+			$stmt->setFetchMode(PDO::FETCH_ASSOC);
+
+			$temp = $stmt->fetch();
+			if (!$temp) {
+				return TRUE;
+			}
+			return FALSE;
+		} catch (PDOException $e) {
+			echo "Error: " . $e->getMessage();
+			return FALSE;
+		}
 	}
 
 //============================================GETrelated===================================================

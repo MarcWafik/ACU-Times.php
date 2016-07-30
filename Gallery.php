@@ -12,32 +12,32 @@
 			<br><br>
 			<div class="gallery" >
 				<div class="row">
-					<h4>Aprile</h4>
+					<h4>Aprile <small>hi</small></h4>
 					<div class="gallery-div"> 
-						<a class="fancybox" rel="group" href="images/1_b.jpg"><img src="images/1_b.jpg" height="200" class="img-gallery"/></a>
+						<a class="fancybox" rel="group" href="images/demo/1_b.jpg"><img src="images/demo/1_b.jpg" height="200" class="img-gallery"/></a>
 					</div>
 					<div class="gallery-div"> 
-						<a class="fancybox" rel="group" href="images/3_b.jpg"><img src="images/3_b.jpg" height="200" class="img-gallery"/></a> 
+						<a class="fancybox" rel="group" href="images/demo/1.jpg"><img src="images/demo/1.jpg" height="200" class="img-gallery"/></a> 
 					</div>
 					<div class="gallery-div"> 
-						<a class="fancybox" rel="group" href="images/3_b.jpg"><img src="images/3_b.jpg"  height="200" class="img-gallery"/></a>
+						<a class="fancybox" rel="group" href="images/demo/3_b.jpg"><img src="images/demo/3_b.jpg"  height="200" class="img-gallery"/></a>
 					</div>
 					<div class="gallery-div"> 
-						<a class="fancybox" rel="group" href="images/3_b.jpg"><img src="images/3_b.jpg"  height="200" class="img-gallery"/></a> 
+						<a class="fancybox" rel="group" href="images/demo/2.jpg"><img src="images/demo/2.jpg"  height="200" class="img-gallery"/></a> 
 					</div>
 				</div>
 				<div class="row">
 					<h4>dec</h4>
 					<div class="gallery-div"> 
-						<a class="fancybox" rel="group" href="images/3_b.jpg" ><img src="images/3_b.jpg" height="200" class="img-gallery"/></a>
+						<a class="fancybox" rel="group" href="images/demo/3_b.jpg" ><img src="images/demo/3_b.jpg" height="200" class="img-gallery"/></a>
 					</div>
 					<div class="gallery-div"> 
-						<a class="fancybox" rel="group" href="images/3_b.jpg" ><img src="images/3_b.jpg" height="200" class="img-gallery"/></a> 
+						<a class="fancybox" rel="group" href="images/demo/4.jpg" ><img src="images/demo/4.jpg" height="200" class="img-gallery"/></a> 
 					</div>
 				</div>
 				<div class="row"> <h4>aho</h4>
 					<div class="gallery-div"> 
-						<a class="fancybox" rel="group" href="images/4_b.jpg" ><img src="images/4_b.jpg" height="200" class="img-gallery"/></a> 
+						<a class="fancybox" rel="group" href="images/demo/4_b.jpg" ><img src="images/demo/4_b.jpg" height="200" class="img-gallery"/></a> 
 					</div>
 				</div>
 			</div>
@@ -49,7 +49,7 @@
 					'transitionIn': 'elastic',
 					'transitionOut': 'elastic',
 					'autoPlay': 'true',
-					'playSpeed': '15000',
+					'playSpeed': '10000',
 					'autoSize': 'true',
 					'autoScale': 'true',
 					//'centerOnScroll': 'true',

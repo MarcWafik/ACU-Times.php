@@ -78,8 +78,13 @@ class Youtube extends EntityArticle implements iCRUD {
 				WHERE id=:id", TRUE, FALSE);
 	}
 
-	public function search($imput) {
-		
+	public static function Search($find, $offset = 0, $size = 0) {
+		$comand = "SELECT * FROM " . static::DB_TABLE_NAME . " WHERE 
+				`titleEnglish` LIKE :find OR 
+				`titleArabic` LIKE :find OR
+				`descriptionEnglish` LIKE :find OR 
+				`descriptionArabic` LIKE :find OR";
+		return static::Do_comand_Search($comand, $find, $offset, $size);
 	}
 
 //===================================================SET===================================================
@@ -109,6 +114,7 @@ class Youtube extends EntityArticle implements iCRUD {
 
 	public function setDisplayFromSession(Accses $Accses) {
 		$this->display = $Accses->getYoutube();
+		return TRUE;
 	}
 
 //===================================================GET===================================================

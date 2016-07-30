@@ -115,7 +115,7 @@ function valAllNotnull() {
 								</ul>
 							</span></div>
 					</div>
-				
+
 					<!-- #################################################################### Breif-EN #################################################################### -->
 					<div class="form-group">
 						<label class="control-label col-sm-2" for="description_en">Description :</label>
@@ -137,7 +137,7 @@ function valAllNotnull() {
 							</span></div>
 					</div>
 				</div>
-					
+
 				<div id="ar">
 					<h3 class="text-center text-primary">Arabic</h3>
 					<hr>

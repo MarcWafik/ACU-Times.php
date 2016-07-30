@@ -49,7 +49,16 @@ abstract class EntityArticle extends Entity {
 	const DISPLAY_APPROVED = 2;
 	const DISPLAY_PUBLISHED = 3;
 
+//==================================================CRUD===================================================
+	public static function Search($find, $offset = 0, $size = 0) {
+		$comand = "SELECT * FROM " . static::DB_TABLE_NAME . " WHERE 
+				`titleEnglish` LIKE :find OR 
+				`titleArabic` LIKE :find";
+		return static::Do_comand_Search($comand, $find, $offset, $size);
+	}
+
 //===================================================SET===================================================
+
 	public function setTitleEnglish($title) {
 		$this->Title = $title;
 		if (Validation::isStringMinMaxLenth($title, 4, 64)) {

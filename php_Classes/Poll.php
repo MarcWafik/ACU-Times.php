@@ -98,6 +98,7 @@ class Poll extends EntityArticle implements iCRUD {
 
 	public function setDisplayFromSession(Accses $Accses) {
 		$this->display = $Accses->getPoll();
+		return TRUE;
 	}
 
 //===================================================GET===================================================

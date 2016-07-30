@@ -102,14 +102,14 @@ function valAllNotnull() {
 <html lang="en">
     <head>
         <title>ACU Times | Creat Article</title>
-<?php require_once("header.php"); ?>
+		<?php require_once("header.php"); ?>
         <link rel="stylesheet" href="css/dropezone.css" type="text/css" media="all">
         <script src='js/tinymce/tinymce.min.js'></script>
         <script src="js/dropzone.js"></script>
         <script src="js/Validate.js"></script>
 	</head>
 	<body  onload="onLoad()">
-<?php include ("navbar.php"); ?>
+		<?php include ("navbar.php"); ?>
 		<div class="container">
 			<h3>
 				<ul class="nav nav-pills">
@@ -139,7 +139,7 @@ function valAllNotnull() {
 					<label class="control-label col-sm-2" for="Rate">Importance:</label>
 					<div class="col-sm-10">
 						<select class="form-control" id="Importance" name="Importance">
-<?php PrintHTML::numericOption(0, 9, @$Data["Importance"]) ?>
+							<?php PrintHTML::numericOption(0, 9, @$Data["Importance"]) ?>
 						</select>
 					</div>
 				</div>
@@ -157,7 +157,7 @@ function valAllNotnull() {
 							   onBlur="valYouTube(this)" 
 							   value="<?php echo @$Data["Youtubelink"] ?>">
 						<span class="help-block"><ul>
-<?php PrintHTML::validation("IDtaken", @$iscorrect["IDtaken"], "ID is Already Taken") ?>
+								<?php PrintHTML::validation("IDtaken", @$iscorrect["IDtaken"], "ID is Already Taken") ?>
 							</ul></span> </div>
 				</div>
 				<!-- #################################################################### Language #################################################################### -->
@@ -197,7 +197,7 @@ function valAllNotnull() {
 								   autocomplete="on">
 							<span class="help-block">
 								<ul>
-<?php PrintHTML::validation("IDtaken", @$iscorrect["IDtaken"], "ID is Already Taken") ?>
+									<?php PrintHTML::validation("IDtaken", @$iscorrect["IDtaken"], "ID is Already Taken") ?>
 								</ul>
 							</span></div>
 					</div>
@@ -217,7 +217,7 @@ function valAllNotnull() {
 								   autocomplete="on">
 							<span class="help-block">
 								<ul>
-<?php PrintHTML::validation("IDtaken", @$iscorrect["IDtaken"], "ID is Already Taken") ?>
+									<?php PrintHTML::validation("IDtaken", @$iscorrect["IDtaken"], "ID is Already Taken") ?>
 								</ul>
 							</span></div>
 					</div>
@@ -247,7 +247,7 @@ function valAllNotnull() {
 								   autocomplete="on">
 							<span class="help-block">
 								<ul>
-<?php PrintHTML::validation("IDtaken", @$iscorrect["IDtaken"], "ID is Already Taken") ?>
+									<?php PrintHTML::validation("IDtaken", @$iscorrect["IDtaken"], "ID is Already Taken") ?>
 								</ul>
 							</span></div>
 					</div>
@@ -267,7 +267,7 @@ function valAllNotnull() {
 								   autocomplete="on">
 							<span class="help-block">
 								<ul>
-<?php PrintHTML::validation("IDtaken", @$iscorrect["IDtaken"], "ID is Already Taken") ?>
+									<?php PrintHTML::validation("IDtaken", @$iscorrect["IDtaken"], "ID is Already Taken") ?>
 								</ul>
 							</span></div>
 					</div>
@@ -280,7 +280,7 @@ function valAllNotnull() {
 				<button type="submit" class="btn btn-primary pull-right">Submit</button>
 			</form>
 		</div>
-<?php include ("footer.php"); ?>
+		<?php include ("footer.php"); ?>
 		<script>
 			tinymce.init({
 				selector: '.tinymce',

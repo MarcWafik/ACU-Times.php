@@ -116,10 +116,6 @@ class Article extends Youtube implements iCRUD {
 				WHERE id=:id", TRUE, TRUE);
 	}
 
-	public function search($imput) {
-		
-	}
-
 //===================================================SET===================================================
 
 	public function setyoutubeID($youtubeLink) {
@@ -187,6 +183,7 @@ class Article extends Youtube implements iCRUD {
 
 	public function setDisplayFromSession(Accses $Accses) {
 		$this->display = $Accses->getArticle();
+		return TRUE;
 	}
 
 //===================================================GET===================================================

@@ -122,16 +122,49 @@ abstract class Entity {
 		}
 	}
 
-	public static function readAll($offset, $size) {
+	public static function readAll($offset = 0, $size = 0) {
+		$comand = "SELECT * FROM " . static::DB_TABLE_NAME;
+		return Do_comand_readAll($comand, $offset, $size);
+	}
 
+	protected static function Do_comand_readAll($comand, $offset = 0, $size = 0) {
+		if (isset($size) && isset($offset) && 0 < $size && 0 < $offset) {
+			$comand .= " LIMIT $size OFFSET $offset";
+		}
+		$conn = DataBase::getConnection();
+		if ($conn === null) {
+			return FALSE;
+		}
 
 		try {
-			$conn = DataBase::getConnection();
-			if (isset($size) && isset($offset) && 0 < $size && 0 < $offset) {
-				$stmt = $conn->prepare("SELECT * FROM " . static::DB_TABLE_NAME . " LIMIT $size OFFSET $offset");
-			} else {
-				$stmt = $conn->prepare("SELECT * FROM " . static::DB_TABLE_NAME);
+			$stmt = $conn->prepare($comand);
+			$stmt->execute();
+			$stmt->setFetchMode(PDO::FETCH_ASSOC);
+
+			$result = array();
+			foreach ($stmt->fetchAll() as $value) {
+				$temp = new static();
+				$temp->fillFromAssoc($value);
+				array_push($result, $temp);
 			}
+			return $result;
+		} catch (PDOException $e) {
+			echo "Error: " . $e->getMessage();
+		}
+	}
+
+	public static function Do_comand_Search($comand, $find, $offset = 0, $size = 0) {
+		if (isset($size) && isset($offset) && 0 < $size && 0 < $offset) {
+			$comand .= " LIMIT $size OFFSET $offset";
+		}
+		$conn = DataBase::getConnection();
+		if ($conn === null) {
+			return FALSE;
+		}
+		$find = '%' . $find . '%';
+		try {
+			$stmt = $conn->prepare($comand);
+			$stmt->bindParam(':find', $find);
 			$stmt->execute();
 			$stmt->setFetchMode(PDO::FETCH_ASSOC);
 
