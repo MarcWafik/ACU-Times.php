@@ -20,13 +20,13 @@
 			<!-- Wrapper for slides -->
 			<div class="carousel-inner">
 				<div class="item active">
-					<a href="#"><div class="fill" style="background-image:url('Data/Articles/1.jpg');"></div></a>
+					<a href="#"><div class="fill" style="background-image:url('images\1_b.jpg');"></div></a>
 					<div class="carousel-caption">
 						<h2>Caption 1</h2>
 					</div>
 				</div>
 				<div class="item">
-					<a href="#"><div class="fill" style="background-image:url('Data/Articles/2.jpg');"></div></a>
+					<a href="#"><div class="fill" style="background-image:url('images\1_b.jpg');"></div></a>
 					<div class="carousel-caption">
 						<h2>Caption 2</h2>
 					</div>
@@ -55,13 +55,14 @@
 			<!-- /.row -->
 
 			<div class="row">
-				<div class="col-md-8 img-portfolio"> <a href="portfolio-item.html"> <img class="img-responsive img-rounded img-hover" src="Data/Articles/2.jpg" alt=""> </a> <a href="#">
+				<div class="col-md-8 img-portfolio"> <a href="portfolio-item.html"> 
+						<div class="img-responsive img-rounded img-hover" style="background-image:url('images\4_b.jpg'); width: 100%; height: 200px; background-position: center; background-size: cover; "></div> </a> <a href="#">
 						<h3>Sed ultrices turpis sed rhoncus semper</h3>
 					</a>
 					<h5>10/10/2015 <span class="glyphicon glyphicon-time"></span></h5>
 					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi pellentesque scelerisque mi, eu varius eros interdum sit amet. Maecenas at vulputate nisl. Aenean in varius purus. Praesent commodo fringilla euismod. In eu eros id arcu imperdiet rutrum.</p>
 				</div>
-				<div class="col-md-4 img-portfolio"> <a href="portfolio-item.html"> <img class="img-responsive img-rounded img-hover" src="Data/Articles/3.jpg" alt=""> </a> <a href="#">
+				<div class="col-md-4 img-portfolio"> <a href="portfolio-item.html"> <img style="width: 100%" class="img-responsive img-rounded img-hover" src="images\4_b - Copy.jpg" alt=""> </a> <a href="#">
 						<h3>Sed ultrices turpis sed rhoncus semper</h3>
 					</a>
 					<h5>10/10/2015 <span class="glyphicon glyphicon-time"></span></h5>

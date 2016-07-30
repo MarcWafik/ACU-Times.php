@@ -60,17 +60,34 @@ abstract class Entity {
 		}
 	}
 
-	public function delete() {
-		static::delete_Static($this->id);
+	public function delete($Permenant = FALSE) {
+		return static::delete_or_Undo_Static($this->id, TRUE, $Permenant);
 	}
 
-	public static function delete_Static($id) {
+	public function undoDelete() {
+		return static::delete_or_Undo_Static($this->id, FALSE);
+	}
+
+	public static function delete_static($id, $Permenant = FALSE) {
+		return static::delete_or_Undo_Static($id, TRUE, $Permenant);
+	}
+
+	public static function undoDelete_static($id) {
+		return static::delete_or_Undo_Static($id, FALSE);
+	}
+
+	protected static function delete_or_Undo_Static($id, $Delete_or_Undo = TRUE, $Permenant = FALSE) {
 		$conn = DataBase::getConnection();
 		if ($conn === null) {
 			return FALSE;
 		}
 		try {
-			$stmt = $conn->prepare("DELETE FROM " . static::DB_TABLE_NAME . " WHERE ID=:imputID");
+			if ($Permenant) {
+				$stmt = $conn->prepare("DELETE FROM " . static::DB_TABLE_NAME . " WHERE ID=:imputID");
+			} else {
+				$stmt = $conn->prepare("UPDATE " . static::DB_TABLE_NAME . " SET isDeleted =:isDeleted WHERE id=:id");
+				$stmt->bindParam(':isDeleted', $Delete_or_Undo);
+			}
 			$stmt->bindParam(':imputID', $id);
 			$stmt->execute();
 			return TRUE;

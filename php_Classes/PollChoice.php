@@ -13,9 +13,10 @@
  */
 class PollChoice extends Entity implements iCRUD {
 
-	private $textEnglish;
-	private $textArabic;
-	private $votes;
+	protected $textEnglish;
+	protected $textArabic;
+	protected $votes;
+	protected $PollID;
 
 	public function init() {
 		$this->id = 0;
@@ -33,19 +34,39 @@ class PollChoice extends Entity implements iCRUD {
 		}
 	}
 
+	public function setText($textEnglish, $textArabic) {
+		return setTextEnglish($textEnglish) && setTextArabic($textArabic);
+	}
+
 	public function setTextEnglish($textEnglish) {
-		$this->textEnglish = $textEnglish;
-		return TRUE;
+		if (isset($textEnglish) && Validation::isStringMinMaxLenth($textEnglish, 2, 32)) {
+			$this->textEnglish = htmlspecialchars($textEnglish);
+			return TRUE;
+		}
+
+		return FALSE;
 	}
 
 	public function setTextArabic($textArabic) {
-		$this->textArabic = $textArabic;
-		return TRUE;
+		if (isset($textArabic) && Validation::isStringMinMaxLenth($textArabic, 2, 32)) {
+			$this->textArabic = htmlspecialchars($textArabic);
+			return TRUE;
+		}
+
+		return FALSE;
+	}
+
+	function setPollID($PollID) {
+		$this->PollID = $PollID;
 	}
 
 //===================================================GET===================================================
-	public function getId() {
-		return $this->id;
+	function getVotes() {
+		return $this->votes;
+	}
+
+	function getPollID() {
+		return $this->PollID;
 	}
 
 	public function getTextEnglish() {
@@ -54,19 +75,6 @@ class PollChoice extends Entity implements iCRUD {
 
 	public function getTextArabic() {
 		return $this->textArabic;
-	}
-
-	public function getClicked() {
-		return $this->votes;
-	}
-
-//==================================================CRUD===================================================
-	public function create() {
-		
-	}
-
-	public function update() {
-		
 	}
 
 }

@@ -19,6 +19,16 @@ class Notification extends Entity implements iCRUD {
 	private $sourceID;
 	private $userID;
 
+//=================================================Const===================================================
+	const IMPORTANCE_INFO = 0;
+	const IMPORTANCE_SUCCESS = 1;
+	const IMPORTANCE_WARNING = 2;
+	const IMPORTANCE_DANGER = 3;
+	const SOURCE_USER = 0;
+	const SOURCE_COMMENT = 1;
+	const SOURCE_ARTICLE = 2;
+	const DB_TABLE_NAME = "notification";
+
 	function __construct() {
 		$this->__init();
 	}
@@ -32,23 +42,51 @@ class Notification extends Entity implements iCRUD {
 		$this->userID = 0;
 	}
 
-//=================================================Const===================================================
-	const IMPORTANCE_INFO = 0;
-	const IMPORTANCE_SUCCESS = 1;
-	const IMPORTANCE_WARNING = 2;
-	const IMPORTANCE_DANGER = 3;
-	const SOURCE_USER = 0;
-	const SOURCE_COMMENT = 1;
-	const SOURCE_ARTICLE = 2;
+	protected function fillFromAssoc($DBrow) {
+		parent::fillFromAssoc($DBrow);
+
+		$this->message = $DBrow['message'];
+		$this->importance = $DBrow['importance'];
+		$this->source = $DBrow['source'];
+		$this->sourceID = $DBrow['sourceID'];
+		$this->userID = $DBrow['userID'];
+	}
+
+	protected function bindParamClass($stmt) {
+		parent::bindParamClass($stmt);
+
+		$stmt->bindParam('message', $this->message);
+		$stmt->bindParam('importance', $this->importance);
+		$stmt->bindParam('source', $this->source);
+		$stmt->bindParam('sourceID', $this->sourceID);
+		$stmt->bindParam('userID', $this->userID);
+	}
 
 //==================================================CRUD===================================================
-
 	public function create() {
-		
+		return $this->Do_comand_Update_Creat("INSERT INTO " . static::DB_TABLE_NAME . "
+				(	message, 
+					importance, 
+					source, 
+					sourceID, 
+					userID
+				) VALUES ( 
+					:message, 
+					:importance, 
+					:source, 
+					:sourceID, 
+					:userID
+				)", FALSE, TRUE);
 	}
 
 	public function update() {
-		
+		return $this->Do_comand_Update_Creat("UPDATE " . static::DB_TABLE_NAME . " SET 
+					message = :message, 
+					importance = :importance, 
+					source = :source, 
+					sourceID = sourceID, 
+					userID = :userID
+				WHERE id=:id", TRUE, TRUE);
 	}
 
 //===================================================SET===================================================

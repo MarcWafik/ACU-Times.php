@@ -153,15 +153,19 @@ class Category extends Entity implements iCRUD {
 		}
 	}
 
-	function PrintOptionCategory() {
+	function PrintOptionCategory($selected) {
+		$temp = "";
+		if ($selected == $this->id) {
+			$temp = " selected ";
+		}
 		if (isset($this->arrSubCategorys[0])) {
 			echo "<optgroup label='{$this->nameEnglish}'>";
 			foreach ($this->arrSubCategorys as $value) {
-				echo "<option value='{$value->id}'>{$value->nameEnglish}</option>";
+				$value->PrintOptionCategory($selected);
 			}
 			echo "</optgroup>";
 		} else {
-			echo "<option value='{$this->id}'>{$this->nameEnglish}</option>";
+			echo "<option value='{$this->id}' {$selected}>{$this->nameEnglish}</option>";
 		}
 	}
 

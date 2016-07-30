@@ -16,7 +16,6 @@ class Youtube extends EntityArticle implements iCRUD {
 	protected $youtubeID;
 	protected $descriptionEnglish;
 	protected $descriptionArabic;
-	protected $ArrComments; // and array of class comment
 
 	const DB_TABLE_NAME = "youtube";
 
@@ -107,9 +106,11 @@ class Youtube extends EntityArticle implements iCRUD {
 		}
 		return FALSE;
 	}
-	protected function setDisplayFromSession(Accses $Accses) {
+
+	public function setDisplayFromSession(Accses $Accses) {
 		$this->display = $Accses->getYoutube();
 	}
+
 //===================================================GET===================================================
 	public function getyoutubeID() {
 		return $this->youtubeID;

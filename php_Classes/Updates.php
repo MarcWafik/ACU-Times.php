@@ -66,14 +66,45 @@ class Updates extends Entity implements iCRUD {
 
 //==================================================CRUD===================================================
 	public function create() {
-		
+		return $this->Do_comand_Update_Creat("INSERT INTO " . static::DB_TABLE_NAME . "
+				(	editorID,
+					targetID,
+					targetType,
+					MessageType
+				) VALUES ( 
+					:editorID,
+					:targetID,
+					:targetType,
+					:MessageType
+				)", FALSE, TRUE);
 	}
 
 	public function update() {
-		
+		return $this->Do_comand_Update_Creat("UPDATE " . static::DB_TABLE_NAME . " SET 
+					editorID = :editorID,
+					targetID = :targetID,
+					targetType = :targetType,
+					MessageType = :MessageType
+				WHERE id=:id", TRUE, TRUE);
 	}
 
 //===================================================SET===================================================
+	function setEditorID($editorID) {
+		$this->editorID = $editorID;
+	}
+
+	function setTargetID($targetID) {
+		$this->targetID = $targetID;
+	}
+
+	function setTargetType($targetType) {
+		$this->targetType = $targetType;
+	}
+
+	function setMessageType($MessageType) {
+		$this->MessageType = $MessageType;
+	}
+
 //===================================================GET===================================================
 	function getEditorID() {
 		return $this->editorID;

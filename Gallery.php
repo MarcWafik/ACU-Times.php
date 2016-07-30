@@ -9,6 +9,7 @@
 	<body>
 		<?php include ("Navbar.php"); ?>
 		<div class="container">
+			<br><br>
 			<div class="gallery" >
 				<div class="row">
 					<h4>Aprile</h4>
