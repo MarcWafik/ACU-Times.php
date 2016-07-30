@@ -18,8 +18,8 @@ if (valAllNotnull()) {
 	);
 	if (Validation::valAll($iscorrect)) {
 		$User->create();
-	//	header("Location: signup_success.php");
-	//	exit;
+		header("Location: signup_success.php");
+		exit;
 	}
 }
 

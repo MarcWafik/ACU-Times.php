@@ -57,18 +57,111 @@ class Accses extends Entity implements iCRUD {
 	const APPROVE = 2;
 	const PUBLISH = 3;
 	const FULL = 4;
+	const VALIDATE_MAX_RANGE = 4;
 
 //==================================================CRUD===================================================
 	public function create() {
-		
+		return $this->Do_comand_Update_Creat("INSERT INTO " . static::DB_TABLE_NAME . "
+				(	
+					poll,
+					article,
+					youtube,
+					gallery,
+					user,
+					email,
+					titleEnglish,
+					titleArabic
+				) VALUES ( 
+					:poll,
+					:article,
+					:youtube,
+					:gallery,
+					:user,
+					:email,
+					:titleEnglish,
+					:titleArabic
+				)", FALSE, TRUE);
 	}
 
 	public function update() {
-		
+		return $this->Do_comand_Update_Creat("UPDATE " . static::DB_TABLE_NAME . " SET 
+					poll = :poll,
+					article = :article,
+					youtube = :youtube,
+					gallery = :gallery,
+					user = :user,
+					email = :email,
+					titleEnglish = :titleEnglish,
+					titleArabic = :titleArabic
+				WHERE id=:id", TRUE, TRUE);
 	}
 
 //===================================================SET===================================================
-//===================================================HasAccses===================================================
+	public function setPoll($poll) {
+		if (Validation::isNumInRange($poll, 0, static::VALIDATE_MAX_RANGE)) {
+			$this->poll = (int) $poll;
+			return TRUE;
+		}
+		return FALSE;
+	}
+
+	public function setArticle($article) {
+		if (Validation::isNumInRange($article, 0, static::VALIDATE_MAX_RANGE)) {
+			$this->article = (int) $article;
+			return TRUE;
+		}
+		return FALSE;
+	}
+
+	public function setYoutube($youtube) {
+		if (Validation::isNumInRange($youtube, 0, static::VALIDATE_MAX_RANGE)) {
+			$this->youtube = (int) $youtube;
+			return TRUE;
+		}
+		return FALSE;
+	}
+
+	public function setGallery($gallery) {
+		if (Validation::isNumInRange($gallery, 0, static::VALIDATE_MAX_RANGE)) {
+			$this->gallery = (int) $gallery;
+			return TRUE;
+		}
+		return FALSE;
+	}
+
+	public function setUser($user) {
+		if (Validation::isNumInRange($user, 0, static::VALIDATE_MAX_RANGE)) {
+			$this->user = (int) $user;
+			return TRUE;
+		}
+		return FALSE;
+	}
+
+	public function setEmail($email) {
+		if (Validation::isNumInRange($email, 0, static::VALIDATE_MAX_RANGE)) {
+			$this->email = (int) $email;
+			return TRUE;
+		}
+		return FALSE;
+	}
+
+	public function setTitleEnglish($titleEnglish) {
+		if (Validation::isStringMinMaxLenth($titleEnglish, 2, 16)) {
+			$this->titleEnglish = htmlspecialchars($titleEnglish);
+			return TRUE;
+		}
+		return FALSE;
+	}
+
+	public function setTitleArabic($titleArabic) {
+		if (Validation::isStringMinMaxLenth($titleArabic, 2, 16)) {
+			$this->titleArabic = $titleArabic;
+			return TRUE;
+		}
+		return FALSE;
+	}
+
+//=============================================HasAccses===================================================
 
 	function hasAccsesPoll($AccsesLevel) {
 		return $this->poll >= $AccsesLevel;

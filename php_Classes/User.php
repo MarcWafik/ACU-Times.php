@@ -1,4 +1,5 @@
-.<?php
+<?php
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -71,31 +72,30 @@ class User extends EntityUser implements iCRUD {
 //==================================================CRUD===================================================
 
 	public function create() {
-		return $this->Do_comand_Update_Creat(
-						"INSERT INTO " . static::DB_TABLE_NAME . " 
-						(
-							id, 
-							fullName, 
-							email, 
-							phoneNumber, 
-							nameArabic, 
-							password, 
-							gender, 
-							accsesID, 
-							about, 
-							birthDate
-						) VALUES (
-							:id, 
-							:fullName, 
-							:email, 
-							:phoneNumber, 
-							:nameArabic, 
-							:password, 
-							:gender, 
-							:accsesID, 
-							:about, 
-							:birthDate
-						)", TRUE);
+		return $this->Do_comand_Update_Creat("INSERT INTO " . static::DB_TABLE_NAME . " 
+				(
+					id, 
+					fullName, 
+					email, 
+					phoneNumber, 
+					nameArabic, 
+					password, 
+					gender, 
+					accsesID, 
+					about, 
+					birthDate
+				) VALUES (
+					:id, 
+					:fullName, 
+					:email, 
+					:phoneNumber, 
+					:nameArabic, 
+					:password, 
+					:gender, 
+					:accsesID, 
+					:about, 
+					:birthDate
+				)", TRUE);
 	}
 
 	public function update() {

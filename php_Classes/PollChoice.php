@@ -18,110 +18,63 @@ class PollChoice extends Entity implements iCRUD {
 	protected $votes;
 	protected $PollID;
 
-	public function init() {
-		$this->id = 0;
+	const DB_TABLE_NAME = "pollchoice";
+
+	public function __init() {
+		parent::__init();
 		$this->textEnglish = "";
 		$this->textArabic = "";
 		$this->votes = 0;
+		$this->PollID = 0;
 	}
-	const DB_TABLE_NAME = "article";
 
 	function __construct() {
 		$this->__init();
 	}
 
-	public function __init() {
-		parent::__init();
-		$this->categoryID = 0;
-		$this->language = 0;
-		$this->importance = 0;
-		$this->imageNumber = 0;
-		$this->views = 0;
-		$this->bodyEnglish = "";
-		$this->bodyArabic = "";
-	}
-
 	protected function fillFromAssoc($DBrow) {
 		parent::fillFromAssoc($DBrow);
 
-		$this->categoryID = $DBrow['categoryID'];
-		$this->language = $DBrow['language'];
-		$this->importance = $DBrow['importance'];
-		$this->imageNumber = $DBrow['imageNumber'];
-		$this->views = $DBrow['views'];
-		$this->bodyEnglish = $DBrow['bodyEnglish'];
-		$this->bodyArabic = $DBrow['bodyArabic'];
+		$this->textEnglish = $DBrow['textEnglish'];
+		$this->textArabic = $DBrow['textArabic'];
+		$this->votes = $DBrow['votes'];
+		$this->PollID = $DBrow['PollID'];
 	}
 
 	protected function bindParamClass($stmt) {
 		parent::bindParamClass($stmt);
 
-		$stmt->bindParam('categoryID', $this->categoryID);
-		$stmt->bindParam('language', $this->language);
-		$stmt->bindParam('importance', $this->importance);
-		$stmt->bindParam('imageNumber', $this->imageNumber);
-		$stmt->bindParam('views', $this->views);
-		$stmt->bindParam('bodyEnglish', $this->bodyEnglish);
-		$stmt->bindParam('bodyArabic', $this->bodyArabic);
+		$stmt->bindParam('textEnglish', $this->textEnglish);
+		$stmt->bindParam('textArabic', $this->textArabic);
+		$stmt->bindParam('votes', $this->votes);
+		$stmt->bindParam('PollID', $this->PollID);
 	}
 
 //==================================================CRUD===================================================
 	public function create() {
 		return $this->Do_comand_Update_Creat("INSERT INTO " . static::DB_TABLE_NAME . "
-				(	titleEnglish, 
-					titleArabic, 
-					display, 
-					writerID, 
-					youtubeID, 
-					descriptionEnglish, 
-					descriptionArabic, 
-					bodyEnglish, 
-					bodyArabic, 
-					categoryID, 
-					language, 
-					importance, 
-					imageNumber, 
-					views
+				(	
+					textEnglish,
+					textArabic,
+					votes,
+					PollID
 				) VALUES ( 
-					:titleEnglish, 
-					:titleArabic, 
-					:display, 
-					:writerID, 
-					:youtubeID, 
-					:descriptionEnglish, 
-					:descriptionArabic, 
-					:bodyEnglish, 
-					:bodyArabic, 
-					:categoryID, 
-					:language, 
-					:importance, 
-					:imageNumber, 
-					:views
+					:textEnglish,
+					:textArabic,
+					:votes,
+					:PollID
 				)", FALSE, TRUE);
 	}
 
 	public function update() {
 		return $this->Do_comand_Update_Creat("UPDATE " . static::DB_TABLE_NAME . " SET 
-					titleEnglish = :titleEnglish, 
-					titleArabic = :titleArabic, 
-					display = :display, 
-					writerID = :writerID, 
-					youtubeID = :youtubeID, 
-					descriptionEnglish = :descriptionEnglish, 
-					descriptionArabic = :descriptionArabic, 
-					bodyEnglish = :bodyEnglish, 
-					bodyArabic = :bodyArabic, 
-					categoryID = :categoryID, 
-					language = :language, 
-					importance = :importance, 
-					imageNumber = :imageNumber, 
-					views = :views
+					textEnglish = :textEnglish,
+					textArabic = :textArabic,
+					votes = :votes,
+					PollID = :PollID
 				WHERE id=:id", TRUE, TRUE);
 	}
 
-	public function search($imput) {
-		
-	}
 //===================================================SET===================================================
 	public function increment() {
 		if (!isset($this->votes)) {
@@ -158,6 +111,10 @@ class PollChoice extends Entity implements iCRUD {
 	}
 
 //===================================================GET===================================================
+	function isValidChoice() {
+		return setTextEnglish($this->textEnglish) && setTextArabic($this->textArabic);
+	}
+
 	function getVotes() {
 		return $this->votes;
 	}

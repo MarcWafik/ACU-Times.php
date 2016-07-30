@@ -94,11 +94,27 @@ class Category extends Entity implements iCRUD {
 	}
 
 	public function create() {
-		
+		return $this->Do_comand_Update_Creat("INSERT INTO " . static::DB_TABLE_NAME . "
+				(	
+					possition,
+					nameEnglish,
+					nameArabic,
+					ParentID
+				) VALUES ( 
+					:possition,
+					:nameEnglish,
+					:nameArabic,
+					:ParentID
+				)", FALSE, TRUE);
 	}
 
 	public function update() {
-		
+		return $this->Do_comand_Update_Creat("UPDATE " . static::DB_TABLE_NAME . " SET 
+					possition = :possition,
+					nameEnglish = :nameEnglish,
+					nameArabic = :nameArabic,
+					ParentID = :ParentID
+				WHERE id=:id", TRUE, TRUE);
 	}
 
 //===================================================SET===================================================

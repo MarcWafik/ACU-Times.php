@@ -74,7 +74,7 @@ class Youtube extends EntityArticle implements iCRUD {
 					writerID = :writerID, 
 					youtubeID = :youtubeID, 
 					descriptionEnglish = :descriptionEnglish, 
-					descriptionArabic = :descriptionArabic, 
+					descriptionArabic = :descriptionArabic
 				WHERE id=:id", TRUE, FALSE);
 	}
 
