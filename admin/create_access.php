@@ -1,6 +1,6 @@
 <?php
 require_once 'autoload.php';
-AccessController::Creat();
+AccessController::Create();
 ?><!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -13,7 +13,7 @@ AccessController::Creat();
 		<?php include ("navbar.php"); ?>
 		<div class="container"> 
 			<br><br>
-			<form class="form-horizontal" role="form" method="post" action="creat_access.php<?php if (isset($_GET["id"])) echo "?id=" . $_GET["id"] ?>">
+			<form class="form-horizontal" role="form" method="post" action="create_access.php<?php if (isset($_GET["id"])) echo "?id=" . $_GET["id"] ?>">
 				<div class="form-group">
 					<label class="control-label col-sm-2" for="titleEnglish">Title :</label>
 					<div class="controls col-sm-10">

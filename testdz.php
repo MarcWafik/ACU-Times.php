@@ -6,15 +6,5 @@
  * and open the template in the editor.
  */
 
-/**
- * Description of AccessController
- *
- * @author marcw
- */
-class AccessController {
+print_r($_FILES);
 
-	public static function Create() {
-		
-	}
-
-}

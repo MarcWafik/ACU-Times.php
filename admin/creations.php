@@ -11,7 +11,7 @@ function printthem($displayLVL) {
 	global $arrArticle, $arrPoll, $arrYoutube, $arrGallery;
 	foreach ($arrArticle as &$value) {
 		if ($value->getDisplay() == $displayLVL) {
-			ArticleView::Normal12Next($value->getTitleEnglish(), "creat_article.php?id=" . $value->getId(), $value->getDescriptionEnglish(), $value->getCreatDate_StringLong(), $value->getImgThumbnail());
+			ArticleView::Normal12Next($value->getTitleEnglish(), "create_article.php?id=" . $value->getId(), $value->getDescriptionEnglish(), $value->getCreatDate_StringLong(), $value->getImgThumbnail());
 		}
 	}
 	foreach ($arrYoutube as &$value) {

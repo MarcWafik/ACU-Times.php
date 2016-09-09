@@ -52,7 +52,7 @@ $writer->read($article->getWriterID());
 						<div class="dropdown pull-right <?php if (User::CheckLogin() && $article->hasAccsesToModify(User::getSessionAccses())) echo "hiden" ?>">
 							<button class="btn-setting btn btn-default " data-toggle="dropdown" aria-haspopup="true" > <i class="fa fa-bars" aria-hidden="true"></i> </button>
 							<ul class="dropdown-menu" aria-labelledby="dLabel">
-								<li><a href="creat_article.php?id=<?php echo $article->getId(); ?>"><i class="fa fa-pencil"></i> Edit</a></li>
+								<li><a href="create_article.php?id=<?php echo $article->getId(); ?>"><i class="fa fa-pencil"></i> Edit</a></li>
 								<li><a  href="redir_delete_article_entity.php?id=<?php echo $article->getId() . '&type=' . EntityArticle::TYPE_ARTICLE; ?>"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</a></li>
 							</ul>
 						</div>

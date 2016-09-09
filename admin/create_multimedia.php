@@ -13,14 +13,14 @@ $iscorrect = YoutubeController::Create();
 		<div class="container">
 			<h3>
 				<ul class="nav nav-pills">
-					<li role="presentation" ><a href="creat_article.php"> Article </a></li>
-					<li role="presentation"><a  href="creat_poll.php"> Poll </a></li>
+					<li role="presentation" ><a href="create_article.php"> Article </a></li>
+					<li role="presentation"><a  href="create_poll.php"> Poll </a></li>
 					<li role="presentation" class="active"><a> Multimedia </a></li>
-					<li role="presentation"><a href="creat_gallery.php"> Gallery </a></li>
+					<li role="presentation"><a href="create_gallery.php"> Gallery </a></li>
 				</ul>
 			</h3>
 			<br><br>
-			<form class="form-horizontal" role="form" method="post" action="creat_multimedia.php<?php if (isset($_GET["id"])) echo "?id=" . $_GET["id"] ?>">
+			<form class="form-horizontal" role="form" method="post" action="create_multimedia.php<?php if (isset($_GET["id"])) echo "?id=" . $_GET["id"] ?>">
 				<!-- #################################################################### YoutubeUrl #################################################################### -->
 				<div class="form-group">
 					<label class="control-label col-sm-2" for="Youtubelink">Youtube Url:</label>

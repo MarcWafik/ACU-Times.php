@@ -72,7 +72,7 @@ function valAllNotnull() {
 		<?php include ("navbar.php"); ?>
 		<div class="container"> 
 			<br><br>
-			<form class="form-horizontal" role="form" method="post" action="creat_category.php<?php if (isset($_GET["id"])) echo "?id=" . $_GET["id"] ?>">
+			<form class="form-horizontal" role="form" method="post" action="create_category.php<?php if (isset($_GET["id"])) echo "?id=" . $_GET["id"] ?>">
 				<div class="form-group">
 					<label class="control-label col-sm-2" for="title_en">Category name:</label>
 					<div class="controls col-sm-10">

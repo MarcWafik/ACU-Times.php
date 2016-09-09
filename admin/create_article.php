@@ -1,5 +1,6 @@
 <?php
 require_once 'autoload.php';
+Session::startOnce();
 //ArticleController::Create();
 ?><!DOCTYPE html>
 <html lang="en">
@@ -17,13 +18,13 @@ require_once 'autoload.php';
 			<h3>
 				<ul class="nav nav-pills">
 					<li role="presentation" class="active"><a> Article </a></li>
-					<li role="presentation"><a  href="creat_poll.php"> Poll </a></li>
-					<li role="presentation"><a href="creat_multimedia.php"> Multimedia </a></li>
-					<li role="presentation"><a href="creat_gallery.php"> Gallery </a></li>
+					<li role="presentation"><a  href="create_poll.php"> Poll </a></li>
+					<li role="presentation"><a href="create_multimedia.php"> Multimedia </a></li>
+					<li role="presentation"><a href="create_gallery.php"> Gallery </a></li>
 				</ul>
 			</h3>
 			<br>
-			<form class="form-horizontal" role="form" method="post" action="creat_article.php<?php if (isset($_GET["id"])) echo "?id=" . $_GET["id"] ?>">
+			<form class="form-horizontal" role="form" method="post" action="create_article.php<?php if (isset($_GET["id"])) echo "?id=" . $_GET["id"] ?>">
 				<!-- #################################################################### Category #################################################################### -->
 				<div class="form-group">
 					<label class="control-label col-sm-2" for="Category">Category:</label>
@@ -171,7 +172,7 @@ require_once 'autoload.php';
 					</div>
 				</div>
 
-				<button type="submit" class="btn btn-primary pull-right" name="submit" id="submit" >Submit</button>
+				<button type="button" class="btn btn-primary pull-right" name="submit" id="submit" onclick="myDropzone.processQueue()">Submit</button>
 			</form>
 		</div>
 		<?php include ("footer.php"); ?>
@@ -190,23 +191,28 @@ require_once 'autoload.php';
 				],
 				contextmenu: "cut copy paste | bold italic underline strikethrough ",
 				contextmenu_never_use_native: true,
-				toolbar1: 'undo redo | formatselect | forecolor backcolor | bold italic underline strikethrough | subscript superscript | alignleft aligncenter alignright alignjustify | bullist numlist | outdent indent | link image media | print preview searchreplace'
+				toolbar: 'undo redo | formatselect | forecolor backcolor | bold italic underline strikethrough | subscript superscript | alignleft aligncenter alignright alignjustify | bullist numlist | outdent indent | link image media | print preview searchreplace'
 			});
 		</script>
 		<script>
-			var imageCount = 0;
+			var imageCount = -1;
 			var cleanFilename = function (name) {
-				return 'upload' + imageCount + '.jpg';
+				imageCount++;
+				return imageCount + '.jpg';
 			};
 			var myDropzone = new Dropzone("div#dropzone", {
-				url: "uploadArticle.php",
+				url: "testdz.php",
 				maxFilesize: 4,
 				maxFiles: 10,
-				parallelUploads: 1,
+				parallelUploads: 50,
 				acceptedFiles: "image/*",
 				renameFilename: cleanFilename,
+				autoProcessQueue: false,
 				uploadMultiple: true
 
+			});
+			myDropzone.on('sending', function (file, xhr, formData) {
+				formData.append('userName', 'bob');
 			});
 		</script>
 		<script>

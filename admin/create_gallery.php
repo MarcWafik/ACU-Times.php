@@ -16,14 +16,14 @@ GalleryController::Creat();
 		<div class="container">
 			<h3>
 				<ul class="nav nav-pills">
-					<li role="presentation"><a href="creat_article.php"> Article </a></li>
-					<li role="presentation"><a href="creat_poll.php"> Poll </a></li>
-					<li role="presentation"><a href="creat_multimedia.php"> Multimedia </a></li>
+					<li role="presentation"><a href="create_article.php"> Article </a></li>
+					<li role="presentation"><a href="create_poll.php"> Poll </a></li>
+					<li role="presentation"><a href="create_multimedia.php"> Multimedia </a></li>
 					<li role="presentation" class="active"><a> Gallery </a></li>
 				</ul>
 			</h3>
 			<br><br>
-			<form class="form-horizontal" role="form" method="post" action="creat_gallery.php<?php if (isset($_GET["id"])) echo "?id=" . $_GET["id"] ?>">
+			<form class="form-horizontal" role="form" method="post" action="create_gallery.php<?php if (isset($_GET["id"])) echo "?id=" . $_GET["id"] ?>">
 
 				<!-- #################################################################### Title-EN #################################################################### -->
 				<div class="form-group">

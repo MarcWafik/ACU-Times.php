@@ -12,21 +12,10 @@
  * @author marcw
  */
 class DataBase {
-	/*
-	  private static $servername = "sql304.byethost7.com";
-	  private static $username = "b7_18011127";
-	  private static $password = "33151732";
-	  private static $dbname = "b7_18011127_journalcms";
-
-	  private static $servername = "mysql13.000webhost.com";
-	  private static $username = "a6053072_a605307";
-	  private static $password = "Itsnotasecret12";
-	  private static $dbname = "a6053072_CMS";
-	 */
 
 	private static $servername = "localhost";
 	private static $username = "root";
-	private static $password = "";
+	private static $password = "root";
 	private static $dbname = "journalcms";
 	private static $dbConnection = null;
 

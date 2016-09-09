@@ -13,14 +13,14 @@ PollController::Create();
 		<div class="container">
 			<h3>
 				<ul class="nav nav-pills">
-					<li role="presentation" ><a href="creat_article.php"> Article </a></li>
+					<li role="presentation" ><a href="create_article.php"> Article </a></li>
 					<li role="presentation" class="active"><a> Poll </a></li>
-					<li role="presentation"><a href="creat_multimedia.php"> Multimedia </a></li>
-					<li role="presentation"><a href="creat_gallery.php"> Gallery </a></li>
+					<li role="presentation"><a href="create_multimedia.php"> Multimedia </a></li>
+					<li role="presentation"><a href="create_gallery.php"> Gallery </a></li>
 				</ul>
 			</h3>
 			<br><br>
-			<form class="form-horizontal" role="form" method="post" action="creat_poll.php">
+			<form class="form-horizontal" role="form" method="post" action="create_poll.php">
 
 				<br>
 				<!-- #################################################################### Question #################################################################### -->

@@ -22,7 +22,7 @@ $arrArticle = Access::readAll();
 				<?php
 				foreach ($arrArticle as &$value) {
 					//<a href="#" class="alert-link">...</a>
-					echo '<a href="creat_access.php?id=' . $value->getId() . '">' . $value->getTitleEnglish() . '</a><br><br>';
+					echo '<a href="create_access.php?id=' . $value->getId() . '">' . $value->getTitleEnglish() . '</a><br><br>';
 				}
 				?></h4>
 				<!-------------------------------- Articles -------------------------------->

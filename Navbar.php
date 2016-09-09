@@ -9,17 +9,15 @@
 			</button>
 			<a class="navbar-brand" href="index.php">ACU Times</a> </div>
 		<div class="collapse navbar-collapse" id="myNavbar">
-
 			<ul class="nav navbar-nav">
 				<li class="active"><a href="index.php"><span class="glyphicon glyphicon-home"></span></a></li>
-
 				<!--<li class="dropdown"> <a class="dropdown-toggle" data-toggle="dropdown" href="category.php?Category=News">News <span class="caret"></span></a>
 					<ul class="dropdown-menu">
 						<li><a href="category.php">Category 1</a></li>
 						<li><a href="category.php">Category</a></li>
 						<li><a href="category.php">Category</a></li>
 					</ul>
-				</li> -->
+				</li>-->
 				<?php
 				foreach (Category::readAll() as $Category) {
 					$Category->PrintCategory();
@@ -44,21 +42,17 @@
 				<?php
 				if (User::isLogin()) {
 					echo
-					'<li class="dropdown"> <a class="dropdown-toggle" data-toggle="dropdown" href=""><span class="glyphicon glyphicon-user"></span> '
-					. User::getSessionUserFullName() . ' <span class="caret"></span></a>
-	<ul class="dropdown-menu">
-		<li><a href="profile.php">Profile</a></li>
-		<li><a href="creat_article.php">Write Article</a></li>
-		<li><a href="members.php">Members</a></li>
-		<li><a href="polls.php">Pollss</a></li>
-		<li><a href="redir_logout.php">Logout</a></li>
-	</ul>
-</li>';
-				} else {
-					echo'<li><a href="login.php"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>';
+					'<li class="dropdown"> <a class="dropdown-toggle" data-toggle="dropdown" href=""><span class="glyphicon glyphicon-user"></span> '. User::getSessionUserFullName() . ' <span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a href="profile.php">Profile</a></li>
+							<li><a href="create_article.php">Write Article</a></li>
+							<li><a href="members.php">Members</a></li>
+							<li><a href="polls.php">Pollss</a></li>
+							<li><a href="redir_logout.php">Logout</a></li>
+						</ul>
+					</li>';
 				}
 				?>
-
 			</ul>
 		</div>
 	</div>

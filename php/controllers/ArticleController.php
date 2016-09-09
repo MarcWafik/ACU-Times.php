@@ -14,123 +14,39 @@
 class ArticleController {
 
 	public static function Create() {
-		// Check for accses
-		User::CheckLogin();
-		$article = new Article();
-		$access = User::getSessionAccses();
-		if (!$article->hasAccsesToModify($access)) {
-			Header::ResponseCode(Header::UNAUTHORIZED);
-		}
-
-// Update
-		if (isset($_GET["id"])) {
-			if ($article->read($_GET["id"])) {
-				$Data = array(
-					"Category" => $article->getCategoryID(),
-					"Importance" => $article->getImportance(),
-					"Youtubelink" => $article->getyoutubeURLString(),
-					"lang" => $article->getLanguage(),
-					"titleEnglish" => $article->getTitleEnglish(),
-					"descriptionEnglish" => $article->getDescriptionEnglish(),
-					"bodyEnglish" => $article->getBodyEnglish(),
-					"titleArabic" => $article->getTitleArabic(),
-					"descriptionArabic" => $article->getDescriptionArabic(),
-					"bodyArabic" => $article->getBodyArabic()
-				);
-			} else {
-				Header::ResponseCode(Header::NOT_FOUND);
-				exit;
+		
+	}
+	public static function ReadSearch() {
+		if (isset($_GET["Search"])) {
+			$offsetMultiplier = 0;
+			if (isset($_GET["offsetMultiplier"])) {
+				$offsetMultiplier = $_GET["offsetMultiplier"];
+			}
+			$arr = Article::Search($_GET["Search"], $offsetMultiplier * 6, 6);
+			foreach ($arr as $value) {
+				ArticleView::Normal12Next($value->getTitleEnglish(), "Article.php?id=" . $value->getId(), $value->getDescriptionEnglish(), $value->getCreatDate_StringLong(), $value->getImgThumbnail());
 			}
 		}
+	}
 
-		if (valAllNotnull()) {
-
-			// setting the data
-			$iscorrect = array(
-				"Category" => (bool) $article->setCategoryID($_POST["Category"]),
-				"Importance" => (bool) $article->setImportance($_POST["Importance"]),
-				"Youtubelink" => (bool) $article->setyoutubeID($_POST["Youtubelink"]),
-				"lang" => (bool) $article->setLanguage($_POST["lang"]),
-				"WriterID" => (bool) $article->setWriterID(User::getSessionUserID()));
-
-			// set the English data
-			if ($_POST["lang"] == Language::ENGLISH || $_POST["lang"] == Language::BOTH) {
-				$iscorrect["titleEnglish"] = (bool) $article->setTitleEnglish($_POST["titleEnglish"]);
-				$iscorrect["descriptionEnglish"] = (bool) $article->setDescriptionEnglish($_POST["descriptionEnglish"]);
-				$iscorrect["bodyEnglish"] = (bool) $article->setBodyEnglish($_POST["bodyEnglish"]);
+	public static function ReadCategory() {
+		if (isset($_GET["CategoryID"])) {
+			$isFirst = TRUE;
+			$offsetMultiplier = 0;
+			if (isset($_GET["offsetMultiplier"])) {
+				$isFirst = FALSE;
+				$offsetMultiplier = $_GET["offsetMultiplier"];
 			}
-
-			// set the Arabic data
-			if ($_POST["lang"] == Language::ARABIC || $_POST["lang"] == Language::BOTH) {
-				$iscorrect["titleArabic"] = (bool) $article->setTitleArabic($_POST["titleArabic"]);
-				$iscorrect["descriptionArabic"] = (bool) $article->setDescriptionArabic($_POST["descriptionArabic"]);
-				$iscorrect["bodyArabic"] = (bool) $article->setBodyArabic($_POST["bodyArabic"]);
-			}
-			$article->setImageNumber(1);
-			// set the publish or aprove or creat
-			$article->setDisplayFromSession($access);
-			$passed = FALSE;
-			// check if the imput is valid
-			if (Validation::valAll($iscorrect)) {
-
-				if (isset($_GET["id"])) {
-					$passed = (bool) $article->update();
-					if ($passed) {
-						$x = new Updates;
-						$x->setEditorID(User::getSessionUserID());
-						$x->setTargetType(Updates::TARGET_TYPE_ARTICLE);
-						$x->setTargetID($Gallery->getId());
-						$x->setMessageType(Updates::MESSAGE_TYPE_UPDATE);
-						$x->create();
-
-						$y = new Notification;
-						$y->setUserID($article->getWriterID());
-						$y->setSource(Notification::SOURCE_ARTICLE);
-						$y->setsourceID($article->getId());
-						$y->setMessage("Article was updated by " . User::getSessionUserFullName());
-						$y->create();
-					}
+			$arr = Article::getAllInCat($_GET["CategoryID"], $offsetMultiplier * 6, 6);
+			foreach ($arr as $value) {
+				if ($isFirst) {
+					ArticleView::Large12Next($value->getTitleEnglish(), "Article.php?id=" . $value->getId(), $value->getDescriptionEnglish(), $value->getCreatDate_StringLong(), $value->getImgThumbnail());
+					$isFirst = FALSE;
 				} else {
-					$article->setWriterID(User::getSessionUserID());
-					$passed = (bool) $article->create();
-					rename("images\\article\\upload.jpg", "images\\article\\" . $article->getId() . "-0.jpg");
+					ArticleView::Normal12Next($value->getTitleEnglish(), "Article.php?id=" . $value->getId(), $value->getDescriptionEnglish(), $value->getCreatDate_StringLong(), $value->getImgThumbnail());
 				}
 			}
-
-			// check if every thing went right
-			if ($passed) {
-
-				Header::Location("article.php?id=" . $article->getId());
-				exit;
-			} else {
-				$Data = array(
-					"Category" => $_POST["Category"],
-					"Importance" => $_POST["Importance"],
-					"Youtubelink" => $_POST["Youtubelink"],
-					"lang" => $_POST["lang"],
-					"titleEnglish" => $_POST["titleEnglish"],
-					"descriptionEnglish" => $_POST["descriptionEnglish"],
-					"titleArabic" => $_POST["titleArabic"],
-					"descriptionArabic" => $_POST["descriptionArabic"],
-					"bodyArabic" => $_POST["bodyArabic"]
-				);
-			}
 		}
-
-		function valAllNotnull() {
-			return
-					isset($_POST["Category"]) &&
-					isset($_POST["Importance"]) &&
-					isset($_POST["Youtubelink"]) &&
-					isset($_POST["lang"]) &&
-					isset($_POST["titleEnglish"]) &&
-					isset($_POST["descriptionEnglish"]) &&
-					isset($_POST["bodyEnglish"]) &&
-					isset($_POST["titleArabic"]) &&
-					isset($_POST["descriptionArabic"]) &&
-					isset($_POST["bodyArabic"]);
-		}
-
 	}
 
 }

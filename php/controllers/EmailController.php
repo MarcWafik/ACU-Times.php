@@ -12,5 +12,9 @@
  * @author marcw
  */
 class EmailController {
-	//put your code here
+
+	public static function send() {
+		
+	}
+
 }

@@ -29,7 +29,7 @@ function valAllNotnull() {
 		<?php include ("navbar.php"); ?>
 		<div class="container">
 			<br><br>
-			<form class="form-horizontal" role="form" method="post" action="creat_article.php<?php if (isset($_GET["id"])) echo "?id=" . $_GET["id"] ?>">
+			<form class="form-horizontal" role="form" method="post" action="create_article.php<?php if (isset($_GET["id"])) echo "?id=" . $_GET["id"] ?>">
 				<!-- #################################################################### Title-EN #################################################################### -->
 				<div class="form-group">
 					<label class="control-label col-sm-2" for="email">To :</label>
